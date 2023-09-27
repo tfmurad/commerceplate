@@ -1,11 +1,11 @@
+/* eslint-disable react/no-unescaped-entities */
 import ImageFallback from "@/helpers/ImageFallback";
 import { getListPage } from "@/lib/contentParser";
 import { markdownify } from "@/lib/utils/textConverter";
 import CallToAction from "@/partials/CallToAction";
 import SeoMeta from "@/partials/SeoMeta";
-import Testimonials from "@/partials/Testimonials";
 import { Button, Feature } from "@/types";
-import { FaCheck } from "react-icons/fa/index.js";
+import { HiOutlineArrowNarrowLeft, HiOutlineArrowNarrowRight } from "react-icons/hi";
 
 const Home = () => {
   const homepage = getListPage("homepage/_index.md");
@@ -23,17 +23,17 @@ const Home = () => {
   return (
     <>
       <SeoMeta />
-      <section className="section pt-14">
+      <section className="section pt-14 bg-gradient-to-r from-[#F4F4F4] to-[#F4F4F43D] w-[85%] mx-auto relative">
         <div className="container">
           <div className="flex gap-10 items-center">
             <div className="mb-16 text-center lg:col-7">
-              <h1
-                className="mb-4"
-                dangerouslySetInnerHTML={markdownify(banner.title)}
-              />
               <p
-                className="mb-8"
+                className="mb-4"
                 dangerouslySetInnerHTML={markdownify(banner.content ?? "")}
+              />
+              <h1
+                className="mb-8"
+                dangerouslySetInnerHTML={markdownify(banner.title)}
               />
               {banner.button!.enable && (
                 <a className="btn btn-primary" href={banner.button!.link}>
@@ -42,7 +42,7 @@ const Home = () => {
               )}
             </div>
             {banner.image && (
-              <div className="col-12 border-4">
+              <div className="">
                 <ImageFallback
                   src={banner.image}
                   className="mx-auto"
@@ -55,61 +55,90 @@ const Home = () => {
             )}
           </div>
         </div>
+
+
+        <div className="bg-white text-3xl w-[30px] h-[32px] md:w-[60px] md:h-[60px] flex items-center justify-center rounded-md absolute bottom-4 left-4"><HiOutlineArrowNarrowLeft /></div>
+        <div className="bg-white text-3xl w-[30px] h-[32px] md:w-[60px] md:h-[60px] flex items-center justify-center rounded-md absolute bottom-4 right-4 md:left-24 opacity-50"><HiOutlineArrowNarrowRight /></div>
       </section>
 
-      {features.map((feature, index: number) => (
-        <section
-          key={index}
-          className={`section-sm ${index % 2 === 0 && "bg-gradient"}`}
-        >
-          <div className="container">
-            <div className="row items-center justify-between">
-              <div
-                className={`mb:md-0 mb-6 md:col-5 ${index % 2 !== 0 && "md:order-2"
-                  }`}
-              >
-                <ImageFallback
-                  src={feature.image}
-                  height={480}
-                  width={520}
-                  alt={feature.title}
-                />
-              </div>
-              <div
-                className={`md:col-7 lg:col-6 ${index % 2 !== 0 && "md:order-1"
-                  }`}
-              >
-                <h2
-                  className="mb-4"
-                  dangerouslySetInnerHTML={markdownify(feature.title)}
-                />
-                <p
-                  className="mb-8 text-lg"
-                  dangerouslySetInnerHTML={markdownify(feature.content)}
-                />
-                <ul>
-                  {feature.bulletpoints.map((bullet: string) => (
-                    <li className="relative mb-4 pl-6" key={bullet}>
-                      <FaCheck className={"absolute left-0 top-1.5"} />
-                      <span dangerouslySetInnerHTML={markdownify(bullet)} />
-                    </li>
-                  ))}
-                </ul>
-                {feature.button.enable && (
-                  <a
-                    className="btn btn-primary mt-5"
-                    href={feature.button.link}
-                  >
-                    {feature.button.label}
-                  </a>
-                )}
-              </div>
+      {/* category section  */}
+      <section className="mt-[130px] w-[85%] mx-auto container">
+        <h3 className="text-12 text-center mb-14">Categories</h3>
+
+        <div className="grid grid-cols-3 gap-6">
+          <div className="text-center">
+            <ImageFallback
+              className=""
+              src="/images/category-1.png"
+              width={531}
+              height={383}
+              alt="category image"
+            />
+            <div className="p-6">
+              <p className="text-8 font-bold tracking-wider">Lamp</p>
+              <p className="text-6 font-light text-[#666666] ">8 items</p>
             </div>
           </div>
-        </section>
-      ))}
 
-      <Testimonials data={testimonial} />
+          <div className="text-center">
+            <ImageFallback
+              className=""
+              src="/images/category-2.png"
+              width={531}
+              height={383}
+              alt="category image"
+            />
+            <div className="p-6">
+              <p className="text-8 font-bold tracking-wider">Lamp</p>
+              <p className="text-6 font-light text-[#666666] ">8 items</p>
+            </div>
+          </div>
+
+          <div className="text-center">
+            <ImageFallback
+              className=""
+              src="/images/category-1.png"
+              width={531}
+              height={383}
+              alt="category image"
+            />
+            <div className="p-6">
+              <p className="text-8 font-bold tracking-wider">Lamp</p>
+              <p className="text-6 font-light text-[#666666] ">8 items</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+
+      {/* Latest Products section  */}
+      <section className="mt-[130px] w-[85%] mx-auto container">
+        <h3 className="text-12 text-center mb-2">Latest Products</h3>
+        <p className="text-5 text-[#444444] text-center mb-14">Don't Miss Today's Latest Deals</p>
+
+        <div className="row">
+          {Array.from({ length: 8 }).map((_, index) =>
+            <div key={index} className="text-center sm:col-6 md:col-4 lg:col-3">
+              <ImageFallback
+                className=""
+                src="/images/category-1.png"
+                width={1000}
+                height={269}
+                alt="category image"
+              />
+              <div className="p-6 text-center">
+                <p className="text-8 font-bold tracking-wider">Elliot Table Lamp</p>
+                <div className="flex justify-center gap-2">
+                  <p className="text-lg font-light text-[#41484D] ">$49.99 USD</p>
+                  <p className="font-light text-[#666666] line-through">$89.99 USD</p>
+                </div>
+              </div>
+            </div>
+          )}
+        </div>
+      </section>
+
+      {/* <Testimonials data={testimonial} /> */}
       <CallToAction data={callToAction} />
     </>
   );

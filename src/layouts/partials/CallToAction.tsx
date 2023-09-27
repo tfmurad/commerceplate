@@ -12,9 +12,9 @@ const CallToAction = ({ data }: { data: PageData }) => {
   return (
     <>
       {data.frontmatter.enable && (
-        <section className="mb-28">
+        <section className="my-28">
           <div className="container">
-            <div className="rounded-xl bg-theme-light px-4 py-16 dark:bg-darkmode-theme-light xl:p-20">
+            <div className="rounded-xl bg-theme-light px-4 py-16 dark:bg-darkmode-theme-light xl:p-[150px]">
               <div className="row items-center justify-between">
                 <div className="mb-10 md:col-5 lg:col-4 md:order-2 md:mb-0">
                   <ImageFallback
@@ -25,7 +25,7 @@ const CallToAction = ({ data }: { data: PageData }) => {
                     alt="cta-image"
                   />
                 </div>
-                <div className="md:col-7 md:order-1">
+                <div className="md:col-7 md:order-1 text-center">
                   <h2
                     dangerouslySetInnerHTML={markdownify(
                       data.frontmatter.title,
@@ -39,12 +39,18 @@ const CallToAction = ({ data }: { data: PageData }) => {
                     className="mb-6"
                   />
                   {data.frontmatter.button.enable && (
-                    <a
-                      className="btn btn-primary"
-                      href={data.frontmatter.button.link}
-                    >
-                      {data.frontmatter.button.label}
-                    </a>
+                    <form>
+                      <input
+                        placeholder="Email Here"
+                        type="text"
+                        className="border-2 border-white py-2 rounded-tl-md rounded-bl-md"
+                      />
+                      <input
+                        className="text-4 font-medium bg-black text-white px-4 py-2 border-0 rounded-tr-md rounded-br-md"
+                        type="submit"
+                        value="Subscribe" />
+                    </form>
+
                   )}
                 </div>
               </div>
