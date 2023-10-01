@@ -26,7 +26,7 @@
   li {
     @apply inline-block;
     a {
-      @apply flex h-9 w-9 items-center justify-center rounded-full bg-white text-center leading-9 text-black border border-black dark:bg-darkmode-primary dark:text-dark;
+      @apply flex h-9 w-9 items-center justify-center rounded-full bg-white hover:bg-black hover:text-white duration-300 text-center leading-9 text-black border border-black dark:bg-darkmode-primary dark:text-dark;
       svg {
         @apply h-5 w-5;
       }
@@ -88,19 +88,19 @@
 
 // tab
 .tab {
-  @apply overflow-hidden rounded-lg border border-border dark:border-darkmode-border;
+  @apply overflow-hidden rounded-lg border-0 border-border dark:border-darkmode-border;
   &-nav {
-    @apply flex border-b border-border bg-theme-light dark:border-darkmode-border dark:bg-darkmode-theme-light;
+    @apply flex border-0 border-border dark:border-darkmode-border dark:bg-darkmode-theme-light;
     @apply m-0 #{!important};
     @apply list-none #{!important};
 
     &-item {
-      @apply cursor-pointer border-b-[3px] border-border py-2 text-lg text-dark opacity-80 dark:border-light;
+      @apply cursor-pointer border-b py-2 text-lg text-dark opacity-80 dark:border-light;
       @apply my-0 #{!important};
       @apply px-8 #{!important};
 
       &.active {
-        @apply border-b-[3px] border-dark opacity-100 dark:border-darkmode-primary;
+        @apply border border-b-0 border-border rounded-tr-lg rounded-tl-lg opacity-100 dark:border-darkmode-primary;
       }
     }
   }

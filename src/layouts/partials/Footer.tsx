@@ -33,10 +33,10 @@ const Footer = () => {
         </div>
       </div>
       <div className="border-t border-border py-7 dark:border-darkmode-border">
-        <div className="container flex justify-between items-center text-light dark:text-darkmode-light">
+        <div className="container flex flex-col md:flex-row justify-between items-center text-light dark:text-darkmode-light">
           <ul>
-            {menu.footer.map((menu) => (
-              <li className="m-3 inline-block" key={menu.name}>
+            {menu.footerCopyright.map((menu) => (
+              <li className="m-3 inline-block text-[#41484D]" key={menu.name}>
                 <Link href={menu.url}>{menu.name}</Link>
               </li>
             ))}

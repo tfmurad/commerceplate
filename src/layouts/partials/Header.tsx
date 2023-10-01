@@ -39,9 +39,9 @@ const Header = () => {
 
   return (
     <header
-      className={`header z-30 ${settings.sticky_header && "sticky top-0"}`}
+      className={`header z-30 ${settings.sticky_header && "sticky top-0"} shadow-lg`}
     >
-      <nav className="navbar container">
+      <nav className="navbar container space-x-3">
         {/* logo */}
         <div className="order-0">
           <Logo />
@@ -138,7 +138,7 @@ const Header = () => {
           )}
         </ul>
         <div className="order-1 ml-auto flex gap-7 items-center md:order-2 lg:ml-0">
-          <div className="flex gap-1">
+          <div className="hidden md:flex gap-1">
             <ImageFallback
               src={flag}
               height={24}

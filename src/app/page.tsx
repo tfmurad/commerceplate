@@ -5,6 +5,7 @@ import { markdownify } from "@/lib/utils/textConverter";
 import CallToAction from "@/partials/CallToAction";
 import SeoMeta from "@/partials/SeoMeta";
 import { Button, Feature } from "@/types";
+import Link from "next/link";
 import { HiOutlineArrowNarrowLeft, HiOutlineArrowNarrowRight } from "react-icons/hi";
 
 const Home = () => {
@@ -25,8 +26,8 @@ const Home = () => {
       <SeoMeta />
       <section className="section pt-14 bg-gradient-to-r from-[#F4F4F4] to-[#F4F4F43D] w-[85%] mx-auto relative">
         <div className="container">
-          <div className="flex gap-10 items-center">
-            <div className="mb-16 text-center lg:col-7">
+          <div className="flex flex-col md:flex-row md:gap-10 items-center">
+            <div className="mb-6 md:mb-16 text-center lg:col-7">
               <p
                 className="mb-4"
                 dangerouslySetInnerHTML={markdownify(banner.content ?? "")}
@@ -36,9 +37,9 @@ const Home = () => {
                 dangerouslySetInnerHTML={markdownify(banner.title)}
               />
               {banner.button!.enable && (
-                <a className="btn btn-primary" href={banner.button!.link}>
+                <Link className="btn btn-primary" href={banner.button!.link}>
                   {banner.button!.label}
-                </a>
+                </Link>
               )}
             </div>
             {banner.image && (
@@ -62,10 +63,10 @@ const Home = () => {
       </section>
 
       {/* category section  */}
-      <section className="mt-[130px] w-[85%] mx-auto container">
+      <section className="mt-[56px] md:mt-[130px] w-[85%] mx-auto container">
         <h3 className="text-12 text-center mb-14">Categories</h3>
 
-        <div className="grid grid-cols-3 gap-6">
+        <div className="grid grid-cols-2 md:grid-cols-3 gap-6">
           <div className="text-center">
             <ImageFallback
               className=""
@@ -112,7 +113,7 @@ const Home = () => {
 
 
       {/* Latest Products section  */}
-      <section className="mt-[130px] w-[85%] mx-auto container">
+      <section className="mt-[56px] md:mt-[130px] w-[85%] mx-auto container">
         <h3 className="text-12 text-center mb-2">Latest Products</h3>
         <p className="text-5 text-[#444444] text-center mb-14">Don't Miss Today's Latest Deals</p>
 
@@ -135,6 +136,12 @@ const Home = () => {
               </div>
             </div>
           )}
+        </div>
+
+        <div className="flex items-center justify-center mt-6">
+          <Link className="btn btn-primary" href={""}>
+            + See All Products
+          </Link>
         </div>
       </section>
 

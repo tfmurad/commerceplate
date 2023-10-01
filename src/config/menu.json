@@ -69,5 +69,15 @@
       "name": "Contact",
       "url": "/contact"
     }
+  ],
+  "footerCopyright": [
+    {
+      "name": "Privacy & Policy",
+      "url": "/privacy-policy"
+    },
+    {
+      "name": "Terms & Conditions",
+      "url": "/terms-conditions"
+    }
   ]
 }
