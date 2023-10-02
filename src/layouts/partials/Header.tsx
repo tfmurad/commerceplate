@@ -39,13 +39,14 @@ const Header = () => {
 
   return (
     <header
-      className={`header z-30 ${settings.sticky_header && "sticky top-0"} shadow-lg`}
+      className={`header z-30 ${settings.sticky_header && "sticky top-0"}`}
     >
-      <nav className="navbar container space-x-3">
+      <nav className="navbar container">
         {/* logo */}
         <div className="order-0">
           <Logo />
         </div>
+
         {/* navbar toggler */}
         <input id="nav-toggle" type="checkbox" className="hidden" />
         <label
@@ -137,7 +138,7 @@ const Header = () => {
             </li>
           )}
         </ul>
-        <div className="order-1 ml-auto flex gap-7 items-center md:order-2 lg:ml-0">
+        <div className="order-1 ml-auto mr-7 flex gap-7 items-center md:order-2 lg:ml-0">
           <div className="hidden md:flex gap-1">
             <ImageFallback
               src={flag}
