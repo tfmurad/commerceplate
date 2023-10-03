@@ -16,7 +16,6 @@ const CallToAction = ({ data }: { data: PageData }) => {
           <div className="container">
             <div className="rounded-xl bg-theme-light px-4 py-16 dark:bg-darkmode-theme-light xl:p-[150px]">
               <div className="row items-center justify-between">
-
                 <div className="mb-10 md:col-7 md:order-1 text-center">
                   <h2
                     dangerouslySetInnerHTML={markdownify(
@@ -38,11 +37,11 @@ const CallToAction = ({ data }: { data: PageData }) => {
                         className="border-2 border-white py-2 rounded-tl-md rounded-bl-md"
                       />
                       <input
-                        className="text-4 font-medium bg-black text-white px-4 py-2 border-0 rounded-tr-md rounded-br-md"
+                        className="text-4 font-medium bg-primary text-white px-4 py-2 border-0 rounded-tr-md rounded-br-md"
                         type="submit"
-                        value="Subscribe" />
+                        value="Subscribe"
+                      />
                     </form>
-
                   )}
                 </div>
 

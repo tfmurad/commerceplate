@@ -26,7 +26,7 @@
   li {
     @apply inline-block;
     a {
-      @apply flex h-9 w-9 items-center justify-center rounded-full bg-white hover:bg-black hover:text-white duration-300 text-center leading-9 text-black border border-black dark:bg-darkmode-primary dark:text-dark;
+      @apply flex h-9 w-9 items-center justify-center rounded-full bg-white hover:bg-primary hover:text-white duration-300 text-center leading-9 text-primary border border-primary dark:bg-darkmode-primary dark:text-dark;
       svg {
         @apply h-5 w-5;
       }

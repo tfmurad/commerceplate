@@ -6,7 +6,7 @@ import menu from "@/config/menu.json";
 import ImageFallback from "@/helpers/ImageFallback";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { BsCart3, BsPerson } from "react-icons/bs/index.js";
 import { IoSearch } from "react-icons/io5/index.js";
 import flag from "/public/images/flag.png";
@@ -26,6 +26,7 @@ export interface INavigationLink {
 }
 
 const Header = () => {
+  const [navbarShadow, setNavbarShadow] = useState(false);
   // distructuring the main menu from menu object
   const { main }: { main: INavigationLink[] } = menu;
   const { navigation_button, settings } = config;
@@ -37,9 +38,26 @@ const Header = () => {
     window.scroll(0, 0);
   }, [pathname]);
 
+  useEffect(() => {
+    const handleScroll = () => {
+      if (window.scrollY > 0) {
+        setNavbarShadow(true);
+      } else {
+        setNavbarShadow(false);
+      }
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
+
   return (
     <header
-      className={`header z-30 ${settings.sticky_header && "sticky top-0"}`}
+      className={`header z-30 ${settings.sticky_header && "sticky top-0"} ${
+        navbarShadow ? "shadow-md" : "shadow-none"
+      }`}
     >
       <nav className="navbar container">
         {/* logo */}
@@ -84,13 +102,14 @@ const Header = () => {
               {menu.hasChildren ? (
                 <li className="nav-item nav-dropdown group relative">
                   <span
-                    className={`nav-link inline-flex items-center ${menu.children?.map(({ url }) => url).includes(pathname) ||
+                    className={`nav-link inline-flex items-center ${
+                      menu.children?.map(({ url }) => url).includes(pathname) ||
                       menu.children
                         ?.map(({ url }) => `${url}/`)
                         .includes(pathname)
-                      ? "active"
-                      : ""
-                      }`}
+                        ? "active"
+                        : ""
+                    }`}
                   >
                     {menu.name}
                     <svg className="h-4 w-4 fill-current" viewBox="0 0 20 20">
@@ -102,10 +121,11 @@ const Header = () => {
                       <li className="nav-dropdown-item" key={`children-${i}`}>
                         <Link
                           href={child.url}
-                          className={`nav-dropdown-link block ${(pathname === `${child.url}/` ||
-                            pathname === child.url) &&
+                          className={`nav-dropdown-link block ${
+                            (pathname === `${child.url}/` ||
+                              pathname === child.url) &&
                             "active"
-                            }`}
+                          }`}
                         >
                           {child.name}
                         </Link>
@@ -117,9 +137,10 @@ const Header = () => {
                 <li className="nav-item">
                   <Link
                     href={menu.url}
-                    className={`nav-link block ${(pathname === `${menu.url}/` || pathname === menu.url) &&
+                    className={`nav-link block ${
+                      (pathname === `${menu.url}/` || pathname === menu.url) &&
                       "active"
-                      }`}
+                    }`}
                   >
                     {menu.name}
                   </Link>
@@ -140,11 +161,7 @@ const Header = () => {
         </ul>
         <div className="order-1 ml-auto mr-7 flex gap-7 items-center md:order-2 lg:ml-0">
           <div className="hidden md:flex gap-1">
-            <ImageFallback
-              src={flag}
-              height={24}
-              width={24}
-            />
+            <ImageFallback src={flag} height={24} width={24} />
             USD
           </div>
 
@@ -174,7 +191,9 @@ const Header = () => {
               href="/cart"
               aria-label="cart"
             >
-              <span className="bg-black text-white text-xs rounded-full p-1 absolute -top-2 -right-4 w-5 h-5 flex items-center justify-center">0</span>
+              <span className="bg-black text-white text-xs rounded-full p-1 absolute -top-2 -right-4 w-5 h-5 flex items-center justify-center">
+                0
+              </span>
               <BsCart3 />
             </Link>
           )}
