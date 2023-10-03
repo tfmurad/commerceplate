@@ -14,9 +14,9 @@ const CallToAction = ({ data }: { data: PageData }) => {
       {data.frontmatter.enable && (
         <section className="section">
           <div className="container">
-            <div className="rounded-xl bg-theme-light px-4 py-16 dark:bg-darkmode-theme-light xl:p-[150px]">
+            <div className="rounded-xl bg-theme-light px-4 py-16 dark:bg-darkmode-theme-light">
               <div className="row items-center justify-between">
-                <div className="mb-10 md:col-7 md:order-1 text-center">
+                <div className="mb-10 md:col-6 md:order-1 text-center">
                   <h2
                     dangerouslySetInnerHTML={markdownify(
                       data.frontmatter.title,
@@ -34,10 +34,10 @@ const CallToAction = ({ data }: { data: PageData }) => {
                       <input
                         placeholder="Email Here"
                         type="text"
-                        className="border-2 border-white py-2 rounded-tl-md rounded-bl-md"
+                        className="form-input"
                       />
                       <input
-                        className="text-4 font-medium bg-primary text-white px-4 py-2 border-0 rounded-tr-md rounded-br-md"
+                        className="btn btn-primary rounded-tl-none rounded-bl-none"
                         type="submit"
                         value="Subscribe"
                       />
@@ -45,7 +45,7 @@ const CallToAction = ({ data }: { data: PageData }) => {
                   )}
                 </div>
 
-                <div className=" md:col-5 lg:col-4 md:order-2 md:mb-0">
+                <div className=" md:col-6 lg:col-5 md:order-2 md:mb-0">
                   <ImageFallback
                     className="w-full"
                     src={data.frontmatter.image}

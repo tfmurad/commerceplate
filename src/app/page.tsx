@@ -1,23 +1,59 @@
 /* eslint-disable react/no-unescaped-entities */
+import CategoriesSlider from "@/components/CategoriesSlider";
 import HeroSlider from "@/components/HeroSlider";
 import ImageFallback from "@/helpers/ImageFallback";
 import { getListPage } from "@/lib/contentParser";
 import CallToAction from "@/partials/CallToAction";
 import SeoMeta from "@/partials/SeoMeta";
-import { Banner, Feature } from "@/types";
+import { Banner } from "@/types";
 import Link from "next/link";
 
 const Home = () => {
   const homepage = getListPage("homepage/_index.md");
   const callToAction = getListPage("sections/call-to-action.md");
   const { frontmatter } = homepage;
-  const {
-    banner,
-    features,
-  }: {
-    banner: Banner[];
-    features: Feature[];
-  } = frontmatter;
+  const { banner }: { banner: Banner[]; } = frontmatter;
+
+
+  // Sample array of categories
+  const categories = [
+    {
+      id: 1,
+      name: 'Lamp',
+      imageSrc: '/images/category-1.png',
+      itemCount: 8,
+    },
+    {
+      id: 2,
+      name: 'Chair',
+      imageSrc: '/images/category-2.png',
+      itemCount: 12,
+    },
+    {
+      id: 3,
+      name: '1 Lamp',
+      imageSrc: '/images/category-1.png',
+      itemCount: 8,
+    },
+    {
+      id: 4,
+      name: 'Lamp',
+      imageSrc: '/images/category-1.png',
+      itemCount: 8,
+    },
+    {
+      id: 5,
+      name: 'Chair',
+      imageSrc: '/images/category-2.png',
+      itemCount: 12,
+    },
+    {
+      id: 6,
+      name: '1 Lamp',
+      imageSrc: '/images/category-1.png',
+      itemCount: 8,
+    }
+  ];
 
   return (
     <>
@@ -34,27 +70,7 @@ const Home = () => {
       <section className="section">
         <div className="container">
           <h3 className="text-center mb-14">Categories</h3>
-
-          <div className="row">
-            {Array.from({ length: 3 }).map((_, idx) => (
-              <div
-                key={idx}
-                className="text-center sm:col-12 md:col-6 lg:col-4"
-              >
-                <ImageFallback
-                  className=""
-                  src="/images/category-1.png"
-                  width={531}
-                  height={383}
-                  alt="category image"
-                />
-                <div className="p-6">
-                  <h5>Lamp</h5>
-                  <h6 className="text-light">8 items</h6>
-                </div>
-              </div>
-            ))}
-          </div>
+          <CategoriesSlider categories={categories} />
         </div>
       </section>
 

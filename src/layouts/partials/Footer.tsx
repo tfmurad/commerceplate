@@ -21,7 +21,7 @@ const Footer = () => {
           <div className="mb-8 text-center lg:col-6 lg:mb-0">
             <ul>
               {menu.footer.map((menu) => (
-                <li className="m-3 inline-block" key={menu.name}>
+                <li className="nav-link inline-block text-light" key={menu.name}>
                   <Link href={menu.url}>{menu.name}</Link>
                 </li>
               ))}
@@ -36,7 +36,7 @@ const Footer = () => {
         <div className="container flex flex-col md:flex-row justify-between items-center text-light dark:text-darkmode-light">
           <ul>
             {menu.footerCopyright.map((menu) => (
-              <li className="m-3 inline-block text-light" key={menu.name}>
+              <li className="nav-link inline-block text-light" key={menu.name}>
                 <Link href={menu.url}>{menu.name}</Link>
               </li>
             ))}

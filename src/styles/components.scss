@@ -13,7 +13,7 @@
 
 // form style
 .form-input {
-  @apply w-full rounded border-transparent bg-theme-light px-6 py-4 text-dark placeholder:text-light focus:border-primary focus:ring-transparent dark:border-darkmode-border dark:bg-darkmode-theme-light dark:text-darkmode-light;
+  @apply rounded-tl-md rounded-bl-md border-transparent bg-body md:px-6 py-4 text-dark placeholder:text-light focus:border-primary focus:ring-transparent dark:border-darkmode-border dark:bg-darkmode-theme-light dark:text-darkmode-light;
 }
 
 .form-label {
@@ -84,17 +84,6 @@
       @apply h-4 w-4 bg-primary dark:bg-darkmode-primary;
     }
   }
-}
-
-.swiper {
-  @apply relative;
-}
-.swiper-button-prev {
-  @apply bg-white text-3xl w-[30px] h-[32px] md:w-[60px] md:h-[60px] flex items-center justify-center rounded-md absolute bottom-4 left-4;
-}
-
-.swiper-button-next {
-  @apply bg-white text-3xl w-[30px] h-[32px] md:w-[60px] md:h-[60px] flex items-center justify-center rounded-md absolute bottom-4 right-4 md:left-24;
 }
 
 // tab

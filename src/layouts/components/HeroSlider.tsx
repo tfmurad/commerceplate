@@ -2,24 +2,34 @@
 import ImageFallback from "@/helpers/ImageFallback";
 import { markdownify } from "@/lib/utils/textConverter";
 import Link from "next/link";
+import { useRef, useState } from "react";
+import { HiOutlineArrowNarrowLeft, HiOutlineArrowNarrowRight } from "react-icons/hi";
 // Import Swiper styles
 import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
-import { A11y, Navigation, Pagination } from "swiper/modules";
+import { Navigation, Pagination } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
-import {
-  HiOutlineArrowNarrowLeft,
-  HiOutlineArrowNarrowRight,
-} from "react-icons/hi";
-import { useSwiper } from "swiper/react";
 
 const HeroSlider = ({ content }: { content: any }) => {
-  const swiperBTN = useSwiper();
-  console.log(swiperBTN);
+  //Add a state that will trigger a re-render later
+  const [_, setInit] = useState(false);
+
+  const prevRef = useRef(null);
+  const nextRef = useRef(null);
+
   return (
     <>
-      <Swiper navigation={true} modules={[Pagination, Navigation]}>
+      <Swiper
+        modules={[Pagination, Navigation]}
+        //assign the refs to the swiper navigation buttons
+        navigation={{
+          prevEl: prevRef.current,
+          nextEl: nextRef.current,
+        }}
+        //trigger a re-render by updating the state on swiper initialization
+        onInit={() => setInit(true)}
+      >
         {content.map((item: any, index: number) => (
           <SwiperSlide key={index}>
             <div className="row items-center md:px-[100px]">
@@ -57,18 +67,10 @@ const HeroSlider = ({ content }: { content: any }) => {
           </SwiperSlide>
         ))}
 
-        <button
-          onClick={() => swiperBTN.slidePrev()}
-          className="bg-white text-3xl w-[30px] h-[32px] md:w-[60px] md:h-[60px] flex items-center justify-center rounded-md absolute bottom-4 left-4"
-        >
-          <HiOutlineArrowNarrowLeft />
-        </button>
-        <button
-          onClick={() => swiperBTN.slideNext()}
-          className="bg-white text-3xl w-[30px] h-[32px] md:w-[60px] md:h-[60px] flex items-center justify-center rounded-md absolute bottom-4 right-4 md:left-24 opacity-50"
-        >
-          <HiOutlineArrowNarrowRight />
-        </button>
+        <div className="flex justify-between lg:justify-normal gap-4 mx-4">
+          <div ref={prevRef} className="p-4 rounded-md bg-body cursor-pointer"><HiOutlineArrowNarrowLeft size={24} /></div>
+          <div ref={nextRef} className="p-4 rounded-md bg-body cursor-pointer"><HiOutlineArrowNarrowRight size={24} /></div>
+        </div>
       </Swiper>
     </>
   );

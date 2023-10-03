@@ -55,9 +55,8 @@ const Header = () => {
 
   return (
     <header
-      className={`header z-30 ${settings.sticky_header && "sticky top-0"} ${
-        navbarShadow ? "shadow-md" : "shadow-none"
-      }`}
+      className={`header z-30 ${settings.sticky_header && "sticky top-0"} ${navbarShadow ? "shadow-md" : "shadow-none"
+        }`}
     >
       <nav className="navbar container">
         {/* logo */}
@@ -102,14 +101,13 @@ const Header = () => {
               {menu.hasChildren ? (
                 <li className="nav-item nav-dropdown group relative">
                   <span
-                    className={`nav-link inline-flex items-center ${
-                      menu.children?.map(({ url }) => url).includes(pathname) ||
+                    className={`nav-link inline-flex items-center ${menu.children?.map(({ url }) => url).includes(pathname) ||
                       menu.children
                         ?.map(({ url }) => `${url}/`)
                         .includes(pathname)
-                        ? "active"
-                        : ""
-                    }`}
+                      ? "active"
+                      : ""
+                      }`}
                   >
                     {menu.name}
                     <svg className="h-4 w-4 fill-current" viewBox="0 0 20 20">
@@ -121,11 +119,10 @@ const Header = () => {
                       <li className="nav-dropdown-item" key={`children-${i}`}>
                         <Link
                           href={child.url}
-                          className={`nav-dropdown-link block ${
-                            (pathname === `${child.url}/` ||
-                              pathname === child.url) &&
-                            "active"
-                          }`}
+                          className={`nav-dropdown-link block ${(pathname === `${child.url}/` ||
+                            pathname === child.url) &&
+                            "nav-active"
+                            }`}
                         >
                           {child.name}
                         </Link>
@@ -137,10 +134,9 @@ const Header = () => {
                 <li className="nav-item">
                   <Link
                     href={menu.url}
-                    className={`nav-link block ${
-                      (pathname === `${menu.url}/` || pathname === menu.url) &&
-                      "active"
-                    }`}
+                    className={`nav-link block ${(pathname === `${menu.url}/` || pathname === menu.url) &&
+                      "nav-active"
+                      }`}
                   >
                     {menu.name}
                   </Link>
