@@ -1,91 +1,180 @@
+import Counter from "@/components/Counter";
+import PaymentSlider from "@/components/PaymentSlider";
 import Social from "@/components/Social";
 import social from "@/config/social.json";
+import ImageFallback from "@/helpers/ImageFallback";
 import Image from "next/image";
-import { BsChevronRight } from "react-icons/bs";
 
 const ProductSingle = () => {
+	const paymentMethods = [
+		{
+			id: 1,
+			paymentMethodName: "Visa",
+			paymentMethodLogo: "/images/visa.png",
+		},
+		{
+			id: 2,
+			paymentMethodName: "Mastercard",
+			paymentMethodLogo: "/images/visa.png",
+		},
+		{
+			id: 3,
+			paymentMethodName: "PayPal",
+			paymentMethodLogo: "/images/visa.png",
+		},
+		{
+			id: 4,
+			paymentMethodName: "American Express",
+			paymentMethodLogo: "/images/visa.png",
+		},
+		{
+			id: 5,
+			paymentMethodName: "Discover",
+			paymentMethodLogo: "/images/visa.png",
+		},
+		{
+			id: 6,
+			paymentMethodName: "Visa",
+			paymentMethodLogo: "/images/visa.png",
+		},
+		{
+			id: 7,
+			paymentMethodName: "Mastercard",
+			paymentMethodLogo: "/images/visa.png",
+		},
+		{
+			id: 8,
+			paymentMethodName: "PayPal",
+			paymentMethodLogo: "/images/visa.png",
+		},
+		{
+			id: 9,
+			paymentMethodName: "American Express",
+			paymentMethodLogo: "/images/visa.png",
+		},
+		{
+			id: 10,
+			paymentMethodName: "Discover",
+			paymentMethodLogo: "/images/visa.png",
+		}
+	];
+
 	return (
 		<>
-			<section className="my-20 container flex justify-between gap-16 items-center">
-				{/* right side contents  */}
-				<div>
-					<div>
-						<Image className="rounded-md" src="/images/product-1.png" width={722} height={623} alt="" />
-					</div>
+			<section className="md:section">
+				<div className="container-sm">
+					<div className="row justify-center">
+						{/* right side contents  */}
+						<div className="col-12 md:col-5">
+							<Image className="rounded-md" src="/images/product-1.png" width={722} height={623} alt="" />
 
-					<div className="flex gap-4 mt-6">
-						{
-							Array.from({ length: 4 }).map((_, idx) => <Image className="rounded-md"
-								key={idx} src="/images/product-1.png" width={148} height={146} alt="" />)
-						}
+							<div className="row mt-6">
+								{
+									Array.from({ length: 4 }).map((_, idx) => <Image className="col-3"
+										key={idx} src="/images/product-1.png" width={148} height={146} alt="product" />)
+								}
+							</div>
+						</div>
+
+						{/* left side contents  */}
+						<div className="col-12 md:col-6 space-y-6 md:ml-10 py-6 md:py-0">
+							<h2>Curved Table Lamp</h2>
+
+							<div className="flex gap-2 items-center">
+								<h4 className="text-light">$49.99 USD</h4>
+								<h6 className="text-lunar line-through">$89.99 USD</h6>
+							</div>
+
+							<div>
+								<h5 className="mb-2">Frame Color</h5>
+								<div className="flex gap-3">
+									<div className="w-10 h-10 border rounded-md bg-black"></div>
+									<div className="w-10 h-10 border rounded-md bg-white"></div>
+									<div className="w-10 h-10 border rounded-md bg-lunar"></div>
+								</div>
+							</div>
+
+							<div>
+								<h5 className="mb-2">Size & Weight</h5>
+								<select className="bg-theme-light rounded-md md:w-1/2 border-none" name="size-weight" id="size-weight">
+									<option value="Height 61cm,Bulb E27">Height 61cm,Bulb E27</option>
+									<option value="Height 61cm,Bulb E27">Height 61cm,Bulb E27</option>
+									<option value="Height 41cm,Bulb E26">Height 41cm,Bulb E26</option>
+									<option value="Height 32cm,Bulb E25">Height 32cm,Bulb E25</option>
+								</select>
+							</div>
+
+							<div className="flex gap-4 md:w-3/4">
+								<Counter />
+
+								<button className="btn btn-outline-primary">Add To Cart
+								</button>
+
+								<button className="btn btn-primary">Buy now
+								</button>
+							</div>
+
+							<div>
+								<p className="p-2 rounded-md bg-theme-light inline">Est. Delivery between 0 - 3 days</p>
+							</div>
+
+							{/* <div className="flex gap-3">
+								<h5>Payment: </h5>
+								<PaymentSlider paymentMethods={paymentMethods} />
+							</div> */}
+
+							<div>
+								<h5>Payment: </h5>
+								<PaymentSlider paymentMethods={paymentMethods} />
+							</div>
+
+							<hr />
+
+							<div className="flex gap-3 items-center">
+								<h5>Share:</h5>
+								<Social source={social.main} className="social-icons" />
+							</div>
+
+							<div className="flex gap-3">
+								<h5>Tags:</h5>
+								<button className="flex flex-wrap gap-3">
+									{Array.from({ length: 5 }).map((_, idx) => <p
+										key={idx} className="px-2 py-1 rounded-md border">Table Lamps</p>)}
+								</button>
+							</div>
+						</div>
 					</div>
 				</div>
+			</section>
 
-				{/* left side contents  */}
-				<div className="space-y-6 py-10">
-					<h2 className="text-4xl">Curved Table Lamp</h2>
 
-					<div className="flex gap-2 items-center">
-						<p className="text-3xl font-medium text-[#41484D] ">$49.99 USD</p>
-						<p className=" font-light text-[#666666] line-through">$89.99 USD</p>
-					</div>
 
-					<div>
-						<h5 className="text-xl mb-2">Frame Color</h5>
-						<div className="flex gap-3">
-							<div className="w-10 h-10 border rounded-md bg-black"></div>
-							<div className="w-10 h-10 border rounded-md bg-white"></div>
-							<div className="w-10 h-10 border rounded-md bg-[#DFDFDF]"></div>
-						</div>
-					</div>
+			<section>
+				<div className="container-sm text-center">
+					<h3 className="mb-14">Latest Products</h3>
 
-					<div>
-						<h5 className="text-xl mb-2">Size & Weight</h5>
-						<select className="bg-[#F2F2F2] rounded-md w-1/2 border-none" name="size-weight" id="size-weight">
-							<option value="Height 61cm,Bulb E27">Height 61cm,Bulb E27</option>
-							<option value="Height 61cm,Bulb E27">Height 61cm,Bulb E27</option>
-							<option value="Height 41cm,Bulb E26">Height 41cm,Bulb E26</option>
-							<option value="Height 32cm,Bulb E25">Height 32cm,Bulb E25</option>
-						</select>
-					</div>
-
-					<div className="text-lg font-medium flex gap-4 w-3/4">
-						<div className="border rounded-md px-4 py-2 flex gap-6 justify-between">
-							<button>-</button>
-							<span>1</span>
-							<button>+</button>
-						</div>
-
-						<button className="border border-black text-black rounded-md px-4 py-2 flex justify-between">Add To Cart
-						</button>
-
-						<button className="border border-black text-white bg-black rounded-md px-4 py-2 flex justify-between">Buy now
-						</button>
-					</div>
-
-					<div>
-						<p className="p-2 rounded-md bg-[#F2F2F2] inline">Est. Delivery between 0 - 3 days</p>
-					</div>
-
-					<div className="flex gap-3">
-						<h5 className="text-xl">Payment: </h5>
-						{Array.from({ length: 6 }).map((_, idx) => <Image key={idx} src={'/images/visa.png'} width={44} height={32} alt="payment methods" />)}
-						<p className="p-2 border rounded-md flex items-center justify-center"><BsChevronRight /></p>
-					</div>
-
-					<hr />
-
-					<div className="flex gap-3">
-						<h5 className="text-xl">Share:</h5>
-						<Social source={social.main} className="social-icons" />
-					</div>
-
-					<div className="flex gap-3">
-						<h5 className="text-xl">Tags:</h5>
-						<div className="flex flex-wrap gap-3">
-							{Array.from({ length: 5 }).map((_, idx) => <p
-								key={idx} className="px-2 py-1 rounded-md border">Table Lamps</p>)}
-						</div>
+					<div className="row mb-6">
+						{Array.from({ length: 4 }).map((_, index) => (
+							<div
+								key={index}
+								className="text-center sm:col-6 md:col-4 lg:col-3"
+							>
+								<ImageFallback
+									className=""
+									src="/images/category-2.png"
+									width={1000}
+									height={269}
+									alt="category image"
+								/>
+								<div className="p-6 text-center">
+									<h5>Elliot Table Lamp</h5>
+									<div className="flex justify-center gap-2">
+										<h6 className="text-light">$49.99 USD</h6>
+										<h6 className="text-light line-through">$89.99 USD</h6>
+									</div>
+								</div>
+							</div>
+						))}
 					</div>
 				</div>
 			</section>

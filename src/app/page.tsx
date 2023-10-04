@@ -76,7 +76,7 @@ const Home = () => {
 
       {/* Latest Products section  */}
       <section>
-        <div className="container text-center">
+        <div className="container-sm text-center">
           <h3 className="mb-2">Latest Products</h3>
           <p className="text-5 mb-14">Don't Miss Today's Latest Deals</p>
 

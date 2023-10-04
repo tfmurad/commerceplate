@@ -84,7 +84,7 @@ input#nav-toggle:checked ~ #nav-menu {
 
 // search style
 .search-icon {
-  @apply cursor-pointer p-2 text-xl text-dark hover:text-primary dark:text-darkmode-light;
+  @apply cursor-pointer text-xl text-dark hover:text-primary dark:text-darkmode-light;
 }
 
 .search-modal {

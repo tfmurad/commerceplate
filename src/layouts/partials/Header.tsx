@@ -58,7 +58,7 @@ const Header = () => {
       className={`header z-30 ${settings.sticky_header && "sticky top-0"} ${navbarShadow ? "shadow-md" : "shadow-none"
         }`}
     >
-      <nav className="navbar container">
+      <nav className="navbar nav-container">
         {/* logo */}
         <div className="order-0">
           <Logo />
@@ -157,13 +157,13 @@ const Header = () => {
         </ul>
         <div className="order-1 ml-auto mr-7 flex gap-7 items-center md:order-2 lg:ml-0">
           <div className="hidden md:flex gap-1">
-            <ImageFallback src={flag} height={24} width={24} />
+            <ImageFallback src={flag} height={24} width={24} alt={'currency'} />
             USD
           </div>
 
           {settings.search && (
             <Link
-              className="text-xl text-dark hover:text-primary dark:border-darkmode-border dark:text-white"
+              className="search-icon"
               href="/search"
               aria-label="search"
             >
