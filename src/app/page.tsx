@@ -1,6 +1,7 @@
 /* eslint-disable react/no-unescaped-entities */
 import CategoriesSlider from "@/components/CategoriesSlider";
 import HeroSlider from "@/components/HeroSlider";
+import SectionTitle from "@/components/SectionTitle";
 import ImageFallback from "@/helpers/ImageFallback";
 import { getListPage } from "@/lib/contentParser";
 import CallToAction from "@/partials/CallToAction";
@@ -60,7 +61,7 @@ const Home = () => {
       <SeoMeta />
       <section>
         <div className="container">
-          <div className="bg-gradient relative py-10">
+          <div className="bg-gradient py-10">
             <HeroSlider content={banner} />
           </div>
         </div>
@@ -69,16 +70,15 @@ const Home = () => {
       {/* category section  */}
       <section className="section">
         <div className="container">
-          <h3 className="text-center mb-14">Categories</h3>
+          <SectionTitle title="Categories" />
           <CategoriesSlider categories={categories} />
         </div>
       </section>
 
       {/* Latest Products section  */}
       <section>
-        <div className="container-sm text-center">
-          <h3 className="mb-2">Latest Products</h3>
-          <p className="text-5 mb-14">Don't Miss Today's Latest Deals</p>
+        <div className="container-sm">
+          <SectionTitle title="Latest Products" subtitle="Don't Miss Today's Latest Deals" />
 
           <div className="row mb-6">
             {Array.from({ length: 8 }).map((_, index) => (
@@ -95,14 +95,14 @@ const Home = () => {
                 />
                 <div className="p-6 text-center">
                   <h5>Elliot Table Lamp</h5>
-                  <div className="flex justify-center gap-2">
+                  <div className="flex justify-center items-center gap-2">
                     <h6 className="text-light">$49.99 USD</h6>
-                    <h6 className="text-light line-through">$89.99 USD</h6>
+                    <h6 className="text-lunar line-through text-xxs md:text-base">$89.99 USD</h6>
                   </div>
                 </div>
               </div>
             ))}
-          </div>
+            S</div>
 
           <div className="mx-auto">
             <Link className="btn btn-primary" href={""}>

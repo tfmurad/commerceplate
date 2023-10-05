@@ -36,7 +36,7 @@ const Footer = () => {
         <div className="container flex flex-col md:flex-row justify-between items-center text-light dark:text-darkmode-light">
           <ul>
             {menu.footerCopyright.map((menu) => (
-              <li className="nav-link inline-block text-light" key={menu.name}>
+              <li className="nav-link inline-block text-text" key={menu.name}>
                 <Link href={menu.url}>{menu.name}</Link>
               </li>
             ))}

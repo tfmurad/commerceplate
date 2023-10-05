@@ -1,15 +1,14 @@
 "use client";
 
 import Logo from "@/components/Logo";
+import ThemeSwitcher from "@/components/ThemeSwitcher";
 import config from "@/config/config.json";
 import menu from "@/config/menu.json";
-import ImageFallback from "@/helpers/ImageFallback";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import React, { useEffect, useState } from "react";
 import { BsCart3, BsPerson } from "react-icons/bs/index.js";
 import { IoSearch } from "react-icons/io5/index.js";
-import flag from "/public/images/flag.png";
 
 //  child navigation link interface
 export interface IChildNavigationLink {
@@ -38,6 +37,7 @@ const Header = () => {
     window.scroll(0, 0);
   }, [pathname]);
 
+  // shadow on scroll down
   useEffect(() => {
     const handleScroll = () => {
       if (window.scrollY > 0) {
@@ -55,10 +55,10 @@ const Header = () => {
 
   return (
     <header
-      className={`header z-30 ${settings.sticky_header && "sticky top-0"} ${navbarShadow ? "shadow-md" : "shadow-none"
+      className={`header z-30 ${settings.sticky_header && "sticky top-0"} ${navbarShadow ? "shadow-sm" : "shadow-none"
         }`}
     >
-      <nav className="navbar nav-container">
+      <nav className="navbar container">
         {/* logo */}
         <div className="order-0">
           <Logo />
@@ -68,11 +68,11 @@ const Header = () => {
         <input id="nav-toggle" type="checkbox" className="hidden" />
         <label
           htmlFor="nav-toggle"
-          className="order-3 cursor-pointer flex items-center lg:hidden text-dark dark:text-white lg:order-1"
+          className="order-3 cursor-pointer flex items-center lg:hidden text-dark dark:text-white lg:order-1 border-2 p-1 rounded-md"
         >
           <svg
             id="show-button"
-            className="h-6 fill-current block"
+            className="h-5 fill-current block"
             viewBox="0 0 20 20"
           >
             <title>Menu Open</title>
@@ -80,7 +80,7 @@ const Header = () => {
           </svg>
           <svg
             id="hide-button"
-            className="h-6 fill-current hidden"
+            className="h-5 fill-current hidden"
             viewBox="0 0 20 20"
           >
             <title>Menu Close</title>
@@ -92,6 +92,7 @@ const Header = () => {
         </label>
         {/* /navbar toggler */}
 
+        {/* header menu items */}
         <ul
           id="nav-menu"
           className="navbar-nav order-3 hidden w-full pb-6 lg:order-1 lg:flex lg:w-auto lg:space-x-2 lg:pb-0 xl:space-x-8"
@@ -155,11 +156,9 @@ const Header = () => {
             </li>
           )}
         </ul>
-        <div className="order-1 ml-auto mr-7 flex gap-7 items-center md:order-2 lg:ml-0">
-          <div className="hidden md:flex gap-1">
-            <ImageFallback src={flag} height={24} width={24} alt={'currency'} />
-            USD
-          </div>
+
+        <div className="order-1 ml-auto mr-6 md:mr-7 flex gap-4 md:gap-7 items-center md:order-2 lg:ml-0">
+          <ThemeSwitcher className="" />
 
           {settings.search && (
             <Link
@@ -167,7 +166,7 @@ const Header = () => {
               href="/search"
               aria-label="search"
             >
-              <IoSearch />
+              <IoSearch size={20} />
             </Link>
           )}
 
@@ -187,7 +186,7 @@ const Header = () => {
               href="/cart"
               aria-label="cart"
             >
-              <span className="bg-black text-white text-xs rounded-full p-1 absolute -top-2 -right-4 w-5 h-5 flex items-center justify-center">
+              <span className="bg-black text-white dark:bg-white dark:text-black text-xs rounded-full p-1 absolute -top-1 md:-top-2 -right-3 md:-right-4 w-5 h-5 flex items-center justify-center">
                 0
               </span>
               <BsCart3 />

@@ -16,7 +16,7 @@
 
 // form style
 .form-input {
-  @apply rounded-tl-md rounded-bl-md border-transparent bg-body md:px-6 py-4 text-dark placeholder:text-light focus:border-primary focus:ring-transparent dark:border-darkmode-border dark:bg-darkmode-theme-light dark:text-darkmode-light;
+  @apply rounded-tl-md rounded-bl-md border-transparent bg-body md:px-6 py-4 text-dark placeholder:text-text focus:border-primary focus:ring-transparent dark:border-darkmode-border dark:bg-darkmode-theme-light dark:text-darkmode-light;
 }
 
 .form-label {
@@ -80,13 +80,14 @@
 // swiper pagination
 .swiper-pagination {
   @apply mt-9 flex items-center justify-center space-x-2 text-center;
-  &-bullet {
-    @apply h-2.5 w-2.5 rounded-full bg-theme-light opacity-100 dark:bg-darkmode-theme-light;
+}
 
-    &-active {
-      @apply h-4 w-4 bg-primary dark:bg-darkmode-primary;
-    }
-  }
+.banner-pagination-bullet {
+  @apply cursor-pointer h-2.5 w-2.5 rounded-full bg-swiper-bullet opacity-100 dark:bg-swiper-bullet;
+}
+
+.banner-pagination-bullet-active {
+  @apply h-2.5 w-5 bg-theme-dark dark:bg-darkmode-primary duration-200;
 }
 
 // tab

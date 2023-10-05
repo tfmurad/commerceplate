@@ -55,16 +55,19 @@ module.exports = {
         border: theme.colors.default.theme_color.border,
         "theme-light": theme.colors.default.theme_color.theme_light,
         "theme-dark": theme.colors.default.theme_color.theme_dark,
+        "swiper-bullet": theme.colors.default.theme_color.swiper_bullet,
         darkmode: {
           text: theme.colors.darkmode.text_color.default,
           light: theme.colors.darkmode.text_color.light,
           dark: theme.colors.darkmode.text_color.dark,
+          lunar: theme.colors.darkmode.text_color.lunar,
           primary: theme.colors.darkmode.theme_color.primary,
           secondary: theme.colors.darkmode.theme_color.secondary,
           body: theme.colors.darkmode.theme_color.body,
           border: theme.colors.darkmode.theme_color.border,
           "theme-light": theme.colors.darkmode.theme_color.theme_light,
           "theme-dark": theme.colors.darkmode.theme_color.theme_dark,
+          "swiper-bullet": theme.colors.darkmode.theme_color.swiper_bullet,
         },
       },
       fontSize: {
@@ -78,6 +81,7 @@ module.exports = {
         h4: h4 + "rem",
         h5: h5 + "rem",
         h6: h6 + "rem",
+        xxs: "10px",
       },
       fontFamily: {
         primary: [fontPrimary, fontPrimaryType],
