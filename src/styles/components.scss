@@ -1,6 +1,6 @@
 // section style
 .section {
-  @apply py-24 xl:py-28;
+  @apply py-14 xl:py-28;
   &-sm {
     @apply py-16 xl:py-20;
   }
@@ -16,7 +16,7 @@
 
 // form style
 .form-input {
-  @apply rounded-tl-md rounded-bl-md border-transparent bg-body md:px-6 py-4 text-dark placeholder:text-text focus:border-primary focus:ring-transparent dark:border-darkmode-border dark:bg-darkmode-theme-light dark:text-darkmode-light;
+  @apply w-full rounded-tl-md rounded-bl-md border-transparent bg-body md:px-6 py-4 text-dark placeholder:text-text focus:border-primary focus:ring-transparent dark:border-darkmode-border dark:bg-darkmode-theme-light dark:text-darkmode-light;
 }
 
 .form-label {
@@ -29,7 +29,7 @@
   li {
     @apply inline-block;
     a {
-      @apply flex h-9 w-9 items-center justify-center rounded-full bg-white hover:bg-primary hover:text-white duration-300 text-center leading-9 text-primary border border-primary dark:bg-darkmode-primary dark:text-dark;
+      @apply flex h-9 w-9 items-center justify-center rounded-full bg-white hover:bg-primary hover:text-white duration-300 text-center leading-9 text-primary border border-primary dark:border-white dark:bg-darkmode-theme-light dark:text-white dark:hover:bg-white dark:hover:text-black;
       svg {
         @apply h-5 w-5;
       }
@@ -88,6 +88,10 @@
 
 .banner-pagination-bullet-active {
   @apply h-2.5 w-5 bg-theme-dark dark:bg-darkmode-primary duration-200;
+}
+
+.swiper-button-disabled {
+  @apply opacity-50;
 }
 
 // tab

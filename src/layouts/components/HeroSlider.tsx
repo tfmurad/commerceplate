@@ -10,59 +10,41 @@ import { Pagination } from 'swiper/modules';
 import { Swiper, SwiperSlide } from "swiper/react";
 
 const HeroSlider = ({ content }: { content: any }) => {
-  //Add a state that will trigger a re-render later
-  // const [_, setInit] = useState(false);
-
-  // const prevRef = useRef(null);
-  // const nextRef = useRef(null);
-
-  // const pagination = {
-  //   clickable: true,
-  // };
 
   return (
     <>
       <Swiper
-        // modules={[Pagination, Navigation]}
-        // //assign the refs to the swiper navigation buttons
-        // pagination={true}
-        // navigation={{
-        //   prevEl: prevRef.current,
-        //   nextEl: nextRef.current,
-        // }}
-        // //trigger a re-render by updating the state on swiper initialization
-        // onInit={() => setInit(true)}
         pagination={{ clickable: true, bulletClass: 'banner-pagination-bullet', bulletActiveClass: 'banner-pagination-bullet-active' }}
         modules={[Pagination]}
       >
         {content.map((item: any, index: number) => (
           <SwiperSlide key={index}>
-            <div className="row items-center px-7 lg:px-[100px]">
-              <div className="sm:col-12 md:col-6">
+            <div className="row items-center px-7 xl:px-[100px]">
+              <div className="sm:col-12 md:col-6 xl:px-[60px]">
                 <div className="text-center">
                   {
                     item?.content && <p
-                      className="mb-4 text-lunar dark:text-darkmode-lunar font-medium text-xxs md:text-xl"
+                      className="mb-2 lg:mb-3 text-lunar dark:text-darkmode-lunar font-medium text-xxs md:text-xl"
                       dangerouslySetInnerHTML={markdownify(item.content)}
                     />
                   }
                   <h1
-                    className="mb-8 text-[22px] lg:text-[56px]"
+                    className="mb-4 lg:mb-10"
                     dangerouslySetInnerHTML={markdownify(item.title)}
                   />
                   {item.button!.enable && (
-                    <Link className="btn lg:btn-lg btn-primary" href={item.button!.link}>
+                    <Link className="btn-sm lg:btn-lg btn-primary font-medium" href={item.button!.link}>
                       {item.button!.label}
                     </Link>
                   )}
                 </div>
               </div>
 
-              <div className="sm:col-12 md:col-6 mt-6 md:mt-0">
+              <div className="sm:col-12 md:col-6 mt-6 lg:mt-0">
                 {item.image && (
                   <ImageFallback
                     src={item.image}
-                    className="mx-auto"
+                    className="mx-auto w-[288px] md:w-full"
                     width={702}
                     height={551}
                     alt="banner image"

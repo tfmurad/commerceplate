@@ -22,7 +22,7 @@
         "body": "#1c1c1c",
         "border": "#3E3E3E",
         "theme_light": "#222222",
-        "theme_dark": "",
+        "theme_dark": "#000",
         "swiper_bullet": "#AFAFAF"
       },
       "text_color": {
@@ -42,7 +42,7 @@
     },
     "font_size": {
       "base": "16",
-      "scale": "1.250"
+      "scale": "1.285"
     }
   }
 }

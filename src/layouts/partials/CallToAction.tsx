@@ -14,9 +14,9 @@ const CallToAction = ({ data }: { data: PageData }) => {
       {data.frontmatter.enable && (
         <section className="section">
           <div className="container">
-            <div className="rounded-xl bg-theme-light px-4 py-16 dark:bg-darkmode-theme-light">
-              <div className="row items-center justify-between">
-                <div className="mb-10 md:col-6 md:order-1 text-center">
+            <div className="rounded-xl bg-theme-light px-6 py-8 md:py-16 dark:bg-darkmode-theme-light">
+              <div className="row items-center">
+                <div className="mb-10 md:mb-0 md:col-6 text-center lg:px-[80px] xl:px-[100px] 2xl:px-[150px]">
                   <h2
                     dangerouslySetInnerHTML={markdownify(
                       data.frontmatter.title,
@@ -37,7 +37,7 @@ const CallToAction = ({ data }: { data: PageData }) => {
                         className="form-input"
                       />
                       <input
-                        className="btn btn-primary rounded-tl-none rounded-bl-none"
+                        className="btn btn-primary rounded-tl-none rounded-bl-none cursor-pointer"
                         type="submit"
                         value="Subscribe"
                       />
@@ -45,9 +45,9 @@ const CallToAction = ({ data }: { data: PageData }) => {
                   )}
                 </div>
 
-                <div className=" md:col-6 lg:col-5 md:order-2 md:mb-0">
+                <div className=" md:col-6 lg:col-5 md:mb-0">
                   <ImageFallback
-                    className="w-full"
+                    className="w-[264px] md:w-full mx-auto"
                     src={data.frontmatter.image}
                     width={392}
                     height={390}

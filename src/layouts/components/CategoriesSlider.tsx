@@ -46,7 +46,6 @@ const CategoriesSlider = ({ categories }: { categories: any }) => {
 				navigation={{
 					prevEl: prevRef.current,
 					nextEl: nextRef.current,
-					lockClass: 'lock'
 				}}
 				//trigger a re-render by updating the state on swiper initialization
 				onInit={() => setInit(true)}
@@ -64,8 +63,8 @@ const CategoriesSlider = ({ categories }: { categories: any }) => {
 								alt="category image"
 							/>
 							<div className="p-6">
-								<p className='md:text-[32px] font-bold'>{item.name}</p>
-								<p className="text-lunar text-xs font-medium md:text-2xl">{item.itemCount} items</p>
+								<h3 className='mb-2'>{item.name}</h3>
+								<p className="text-lunar text-xs md:text-2xl">{item.itemCount} items</p>
 							</div>
 						</div>
 					</SwiperSlide>
@@ -75,12 +74,12 @@ const CategoriesSlider = ({ categories }: { categories: any }) => {
 					className={`hidden md:flex justify-between w-full absolute top-[33%] z-10 px-4 text-dark ${isHovered ? 'opacity-100 transition-opacity duration-300 ease-in-out' : 'opacity-0 transition-opacity duration-300 ease-in-out'
 						}`}
 				>
-					<div ref={prevRef} className="p-2 lg:p-4 rounded-md bg-body cursor-pointer"><HiOutlineArrowNarrowLeft size={24} /></div>
-					<div ref={nextRef} className="p-2 lg:p-4 rounded-md bg-body cursor-pointer"><HiOutlineArrowNarrowRight size={24} /></div>
+					<div ref={prevRef} className="p-2 lg:p-4 rounded-md bg-body cursor-pointer shadow-sm"><HiOutlineArrowNarrowLeft size={24} /></div>
+					<div ref={nextRef} className="p-2 lg:p-4 rounded-md bg-body cursor-pointer shadow-sm"><HiOutlineArrowNarrowRight size={24} /></div>
 				</div>
 			</Swiper>
 		</div>
 	)
 }
 
-export default CategoriesSlider
+export default CategoriesSlider;

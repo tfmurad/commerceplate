@@ -5,6 +5,7 @@ import Footer from "@/partials/Footer";
 import Header from "@/partials/Header";
 import Providers from "@/partials/Providers";
 import "@/styles/main.scss";
+import GlobalState from 'context/GlobalState';
 
 export default function RootLayout({
   children,
@@ -47,9 +48,8 @@ export default function RootLayout({
           crossOrigin="anonymous"
         />
         <link
-          href={`https://fonts.googleapis.com/css2?family=${pf}${
-            sf ? "&family=" + sf : ""
-          }&display=swap`}
+          href={`https://fonts.googleapis.com/css2?family=${pf}${sf ? "&family=" + sf : ""
+            }&display=swap`}
           rel="stylesheet"
         />
       </head>
@@ -57,8 +57,10 @@ export default function RootLayout({
       <body suppressHydrationWarning={true}>
         <TwSizeIndicator />
         <Providers>
-          <Header />
-          <main>{children}</main>
+          <GlobalState>
+            <Header />
+            <main>{children}</main>
+          </GlobalState>
           <Footer />
         </Providers>
       </body>

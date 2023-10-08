@@ -4,9 +4,10 @@ import Logo from "@/components/Logo";
 import ThemeSwitcher from "@/components/ThemeSwitcher";
 import config from "@/config/config.json";
 import menu from "@/config/menu.json";
+import { CartContext } from "context/GlobalState";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { BsCart3, BsPerson } from "react-icons/bs/index.js";
 import { IoSearch } from "react-icons/io5/index.js";
 
@@ -25,6 +26,9 @@ export interface INavigationLink {
 }
 
 const Header = () => {
+  const { cartItems } = useContext(CartContext);
+  console.log(cartItems);
+
   const [navbarShadow, setNavbarShadow] = useState(false);
   // distructuring the main menu from menu object
   const { main }: { main: INavigationLink[] } = menu;
@@ -53,6 +57,7 @@ const Header = () => {
     };
   }, []);
 
+
   return (
     <header
       className={`header z-30 ${settings.sticky_header && "sticky top-0"} ${navbarShadow ? "shadow-sm" : "shadow-none"
@@ -60,7 +65,7 @@ const Header = () => {
     >
       <nav className="navbar container">
         {/* logo */}
-        <div className="order-0">
+        <div className="order-0 flex items-center">
           <Logo />
         </div>
 
@@ -187,7 +192,7 @@ const Header = () => {
               aria-label="cart"
             >
               <span className="bg-black text-white dark:bg-white dark:text-black text-xs rounded-full p-1 absolute -top-1 md:-top-2 -right-3 md:-right-4 w-5 h-5 flex items-center justify-center">
-                0
+                {cartItems && cartItems.length}
               </span>
               <BsCart3 />
             </Link>

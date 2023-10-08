@@ -2,9 +2,9 @@
 import CategoriesSlider from "@/components/CategoriesSlider";
 import HeroSlider from "@/components/HeroSlider";
 import SectionTitle from "@/components/SectionTitle";
-import ImageFallback from "@/helpers/ImageFallback";
 import { getListPage } from "@/lib/contentParser";
 import CallToAction from "@/partials/CallToAction";
+import LatestProducts from "@/partials/LatestProducts";
 import SeoMeta from "@/partials/SeoMeta";
 import { Banner } from "@/types";
 import Link from "next/link";
@@ -20,7 +20,7 @@ const Home = () => {
   const categories = [
     {
       id: 1,
-      name: 'Lamp',
+      name: 'Multiple Lights',
       imageSrc: '/images/category-1.png',
       itemCount: 8,
     },
@@ -38,7 +38,7 @@ const Home = () => {
     },
     {
       id: 4,
-      name: 'Lamp',
+      name: 'Multiple Lights',
       imageSrc: '/images/category-1.png',
       itemCount: 8,
     },
@@ -53,6 +53,66 @@ const Home = () => {
       name: '1 Lamp',
       imageSrc: '/images/category-1.png',
       itemCount: 8,
+    }
+  ];
+
+  // sample array of products 
+  const products = [
+    {
+      id: 1,
+      productName: "Product 1",
+      image: "/images/category-1.png",
+      currentPrice: 29.99,
+      previousPrice: 39.99
+    },
+    {
+      id: 2,
+      productName: "Product 2",
+      image: "/images/category-1.png",
+      currentPrice: 19.95,
+      previousPrice: 24.99
+    },
+    {
+      id: 3,
+      productName: "Product 3",
+      image: "/images/category-1.png",
+      currentPrice: 45.50,
+      previousPrice: 49.99
+    },
+    {
+      id: 4,
+      productName: "Product 4",
+      image: "/images/category-1.png",
+      currentPrice: 14.99,
+      previousPrice: 19.99
+    },
+    {
+      id: 5,
+      productName: "Product 5",
+      image: "/images/category-1.png",
+      currentPrice: 79.99,
+      previousPrice: 89.99
+    },
+    {
+      id: 6,
+      productName: "Product 6",
+      image: "/images/category-1.png",
+      currentPrice: 9.95,
+      previousPrice: 12.99
+    },
+    {
+      id: 7,
+      productName: "Product 7",
+      image: "/images/category-1.png",
+      currentPrice: 34.99,
+      previousPrice: 44.99
+    },
+    {
+      id: 8,
+      productName: "Product 8",
+      image: "/images/category-1.png",
+      currentPrice: 54.50,
+      previousPrice: 59.99
     }
   ];
 
@@ -79,33 +139,10 @@ const Home = () => {
       <section>
         <div className="container-sm">
           <SectionTitle title="Latest Products" subtitle="Don't Miss Today's Latest Deals" />
+          <LatestProducts products={products} />
 
-          <div className="row mb-6">
-            {Array.from({ length: 8 }).map((_, index) => (
-              <div
-                key={index}
-                className="text-center sm:col-6 md:col-4 lg:col-3"
-              >
-                <ImageFallback
-                  className=""
-                  src="/images/category-1.png"
-                  width={1000}
-                  height={269}
-                  alt="category image"
-                />
-                <div className="p-6 text-center">
-                  <h5>Elliot Table Lamp</h5>
-                  <div className="flex justify-center items-center gap-2">
-                    <h6 className="text-light">$49.99 USD</h6>
-                    <h6 className="text-lunar line-through text-xxs md:text-base">$89.99 USD</h6>
-                  </div>
-                </div>
-              </div>
-            ))}
-            S</div>
-
-          <div className="mx-auto">
-            <Link className="btn btn-primary" href={""}>
+          <div className="flex justify-center">
+            <Link className="btn-sm md:btn-lg btn-primary font-medium" href={"/product"}>
               + See All Products
             </Link>
           </div>
