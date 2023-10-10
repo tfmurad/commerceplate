@@ -27,7 +27,7 @@ const Footer = () => {
               ))}
             </ul>
           </div>
-          <div className="mb-8 text-center lg:col-3 lg:mb-0 lg:mt-0 lg:text-right">
+          <div className="md:mb-8 text-center lg:col-3 lg:mb-0 lg:mt-0 lg:text-right">
             <Social source={social.main} className="social-icons" />
           </div>
         </div>

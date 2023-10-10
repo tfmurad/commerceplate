@@ -16,7 +16,7 @@ const LatestProducts = ({ products }: { products: any }) => {
 						height={269}
 						alt="category image"
 					/>
-					<button onClick={() => handleAddToCart(product)} className="btn btn-primary font-medium absolute opacity-0 bottom-28 group-hover:-translate-y-6 -translate-x-1/2 group-hover:opacity-100 duration-700 ease-in-out">
+					<button onClick={() => handleAddToCart(product)} className="btn btn-primary font-medium absolute opacity-0 bottom-32 group-hover:-translate-y-6 -translate-x-1/2 group-hover:opacity-100 duration-300 ease-in-out">
 						Add to Cart
 					</button>
 					<div className="p-6 text-center">

@@ -20,7 +20,7 @@ const HeroSlider = ({ content }: { content: any }) => {
         {content.map((item: any, index: number) => (
           <SwiperSlide key={index}>
             <div className="row items-center px-7 xl:px-[100px]">
-              <div className="sm:col-12 md:col-6 xl:px-[60px]">
+              <div className="sm:col-12 lg:col-6 xl:px-[60px]">
                 <div className="text-center">
                   {
                     item?.content && <p
@@ -40,11 +40,11 @@ const HeroSlider = ({ content }: { content: any }) => {
                 </div>
               </div>
 
-              <div className="sm:col-12 md:col-6 mt-6 lg:mt-0">
+              <div className="sm:col-12 lg:col-6 mt-6 lg:mt-0">
                 {item.image && (
                   <ImageFallback
                     src={item.image}
-                    className="mx-auto w-[288px] md:w-full"
+                    className="mx-auto w-[388px] lg:w-full"
                     width={702}
                     height={551}
                     alt="banner image"

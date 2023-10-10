@@ -1,7 +1,6 @@
 /* eslint-disable react/no-unescaped-entities */
 import CategoriesSlider from "@/components/CategoriesSlider";
 import HeroSlider from "@/components/HeroSlider";
-import SectionTitle from "@/components/SectionTitle";
 import { getListPage } from "@/lib/contentParser";
 import CallToAction from "@/partials/CallToAction";
 import LatestProducts from "@/partials/LatestProducts";
@@ -130,15 +129,20 @@ const Home = () => {
       {/* category section  */}
       <section className="section">
         <div className="container">
-          <SectionTitle title="Categories" />
+          <div className="text-center">
+            <h2 className="mb-6 md:mb-14">Categories</h2>
+          </div>
           <CategoriesSlider categories={categories} />
         </div>
       </section>
 
       {/* Latest Products section  */}
       <section>
-        <div className="container-sm">
-          <SectionTitle title="Latest Products" subtitle="Don't Miss Today's Latest Deals" />
+        <div className="container">
+          <div className="text-center">
+            <h2 className="mb-6 md:mb-2">Latest Products</h2>
+            <p className="hidden md:block mb-14 h5">Don't Miss Today's Latest Deals</p>
+          </div>
           <LatestProducts products={products} />
 
           <div className="flex justify-center">

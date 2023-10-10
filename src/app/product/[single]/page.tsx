@@ -62,7 +62,7 @@ const ProductSingle = () => {
 	return (
 		<>
 			<section className="md:section">
-				<div className="container-sm">
+				<div className="container">
 					<div className="row justify-center">
 						{/* right side contents  */}
 						<div className="col-12 md:col-5">
@@ -150,7 +150,7 @@ const ProductSingle = () => {
 
 
 			<section>
-				<div className="container-sm text-center">
+				<div className="container text-center">
 					<h3 className="mb-14">Latest Products</h3>
 
 					<div className="row mb-6">

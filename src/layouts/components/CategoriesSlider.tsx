@@ -74,8 +74,8 @@ const CategoriesSlider = ({ categories }: { categories: any }) => {
 					className={`hidden md:flex justify-between w-full absolute top-[33%] z-10 px-4 text-dark ${isHovered ? 'opacity-100 transition-opacity duration-300 ease-in-out' : 'opacity-0 transition-opacity duration-300 ease-in-out'
 						}`}
 				>
-					<div ref={prevRef} className="p-2 lg:p-4 rounded-md bg-body cursor-pointer shadow-sm"><HiOutlineArrowNarrowLeft size={24} /></div>
-					<div ref={nextRef} className="p-2 lg:p-4 rounded-md bg-body cursor-pointer shadow-sm"><HiOutlineArrowNarrowRight size={24} /></div>
+					<div ref={prevRef} className="p-2 lg:p-3 rounded-md bg-body cursor-pointer shadow-sm"><HiOutlineArrowNarrowLeft size={24} /></div>
+					<div ref={nextRef} className="p-2 lg:p-3 rounded-md bg-body cursor-pointer shadow-sm"><HiOutlineArrowNarrowRight size={24} /></div>
 				</div>
 			</Swiper>
 		</div>

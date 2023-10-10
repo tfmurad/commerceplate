@@ -18,11 +18,7 @@
   @apply border-dark bg-transparent text-dark hover:bg-dark hover:text-white dark:border-white dark:text-white dark:hover:bg-white dark:hover:text-dark;
 }
 
-// .btn-animation-slide-cart {
-//   @layer duration-300
-//   &:hover {
-//     button {
-//       @apply opacity-100 -translate-y-28 ease-out;
-//     }
-//   }
-// }
+.input-checkbox {
+  @apply cursor-pointer
+  appearance-none h-10 w-10 bg-transparent border-none focus:ring-transparent focus:outline-none checked:focus:bg-transparent rounded-md checked:bg-transparent transition-all duration-300;
+}
