@@ -1,4 +1,4 @@
-const ModalFilter = ({ isVisible, onClose, children }) => {
+const ModalFilter = ({ isVisible, onClose }) => {
   if (!isVisible) return null;
 
   const handleClose = (e) => {
@@ -7,18 +7,109 @@ const ModalFilter = ({ isVisible, onClose, children }) => {
 
   return (
     <div
-      className="fixed inset-0 bg-black bg-opacity-25 backdrop-blur-sm flex justify-center items-center"
+      className="fixed inset-0 bg-dark dark:bg-light bg-opacity-25 backdrop-blur-sm overflow-y-auto z-50"
       id="wrapper"
       onClick={handleClose}
     >
-      <div className="w-[600px] flex flex-col">
-        <button
-          className="text-white text-xl place-self-end"
-          onClick={() => onClose()}
-        >
+      <div className=" ">
+        <button className="modal-close" onClick={() => onClose()}>
           X
         </button>
-        <div className="bg-white p-2 rounded">{children}</div>
+        <div className="modal-content">
+          <div className="z-10">
+            <div>
+              <h4 className="mb-2">Select Price Range</h4>
+              <hr />
+              <input className="mt-4 w-full" type="range" name="" id="" />
+            </div>
+
+            <div>
+              <h4 className="mt-10 mb-2">Product Categories</h4>
+              <hr />
+              <ul className="mt-4 space-y-4">
+                {Array.from({ length: 6 }).map((_, i) => (
+                  <li
+                    key={i}
+                    className="flex justify-between text-lunar dark:text-darkmode-lunar"
+                  >
+                    Gatelight <span>( 09 )</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+
+            <div>
+              <h4 className="mt-10 mb-2">Brand</h4>
+              <hr />
+              <ul className="mt-4 space-y-4">
+                {Array.from({ length: 5 }).map((_, i) => (
+                  <li
+                    key={i}
+                    className="flex justify-between text-lunar dark:text-darkmode-lunar"
+                  >
+                    <span>WebelKart ( 09 )</span>
+                    <span>
+                      {" "}
+                      <input type="checkbox" name="" id="" />
+                    </span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+
+            <div>
+              <h4 className="mt-10 mb-2">Frame Color</h4>
+              <hr />
+              <div className="flex gap-4 mt-4">
+                <div className=" bg-gray-800 rounded-md border">
+                  <input type="checkbox" className="input-checkbox" />
+                </div>
+
+                <div className=" bg-gray-200 rounded-md border">
+                  <input type="checkbox" className="input-checkbox" />
+                </div>
+
+                <div className=" bg-gray-400 rounded-md border">
+                  <input type="checkbox" className="input-checkbox" />
+                </div>
+              </div>
+            </div>
+
+            <div>
+              <h4 className="mt-10 mb-2">Size</h4>
+              <hr />
+              <ul className="mt-4 space-y-4">
+                {Array.from({ length: 3 }).map((_, i) => (
+                  <li
+                    key={i}
+                    className="flex justify-between text-lunar dark:text-darkmode-lunar"
+                  >
+                    <span>Height 61cm,Bulb E27</span>
+                    <span>
+                      {" "}
+                      <input type="checkbox" name="" id="" />
+                    </span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+
+            <div>
+              <h4 className="mt-10 mb-2">Size</h4>
+              <hr />
+              <button className="flex flex-wrap gap-3 mt-4">
+                {Array.from({ length: 4 }).map((_, idx) => (
+                  <p
+                    key={idx}
+                    className="px-2 py-1 rounded-md border text-lunar dark:text-darkmode-lunar"
+                  >
+                    Table Lamps
+                  </p>
+                ))}
+              </button>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   );
