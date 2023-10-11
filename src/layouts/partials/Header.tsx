@@ -27,7 +27,6 @@ export interface INavigationLink {
 
 const Header = () => {
   const { cartItems } = useContext(CartContext);
-  console.log(cartItems);
 
   const [navbarShadow, setNavbarShadow] = useState(false);
   // distructuring the main menu from menu object

@@ -1,63 +1,14 @@
 import Counter from "@/components/Counter";
-import PaymentSlider from "@/components/PaymentSlider";
 import Social from "@/components/Social";
 import social from "@/config/social.json";
 import ImageFallback from "@/helpers/ImageFallback";
+import MDXContent from "@/helpers/MDXContent";
+import { getSinglePage } from "@/lib/contentParser";
 import Image from "next/image";
 
-const ProductSingle = () => {
-	const paymentMethods = [
-		{
-			id: 1,
-			paymentMethodName: "Visa",
-			paymentMethodLogo: "/images/visa.png",
-		},
-		{
-			id: 2,
-			paymentMethodName: "Mastercard",
-			paymentMethodLogo: "/images/visa.png",
-		},
-		{
-			id: 3,
-			paymentMethodName: "PayPal",
-			paymentMethodLogo: "/images/visa.png",
-		},
-		{
-			id: 4,
-			paymentMethodName: "American Express",
-			paymentMethodLogo: "/images/visa.png",
-		},
-		{
-			id: 5,
-			paymentMethodName: "Discover",
-			paymentMethodLogo: "/images/visa.png",
-		},
-		{
-			id: 6,
-			paymentMethodName: "Visa",
-			paymentMethodLogo: "/images/visa.png",
-		},
-		{
-			id: 7,
-			paymentMethodName: "Mastercard",
-			paymentMethodLogo: "/images/visa.png",
-		},
-		{
-			id: 8,
-			paymentMethodName: "PayPal",
-			paymentMethodLogo: "/images/visa.png",
-		},
-		{
-			id: 9,
-			paymentMethodName: "American Express",
-			paymentMethodLogo: "/images/visa.png",
-		},
-		{
-			id: 10,
-			paymentMethodName: "Discover",
-			paymentMethodLogo: "/images/visa.png",
-		}
-	];
+const ProductSingle = (props: any) => {
+	const tabsData: any = getSinglePage("products");
+	console.log(props)
 
 	return (
 		<>
@@ -70,8 +21,8 @@ const ProductSingle = () => {
 
 							<div className="row mt-6">
 								{
-									Array.from({ length: 4 }).map((_, idx) => <Image className="col-3"
-										key={idx} src="/images/product-1.png" width={148} height={146} alt="product" />)
+									Array.from({ length: 4 }).map((_, idx) => <Image className="col-3 rounded-md"
+										key={idx} src="/images/product-1.png" width={168} height={146} alt="product" />)
 								}
 							</div>
 						</div>
@@ -87,10 +38,18 @@ const ProductSingle = () => {
 
 							<div>
 								<h5 className="mb-2">Frame Color</h5>
-								<div className="flex gap-3">
-									<div className="w-10 h-10 border rounded-md bg-black"></div>
-									<div className="w-10 h-10 border rounded-md bg-white"></div>
-									<div className="w-10 h-10 border rounded-md bg-lunar"></div>
+								<div className="flex gap-4 mt-4">
+									<div className=" bg-gray-800 rounded-md border">
+										<input type="checkbox" className="input-checkbox" />
+									</div>
+
+									<div className=" bg-gray-200 rounded-md border">
+										<input type="checkbox" className="input-checkbox" />
+									</div>
+
+									<div className=" bg-gray-400 rounded-md border">
+										<input type="checkbox" className="input-checkbox" />
+									</div>
 								</div>
 							</div>
 
@@ -123,9 +82,19 @@ const ProductSingle = () => {
 								<PaymentSlider paymentMethods={paymentMethods} />
 							</div> */}
 
-							<div>
+							<div className="flex flex-wrap gap-3">
 								<h5>Payment: </h5>
-								<PaymentSlider paymentMethods={paymentMethods} />
+								{
+									Array.from({ length: 7 }).map((_, i) => (
+										<Image
+											key={i}
+											src={"/images/visa.png"}
+											alt="payment"
+											width={44}
+											height={32}
+										/>
+									))
+								}
 							</div>
 
 							<hr />
@@ -178,6 +147,10 @@ const ProductSingle = () => {
 					</div>
 				</div>
 			</section>
+
+			<div>
+				<MDXContent content={tabsData} />
+			</div>
 		</>
 	)
 }

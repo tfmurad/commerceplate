@@ -16,7 +16,7 @@ const CallToAction = ({ data }: { data: PageData }) => {
           <div className="container">
             <div className="rounded-xl bg-theme-light px-6 py-8 md:py-16 dark:bg-darkmode-theme-light">
               <div className="row items-center">
-                <div className="mb-10 md:mb-0 lg:col-6 text-center lg:px-[56px]">
+                <div className="mb-10 md:mb-0 lg:col-6 text-center lg:px-[56px] order-2 lg:order-0">
                   <h2
                     dangerouslySetInnerHTML={markdownify(
                       data.frontmatter.title,
@@ -45,7 +45,7 @@ const CallToAction = ({ data }: { data: PageData }) => {
                   )}
                 </div>
 
-                <div className=" lg:col-6 md:mb-0">
+                <div className="lg:col-6 mb-6 lg:mb-0">
                   <ImageFallback
                     className="w-[264px] lg:w-full mx-auto"
                     src={data.frontmatter.image}
