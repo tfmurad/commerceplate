@@ -7,8 +7,6 @@ draft: false
 
 ---
 
-### Tab
-
 <Tabs>
 
 <Tab name="Tab 1">

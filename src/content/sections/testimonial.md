@@ -1,27 +1,35 @@
 ---
 enable: true
-title: "What Users Are Saying About Nextplate"
-description: "Don't just take our word for it - hear from some of our satisfied users!  Check out some of our testimonials below to see what others are saying about Nextplate."
+title: "What Our Client Says"
+description: ""
 
 # Testimonials
 testimonials:
   - name: "Marvin McKinney"
     designation: "Web Designer"
     avatar: "/images/avatar-sm.png"
-    content: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Qui iusto illo molestias, assumenda expedita commodi inventore non itaque molestiae voluptatum dolore, facilis sapiente, repellat veniam."
+    content: "Saastro SaaS Landingpage is an outstanding platform for businesses that want to showcase their 
+software as a service (SaaS) solutions in an intuitive and visually appealing way. landing page is designed 
+with the user in mind, making it easy to navigate and understand what software offers.One of the standout features of Saastro SaaS Landingpage is its sleek."
 
   - name: "Marvin McKinney"
     designation: "Web Designer"
     avatar: "/images/avatar-sm.png"
-    content: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Qui iusto illo molestias, assumenda expedita commodi inventore non itaque molestiae voluptatum dolore, facilis sapiente, repellat veniam."
+    content: "Saastro SaaS Landingpage is an outstanding platform for businesses that want to showcase their 
+software as a service (SaaS) solutions in an intuitive and visually appealing way. landing page is designed 
+with the user in mind, making it easy to navigate and understand what software offers.One of the standout features of Saastro SaaS Landingpage is its sleek."
 
   - name: "Marvin McKinney"
     designation: "Web Designer"
     avatar: "/images/avatar-sm.png"
-    content: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Qui iusto illo molestias, assumenda expedita commodi inventore non itaque molestiae voluptatum dolore, facilis sapiente, repellat veniam."
+    content: "Saastro SaaS Landingpage is an outstanding platform for businesses that want to showcase their 
+software as a service (SaaS) solutions in an intuitive and visually appealing way. landing page is designed 
+with the user in mind, making it easy to navigate and understand what software offers.One of the standout features of Saastro SaaS Landingpage is its sleek."
 
   - name: "Marvin McKinney"
     designation: "Web Designer"
     avatar: "/images/avatar-sm.png"
-    content: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Qui iusto illo molestias, assumenda expedita commodi inventore non itaque molestiae voluptatum dolore, facilis sapiente, repellat veniam."
+    content: "Saastro SaaS Landingpage is an outstanding platform for businesses that want to showcase their 
+software as a service (SaaS) solutions in an intuitive and visually appealing way. landing page is designed 
+with the user in mind, making it easy to navigate and understand what software offers.One of the standout features of Saastro SaaS Landingpage is its sleek."
 ---

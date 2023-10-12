@@ -201,7 +201,7 @@ const Product = () => {
 										</button>
 										<div className="p-6 text-center">
 											<h4 className="font-bold md:font-normal">
-												<Link href={`/product/${product.productName}`}>
+												<Link href={`/product/product-1`}>
 													{product.productName}
 												</Link>
 											</h4>

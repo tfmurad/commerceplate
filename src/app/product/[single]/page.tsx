@@ -6,9 +6,10 @@ import MDXContent from "@/helpers/MDXContent";
 import { getSinglePage } from "@/lib/contentParser";
 import Image from "next/image";
 
-const ProductSingle = (props: any) => {
+const ProductSingle = ({ params }: { params: any }) => {
 	const tabsData: any = getSinglePage("products");
-	console.log(props)
+	const post = tabsData.filter((page: any) => page.slug === params.single)[0];
+	const { content } = post;
 
 	return (
 		<>
@@ -116,7 +117,11 @@ const ProductSingle = (props: any) => {
 				</div>
 			</section>
 
-
+			<section className="section">
+				<div className="container">
+					<MDXContent content={content} />
+				</div>
+			</section>
 
 			<section>
 				<div className="container text-center">
@@ -148,9 +153,6 @@ const ProductSingle = (props: any) => {
 				</div>
 			</section>
 
-			<div>
-				<MDXContent content={tabsData} />
-			</div>
 		</>
 	)
 }
