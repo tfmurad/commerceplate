@@ -16,7 +16,7 @@
 
 // form style
 .form-input {
-  @apply w-full rounded-tl-md rounded-bl-md border-transparent bg-body md:px-6 py-4 text-dark placeholder:text-text focus:border-primary focus:ring-transparent dark:border-darkmode-border dark:bg-darkmode-theme-light dark:text-darkmode-light;
+  @apply w-full rounded border border-border bg-transparent px-6 py-4 text-dark placeholder:text-light focus:border-primary focus:ring-transparent dark:border-darkmode-border dark:bg-darkmode-theme-light dark:text-darkmode-light;
 }
 
 .form-label {
@@ -162,17 +162,17 @@
 .accordion {
   @apply overflow-hidden border-b-2 border-border bg-theme-light dark:border-darkmode-border dark:bg-darkmode-theme-light;
   &-header {
-    @apply flex w-full cursor-pointer items-center justify-between px-0 py-3 text-lg text-light dark:bg-darkmode-theme-light dark:text-darkmode-light text-start;
+    @apply flex w-full cursor-pointer items-center justify-between px-0 py-3 text-xl text-light dark:bg-darkmode-theme-light dark:text-darkmode-light text-start;
   }
   &-icon {
     @apply h-[.8em] w-[.8em] rotate-[-90deg] transition-transform duration-200;
   }
   &-content {
-    @apply max-h-0 overflow-hidden px-0 py-0;
+    @apply max-h-0 overflow-hidden px-0 py-0 text-lg;
   }
   &.active {
     .accordion-header {
-      @apply text-dark dark:text-darkmode-primary;
+      @apply text-dark dark:text-darkmode-primary font-medium;
     }
     .accordion-icon {
       @apply rotate-0;
@@ -200,7 +200,7 @@
 // content style
 .content {
   @apply prose max-w-none;
-  @apply prose-headings:mb-[.3em] prose-headings:mt-[.6em];
+  @apply prose-headings:mb-[0.9em] prose-headings:mt-[1.2em];
   @apply prose-h1:text-h1-sm md:prose-h1:text-h1;
   @apply prose-h2:text-h2-sm md:prose-h2:text-h2;
   @apply prose-h3:text-h3-sm md:prose-h3:text-h3;

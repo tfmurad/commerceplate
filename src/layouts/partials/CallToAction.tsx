@@ -34,7 +34,7 @@ const CallToAction = ({ data }: { data: PageData }) => {
                       <input
                         placeholder="Email Here"
                         type="text"
-                        className="form-input"
+                        className="form-input bg-white border-border focus:border-border rounded-r-none"
                       />
                       <input
                         className="btn btn-primary rounded-tl-none rounded-bl-none cursor-pointer"

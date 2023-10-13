@@ -177,8 +177,8 @@ const Header = () => {
           {settings.account && (
             <Link
               className="text-xl text-dark hover:text-primary dark:border-darkmode-border dark:text-white"
-              href="/account"
-              aria-label="account"
+              href="/login"
+              aria-label="login"
             >
               <BsPerson />
             </Link>
