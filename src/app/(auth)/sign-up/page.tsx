@@ -54,7 +54,7 @@ const SignUp = () => {
                 </p>
                 <Link
                   className="underline font-medium text-dark dark:text-darkmode-dark"
-                  href={"#"}
+                  href={"/terms-services"}
                 >
                   Terms & Conditions
                 </Link>

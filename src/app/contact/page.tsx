@@ -2,12 +2,11 @@ import config from "@/config/config.json";
 import { getListPage } from "@/lib/contentParser";
 import PageHeader from "@/partials/PageHeader";
 import SeoMeta from "@/partials/SeoMeta";
-import { RegularPage } from "@/types";
 
 const Contact = async () => {
-  const data: RegularPage = getListPage("contact/_index.md");
+  const data: any = getListPage("contact/_index.md");
   const { frontmatter } = data;
-  const { title, description, meta_title, image } = frontmatter;
+  const { title, description, meta_title, image, contactOptions } = frontmatter;
   const { contact_form_action } = config.params;
 
   return (
@@ -19,26 +18,59 @@ const Contact = async () => {
         image={image}
       />
       <PageHeader title={title} />
-      <section className="section-sm">
+      <section className="pt-12 xl:pt-24">
         <div className="container">
-          <div className="row">
-            <div className="mx-auto md:col-10 lg:col-6">
-              <form action={contact_form_action} method="POST">
-                <div className="mb-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+            {
+              contactOptions && contactOptions.map((contact: any) => (
+                <div key={contact.heading} className="p-10 bg-theme-light dark:bg-darkmode-theme-light rounded-md text-center">
+                  <h2 className="mb-6">{contact.heading}</h2>
+                  <p>{contact.subHeading}</p>
+                  <p>{contact.subtitle}</p>
+                </div>
+              ))
+            }
+          </div>
+        </div>
+      </section>
+
+      <section className="section">
+        <div className="container">
+          <div className="mx-auto md:col-10 lg:col-10">
+            <h2 className="mb-14 text-center">We would love to hear from you!</h2>
+            <form className="border border-border rounded-md p-10" action={contact_form_action} method="POST">
+              <div className="mb-6 md:grid grid-cols-2 gap-x-8">
+                <div>
                   <label htmlFor="name" className="form-label">
-                    Full Name <span className="text-red-500">*</span>
+                    First Name <span className="text-red-500">*</span>
                   </label>
                   <input
                     id="name"
                     name="name"
                     className="form-input"
-                    placeholder="John Doe"
+                    placeholder="John"
                     type="text"
                   />
                 </div>
-                <div className="mb-6">
+
+                <div>
+                  <label htmlFor="name" className="form-label">
+                    Last Name
+                  </label>
+                  <input
+                    id="name"
+                    name="name"
+                    className="form-input"
+                    placeholder="Doe"
+                    type="text"
+                  />
+                </div>
+              </div>
+
+              <div className="mb-6 md:grid grid-cols-2 gap-x-8">
+                <div>
                   <label htmlFor="email" className="form-label">
-                    Working Mail <span className="text-red-500">*</span>
+                    Email Address <span className="text-red-500">*</span>
                   </label>
                   <input
                     id="email"
@@ -48,23 +80,39 @@ const Contact = async () => {
                     type="email"
                   />
                 </div>
-                <div className="mb-6">
-                  <label htmlFor="message" className="form-label">
-                    Anything else? <span className="text-red-500">*</span>
+
+                <div>
+                  <label htmlFor="name" className="form-label">
+                    Subject <span className="text-red-500">*</span>
                   </label>
-                  <textarea
-                    id="message"
-                    name="message"
+                  <input
+                    id="name"
+                    name="name"
                     className="form-input"
-                    placeholder="Message goes here..."
-                    rows={8}
-                  ></textarea>
+                    placeholder="Enquiry About"
+                    type="text"
+                  />
                 </div>
+              </div>
+              <div className="mb-6">
+                <label htmlFor="message" className="form-label">
+                  Message <span className="text-red-500">*</span>
+                </label>
+                <textarea
+                  id="message"
+                  name="message"
+                  className="form-input"
+                  placeholder="Type your message..."
+                  rows={8}
+                ></textarea>
+              </div>
+
+              <div className="flex justify-center">
                 <button type="submit" className="btn btn-primary">
-                  Submit
+                  Send Message
                 </button>
-              </form>
-            </div>
+              </div>
+            </form>
           </div>
         </div>
       </section>

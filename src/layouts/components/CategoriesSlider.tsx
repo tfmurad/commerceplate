@@ -1,6 +1,7 @@
 "use client";
 
 import ImageFallback from '@/helpers/ImageFallback';
+import { Categories } from '@/types';
 import { useRef, useState } from 'react';
 import { HiOutlineArrowNarrowLeft, HiOutlineArrowNarrowRight } from "react-icons/hi";
 // Import Swiper styles
@@ -10,7 +11,7 @@ import "swiper/css/pagination";
 import { Navigation, Pagination } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
 
-const CategoriesSlider = ({ categories }: { categories: any }) => {
+const CategoriesSlider = ({ categories }: { categories: Categories[] }) => {
 	const [_, setInit] = useState(false);
 	const [isHovered, setIsHovered] = useState(false);
 
@@ -60,7 +61,7 @@ const CategoriesSlider = ({ categories }: { categories: any }) => {
 								src={item.imageSrc}
 								width={531}
 								height={383}
-								alt="category image"
+								alt={item.name}
 							/>
 							<div className="p-6">
 								<h3 className='mb-2'>{item.name}</h3>

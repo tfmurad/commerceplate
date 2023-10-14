@@ -21,7 +21,7 @@ const ModalFilter: React.FC<ModalFilterProps> = ({ isVisible, onClose }) => {
   return (
     <>
       <div
-        className="fixed inset-0 bg-dark dark:bg-light bg-opacity-25 backdrop-blur-sm overflow-y-auto z-50"
+        className="modal"
         id="wrapper"
         onClick={handleClose}
       >

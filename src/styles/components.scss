@@ -183,11 +183,11 @@
   }
 }
 
-// modal
+// modal product filter
 .modal {
-  @apply fixed inset-0 z-40 hidden h-full w-full overflow-auto;
+  @apply fixed inset-0 bg-dark bg-opacity-25 backdrop-blur-sm overflow-y-auto z-50;
   &-overlay {
-    @apply fixed inset-0 z-40 hidden h-full w-full bg-black bg-opacity-40;
+    @apply fixed inset-0 z-40 hidden h-full w-full bg-opacity-40;
   }
   &-content {
     @apply relative top-1/2 z-50 mx-auto max-w-[90%] translate-y-14 rounded-lg bg-body p-8 dark:bg-darkmode-body;
@@ -197,10 +197,27 @@
   }
 }
 
+// modal cart
+.modalCart {
+  @apply fixed inset-0 bg-dark bg-opacity-25 backdrop-blur-sm overflow-y-auto z-40;
+  &-overlay {
+    @apply fixed inset-0 z-40 hidden h-full w-full bg-opacity-40;
+  }
+  &-header {
+    @apply flex justify-between items-center relative ml-auto z-50 w-full md:max-w-[50%] lg:max-w-[30%] bg-body border-b-2 p-8 pb-4 dark:bg-darkmode-body;
+  }
+  &-content {
+    @apply relative ml-auto z-50 w-full md:max-w-[50%] lg:max-w-[30%] rounded-bl-md bg-body p-8 dark:bg-darkmode-body py-36;
+  }
+  &-close {
+    @apply rounded-full p-2 text-dark  dark:text-darkmode-dark;
+  }
+}
+
 // content style
 .content {
   @apply prose max-w-none;
-  @apply prose-headings:mb-[0.9em] prose-headings:mt-[1.2em];
+  @apply prose-headings:mb-[0.6em] prose-headings:mt-[0.6em];
   @apply prose-h1:text-h1-sm md:prose-h1:text-h1;
   @apply prose-h2:text-h2-sm md:prose-h2:text-h2;
   @apply prose-h3:text-h3-sm md:prose-h3:text-h3;

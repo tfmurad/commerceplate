@@ -1,6 +1,7 @@
 "use client";
 
 import Logo from "@/components/Logo";
+import ModalCart from "@/components/ModalCart";
 import ThemeSwitcher from "@/components/ThemeSwitcher";
 import config from "@/config/config.json";
 import menu from "@/config/menu.json";
@@ -27,6 +28,7 @@ export interface INavigationLink {
 
 const Header = () => {
   const { cartItems } = useContext(CartContext);
+  const [showModal, setShowModal] = useState(false);
 
   const [navbarShadow, setNavbarShadow] = useState(false);
   // distructuring the main menu from menu object
@@ -185,16 +187,21 @@ const Header = () => {
           )}
 
           {settings.cart && (
-            <Link
-              className="relative text-xl text-dark hover:text-primary dark:border-darkmode-border dark:text-white"
-              href="/cart"
-              aria-label="cart"
-            >
-              <span className="bg-black text-white dark:bg-white dark:text-black text-xs rounded-full p-1 absolute -top-1 md:-top-2 -right-3 md:-right-4 w-5 h-5 flex items-center justify-center">
-                {cartItems && cartItems.length}
-              </span>
-              <BsCart3 />
-            </Link>
+            <>
+              <button
+                onClick={() => setShowModal(true)}
+                className="relative text-xl text-dark hover:text-primary dark:border-darkmode-border dark:text-white"
+              >
+                <span className="bg-black text-white dark:bg-white dark:text-black text-xs rounded-full p-1 absolute -top-1 md:-top-2 -right-3 md:-right-4 w-5 h-5 flex items-center justify-center">
+                  {cartItems && cartItems.length}
+                </span>
+                <BsCart3 />
+              </button>
+
+              <div className="container">
+              <ModalCart isVisible={showModal} onClose={() => setShowModal(false)} />
+              </div>
+            </>
           )}
         </div>
       </nav>

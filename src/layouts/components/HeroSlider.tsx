@@ -55,11 +55,6 @@ const HeroSlider = ({ content }: { content: any }) => {
             </div>
           </SwiperSlide>
         ))}
-
-        {/* <div className="flex justify-between lg:justify-normal gap-4 mx-4 text-dark">
-          <div ref={prevRef} className="p-4 rounded-md bg-body cursor-pointer"><HiOutlineArrowNarrowLeft size={24} /></div>
-          <div ref={nextRef} className="p-4 rounded-md bg-body cursor-pointer"><HiOutlineArrowNarrowRight size={24} /></div>
-        </div> */}
       </Swiper>
     </>
   );

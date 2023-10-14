@@ -78,4 +78,4 @@ const ProductFilter = () => {
 	)
 }
 
-export default ProductFilter
+export default ProductFilter;

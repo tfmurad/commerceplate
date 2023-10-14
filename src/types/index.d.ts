@@ -80,3 +80,20 @@ export type Button = {
   label: string;
   link: string;
 };
+
+export type ContactOptions = {
+  frontmatter: {
+    heading: string;
+    subHeading: string;
+    subtitle?: string;
+  };
+  content?: string;
+  slug?: string;
+};
+
+export type Categories ={
+  id: number;
+  name: string;
+  imageSrc: string;
+  itemCount: number;
+};
