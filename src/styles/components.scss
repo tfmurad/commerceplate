@@ -16,7 +16,7 @@
 
 // form style
 .form-input {
-  @apply w-full rounded border border-border bg-transparent px-6 py-4 text-dark placeholder:text-light focus:border-primary focus:ring-transparent dark:border-darkmode-border dark:bg-darkmode-theme-light dark:text-darkmode-light;
+  @apply w-full rounded border border-border bg-transparent px-6 py-4 text-dark placeholder:text-light focus:border-dark dark:focus:border-darkmode-dark focus:ring-transparent dark:border-darkmode-border dark:bg-darkmode-theme-light dark:text-darkmode-light;
 }
 
 .form-label {
@@ -29,7 +29,7 @@
   li {
     @apply inline-block;
     a {
-      @apply flex h-9 w-9 items-center justify-center rounded-full bg-white hover:bg-primary hover:text-white duration-300 text-center leading-9 text-primary border border-primary dark:border-white dark:bg-darkmode-theme-light dark:text-white dark:hover:bg-white dark:hover:text-black;
+      @apply flex h-6 w-6 p-1 md:h-9 md:w-9 items-center justify-center rounded-full bg-white hover:bg-primary hover:text-white duration-300 text-center leading-9 text-primary border border-primary dark:border-white dark:bg-darkmode-theme-light dark:text-white dark:hover:bg-white dark:hover:text-black;
       svg {
         @apply h-5 w-5;
       }
@@ -213,6 +213,8 @@
     @apply rounded-full p-2 text-dark  dark:text-darkmode-dark;
   }
 }
+
+
 
 // content style
 .content {

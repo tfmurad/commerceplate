@@ -48,7 +48,6 @@ module.exports = {
         text: theme.colors.default.text_color.default,
         light: theme.colors.default.text_color.light,
         dark: theme.colors.default.text_color.dark,
-        lunar: theme.colors.default.text_color.lunar,
         primary: theme.colors.default.theme_color.primary,
         secondary: theme.colors.default.theme_color.secondary,
         body: theme.colors.default.theme_color.body,
@@ -60,7 +59,6 @@ module.exports = {
           text: theme.colors.darkmode.text_color.default,
           light: theme.colors.darkmode.text_color.light,
           dark: theme.colors.darkmode.text_color.dark,
-          lunar: theme.colors.darkmode.text_color.lunar,
           primary: theme.colors.darkmode.theme_color.primary,
           secondary: theme.colors.darkmode.theme_color.secondary,
           body: theme.colors.darkmode.theme_color.body,
@@ -82,7 +80,6 @@ module.exports = {
         "h4-sm": h4 * 0.6 + "rem",
         h5: h5 + "rem",
         h6: h6 + "rem",
-        xxs: "10px",
       },
       fontFamily: {
         primary: [fontPrimary, fontPrimaryType],

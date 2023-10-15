@@ -129,8 +129,8 @@ const Home = () => {
       {/* category section  */}
       <section className="section">
         <div className="container">
-          <div className="text-center">
-            <h2 className="mb-6 md:mb-14">Categories</h2>
+          <div className="text-center mb-6 md:mb-14">
+            <h2>Categories</h2>
           </div>
           <CategoriesSlider categories={categories} />
         </div>
@@ -139,17 +139,11 @@ const Home = () => {
       {/* Latest Products section  */}
       <section>
         <div className="container">
-          <div className="text-center">
-            <h2 className="mb-6 md:mb-2">Latest Products</h2>
-            <p className="hidden md:block mb-14 h5">Don't Miss Today's Latest Deals</p>
+          <div className="text-center mb-6 md:mb-14">
+            <h2 className="mb-2">Latest Products</h2>
+            <p className="md:h5">Don't Miss Today's Latest Deals</p>
           </div>
           <LatestProducts products={products} />
-
-          <div className="flex justify-center">
-            <Link className="btn-sm md:btn-lg btn-primary font-medium" href={"/product"}>
-              + See All Products
-            </Link>
-          </div>
         </div>
       </section>
 

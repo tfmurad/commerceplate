@@ -41,7 +41,7 @@ const About = () => {
                   <div className="mt-10 lg:mt-0">
                     <h2>{section.heading}</h2>
                     <p
-                      className="mt-4 lg:text-xl font-medium text-lunar leading-7"
+                      className="mt-4 lg:text-xl font-medium text-light leading-7"
                       dangerouslySetInnerHTML={markdownify(section.content)}
                     />
                   </div>
@@ -51,7 +51,7 @@ const About = () => {
                   <div>
                     <h2>{section.heading}</h2>
                     <p
-                      className="mt-4 lg:text-xl font-medium text-lunar leading-7"
+                      className="mt-4 lg:text-xl font-medium text-light leading-7"
                       dangerouslySetInnerHTML={markdownify(section.content)}
                     />
                   </div>

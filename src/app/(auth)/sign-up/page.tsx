@@ -5,7 +5,7 @@ import React from "react";
 const SignUp = () => {
   return (
     <>
-    <PageHeader title="Account" />
+      <PageHeader title="Account" />
       <section className="section-sm">
         <div className="container">
           <div className="row">
@@ -16,7 +16,7 @@ const SignUp = () => {
               </div>
 
               <form method="post">
-              <div>
+                <div>
                   <label className="form-label">Name</label>
                   <input
                     className="form-input"
@@ -44,13 +44,13 @@ const SignUp = () => {
                 </div>
 
                 <button type="submit" className="btn btn-primary w-full mt-10">
-                Sign Up
+                  Sign Up
                 </button>
               </form>
 
               <div className="flex gap-4 text-xl mt-6">
-                <p className="text-lunar dark:text-darkmode-lunar">
-                have read and agree to the
+                <p className="text-light dark:text-darkmode-light">
+                  have read and agree to the
                 </p>
                 <Link
                   className="underline font-medium text-dark dark:text-darkmode-dark"
@@ -61,8 +61,8 @@ const SignUp = () => {
               </div>
 
               <div className="flex gap-4 text-xl mt-4">
-                <p className="text-lunar dark:text-darkmode-lunar">
-                Have an account?
+                <p className="text-light dark:text-darkmode-light">
+                  Have an account?
                 </p>
                 <Link
                   className="underline font-medium text-dark dark:text-darkmode-dark"

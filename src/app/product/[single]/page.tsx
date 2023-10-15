@@ -34,7 +34,7 @@ const ProductSingle = ({ params }: { params: any }) => {
 
 							<div className="flex gap-2 items-center">
 								<h4 className="text-light">$49.99 USD</h4>
-								<h6 className="text-lunar line-through">$89.99 USD</h6>
+								<h6 className="text-light line-through">$89.99 USD</h6>
 							</div>
 
 							<div>

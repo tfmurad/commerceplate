@@ -16,7 +16,7 @@ const CallToAction = ({ data }: { data: PageData }) => {
           <div className="container">
             <div className="rounded-xl bg-theme-light px-6 py-8 md:py-16 dark:bg-darkmode-theme-light">
               <div className="row items-center">
-                <div className="mb-10 md:mb-0 lg:col-6 text-center lg:px-[56px] order-2 lg:order-0">
+                <div className="mb-10 md:mb-0 col-10 lg:col-6 xl:col-5 mx-auto text-center order-2 lg:order-0">
                   <h2
                     dangerouslySetInnerHTML={markdownify(
                       data.frontmatter.title,
@@ -33,11 +33,11 @@ const CallToAction = ({ data }: { data: PageData }) => {
                     <form className="flex justify-center">
                       <input
                         placeholder="Email Here"
-                        type="text"
-                        className="form-input bg-white border-border focus:border-border rounded-r-none"
+                        type="email"
+                        className="form-input bg-white rounded-r-none py-2"
                       />
                       <input
-                        className="btn btn-primary rounded-tl-none rounded-bl-none cursor-pointer"
+                        className="btn btn-sm md:btn-lg btn-primary rounded-tl-none rounded-bl-none cursor-pointer"
                         type="submit"
                         value="Subscribe"
                       />
@@ -45,11 +45,10 @@ const CallToAction = ({ data }: { data: PageData }) => {
                   )}
                 </div>
 
-                <div className="lg:col-6 mb-6 lg:mb-0">
+                <div className="mx-auto col-6 mb-6 lg:mb-0">
                   <ImageFallback
-                    className="w-[264px] lg:w-full mx-auto"
                     src={data.frontmatter.image}
-                    width={392}
+                    width={543}
                     height={390}
                     alt="cta-image"
                   />

@@ -1,7 +1,7 @@
 "use client";
 
 import React from 'react';
-import RangeSlider from "./RangeSlider";
+import RangeSlider from "./RangeSlider/RangeSlider";
 
 interface ModalFilterProps {
   isVisible: boolean;
@@ -40,7 +40,7 @@ const ModalFilter: React.FC<ModalFilterProps> = ({ isVisible, onClose }) => {
                   {Array.from({ length: 6 }).map((_, i) => (
                     <li
                       key={i}
-                      className="flex justify-between text-lunar dark:text-darkmode-lunar"
+                      className="flex justify-between text-light dark:text-darkmode-light"
                     >
                       Gatelight <span>( 09 )</span>
                     </li>
@@ -55,7 +55,7 @@ const ModalFilter: React.FC<ModalFilterProps> = ({ isVisible, onClose }) => {
                   {Array.from({ length: 5 }).map((_, i) => (
                     <li
                       key={i}
-                      className="flex justify-between text-lunar dark:text-darkmode-lunar"
+                      className="flex justify-between text-light dark:text-darkmode-light"
                     >
                       <span>WebelKart ( 09 )</span>
                       <span>
@@ -92,7 +92,7 @@ const ModalFilter: React.FC<ModalFilterProps> = ({ isVisible, onClose }) => {
                   {Array.from({ length: 3 }).map((_, i) => (
                     <li
                       key={i}
-                      className="flex justify-between text-lunar dark:text-darkmode-lunar"
+                      className="flex justify-between text-light dark:text-darkmode-light"
                     >
                       <span>Height 61cm,Bulb E27</span>
                       <span>
@@ -112,7 +112,7 @@ const ModalFilter: React.FC<ModalFilterProps> = ({ isVisible, onClose }) => {
                   {Array.from({ length: 4 }).map((_, idx) => (
                     <p
                       key={idx}
-                      className="px-2 py-1 rounded-md border text-lunar dark:text-darkmode-lunar"
+                      className="px-2 py-1 rounded-md border text-light dark:text-darkmode-light"
                     >
                       Table Lamps
                     </p>

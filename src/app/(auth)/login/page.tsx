@@ -5,7 +5,7 @@ import React from "react";
 const Login = () => {
   return (
     <>
-    <PageHeader title="Account" />
+      <PageHeader title="Account" />
       <section className="section-sm">
         <div className="container">
           <div className="row">
@@ -40,7 +40,7 @@ const Login = () => {
               </form>
 
               <div className="flex gap-4 text-xl mt-4">
-                <p className="text-lunar dark:text-darkmode-lunar">
+                <p className="text-light dark:text-darkmode-light">
                   Don&apos;t have an account?
                 </p>
                 <Link

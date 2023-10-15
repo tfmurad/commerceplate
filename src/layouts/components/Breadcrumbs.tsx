@@ -11,7 +11,7 @@ const Breadcrumbs = ({ className }: { className?: string }) => {
   const paths = pathname.split("/").filter((x) => x);
   let parts = [
     {
-      label: <BiHome className="text-lunar dark:text-darkmode-lunar" size={24}/>,
+      label: <BiHome className="text-light dark:text-darkmode-light" size={24} />,
       href: "/",
       "aria-label": pathname === "/" ? "page" : undefined,
     },
@@ -32,7 +32,7 @@ const Breadcrumbs = ({ className }: { className?: string }) => {
       <ol className="inline-flex" role="list">
         {parts.map(({ label, ...attrs }, index) => (
           <li className="mx-1 capitalize" role="listitem" key={index}>
-            {index > 0 && <span className="inline-block mr-1 text-lunar dark:text-darkmode-lunar">&gt;</span>}
+            {index > 0 && <span className="inline-block mr-1 text-light dark:text-darkmode-light">&gt;</span>}
             {index !== parts.length - 1 ? (
               <Link
                 className="text-primary dark:text-darkmode-primary"

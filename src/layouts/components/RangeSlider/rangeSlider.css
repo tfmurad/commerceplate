@@ -1,0 +1,53 @@
+.multi-range-slider .bar-left {
+	width: 25%;
+	background-color: #E7E7E7;
+	border-radius: 10px 0px 0px 10px;
+	box-shadow: inset 0px 0px 0px black;
+	padding: 4px 0px;
+}
+
+.multi-range-slider .bar-right {
+	width: 25%;
+	background-color: #E7E7E7;
+	border-radius: 0px 10px 10px 0px;
+	box-shadow: inset 0px 0px 0px black;
+}
+
+.multi-range-slider .bar-inner {
+	background-color: black;
+	display: flex;
+	flex-grow: 1;
+	flex-shrink: 1;
+	position: relative;
+	justify-content: space-between;
+	box-shadow: inset 0px 0px 0px black;
+}
+
+.multi-range-slider .thumb .caption * {
+	position: absolute;
+	min-width: 30px;
+	height: 30px;
+	font-size: 75%;
+	text-align: center;
+	line-height: 30px;
+	background-color: transparent;
+	border-radius: 15px;
+	color: transparent;
+	box-shadow: 0px 0px 0px black;
+	padding: 0px 5px;
+	white-space: nowrap;
+}
+
+.multi-range-slider .thumb::before {
+	content: '';
+	background-color: inherit;
+	position: absolute;
+	width: 20px;
+	height: 20px;
+	border: solid 3px black;
+	box-shadow: 0px 0px 0px black, inset 0px 0px 0px gray;
+	border-radius: 50%;
+	z-index: 1;
+	margin: -7px -12px;
+	cursor: pointer;
+}

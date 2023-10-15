@@ -198,9 +198,7 @@ const Header = () => {
                 <BsCart3 />
               </button>
 
-              <div className="container">
               <ModalCart isVisible={showModal} onClose={() => setShowModal(false)} />
-              </div>
             </>
           )}
         </div>

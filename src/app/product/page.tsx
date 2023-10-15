@@ -1,5 +1,5 @@
 import ProductFilter from "@/components/ProductFilter";
-import RangeSlider from "@/components/RangeSlider";
+import RangeSlider from "@/components/RangeSlider/RangeSlider";
 import ImageFallback from "@/helpers/ImageFallback";
 import { getListPage } from "@/lib/contentParser";
 import CallToAction from "@/partials/CallToAction";
@@ -101,7 +101,7 @@ const Product = () => {
 									{Array.from({ length: 6 }).map((_, i) => (
 										<li
 											key={i}
-											className="flex justify-between text-lunar dark:text-darkmode-lunar"
+											className="flex justify-between text-light dark:text-darkmode-light"
 										>
 											Gatelight <span>( 09 )</span>
 										</li>
@@ -116,7 +116,7 @@ const Product = () => {
 									{Array.from({ length: 5 }).map((_, i) => (
 										<li
 											key={i}
-											className="flex justify-between text-lunar dark:text-darkmode-lunar"
+											className="flex justify-between text-light dark:text-darkmode-light"
 										>
 											<span>WebelKart ( 09 )</span>
 											<span>
@@ -153,7 +153,7 @@ const Product = () => {
 									{Array.from({ length: 3 }).map((_, i) => (
 										<li
 											key={i}
-											className="flex justify-between text-lunar dark:text-darkmode-lunar"
+											className="flex justify-between text-light dark:text-darkmode-light"
 										>
 											<span>Height 61cm,Bulb E27</span>
 											<span>
@@ -172,7 +172,7 @@ const Product = () => {
 									{Array.from({ length: 4 }).map((_, idx) => (
 										<p
 											key={idx}
-											className="px-2 py-1 rounded-md border text-lunar dark:text-darkmode-lunar"
+											className="px-2 py-1 rounded-md border text-light dark:text-darkmode-light"
 										>
 											Table Lamps
 										</p>
@@ -209,9 +209,9 @@ const Product = () => {
 												<span className="text-light text-xs md:text-lg">
 													${product.currentPrice} USD
 												</span>
-												<del className="text-lunar line-through text-xxs md:text-base">
+												<s className="text-light line-through md:text-base">
 													${product.previousPrice} USD
-												</del>
+												</s>
 											</div>
 										</div>
 									</div>

@@ -63,9 +63,9 @@ const CategoriesSlider = ({ categories }: { categories: Categories[] }) => {
 								height={383}
 								alt={item.name}
 							/>
-							<div className="p-6">
-								<h3 className='mb-2'>{item.name}</h3>
-								<p className="text-lunar text-xs md:text-2xl">{item.itemCount} items</p>
+							<div className="py-6">
+								<h3 className='mb-2 font-medium h4'>{item.name}</h3>
+								<p className="text-light dark:text-darkmode-light text-xs md:text-xl">{item.itemCount} items</p>
 							</div>
 						</div>
 					</SwiperSlide>

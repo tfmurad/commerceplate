@@ -1,13 +1,11 @@
 .btn {
-  @apply inline-block rounded border border-transparent px-5 py-2 font-semibold capitalize transition;
-}
-
-.btn-lg {
-  @apply rounded-md px-12 py-4 text-xl;
-}
-
-.btn-sm {
-  @apply rounded-sm px-4 py-1.5 text-sm;
+  @apply inline-block rounded-md border border-transparent px-5 py-2 font-semibold capitalize transition;
+  &-sm{
+    @apply px-4 py-1.5 text-sm;
+  }
+  &-lg{
+    @apply px-12 py-4 text-xl;
+  }
 }
 
 .btn-primary {

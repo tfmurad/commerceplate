@@ -2,6 +2,7 @@
 
 import MultiRangeSlider from "multi-range-slider-react";
 import { useState } from 'react';
+import "./rangeSlider.css"
 
 const RangeSlider = () => {
 	const [minValue, setMinValue] = useState(0);
@@ -15,9 +16,6 @@ const RangeSlider = () => {
 
 			<MultiRangeSlider
 				style={{ border: 'none', boxShadow: 'none' }}
-				barLeftColor='#E7E7E7'
-				barInnerColor='black'
-				barRightColor='#E7E7E7'
 				ruler="false"
 				label="false"
 				min="0"
@@ -32,7 +30,8 @@ const RangeSlider = () => {
 					setMinValue2(e.minValue);
 					setMaxValue2(e.maxValue);
 				}}
-			></MultiRangeSlider>
+			/>
+
 			<div className="flex justify-between">
 				<p>${minValue} USD</p>
 				<p>${maxValue} USD</p>
