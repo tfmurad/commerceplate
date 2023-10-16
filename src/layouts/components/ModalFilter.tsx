@@ -31,7 +31,11 @@ const ModalFilter: React.FC<ModalFilterProps> = ({ isVisible, onClose }) => {
           </button>
           <div className="modal-content">
             <div className="z-10">
-              <RangeSlider />
+              <div>
+              <h5 className="mb-2 mt-0 lg:mt-10 lg:text-xl">Select Price Range</h5>
+                <hr />
+                <RangeSlider />
+              </div>
 
               <div>
                 <h4 className="mt-10 mb-2">Product Categories</h4>

@@ -37,7 +37,7 @@ const CallToAction = ({ data }: { data: PageData }) => {
                         className="form-input bg-white rounded-r-none py-2"
                       />
                       <input
-                        className="btn btn-sm md:btn-lg btn-primary rounded-tl-none rounded-bl-none cursor-pointer"
+                        className="btn btn-sm md:btn-md btn-primary rounded-tl-none rounded-bl-none cursor-pointer"
                         type="submit"
                         value="Subscribe"
                       />

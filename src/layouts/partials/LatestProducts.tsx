@@ -18,7 +18,7 @@ const LatestProducts = ({ products }: { products: any }) => {
 							alt="category image"
 						/>
 						{/* <p className='px-4 py-1 rounded-md bg-dark dark:bg-darkmode-dark text-darkmode-dark dark:text-dark absolute top-2 right-6'>New</p> */}
-						<button onClick={() => handleAddToCart(product)} className="btn btn-primary font-medium absolute opacity-0 bottom-28 md:bottom-32 group-hover:-translate-y-3 -translate-x-1/2 group-hover:opacity-100 duration-300 ease-in-out">
+						<button onClick={() => handleAddToCart(product)} className="btn btn-primary max-md:btn-sm absolute opacity-0 bottom-28 md:bottom-32 group-hover:-translate-y-3 -translate-x-1/2 group-hover:opacity-100 duration-300 ease-in-out">
 							Add to Cart
 						</button>
 						<div className="py-6 text-center">

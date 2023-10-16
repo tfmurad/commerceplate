@@ -6,7 +6,6 @@ import CallToAction from "@/partials/CallToAction";
 import LatestProducts from "@/partials/LatestProducts";
 import SeoMeta from "@/partials/SeoMeta";
 import { Banner } from "@/types";
-import Link from "next/link";
 
 const Home = () => {
   const homepage = getListPage("homepage/_index.md");

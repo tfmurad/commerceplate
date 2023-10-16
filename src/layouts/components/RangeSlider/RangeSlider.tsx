@@ -11,9 +11,6 @@ const RangeSlider = () => {
 	const [maxValue2, setMaxValue2] = useState(0);
 	return (
 		<div>
-			<h4 className="mb-2 mt-0 lg:mt-10">Select Price Range</h4>
-			<hr />
-
 			<MultiRangeSlider
 				style={{ border: 'none', boxShadow: 'none' }}
 				ruler="false"

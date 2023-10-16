@@ -21,15 +21,14 @@ const ProductFilter = () => {
 							>
 								+ Filter
 							</button>
-							<div className="border border-border rounded-md flex justify-evenly">
-								<div>
-									<input
-										className="bg-transparent border-none focus:ring-transparent"
-										type="text"
-										placeholder="Search For Products"
-									/>
-								</div>
-								<button>
+
+							<div className="border border-border rounded-md flex justify-between">
+								<input
+									className="bg-transparent border-none focus:ring-transparent"
+									type="text"
+									placeholder="Search For Products"
+								/>
+								<button className='px-2'>
 									<IoSearch size={20} />
 								</button>
 							</div>
@@ -47,27 +46,34 @@ const ProductFilter = () => {
 								</div>
 							</div>
 
-							<div className="flex gap-2 items-center">
-								<p className="font-medium">Sort By</p>
+							<div className="flex gap-2 items-center font-medium text-base">
+								<p>Sort By</p>
 								<select
-									className="rounded-md px-4 border border-border"
+									className="rounded-md border border-border text-light text-sm"
 									name=""
 									id=""
 								>
 									<option value="Alphabetically, A-Z">
 										Alphabetically, A-Z
 									</option>
-									<option value="Height 61cm,Bulb E27">
-										Height 61cm,Bulb E27
+									<option value="Alphabetically, Z-A">
+										Alphabetically, Z-A
 									</option>
-									<option value="Height 41cm,Bulb E26">
-										Height 41cm,Bulb E26
+									<option value="Price, low to high">
+										Price, low to high
 									</option>
-									<option value="Height 32cm,Bulb E25">
-										Height 32cm,Bulb E25
+									<option value="Price, high to low">
+										Price, high to low
+									</option>
+									<option value="Date, old to new">
+										Date, old to new
+									</option>
+									<option value="Date, new to old">
+										Date, new to old
 									</option>
 								</select>
 							</div>
+
 						</div>
 					</div>
 				</div>

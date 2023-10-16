@@ -38,7 +38,7 @@ const Footer = () => {
               ))}
             </ul>
 
-            <p className="text-sm" dangerouslySetInnerHTML={markdownify(copyright)} />
+            <p className="text-sm font-light" dangerouslySetInnerHTML={markdownify(copyright)} />
           </div>
         </div>
       </div>

@@ -1,9 +1,12 @@
 .btn {
   @apply inline-block rounded-md border border-transparent px-5 py-2 font-semibold capitalize transition;
-  &-sm{
-    @apply px-4 py-1.5 text-sm;
+  &-sm {
+    @apply px-4 py-1.5 text-sm font-medium;
   }
-  &-lg{
+  &-md {
+    @apply px-8 py-4 text-xl font-medium;
+  }
+  &-lg {
     @apply px-12 py-4 text-xl;
   }
 }
@@ -14,9 +17,4 @@
 
 .btn-outline-primary {
   @apply border-dark bg-transparent text-dark hover:bg-dark hover:text-white dark:border-white dark:text-white dark:hover:bg-white dark:hover:text-dark;
-}
-
-.input-checkbox {
-  @apply cursor-pointer
-  appearance-none h-10 w-10 bg-transparent border-none focus:ring-transparent focus:outline-none checked:focus:bg-transparent rounded-md checked:bg-transparent transition-all duration-300;
 }
