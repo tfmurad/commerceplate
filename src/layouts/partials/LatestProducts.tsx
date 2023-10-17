@@ -1,11 +1,11 @@
 "use client";
 import ImageFallback from '@/helpers/ImageFallback';
-import { CartContext } from 'context/GlobalState';
+import { GlobalContext } from 'context/GlobalState';
 import Link from 'next/link';
 import { useContext } from 'react';
 
 const LatestProducts = ({ products }: { products: any }) => {
-	const { handleAddToCart } = useContext(CartContext);
+	const { handleAddToCart } = useContext(GlobalContext);
 	return (
 		<>
 			<div className="row">

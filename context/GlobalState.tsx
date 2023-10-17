@@ -12,18 +12,25 @@ interface IProduct {
 }
 
 // Define a common interface for the cart context
-interface CartContextValue {
+interface GlobalContextValue {
   cartItems: IProduct[];
   handleAddToCart: (item: IProduct) => void;
+  changeLayout: boolean;
+  setChangeLayout: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-// Create a CartContext
-export const CartContext = createContext<CartContextValue>({
+// Create a GlobalContext
+export const GlobalContext = createContext<GlobalContextValue>({
   cartItems: [],
-  handleAddToCart: () => { },
+  handleAddToCart: () => {},
+  changeLayout: true,
+  setChangeLayout: () => {},
 });
 
 const GlobalState = ({ children }: { children: ReactNode }) => {
+  // card vs list layout changer
+  const [changeLayout, setChangeLayout] = useState<boolean>(true);
+
   const [cartItems, setCartItems] = useState<IProduct[]>([]);
 
   function handleAddToCart(getCurrentItem: IProduct) {
@@ -41,10 +48,15 @@ const GlobalState = ({ children }: { children: ReactNode }) => {
     setCartItems(copycartItems);
   }
 
+  const info = {
+    cartItems,
+    handleAddToCart,
+    changeLayout,
+    setChangeLayout,
+  };
+
   return (
-    <CartContext.Provider value={{ cartItems, handleAddToCart }}>
-      {children}
-    </CartContext.Provider>
+    <GlobalContext.Provider value={info}>{children}</GlobalContext.Provider>
   );
 };
 

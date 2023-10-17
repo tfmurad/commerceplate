@@ -5,7 +5,7 @@ import ModalCart from "@/components/ModalCart";
 import ThemeSwitcher from "@/components/ThemeSwitcher";
 import config from "@/config/config.json";
 import menu from "@/config/menu.json";
-import { CartContext } from "context/GlobalState";
+import { GlobalContext } from "context/GlobalState";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import React, { useContext, useEffect, useState } from "react";
@@ -27,7 +27,7 @@ export interface INavigationLink {
 }
 
 const Header = () => {
-  const { cartItems } = useContext(CartContext);
+  const { cartItems } = useContext(GlobalContext);
   const [showModal, setShowModal] = useState(false);
 
   const [navbarShadow, setNavbarShadow] = useState(false);

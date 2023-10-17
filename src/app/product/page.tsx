@@ -9,7 +9,7 @@ const Products = () => {
 	return (
 		<>
 			<PageHeader title={"Product"} />
-			<ProductLayouts currentPage={1}/>
+			<ProductLayouts currentPage={null}/>
 			<CallToAction data={callToAction} />
 		</>
 	);
