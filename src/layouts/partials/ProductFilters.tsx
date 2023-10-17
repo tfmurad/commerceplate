@@ -5,6 +5,10 @@ import { useState } from 'react';
 import { BsCheckLg } from "react-icons/bs";
 
 const ProductFilters = () => {
+	const [selectedColor, setSelectedColor] = useState<number | null>(null);
+	const [selectedBrands, setSelectedBrands] = useState<string[]>([]);
+	const [selectedSize, setSelectedSize] = useState<string | null>(null);
+
 	// sample colors 
 	const colors = [
 		{ name: "Medium Gray", hex: "#888888" },
@@ -12,26 +16,105 @@ const ProductFilters = () => {
 		{ name: "Dark Gray", hex: "#555555" }
 	];
 
-	const [selectedColor, setSelectedColor] = useState<number | null>(null);
+	const brands = [
+		{
+			brand: "Philips",
+			products: [
+				"Hue Table Lamp",
+				"Hue Desk Lamp",
+				"LED Lamp",
+				"Smart Light",
+				"Ambiance Lamp",
+			],
+		},
+		{
+			brand: "IKEA",
+			products: [
+				"FADO Lamp",
+				"RANARP Desk Lamp",
+				"ARÖD Work Lamp",
+			],
+		},
+		{
+			brand: "TaoTronics",
+			products: [
+				"LED Desk Lamp",
+				"Dimmable Table Lamp",
+				"Metal Desk Lamp",
+				"USB Charging Lamp",
+			],
+		},
+		{
+			brand: "BenQ",
+			products: [
+				"e-Reading Desk Lamp",
+				"Smart Lamp",
+				"LED Floor Lamp",
+			],
+		},
+		{
+			brand: "Anker",
+			products: [
+				"Wireless Charging Lamp",
+				"USB Lamp",
+				"Rechargeable Desk Light",
+			],
+		},
+	];
+
+	const sizes = [
+		{
+			id: "H40E27",
+			height: 40,
+			bulbSize: 27,
+		},
+		{
+			id: "H35E14",
+			height: 35,
+			bulbSize: 14,
+		},
+		{
+			id: "H150E25",
+			height: 150,
+			bulbSize: 25,
+		},
+	];
+
 
 	const handleColorClick = (colorIndex: number) => {
 		if (selectedColor === colorIndex) {
-				setSelectedColor(null);
+			setSelectedColor(null);
 		} else {
-				setSelectedColor(colorIndex);
+			setSelectedColor(colorIndex);
 		}
-};
+	};
+
+	const handleBrandClick = (name: string) => {
+		if (selectedBrands.includes(name)) {
+			setSelectedBrands(selectedBrands.filter((brand) => brand !== name));
+		} else {
+			setSelectedBrands([...selectedBrands, name]);
+		}
+	};
+
+	const handleSizeClick = (sizeId: string) => {
+		if (selectedSize === sizeId) {
+			setSelectedSize(null);
+		} else {
+			setSelectedSize(sizeId);
+		}
+	};
 
 	return (
 		<>
 			<div>
-				<h5 className="mb-2 mt-0 lg:mt-10 lg:text-xl">Select Price Range</h5>
+				<h5 className="mb-2 mt-8 lg:mt-10 lg:text-xl">Select Price Range</h5>
 				<hr />
 				<RangeSlider />
 			</div>
 
 			<div>
-				<h5 className="mb-2 mt-0 lg:mt-10 lg:text-xl">Product Categories</h5>
+				<h5 className="mb-2 mt-8 lg:mt-10 lg:text-xl">Product Categories</h5>
 				<hr />
 				<ul className="mt-4 space-y-4">
 					{Array.from({ length: 6 }).map((_, i) => (
@@ -46,26 +129,32 @@ const ProductFilters = () => {
 			</div>
 
 			<div>
-				<h5 className="mb-2 mt-0 lg:mt-10 lg:text-xl">Brand</h5>
+				<h5 className="mb-2 mt-8 lg:mt-10 lg:text-xl">Brand</h5>
 				<hr />
 				<ul className="mt-4 space-y-4">
-					{Array.from({ length: 5 }).map((_, i) => (
+					{brands.map((item) => (
 						<li
-							key={i}
-							className="flex justify-between text-light dark:text-darkmode-light"
+							key={item.brand}
+							className={`flex items-center justify-between cursor-pointer text-light dark:text-darkmode-light`}
+							onClick={() => handleBrandClick(item.brand)}
 						>
-							<span>WebelKart ( 09 )</span>
 							<span>
-								{" "}
-								<input type="checkbox" name="" id="" />
+								{item.brand} ({item.products.length})
 							</span>
+							<div className="h-4 w-4 rounded-sm flex items-center justify-center border border-light dark:border-darkmode-light">
+								{selectedBrands.includes(item.brand) && (
+									<span>
+										<BsCheckLg size={16} />
+									</span>
+								)}
+							</div>
 						</li>
 					))}
 				</ul>
 			</div>
 
 			<div>
-				<h5 className="mb-2 mt-0 lg:mt-10 lg:text-xl">Frame Color</h5>
+				<h5 className="mb-2 mt-8 lg:mt-10 lg:text-xl">Frame Color</h5>
 				<hr />
 				<div className="flex gap-4 mt-4">
 					{colors.map((color, index) => {
@@ -86,26 +175,32 @@ const ProductFilters = () => {
 			</div>
 
 			<div>
-				<h5 className="mb-2 mt-0 lg:mt-10 lg:text-xl">Size</h5>
+				<h5 className="mb-2 mt-8 lg:mt-10 lg:text-xl">Size</h5>
 				<hr />
 				<ul className="mt-4 space-y-4">
-					{Array.from({ length: 3 }).map((_, i) => (
+					{sizes.map((item) => (
 						<li
-							key={i}
-							className="flex justify-between text-light dark:text-darkmode-light"
+							key={item.id}
+							className={`flex items-center justify-between cursor-pointer text-light dark:text-darkmode-light`}
+							onClick={() => handleSizeClick(item.id)}
 						>
-							<span>Height 61cm,Bulb E27</span>
 							<span>
-								{" "}
-								<input type="checkbox" name="" id="" />
+								Height {item.height}cm, Bulb E{item.bulbSize}
 							</span>
+							<div className="h-4 w-4 rounded-sm flex items-center justify-center border border-light dark:border-darkmode-light">
+								{selectedSize === item.id && (
+									<span>
+										<BsCheckLg size={16} />
+									</span>
+								)}
+							</div>
 						</li>
 					))}
 				</ul>
 			</div>
 
 			<div>
-				<h5 className="mb-2 mt-0 lg:mt-10 lg:text-xl">Tags</h5>
+				<h5 className="mb-2 mt-8 lg:mt-10 lg:text-xl">Tags</h5>
 				<hr />
 				<button className="flex flex-wrap gap-3 mt-4">
 					{Array.from({ length: 4 }).map((_, idx) => (
@@ -122,4 +217,4 @@ const ProductFilters = () => {
 	)
 }
 
-export default ProductFilters
+export default ProductFilters;

@@ -1,7 +1,7 @@
 "use client";
 
+import ProductFilters from '@/partials/ProductFilters';
 import React from 'react';
-import RangeSlider from "./RangeSlider/RangeSlider";
 
 interface ModalFilterProps {
   isVisible: boolean;
@@ -30,100 +30,7 @@ const ModalFilter: React.FC<ModalFilterProps> = ({ isVisible, onClose }) => {
             X
           </button>
           <div className="modal-content">
-            <div className="z-10">
-              <div>
-              <h5 className="mb-2 mt-0 lg:mt-10 lg:text-xl">Select Price Range</h5>
-                <hr />
-                <RangeSlider />
-              </div>
-
-              <div>
-                <h4 className="mt-10 mb-2">Product Categories</h4>
-                <hr />
-                <ul className="mt-4 space-y-4">
-                  {Array.from({ length: 6 }).map((_, i) => (
-                    <li
-                      key={i}
-                      className="flex justify-between text-light dark:text-darkmode-light"
-                    >
-                      Gatelight <span>( 09 )</span>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-
-              <div>
-                <h4 className="mt-10 mb-2">Brand</h4>
-                <hr />
-                <ul className="mt-4 space-y-4">
-                  {Array.from({ length: 5 }).map((_, i) => (
-                    <li
-                      key={i}
-                      className="flex justify-between text-light dark:text-darkmode-light"
-                    >
-                      <span>WebelKart ( 09 )</span>
-                      <span>
-                        {" "}
-                        <input type="checkbox" name="" id="" />
-                      </span>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-
-              <div>
-                <h4 className="mt-10 mb-2">Frame Color</h4>
-                <hr />
-                <div className="flex gap-4 mt-4">
-                  <div className=" bg-gray-800 rounded-md border">
-                    <input type="checkbox" className="input-checkbox" />
-                  </div>
-
-                  <div className=" bg-gray-200 rounded-md border">
-                    <input type="checkbox" className="input-checkbox" />
-                  </div>
-
-                  <div className=" bg-gray-400 rounded-md border">
-                    <input type="checkbox" className="input-checkbox" />
-                  </div>
-                </div>
-              </div>
-
-              <div>
-                <h4 className="mt-10 mb-2">Size</h4>
-                <hr />
-                <ul className="mt-4 space-y-4">
-                  {Array.from({ length: 3 }).map((_, i) => (
-                    <li
-                      key={i}
-                      className="flex justify-between text-light dark:text-darkmode-light"
-                    >
-                      <span>Height 61cm,Bulb E27</span>
-                      <span>
-                        {" "}
-                        <input type="checkbox" name="" id="" />
-                      </span>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-
-
-              <div>
-                <h4 className="mt-10 mb-2">Size</h4>
-                <hr />
-                <button className="flex flex-wrap gap-3 mt-4">
-                  {Array.from({ length: 4 }).map((_, idx) => (
-                    <p
-                      key={idx}
-                      className="px-2 py-1 rounded-md border text-light dark:text-darkmode-light"
-                    >
-                      Table Lamps
-                    </p>
-                  ))}
-                </button>
-              </div>
-            </div>
+            <ProductFilters />
           </div>
         </div>
       </div>

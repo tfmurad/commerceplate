@@ -1,5 +1,5 @@
 import Pagination from "@/components/Pagination";
-import ProductFilter from "@/components/ProductFilter";
+import ProductLayouts from "@/components/ProductLayouts";
 import config from "@/config/config.json";
 import ImageFallback from "@/helpers/ImageFallback";
 import { getListPage } from "@/lib/contentParser";
@@ -7,7 +7,7 @@ import CallToAction from "@/partials/CallToAction";
 import PageHeader from "@/partials/PageHeader";
 import ProductFilters from "@/partials/ProductFilters";
 import Link from "next/link";
-const { pagination } = config.settings;
+const { pagination_card } = config.settings;
 
 // sample array of products
 const products = [
@@ -74,6 +74,104 @@ const products = [
 		currentPrice: 54.5,
 		previousPrice: 59.99,
 	},
+	{
+		id: 10,
+		productName: "Product 10",
+		image: "/images/category-1.png",
+		currentPrice: 29.99,
+		previousPrice: 39.99,
+	},
+	{
+		id: 11,
+		productName: "Product 11",
+		image: "/images/category-1.png",
+		currentPrice: 19.95,
+		previousPrice: 24.99,
+	},
+	{
+		id: 12,
+		productName: "Product 12",
+		image: "/images/category-1.png",
+		currentPrice: 45.5,
+		previousPrice: 49.99,
+	},
+	{
+		id: 13,
+		productName: "Product 13",
+		image: "/images/category-1.png",
+		currentPrice: 14.99,
+		previousPrice: 19.99,
+	},
+	{
+		id: 14,
+		productName: "Product 14",
+		image: "/images/category-1.png",
+		currentPrice: 79.99,
+		previousPrice: 89.99,
+	},
+	{
+		id: 15,
+		productName: "Product 15",
+		image: "/images/category-1.png",
+		currentPrice: 9.95,
+		previousPrice: 12.99,
+	},
+	{
+		id: 16,
+		productName: "Product 16",
+		image: "/images/category-1.png",
+		currentPrice: 34.99,
+		previousPrice: 44.99,
+	},
+	{
+		id: 17,
+		productName: "Product 17",
+		image: "/images/category-1.png",
+		currentPrice: 54.5,
+		previousPrice: 59.99,
+	},
+	{
+		id: 18,
+		productName: "Product 18",
+		image: "/images/category-1.png",
+		currentPrice: 54.5,
+		previousPrice: 59.99,
+	},
+	{
+		id: 19,
+		productName: "Product 19",
+		image: "/images/category-1.png",
+		currentPrice: 79.99,
+		previousPrice: 89.99,
+	},
+	{
+		id: 20,
+		productName: "Product 20",
+		image: "/images/category-1.png",
+		currentPrice: 9.95,
+		previousPrice: 12.99,
+	},
+	{
+		id: 21,
+		productName: "Product 21",
+		image: "/images/category-1.png",
+		currentPrice: 34.99,
+		previousPrice: 44.99,
+	},
+	{
+		id: 22,
+		productName: "Product 22",
+		image: "/images/category-1.png",
+		currentPrice: 54.5,
+		previousPrice: 59.99,
+	},
+	{
+		id: 23,
+		productName: "Product 23",
+		image: "/images/category-1.png",
+		currentPrice: 54.5,
+		previousPrice: 59.99,
+	}
 ];
 
 // remove dynamicParams
@@ -82,7 +180,7 @@ export const dynamicParams = false;
 // generate static params
 export const generateStaticParams = () => {
 
-	const totalPages = Math.ceil(products.length / pagination);
+	const totalPages = Math.ceil(products.length / pagination_card);
 	let paths: { page: string }[] = [];
 
 	for (let i = 1; i < totalPages; i++) {
@@ -107,79 +205,20 @@ function spreadPages(num: number): number[] {
 const Products = ({ params }: { params: { page: number } }) => {
 	const callToAction = getListPage("sections/call-to-action.md");
 
-	const totalPages = Math.ceil(products.length / pagination);
+	const totalPages = Math.ceil(products.length / pagination_card);
 	const currentPage =
 		params.page && !isNaN(Number(params.page)) ? Number(params.page) : 1;
-	const indexOfLastPost = currentPage * pagination;
-	const indexOfFirstPost = indexOfLastPost - pagination;
+	const indexOfLastPost = currentPage * pagination_card;
+	const indexOfFirstPost = indexOfLastPost - pagination_card;
 	const currentProducts = products.slice(indexOfFirstPost, indexOfLastPost);
 
-	console.log(params)
 	return (
 		<>
-			<section>
-				<div>
-					<PageHeader title={"Product"} />
-				</div>
-			</section>
+			<PageHeader title={"Product"} />
 
-			<ProductFilter />
+			<ProductLayouts currentPage={currentPage}/>
 
-			<section>
-				<div className="container">
-					<div className="row">
-						{/* Left Side  */}
-						<div className="col-3 hidden lg:block">
-							<ProductFilters />
-						</div>
 
-						{/* Right side  */}
-						<div className="col-12 lg:col-9">
-							<div className="row">
-								{currentProducts.map((product) => (
-									<div
-										key={product.id}
-										className="text-center col-6 md:col-4 mb-8 md:mb-14 relative group"
-									>
-										<ImageFallback
-											className=""
-											src={product.image}
-											width={1000}
-											height={269}
-											alt="category image"
-										/>
-										<button className="btn btn-primary max-md:btn-sm absolute opacity-0 bottom-24 md:bottom-32 group-hover:-translate-y-3 -translate-x-1/2 group-hover:opacity-100 duration-300 ease-in-out">
-											Add to Cart
-										</button>
-										<div className="py-6 text-center">
-											<h2 className="font-bold md:font-normal h4">
-												<Link href={`/product/product-1`}>
-													{product.productName}
-												</Link>
-											</h2>
-											<div className="flex justify-center items-center gap-x-2 mt-2">
-												<span className="text-light text-xs md:text-lg font-bold">
-													${product.currentPrice} USD
-												</span>
-												<s className="text-light text-xs md:text-base font-medium">
-													${product.previousPrice} USD
-												</s>
-											</div>
-										</div>
-									</div>
-								))}
-							</div>
-
-							<Pagination
-								section={"products"}
-								currentPage={1}
-								totalPages={totalPages}
-							/>
-						</div>
-
-					</div>
-				</div>
-			</section>
 
 			<CallToAction data={callToAction} />
 
