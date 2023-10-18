@@ -1,4 +1,6 @@
 import Counter from "@/components/Counter";
+import DropdownMenu from "@/components/DropdownMenu";
+import FrameColor from "@/components/FrameColor";
 import Social from "@/components/Social";
 import social from "@/config/social.json";
 import ImageFallback from "@/helpers/ImageFallback";
@@ -10,6 +12,20 @@ const ProductSingle = ({ params }: { params: any }) => {
 	const tabsData: any = getSinglePage("products");
 	const post = tabsData.filter((page: any) => page.slug === params.single)[0];
 	const { content } = post;
+
+	async function handleMenuItemClick (itemId: string) {
+		"use server"
+		console.log(itemId);
+	};
+
+	const menuItems = [
+		{ id: "item-1", label: " Alphabetically, Z-A" },
+		{ id: "item-2", label: " Price, low to high" },
+		{ id: "item-3", label: " Price, high to low" },
+		{ id: "item-4", label: "Date, old to new" },
+		{ id: "item-5", label: "Date, old to new" },
+		{ id: "item-6", label: "Date, new to old" },
+	];
 
 	return (
 		<>
@@ -39,29 +55,14 @@ const ProductSingle = ({ params }: { params: any }) => {
 
 							<div>
 								<h5 className="mb-2">Frame Color</h5>
-								<div className="flex gap-4 mt-4">
-									<div className=" bg-gray-800 rounded-md border">
-										<input type="checkbox" className="input-checkbox" />
-									</div>
-
-									<div className=" bg-gray-200 rounded-md border">
-										<input type="checkbox" className="input-checkbox" />
-									</div>
-
-									<div className=" bg-gray-400 rounded-md border">
-										<input type="checkbox" className="input-checkbox" />
-									</div>
+								<div className="mt-4">
+									<FrameColor />
 								</div>
 							</div>
 
 							<div>
 								<h5 className="mb-2">Size & Weight</h5>
-								<select className="bg-theme-light rounded-md md:w-1/2 border-none" name="size-weight" id="size-weight">
-									<option value="Height 61cm,Bulb E27">Height 61cm,Bulb E27</option>
-									<option value="Height 61cm,Bulb E27">Height 61cm,Bulb E27</option>
-									<option value="Height 41cm,Bulb E26">Height 41cm,Bulb E26</option>
-									<option value="Height 32cm,Bulb E25">Height 32cm,Bulb E25</option>
-								</select>
+								<DropdownMenu handleMenuItemClick={handleMenuItemClick} items={menuItems} buttonLabel="Alphabetically, A-Z" />
 							</div>
 
 							<div className="flex gap-4 md:w-3/4">

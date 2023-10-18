@@ -9,6 +9,7 @@ const RangeSlider = () => {
 	const [maxValue, setMaxValue] = useState(0);
 	const [minValue2, setMinValue2] = useState(0);
 	const [maxValue2, setMaxValue2] = useState(0);
+	
 	return (
 		<div>
 			<MultiRangeSlider

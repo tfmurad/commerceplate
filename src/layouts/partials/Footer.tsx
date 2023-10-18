@@ -17,7 +17,7 @@ const Footer = () => {
         <div className="flex flex-col md:flex-row justify-between items-center py-10 md:pt-20 md:pb-14">
           <Logo />
 
-          <ul className="flex gap-x-4 lg:gap-x-10 my-4">
+          <ul className="flex gap-x-4 lg:gap-x-10 my-3">
             {menu.footer.map((menu) => (
               <li className="footer-link" key={menu.name}>
                 <Link href={menu.url}>{menu.name}</Link>

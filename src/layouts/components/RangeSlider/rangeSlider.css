@@ -1,3 +1,7 @@
+:root {
+  --bar-inner-background: black;
+}
+
 .multi-range-slider .bar-left {
 	width: 25%;
 	background-color: #E7E7E7;
@@ -14,7 +18,7 @@
 }
 
 .multi-range-slider .bar-inner {
-	background-color: black;
+	background-color: var(--bar-inner-background);
 	display: flex;
 	flex-grow: 1;
 	flex-shrink: 1;

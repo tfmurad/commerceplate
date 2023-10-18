@@ -1,20 +1,14 @@
 "use client";
 
+import FrameColor from '@/components/FrameColor';
 import RangeSlider from '@/components/RangeSlider/RangeSlider';
 import { useState } from 'react';
 import { BsCheckLg } from "react-icons/bs";
 
 const ProductFilters = () => {
-	const [selectedColor, setSelectedColor] = useState<number | null>(null);
 	const [selectedBrands, setSelectedBrands] = useState<string[]>([]);
 	const [selectedSize, setSelectedSize] = useState<string | null>(null);
 
-	// sample colors 
-	const colors = [
-		{ name: "Medium Gray", hex: "#888888" },
-		{ name: "Light Gray", hex: "#CCCCCC" },
-		{ name: "Dark Gray", hex: "#555555" }
-	];
 
 	const brands = [
 		{
@@ -79,15 +73,6 @@ const ProductFilters = () => {
 			bulbSize: 25,
 		},
 	];
-
-
-	const handleColorClick = (colorIndex: number) => {
-		if (selectedColor === colorIndex) {
-			setSelectedColor(null);
-		} else {
-			setSelectedColor(colorIndex);
-		}
-	};
 
 	const handleBrandClick = (name: string) => {
 		if (selectedBrands.includes(name)) {
@@ -156,22 +141,7 @@ const ProductFilters = () => {
 			<div>
 				<h5 className="mb-2 mt-8 lg:mt-10 lg:text-xl">Frame Color</h5>
 				<hr />
-				<div className="flex gap-4 mt-4">
-					{colors.map((color, index) => {
-						return (
-							<button
-								key={index}
-								className={`h-10 w-10 rounded-md`}
-								style={{ backgroundColor: color.hex }}
-								onClick={() => handleColorClick(index)}
-							>
-								{selectedColor === index && (
-									<span className="text-white flex items-center justify-center"><BsCheckLg size={25} /></span>
-								)}
-							</button>
-						)
-					})}
-				</div>
+				<FrameColor />
 			</div>
 
 			<div>

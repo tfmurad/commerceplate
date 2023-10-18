@@ -5,19 +5,18 @@ import React from "react";
 const SignUp = () => {
   return (
     <>
-      <PageHeader title="Account" />
-      <section className="section-sm">
+      <section className="section">
         <div className="container">
           <div className="row">
             <div className="col-11 sm:col-9 md:col-6 mx-auto">
-              <div className="mb-14 space-y-4 text-center">
-                <h2 className="max-md:h1">Create an account</h2>
-                <p>Create an account and start using...</p>
+              <div className="mb-14 text-center">
+                <h2 className="max-md:h1 md:mb-4">Create an account</h2>
+                <p className="md:text-xl">Create an account and start using...</p>
               </div>
 
               <form method="post">
                 <div>
-                  <label className="form-label">Name</label>
+                  <label className="form-label mb-2 max-md:text-base">Name</label>
                   <input
                     className="form-input"
                     placeholder="Enter your name"
@@ -26,7 +25,7 @@ const SignUp = () => {
                 </div>
 
                 <div>
-                  <label className="form-label mt-8">Email Address</label>
+                  <label className="form-label mb-2 max-md:text-base mt-8">Email Address</label>
                   <input
                     className="form-input"
                     placeholder="Type your email"
@@ -35,7 +34,7 @@ const SignUp = () => {
                 </div>
 
                 <div>
-                  <label className="form-label mt-8">Password</label>
+                  <label className="form-label mb-2 max-md:text-base mt-8">Password</label>
                   <input
                     className="form-input"
                     placeholder="********"
@@ -43,14 +42,14 @@ const SignUp = () => {
                   />
                 </div>
 
-                <button type="submit" className="btn btn-primary w-full mt-10">
+                <button type="submit" className="btn btn-primary md:text-xl md:font-medium w-full mt-10">
                   Sign Up
                 </button>
               </form>
 
-              <div className="flex gap-4 text-xl mt-6">
+              <div className="flex gap-x-2 text-sm md:text-base mt-6">
                 <p className="text-light dark:text-darkmode-light">
-                  have read and agree to the
+                 I have read and agree to the
                 </p>
                 <Link
                   className="underline font-medium text-dark dark:text-darkmode-dark"
@@ -60,7 +59,7 @@ const SignUp = () => {
                 </Link>
               </div>
 
-              <div className="flex gap-4 text-xl mt-4">
+              <div className="flex gap-x-2 text-sm md:text-base mt-2">
                 <p className="text-light dark:text-darkmode-light">
                   Have an account?
                 </p>

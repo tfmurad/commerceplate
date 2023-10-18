@@ -2,17 +2,30 @@
 
 import ProductCardView from "@/partials/ProductCardView";
 import ProductListView from "@/partials/ProductListView";
+import { GlobalContext } from "context/GlobalState";
 import { useContext, useState } from "react";
 import { BsGridFill } from "react-icons/bs";
 import { FaList } from "react-icons/fa6";
 import { IoSearch } from "react-icons/io5";
+import DropdownMenu from "./DropdownMenu";
 import ModalFilter from "./ModalFilter";
-import { GlobalContext } from "context/GlobalState";
 
 const ProductLayouts = ({ currentPage }: { currentPage: any }) => {
   const { changeLayout, setChangeLayout } = useContext(GlobalContext);
   const [showModal, setShowModal] = useState(false);
-  //   const [changeLayout, setChangeLayout] = useState<boolean>(true);
+
+  const handleMenuItemClick = (itemId: string) => {
+    console.log(itemId)
+  };
+
+  const menuItems = [
+    { id: "item-1", label: " Alphabetically, Z-A" },
+    { id: "item-2", label: " Price, low to high" },
+    { id: "item-3", label: " Price, high to low" },
+    { id: "item-4", label: "Date, old to new" },
+    { id: "item-5", label: "Date, old to new" },
+    { id: "item-6", label: "Date, new to old" },
+  ];
 
   return (
     <>
@@ -34,7 +47,7 @@ const ProductLayouts = ({ currentPage }: { currentPage: any }) => {
                     type="text"
                     placeholder="Search For Products"
                   />
-                  <button className="px-2">
+                  <button className="px-2 search-icon">
                     <IoSearch size={20} />
                   </button>
                 </div>
@@ -46,17 +59,15 @@ const ProductLayouts = ({ currentPage }: { currentPage: any }) => {
                 <div className="flex gap-2">
                   <button
                     onClick={() => setChangeLayout(true)}
-                    className={`btn ${
-                      changeLayout ? "btn-primary" : "btn-outline-primary"
-                    } p-2 hover:scale-105 duration-300`}
+                    className={`btn ${changeLayout ? "btn-primary" : "btn-outline-primary"
+                      } p-2 hover:scale-105 duration-300`}
                   >
                     <BsGridFill />
                   </button>
                   <button
                     onClick={() => setChangeLayout(false)}
-                    className={`btn ${
-                      changeLayout ? "btn-outline-primary" : "btn-primary"
-                    } p-2 hover:scale-105 duration-300`}
+                    className={`btn ${changeLayout ? "btn-outline-primary" : "btn-primary"
+                      } p-2 hover:scale-105 duration-300`}
                   >
                     <FaList />
                   </button>
@@ -64,26 +75,7 @@ const ProductLayouts = ({ currentPage }: { currentPage: any }) => {
 
                 <div className="flex gap-2 items-center font-medium text-base">
                   <p>Sort By</p>
-                  <select
-                    className="rounded-md border border-border text-light text-sm"
-                    name=""
-                    id=""
-                  >
-                    <option value="Alphabetically, A-Z">
-                      Alphabetically, A-Z
-                    </option>
-                    <option value="Alphabetically, Z-A">
-                      Alphabetically, Z-A
-                    </option>
-                    <option value="Price, low to high">
-                      Price, low to high
-                    </option>
-                    <option value="Price, high to low">
-                      Price, high to low
-                    </option>
-                    <option value="Date, old to new">Date, old to new</option>
-                    <option value="Date, new to old">Date, new to old</option>
-                  </select>
+                  <DropdownMenu items={menuItems} handleMenuItemClick={handleMenuItemClick} buttonLabel="Alphabetically, A-Z" />
                 </div>
               </div>
             </div>

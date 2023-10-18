@@ -5,7 +5,10 @@ const nextConfig = {
   reactStrictMode: true,
   basePath: config.base_path !== "/" ? config.base_path : "",
   trailingSlash: config.site.trailing_slash,
-  output: 'standalone',
+  output: "standalone",
+  experimental: {
+    serverActions: true,
+  },
 };
 
 module.exports = nextConfig;

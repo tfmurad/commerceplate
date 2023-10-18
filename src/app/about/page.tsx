@@ -10,7 +10,6 @@ const About = () => {
   const data: any = getListPage("about/_index.md");
   const testimonial = getListPage("sections/testimonial.md");
   const accordion = getListPage("sections/faq.md");
-  console.log(accordion.content);
   const { frontmatter, content } = data;
   const { title, meta_title, description, image, aboutUs } = frontmatter;
 
@@ -129,8 +128,8 @@ const About = () => {
       </section>
 
       <section>
-        <div className="container-lg">
-          <div className="bg-theme-light px-7 lg:px-32 py-20 dark:bg-darkmode-theme-light row mb-14 xl:mb-28">
+        <div className="container">
+          <div className="bg-theme-light px-7 lg:px-32 py-20 dark:bg-darkmode-theme-light row mb-14 xl:mb-28 rounded-b-md">
             <div className="col-12 md:col-5 mx-auto space-y-5 mb-10 md:mb-0">
               <h1>Frequently Asked Questions</h1>
               <p className="text-lg">

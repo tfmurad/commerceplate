@@ -162,13 +162,13 @@
 .accordion {
   @apply overflow-hidden border-b-2 border-border bg-theme-light dark:border-darkmode-border dark:bg-darkmode-theme-light;
   &-header {
-    @apply flex w-full cursor-pointer items-center justify-between px-0 py-3 text-xl text-light dark:bg-darkmode-theme-light dark:text-darkmode-light text-start;
+    @apply flex w-full cursor-pointer items-center justify-between px-0 py-3 text-lg text-light dark:bg-darkmode-theme-light dark:text-darkmode-light text-start;
   }
   &-icon {
     @apply h-[.8em] w-[.8em] rotate-[-90deg] transition-transform duration-200;
   }
   &-content {
-    @apply max-h-0 overflow-hidden px-0 py-0 text-lg;
+    @apply max-h-0 overflow-hidden px-0 py-0;
   }
   &.active {
     .accordion-header {
@@ -213,7 +213,6 @@
     @apply rounded-full p-2 text-dark  dark:text-darkmode-dark;
   }
 }
-
 
 
 // content style

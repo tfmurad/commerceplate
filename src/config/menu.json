@@ -5,16 +5,8 @@
       "url": "/"
     },
     {
-      "name": "Shop",
-      "url": "/shop"
-    },
-    {
       "name": "Product",
       "url": "/product"
-    },
-    {
-      "name": "Blog",
-      "url": "/blog"
     },
     {
       "name": "Pages",
@@ -44,10 +36,6 @@
     {
       "name": "About",
       "url": "/about"
-    },
-    {
-      "name": "Shop",
-      "url": "/shop"
     },
     {
       "name": "Product",
