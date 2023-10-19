@@ -213,10 +213,10 @@ const ProductCardView = ({ currentPage }: { currentPage: number | null }) => {
                       </Link>
                     </h2>
                     <div className="flex justify-center items-center gap-x-2 mt-2">
-                      <span className="text-light text-xs md:text-lg font-bold">
+                      <span className="text-light dark:text-darkmode-light text-xs md:text-lg font-bold">
                         ${product.currentPrice} USD
                       </span>
-                      <s className="text-light text-xs md:text-base font-medium">
+                      <s className="text-light dark:text-darkmode-light text-xs md:text-base font-medium">
                         ${product.previousPrice} USD
                       </s>
                     </div>

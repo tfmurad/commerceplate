@@ -8,15 +8,15 @@ const SignUp = () => {
       <section className="section">
         <div className="container">
           <div className="row">
-            <div className="col-11 sm:col-9 md:col-6 mx-auto">
+            <div className="col-11 sm:col-9 md:col-7 mx-auto">
               <div className="mb-14 text-center">
-                <h2 className="max-md:h1 md:mb-4">Create an account</h2>
-                <p className="md:text-xl">Create an account and start using...</p>
+                <h2 className="max-md:h1 md:mb-2">Create an account</h2>
+                <p className="md:text-lg">Create an account and start using...</p>
               </div>
 
               <form method="post">
                 <div>
-                  <label className="form-label mb-2 max-md:text-base">Name</label>
+                  <label className="form-label">Name</label>
                   <input
                     className="form-input"
                     placeholder="Enter your name"
@@ -25,7 +25,7 @@ const SignUp = () => {
                 </div>
 
                 <div>
-                  <label className="form-label mb-2 max-md:text-base mt-8">Email Address</label>
+                  <label className="form-label mt-8">Email Address</label>
                   <input
                     className="form-input"
                     placeholder="Type your email"
@@ -34,7 +34,7 @@ const SignUp = () => {
                 </div>
 
                 <div>
-                  <label className="form-label mb-2 max-md:text-base mt-8">Password</label>
+                  <label className="form-label mt-8">Password</label>
                   <input
                     className="form-input"
                     placeholder="********"
@@ -42,7 +42,7 @@ const SignUp = () => {
                   />
                 </div>
 
-                <button type="submit" className="btn btn-primary md:text-xl md:font-medium w-full mt-10">
+                <button type="submit" className="btn btn-primary md:text-lg md:font-medium w-full mt-10">
                   Sign Up
                 </button>
               </form>

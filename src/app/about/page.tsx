@@ -27,7 +27,7 @@ const About = () => {
       <section>
         <div className="container">
           {aboutUs.map((section: any, index: number) => (
-            <div className={`lg:flex gap-8 section-sm`} key={section.heading}>
+            <div className={`lg:flex gap-8 mt-14 lg:mt-28`} key={section.heading}>
               {index % 2 === 0 ? (
                 <>
                   <ImageFallback
@@ -40,7 +40,7 @@ const About = () => {
                   <div className="mt-10 lg:mt-0">
                     <h2>{section.heading}</h2>
                     <p
-                      className="mt-4 lg:text-xl font-medium text-light leading-7"
+                      className="mt-4 text-light leading-7"
                       dangerouslySetInnerHTML={markdownify(section.content)}
                     />
                   </div>
@@ -50,7 +50,7 @@ const About = () => {
                   <div>
                     <h2>{section.heading}</h2>
                     <p
-                      className="mt-4 lg:text-xl font-medium text-light leading-7"
+                      className="mt-4 text-light leading-7"
                       dangerouslySetInnerHTML={markdownify(section.content)}
                     />
                   </div>
@@ -105,19 +105,19 @@ const About = () => {
 
             <div className="row justify-center gap-6 mt-14">
               <div className="col-6 md:col-5 lg:col-3">
-                <h3 className="h4 mb-4">24/7 Friendly Support</h3>
+                <h3 className="md:h4 mb-4">24/7 Friendly Support</h3>
                 <p>Our support team always ready for you to 7 days a week</p>
               </div>
 
               <div className="col-6 md:col-5 lg:col-3">
-                <h3 className="h4 mb-4">7 Days Easy Return</h3>
+                <h3 className="md:h4 mb-4">7 Days Easy Return</h3>
                 <p>
                   Product any fault within 7 days for an immediately exchange.
                 </p>
               </div>
 
               <div className="col-6 md:col-5 lg:col-3">
-                <h3 className="h4 mb-4">Quality Guaranteed</h3>
+                <h3 className="md:h4 mb-4">Quality Guaranteed</h3>
                 <p>
                   If your product are not perfect, return them for a full refund
                 </p>
@@ -132,7 +132,7 @@ const About = () => {
           <div className="bg-theme-light px-7 lg:px-32 py-20 dark:bg-darkmode-theme-light row mb-14 xl:mb-28 rounded-b-md">
             <div className="col-12 md:col-5 mx-auto space-y-5 mb-10 md:mb-0">
               <h1>Frequently Asked Questions</h1>
-              <p className="text-lg">
+              <p className="md:text-lg">
                 Our expertly crafted FAQ guide provides valuable insights on
                 selecting the perfect table lamp to complement your decor and
                 meet your specific lighting needs.

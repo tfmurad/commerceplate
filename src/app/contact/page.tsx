@@ -36,10 +36,10 @@ const Contact = async () => {
 
       <section className="section">
         <div className="container">
-          <div className="mx-auto md:col-10 lg:col-10">
+          <div className="mx-auto sm:col-9 md:col-10">
             <h2 className="mb-14 text-center">We would love to hear from you!</h2>
             <form className="border border-border rounded-md p-10" action={contact_form_action} method="POST">
-              <div className="mb-6 md:grid grid-cols-2 gap-x-8">
+              <div className="mb-6 md:grid grid-cols-2 gap-x-8 max-md:space-y-6">
                 <div>
                   <label htmlFor="name" className="form-label">
                     First Name <span className="text-red-500">*</span>
@@ -50,6 +50,7 @@ const Contact = async () => {
                     className="form-input"
                     placeholder="John"
                     type="text"
+                    required
                   />
                 </div>
 
@@ -67,7 +68,7 @@ const Contact = async () => {
                 </div>
               </div>
 
-              <div className="mb-6 md:grid grid-cols-2 gap-x-8">
+              <div className="mb-6 md:grid grid-cols-2 gap-x-8 max-md:space-y-6">
                 <div>
                   <label htmlFor="email" className="form-label">
                     Email Address <span className="text-red-500">*</span>
@@ -78,6 +79,7 @@ const Contact = async () => {
                     className="form-input"
                     placeholder="john.doe@email.com"
                     type="email"
+                    required
                   />
                 </div>
 
@@ -91,6 +93,7 @@ const Contact = async () => {
                     className="form-input"
                     placeholder="Enquiry About"
                     type="text"
+                    required
                   />
                 </div>
               </div>
@@ -104,10 +107,11 @@ const Contact = async () => {
                   className="form-input"
                   placeholder="Type your message..."
                   rows={8}
+                  required
                 ></textarea>
               </div>
 
-              <div className="flex justify-center">
+              <div className="flex justify-end">
                 <button type="submit" className="btn btn-primary">
                   Send Message
                 </button>

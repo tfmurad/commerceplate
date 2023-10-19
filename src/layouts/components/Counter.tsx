@@ -1,5 +1,6 @@
 "use client"
 import { useState } from 'react';
+import { FaMinus, FaPlus } from "react-icons/fa6";
 
 const Counter = () => {
 	const [count, setCount] = useState(1);
@@ -15,10 +16,10 @@ const Counter = () => {
 	};
 
 	return (
-		<div className="border rounded-md flex gap-6 justify-between items-center">
-			<button className='p-2' onClick={decrementCount}>-</button>
+		<div className="border rounded-md flex justify-between items-center w-[116px]">
+			<button className='p-2' onClick={decrementCount}><FaMinus /></button>
 			<p>{count}</p>
-			<button className='p-2' onClick={incrementCount}>+</button>
+			<button className='p-2' onClick={incrementCount}><FaPlus /></button>
 		</div>
 	);
 };

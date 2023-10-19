@@ -80,7 +80,7 @@ const Search = ({ searchList }: Props) => {
             <div className="flex flex-nowrap">
               <input
                 className="form-input rounded-r-none"
-                placeholder="Search posts"
+                placeholder="Search products"
                 type="search"
                 name="search"
                 value={inputVal}
@@ -116,11 +116,11 @@ const Search = ({ searchList }: Props) => {
                 height={184}
               />
               <h1 className="h2 mb-4">
-                {inputVal.length < 1 ? "Search Post Here" : "No Search Found!"}
+                {inputVal.length < 1 ? "Search Product Here" : "No Search Found!"}
               </h1>
               <p>
                 {inputVal.length < 1
-                  ? "Search for posts by title, category, or tag."
+                  ? "Search for products by title, category, or tag."
                   : "We couldn't find what you searched for. Try searching again."}
               </p>
             </div>

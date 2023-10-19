@@ -8,15 +8,15 @@ const Login = () => {
       <section className="section">
         <div className="container">
           <div className="row">
-            <div className="col-11 sm:col-9 md:col-6 mx-auto">
+            <div className="col-11 sm:col-9 md:col-7 mx-auto">
               <div className="mb-14 text-center">
-                <h2 className="max-md:h1 md:mb-4">Login</h2>
-                <p className="md:text-xl">Please fill your email and password to login</p>
+                <h2 className="max-md:h1 md:mb-2">Login</h2>
+                <p className="md:text-lg">Please fill your email and password to login</p>
               </div>
 
               <form method="post">
                 <div>
-                  <label className="form-label mb-2 max-md:text-base">Email Address</label>
+                  <label className="form-label">Email Address</label>
                   <input
                     className="form-input"
                     placeholder="Type your email"
@@ -25,7 +25,7 @@ const Login = () => {
                 </div>
 
                 <div>
-                  <label className="form-label mb-2 max-md:text-base mt-8">Password</label>
+                  <label className="form-label mt-8">Password</label>
                   <input
                     className="form-input"
                     placeholder="********"
@@ -33,7 +33,7 @@ const Login = () => {
                   />
                 </div>
 
-                <button type="submit" className="btn btn-primary md:text-xl md:font-medium w-full mt-10">
+                <button type="submit" className="btn btn-primary md:text-lg md:font-medium w-full mt-10">
                   Log In
                 </button>
               </form>

@@ -1,6 +1,7 @@
 import Counter from "@/components/Counter";
 import DropdownMenu from "@/components/DropdownMenu";
 import FrameColor from "@/components/FrameColor";
+import ProductGallery from "@/components/ProductGallery";
 import Social from "@/components/Social";
 import social from "@/config/social.json";
 import ImageFallback from "@/helpers/ImageFallback";
@@ -13,7 +14,7 @@ const ProductSingle = ({ params }: { params: any }) => {
 	const post = tabsData.filter((page: any) => page.slug === params.single)[0];
 	const { content } = post;
 
-	async function handleMenuItemClick (itemId: string) {
+	async function handleMenuItemClick(itemId: string) {
 		"use server"
 		console.log(itemId);
 	};
@@ -27,56 +28,80 @@ const ProductSingle = ({ params }: { params: any }) => {
 		{ id: "item-6", label: "Date, new to old" },
 	];
 
+
+	const deskLampProducts = [
+		{
+			id: 1,
+			productName: "Modern LED Desk Lamp",
+			imgSrc: "/images/product-1.png"
+		},
+		{
+			id: 2,
+			productName: "Adjustable Swing-Arm Desk Lamp",
+			imgSrc: "/images/product-1.png"
+		},
+		{
+			id: 3,
+			productName: "Vintage Industrial Desk Lamp",
+			imgSrc: "/images/product-1.png"
+		},
+		{
+			id: 4,
+			productName: "Wooden Base Desk Lamp",
+			imgSrc: "/images/product-1.png"
+		},
+		{
+			id: 5,
+			productName: "Minimalist LED Task Lamp",
+			imgSrc: "/images/product-1.png"
+		}
+	];
+
 	return (
 		<>
-			<section className="md:section">
+			<section className="md:section-sm">
 				<div className="container">
 					<div className="row justify-center">
 						{/* right side contents  */}
-						<div className="col-12 md:col-5">
-							<Image className="rounded-md" src="/images/product-1.png" width={722} height={623} alt="" />
-
-							<div className="row mt-6">
-								{
-									Array.from({ length: 4 }).map((_, idx) => <Image className="col-3 rounded-md"
-										key={idx} src="/images/product-1.png" width={168} height={146} alt="product" />)
-								}
-							</div>
+						<div className="col-10 md:col-8 lg:col-6">
+							<ProductGallery products={deskLampProducts} />
 						</div>
 
 						{/* left side contents  */}
-						<div className="col-12 md:col-6 space-y-6 md:ml-10 py-6 md:py-0">
-							<h2>Curved Table Lamp</h2>
+						<div className="col-10 md:col-8 lg:col-5 md:ml-7 py-6 lg:py-0">
+							<h1 className="text-3xl md:h2 mb-2 md:mb-6">Curved Table Lamp</h1>
 
 							<div className="flex gap-2 items-center">
-								<h4 className="text-light">$49.99 USD</h4>
-								<h6 className="text-light line-through">$89.99 USD</h6>
+								<h4 className="text-light max-md:h2">$49.99 USD</h4>
+								<s className="text-light max-md:h3 dark:text-darkmode-light">$89.99 USD</s>
 							</div>
 
-							<div>
-								<h5 className="mb-2">Frame Color</h5>
-								<div className="mt-4">
-									<FrameColor />
+							<div className="my-8 md:my-10 space-y-6 md:space-y-10">
+								<div>
+									<h5 className="mb-2 max-md:text-base">Frame Color</h5>
+									<div className="-mt-2">
+										<FrameColor />
+									</div>
+								</div>
+
+								<div>
+									<h5 className="mb-2 max-md:text-base">Size & Weight</h5>
+									<DropdownMenu handleMenuItemClick={handleMenuItemClick} items={menuItems} buttonLabel="Alphabetically, A-Z" />
 								</div>
 							</div>
 
-							<div>
-								<h5 className="mb-2">Size & Weight</h5>
-								<DropdownMenu handleMenuItemClick={handleMenuItemClick} items={menuItems} buttonLabel="Alphabetically, A-Z" />
-							</div>
-
-							<div className="flex gap-4 md:w-3/4">
+							<div className="flex gap-4 mt-8 md:mt-10 mb-6">
 								<Counter />
 
-								<button className="btn btn-outline-primary">Add To Cart
-								</button>
+								{/* <button className="btn btn-outline-primary">Add To Cart
+								</button> */}
 
-								<button className="btn btn-primary">Buy now
+								<button className="btn max-md:btn-sm btn-primary">Buy now
 								</button>
 							</div>
 
-							<div>
-								<p className="p-2 rounded-md bg-theme-light inline">Est. Delivery between 0 - 3 days</p>
+							<div className="mb-8 md:mb-10">
+								<p className="p-2 max-md:text-sm rounded-md bg-theme-light dark:bg-darkmode-theme-light inline">Est. Delivery between 0 - 3 days</p>
 							</div>
 
 							{/* <div className="flex gap-3">
@@ -84,8 +109,8 @@ const ProductSingle = ({ params }: { params: any }) => {
 								<PaymentSlider paymentMethods={paymentMethods} />
 							</div> */}
 
-							<div className="flex flex-wrap gap-3">
-								<h5>Payment: </h5>
+							<div className="flex flex-wrap items-center gap-3">
+								<h5 className="max-md:text-base">Payment: </h5>
 								{
 									Array.from({ length: 7 }).map((_, i) => (
 										<Image
@@ -99,18 +124,18 @@ const ProductSingle = ({ params }: { params: any }) => {
 								}
 							</div>
 
-							<hr />
+							<hr className="my-6"/>
 
-							<div className="flex gap-3 items-center">
-								<h5>Share:</h5>
+							<div className="flex gap-3 items-center mb-6">
+								<h5 className="max-md:text-base">Share:</h5>
 								<Social source={social.main} className="social-icons" />
 							</div>
 
 							<div className="flex gap-3">
-								<h5>Tags:</h5>
+								<h5 className="max-md:text-base">Tags:</h5>
 								<button className="flex flex-wrap gap-3">
 									{Array.from({ length: 5 }).map((_, idx) => <p
-										key={idx} className="px-2 py-1 rounded-md border">Table Lamps</p>)}
+										key={idx} className="px-2 py-1 rounded-md border max-md:text-sm">Table Lamps</p>)}
 								</button>
 							</div>
 						</div>
