@@ -2,6 +2,8 @@ import ProductLayouts from "@/components/ProductLayouts";
 import { getListPage } from "@/lib/contentParser";
 import CallToAction from "@/partials/CallToAction";
 import PageHeader from "@/partials/PageHeader";
+import ProductCardView from "@/partials/ProductCardView";
+import ProductListView from "@/partials/ProductListView";
 
 const Products = () => {
 	const callToAction = getListPage("sections/call-to-action.md");
@@ -9,7 +11,10 @@ const Products = () => {
 	return (
 		<>
 			<PageHeader title={"Product"} />
-			<ProductLayouts currentPage={null}/>
+			<ProductLayouts currentPage={null}>
+				<ProductCardView currentPage={null}/>
+				<ProductListView currentPage={null}/>
+			</ProductLayouts>
 			<CallToAction data={callToAction} />
 		</>
 	);

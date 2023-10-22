@@ -3,6 +3,8 @@ import config from "@/config/config.json";
 import { getListPage } from "@/lib/contentParser";
 import CallToAction from "@/partials/CallToAction";
 import PageHeader from "@/partials/PageHeader";
+import ProductCardView from "@/partials/ProductCardView";
+import ProductListView from "@/partials/ProductListView";
 const { pagination_card, pagination_list } = config.settings;
 
 // sample array of products
@@ -205,7 +207,11 @@ const Products = ({ params }: { params: { page: number } }) => {
   return (
     <>
       <PageHeader title={"Product"} />
-      <ProductLayouts currentPage={currentPage} />
+      {/* <ProductLayouts currentPage={currentPage} /> */}
+      <ProductLayouts>
+				<ProductCardView currentPage={currentPage}/>
+				<ProductListView currentPage={currentPage}/>
+			</ProductLayouts>
       <CallToAction data={callToAction} />
     </>
   );

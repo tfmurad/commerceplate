@@ -1,7 +1,5 @@
 "use client";
 
-import ProductCardView from "@/partials/ProductCardView";
-import ProductListView from "@/partials/ProductListView";
 import { GlobalContext } from "context/GlobalState";
 import { useContext, useState } from "react";
 import { BsGridFill } from "react-icons/bs";
@@ -10,7 +8,8 @@ import { IoSearch } from "react-icons/io5";
 import DropdownMenu from "./DropdownMenu";
 import ModalFilter from "./ModalFilter";
 
-const ProductLayouts = ({ currentPage }: { currentPage: any }) => {
+const ProductLayouts = (props: any) => {
+  const { children } = props;
   const { changeLayout, setChangeLayout } = useContext(GlobalContext);
   const [showModal, setShowModal] = useState(false);
 
@@ -88,11 +87,9 @@ const ProductLayouts = ({ currentPage }: { currentPage: any }) => {
         />
       </section>
 
-      {changeLayout ? (
-        <ProductCardView currentPage={currentPage} />
-      ) : (
-        <ProductListView currentPage={currentPage} />
-      )}
+      {
+        changeLayout ? <div>{children[0]}</div> : <div>{children[1]}</div>
+      }
     </>
   );
 };

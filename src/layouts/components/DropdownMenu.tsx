@@ -17,7 +17,7 @@ interface DropdownMenuProps {
 const DropdownMenu: React.FC<DropdownMenuProps> = ({ items, buttonLabel, handleMenuItemClick }) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const menuRef = useRef<any>(null);
-  console.log(menuRef)
+  // console.log(menuRef)
 
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
