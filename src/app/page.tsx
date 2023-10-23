@@ -2,12 +2,13 @@
 import CategoriesSlider from "@/components/CategoriesSlider";
 import HeroSlider from "@/components/HeroSlider";
 import { getListPage } from "@/lib/contentParser";
+import { getLatestProducts, getProducts } from "@/lib/shopify/shopify";
 import CallToAction from "@/partials/CallToAction";
 import LatestProducts from "@/partials/LatestProducts";
 import SeoMeta from "@/partials/SeoMeta";
 import { Banner } from "@/types";
 
-const Home = () => {
+const Home = async() => {
   const homepage = getListPage("homepage/_index.md");
   const callToAction = getListPage("sections/call-to-action.md");
   const { frontmatter } = homepage;
@@ -54,65 +55,9 @@ const Home = () => {
     }
   ];
 
-  // sample array of products 
-  const products = [
-    {
-      id: 1,
-      productName: "Product 1",
-      image: "/images/category-1.png",
-      currentPrice: 29.99,
-      previousPrice: 39.99
-    },
-    {
-      id: 2,
-      productName: "Product 2",
-      image: "/images/category-1.png",
-      currentPrice: 19.95,
-      previousPrice: 24.99
-    },
-    {
-      id: 3,
-      productName: "Product 3",
-      image: "/images/category-1.png",
-      currentPrice: 45.50,
-      previousPrice: 49.99
-    },
-    {
-      id: 4,
-      productName: "Product 4",
-      image: "/images/category-1.png",
-      currentPrice: 14.99,
-      previousPrice: 19.99
-    },
-    {
-      id: 5,
-      productName: "Product 5",
-      image: "/images/category-1.png",
-      currentPrice: 79.99,
-      previousPrice: 89.99
-    },
-    {
-      id: 6,
-      productName: "Product 6",
-      image: "/images/category-1.png",
-      currentPrice: 9.95,
-      previousPrice: 12.99
-    },
-    {
-      id: 7,
-      productName: "Product 7",
-      image: "/images/category-1.png",
-      currentPrice: 34.99,
-      previousPrice: 44.99
-    },
-    {
-      id: 8,
-      productName: "Product 8",
-      image: "/images/category-1.png",
-      currentPrice: 54.50,
-      previousPrice: 59.99
-    }
-  ];
+  const data = await getLatestProducts();
+  const products = data.collection.products.edges;
+  // console.log(products)
 
   return (
     <>
