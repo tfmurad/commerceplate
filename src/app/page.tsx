@@ -2,13 +2,13 @@
 import CategoriesSlider from "@/components/CategoriesSlider";
 import HeroSlider from "@/components/HeroSlider";
 import { getListPage } from "@/lib/contentParser";
-import { getLatestProducts, getProducts } from "@/lib/shopify/shopify";
+import { getCollections, getLatestProducts } from "@/lib/shopify/shopify";
 import CallToAction from "@/partials/CallToAction";
 import LatestProducts from "@/partials/LatestProducts";
 import SeoMeta from "@/partials/SeoMeta";
 import { Banner } from "@/types";
 
-const Home = async() => {
+const Home = async () => {
   const homepage = getListPage("homepage/_index.md");
   const callToAction = getListPage("sections/call-to-action.md");
   const { frontmatter } = homepage;
@@ -57,7 +57,9 @@ const Home = async() => {
 
   const data = await getLatestProducts();
   const products = data.collection.products.edges;
-  // console.log(products)
+
+  const collectionsData = await getCollections();
+  const collections = collectionsData.collections.edges;
 
   return (
     <>
@@ -76,7 +78,7 @@ const Home = async() => {
           <div className="text-center mb-6 md:mb-14">
             <h2>Categories</h2>
           </div>
-          <CategoriesSlider categories={categories} />
+          <CategoriesSlider categories={collections} />
         </div>
       </section>
 

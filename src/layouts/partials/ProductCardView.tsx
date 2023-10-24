@@ -9,23 +9,6 @@ const { pagination_card } = config.settings;
 const ProductCardView = async ({ currentPage }: { currentPage: number | null }) => {
   const data = await getProducts();
   const products = data.products.edges;
-  // console.log(data.products.edges.slice(0,3));
-
-  // const idToFind = '7994525745320';
-
-  // const foundProduct = data.products.edges.find((product) => {
-  //   return product.node.id === `gid://shopify/Product/${idToFind}`;
-  // });
-  // // console.log(foundProduct?.node.priceRange)
-
-  // if (foundProduct) {
-  //   // foundProduct contains the product with the specified ID
-  //   console.log(foundProduct.node.variants.edges[0].node.compareAtPrice.amount);
-  // } else {
-  //   // Product not found
-  //   console.log("Product not found");
-  // }
-
 
   const totalPages = Math.ceil(products.length / pagination_card);
   const currentProducts = products.slice(0, pagination_card);
@@ -62,7 +45,7 @@ const ProductCardView = async ({ currentPage }: { currentPage: number | null }) 
                         className='w-[312px] h-[150px] md:h-[269px] object-contain'
                       />
 
-                      <button className="btn btn-primary max-md:btn-sm z-10 absolute bottom-0 left-1/2 transform -translate-x-1/2 translate-y-full group-hover:-translate-y-6 duration-300 ease-in-out whitespace-nowrap">
+                      <button className="btn btn-primary max-md:btn-sm z-10 absolute bottom-0 left-1/2 transform -translate-x-1/2 translate-y-full group-hover:-translate-y-6 duration-300 ease-in-out whitespace-nowrap drop-shadow-md">
                         Add to Cart
                       </button>
                     </div>

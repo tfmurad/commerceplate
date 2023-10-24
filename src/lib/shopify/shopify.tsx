@@ -58,6 +58,27 @@ interface LatestProductResponse {
   collection: ProductResponse;
 }
 
+interface Category {
+  title: string;
+  handle: string;
+  image: {
+    url: string;
+    altText: string;
+  };
+  products: {
+    nodes: {
+      title: string;
+    }[];
+  };
+}
+
+interface CategoriesResponse {
+  collections: {
+    edges: {
+      node: Category;
+    }[];
+  };
+}
 
 export async function getProducts(): Promise<ProductResponse> {
   const getAllProductsQuery = gql`
@@ -99,43 +120,41 @@ export async function getProducts(): Promise<ProductResponse> {
   }
 }
 
-
-// latest products 
-export async function getLatestProducts(): Promise<LatestProductResponse>  {
+export async function getLatestProducts(): Promise<LatestProductResponse> {
   const getLatestProductsQuery = gql`
-  {
-    collection(handle: "latest-products") {
-      id
-      title
-      products(first: 10) {
-        edges {
-          node {
-            id
-            title
-            handle
-            priceRange {
-              minVariantPrice {
-                amount
+    {
+      collection(handle: "latest-products") {
+        id
+        title
+        products(first: 10) {
+          edges {
+            node {
+              id
+              title
+              handle
+              priceRange {
+                minVariantPrice {
+                  amount
+                }
               }
-            }
-            variants(first: 10) {
-              edges {
-                node {
-                  compareAtPrice {
-                    amount
+              variants(first: 10) {
+                edges {
+                  node {
+                    compareAtPrice {
+                      amount
+                    }
                   }
                 }
               }
-            }
-            featuredImage {
-              altText
-              url
+              featuredImage {
+                altText
+                url
+              }
             }
           }
         }
       }
     }
-  }
   `;
 
   try {
@@ -145,35 +164,32 @@ export async function getLatestProducts(): Promise<LatestProductResponse>  {
   }
 }
 
-// categories collections 
-export async function getCollections() {
+export async function getCollections(): Promise<CategoriesResponse> {
   const getCollectionsQuery = gql`
-  {
-    collections(first: 10) {
-      edges {
-        node {
-          title
-          image {
-            url
-            altText
-          }
-          products(first: 20) {
-            nodes {
-              title
-              
+    {
+      collections(first: 10) {
+        edges {
+          node {
+            title
+            handle
+            image {
+              url
+              altText
+            }
+            products(first: 20) {
+              nodes {
+                title
+              }
             }
           }
         }
       }
     }
-  }
   `;
 
   try {
-    return await graphQLClient.request<LatestProductResponse>(getCollectionsQuery);
+    return await graphQLClient.request<CategoriesResponse>(getCollectionsQuery);
   } catch (error) {
     throw new Error(error as any);
   }
 }
-
-// TODO: have to create interface 

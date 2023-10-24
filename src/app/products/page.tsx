@@ -10,7 +10,7 @@ const Products = () => {
 
 	return (
 		<>
-			<PageHeader title={"Product"} />
+			<PageHeader title={"Products"} />
 			<ProductLayouts currentPage={null}>
 				<ProductCardView currentPage={null}/>
 				<ProductListView currentPage={null}/>

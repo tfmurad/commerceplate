@@ -2,6 +2,7 @@
 
 import ImageFallback from '@/helpers/ImageFallback';
 import { Categories } from '@/types';
+import Link from 'next/link';
 import { useRef, useState } from 'react';
 import { HiOutlineArrowNarrowLeft, HiOutlineArrowNarrowRight } from "react-icons/hi";
 // Import Swiper styles
@@ -11,7 +12,26 @@ import "swiper/css/pagination";
 import { Navigation, Pagination } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
 
-const CategoriesSlider = ({ categories }: { categories: Categories[] }) => {
+interface Category {
+	node: {
+		title: string;
+		handle: string;
+		image: {
+			url: string;
+			altText: string;
+		};
+		products: {
+			nodes: {
+				title: string;
+			}[];
+		}
+	}
+}
+
+const CategoriesSlider = ({ categories }: { categories: Category[] }) => {
+  console.log("----------------------")
+  console.log(categories);
+	
 	const [_, setInit] = useState(false);
 	const [isHovered, setIsHovered] = useState(false);
 
@@ -52,24 +72,32 @@ const CategoriesSlider = ({ categories }: { categories: Categories[] }) => {
 				onInit={() => setInit(true)}
 			>
 
-				{categories.map((item: any, index: number) => (
-					<SwiperSlide key={index}>
+				{categories.map((item) => {
+					const {title, handle, image, products} = item.node;
+					return(
+						<SwiperSlide key={handle}>
 						<div
 							className='text-center'
 						>
 							<ImageFallback
-								src={item.imageSrc}
-								width={531}
-								height={383}
-								alt={item.name}
+								src={image.url}
+								width={424}
+								height={306}
+								alt={title}
+								className="h-[97px] sm:h-[150px] md:h-[306px] object-cover object-top rounded-md"
 							/>
 							<div className="py-6">
-								<h3 className='mb-2 font-medium h4'>{item.name}</h3>
-								<p className="text-light dark:text-darkmode-light text-xs md:text-xl">{item.itemCount} items</p>
+								<h3 className='mb-2 font-medium h4'>
+									<Link href={`categories/${handle}`}>
+									{title}
+									</Link>
+								</h3>
+								<p className="text-light dark:text-darkmode-light text-xs md:text-xl">{products.nodes.length} items</p>
 							</div>
 						</div>
 					</SwiperSlide>
-				))}
+					)
+				})}
 
 				<div
 					className={`hidden md:flex justify-between w-full absolute top-[33%] z-10 px-4 text-dark ${isHovered ? 'opacity-100 transition-opacity duration-300 ease-in-out' : 'opacity-0 transition-opacity duration-300 ease-in-out'

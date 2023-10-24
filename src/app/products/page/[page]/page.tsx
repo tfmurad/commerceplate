@@ -206,7 +206,7 @@ const Products = ({ params }: { params: { page: number } }) => {
 
   return (
     <>
-      <PageHeader title={"Product"} />
+      <PageHeader title={"Products"} />
       {/* <ProductLayouts currentPage={currentPage} /> */}
       <ProductLayouts>
 				<ProductCardView currentPage={currentPage}/>

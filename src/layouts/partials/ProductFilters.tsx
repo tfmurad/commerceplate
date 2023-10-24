@@ -9,7 +9,6 @@ const ProductFilters = () => {
 	const [selectedBrands, setSelectedBrands] = useState<string[]>([]);
 	const [selectedSize, setSelectedSize] = useState<string | null>(null);
 
-
 	const brands = [
 		{
 			brand: "Philips",

@@ -5,8 +5,8 @@
       "url": "/"
     },
     {
-      "name": "Product",
-      "url": "/product"
+      "name": "Products",
+      "url": "/products"
     },
     {
       "name": "Pages",
@@ -38,8 +38,8 @@
       "url": "/about"
     },
     {
-      "name": "Product",
-      "url": "/product"
+      "name": "Products",
+      "url": "/products"
     },
     {
       "name": "Contact",

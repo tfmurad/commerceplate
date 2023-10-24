@@ -33,35 +33,39 @@ const ProductListView = async ({ currentPage }: { currentPage: number | null }) 
           <div className="col-12 lg:col-9">
             <div className="space-y-10 mb-14">
               {productsToDisplay?.map((product: any) => {
-                 const { id, title, featuredImage, priceRange } = product?.node;
+                 const { id, title,variants, handle, featuredImage, priceRange } = product?.node;
                 return(
                   <div className="row" key={id}>
                   <div className="col-12 md:col-4">
                   <ImageFallback
-                      src={featuredImage?.url || '/images/category-1.png'}
+                      src={featuredImage?.url || '/images/product_image404.jpg'}
                       // fallback={'/images/category-1.png'}
                       width={312}
                       height={269}
                       alt={featuredImage?.altText || 'fallback image'}
-                      className='w-[312px] h-[150px] md:h-[269px] object-cover'
+                      className='w-[312px] h-[150px] md:h-[269px] object-contain'
                     />
                   </div>
 
                   <div className="col-12 md:col-8 py-3 max-md:pt-4">
                     <h2 className="font-bold md:font-normal h4">
-                      <Link href={`/product/product-1`}>
+                      <Link href={`/products/${handle}`}>
                         {title}
                       </Link>
                     </h2>
 
                     <div className="flex items-center gap-x-2 mt-2">
-                      <span className="text-light dark:text-darkmode-light text-xs md:text-lg font-bold">
-                        ${priceRange.minVariantPrice.amount} USD
-                      </span>
-                      {/* <s className="text-light dark:text-darkmode-light text-xs md:text-base font-medium">
-                        ${product.previousPrice} USD
-                      </s> */}
-                    </div>
+                        <span className="text-light dark:text-darkmode-light text-xs md:text-lg font-bold">
+                          ${priceRange.minVariantPrice.amount} USD
+                        </span>
+                        {
+                          variants.edges.map((p: any, i: number) => (
+                            p.node.compareAtPrice?.amount && <s key={i} className="text-light dark:text-darkmode-light text-xs md:text-base font-medium">
+                              ${p.node.compareAtPrice?.amount} USD
+                            </s>
+                          ))
+                        }
+                      </div>
 
                     <p className="max-md:text-xs text-light dark:text-darkmode-light my-4 md:mb-8">
                       Consider the overall style of your room. Do you prefer a
@@ -70,7 +74,7 @@ const ProductListView = async ({ currentPage }: { currentPage: number | null }) 
                       existing decor.
                     </p>
 
-                    <button className="btn btn-outline-primary max-md:btn-sm">
+                    <button className="btn btn-outline-primary max-md:btn-sm drop-shadow-md">
                       Add to Cart
                     </button>
                   </div>
