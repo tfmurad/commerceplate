@@ -1,14 +1,19 @@
+import { ProductViewProps } from "@/app/products/page";
 import Pagination from "@/components/Pagination";
 import config from "@/config/config.json";
 import ImageFallback from "@/helpers/ImageFallback";
+import { defaultSort, sorting } from "@/lib/constants";
+import { getProducts } from "@/lib/shopify";
 import ProductFilters from "@/partials/ProductFilters";
 import Link from "next/link";
-import { getProducts } from "../../lib/shopify/shopify";
 const { pagination_card } = config.settings;
 
-const ProductCardView = async ({ currentPage }: { currentPage: number | null }) => {
-  const data = await getProducts();
-  const products = data.products.edges;
+const ProductCardView:  React.FC<ProductViewProps> = async ({ currentPage, searchParams }) => {
+
+  const { sort, q: searchValue } = searchParams as { [key: string]: string };
+  const { sortKey, reverse } = sorting.find((item) => item.slug === sort) || defaultSort;
+
+  const products = await getProducts({ sortKey, reverse, query: searchValue });
 
   const totalPages = Math.ceil(products.length / pagination_card);
   const currentProducts = products.slice(0, pagination_card);
@@ -32,7 +37,7 @@ const ProductCardView = async ({ currentPage }: { currentPage: number | null }) 
           <div className="col-12 lg:col-9">
             <div className="row">
               {productsToDisplay?.map((product: any) => {
-                const { id, title, featuredImage, priceRange, variants } = product?.node;
+                const { id, title, featuredImage, priceRange, variants } = product;
 
                 return (
                   <div key={id} className="text-center col-6 md:col-4 mb-8 md:mb-14 group">
@@ -60,9 +65,9 @@ const ProductCardView = async ({ currentPage }: { currentPage: number | null }) 
                           ${priceRange.minVariantPrice.amount} USD
                         </span>
                         {
-                          variants.edges.map((p: any, i: number) => (
-                            p.node.compareAtPrice?.amount && <s key={i} className="text-light dark:text-darkmode-light text-xs md:text-base font-medium">
-                              ${p.node.compareAtPrice?.amount} USD
+                          variants.map((p: any) => (
+                            p.compareAtPrice?.amount && <s key={p.id} className="text-light dark:text-darkmode-light text-xs md:text-base font-medium">
+                              ${p.compareAtPrice?.amount} USD
                             </s>
                           ))
                         }
@@ -75,7 +80,7 @@ const ProductCardView = async ({ currentPage }: { currentPage: number | null }) 
             </div>
 
             <Pagination
-              section={"product"}
+              section={"products"}
               currentPage={currentPage || 1}
               totalPages={totalPages}
             />

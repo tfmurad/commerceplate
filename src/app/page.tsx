@@ -2,7 +2,6 @@
 import CategoriesSlider from "@/components/CategoriesSlider";
 import HeroSlider from "@/components/HeroSlider";
 import { getListPage } from "@/lib/contentParser";
-import { getCollections, getLatestProducts } from "@/lib/shopify/shopify";
 import CallToAction from "@/partials/CallToAction";
 import LatestProducts from "@/partials/LatestProducts";
 import SeoMeta from "@/partials/SeoMeta";
@@ -55,12 +54,6 @@ const Home = async () => {
     }
   ];
 
-  const data = await getLatestProducts();
-  const products = data.collection.products.edges;
-
-  const collectionsData = await getCollections();
-  const collections = collectionsData.collections.edges;
-
   return (
     <>
       <SeoMeta />
@@ -78,7 +71,7 @@ const Home = async () => {
           <div className="text-center mb-6 md:mb-14">
             <h2>Categories</h2>
           </div>
-          <CategoriesSlider categories={collections} />
+          {/* <CategoriesSlider categories={collections} /> */}
         </div>
       </section>
 
@@ -89,7 +82,7 @@ const Home = async () => {
             <h2 className="mb-2">Latest Products</h2>
             <p className="md:h5">Don't Miss Today's Latest Deals</p>
           </div>
-          <LatestProducts products={products} />
+          {/* <LatestProducts products={products} /> */}
         </div>
       </section>
 

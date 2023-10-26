@@ -1,15 +1,20 @@
+import { ProductViewProps } from "@/app/products/page";
 import Pagination from "@/components/Pagination";
 import config from "@/config/config.json";
 import ImageFallback from "@/helpers/ImageFallback";
-import { getProducts } from "@/lib/shopify/shopify";
+import { defaultSort, sorting } from "@/lib/constants";
+import { getProducts } from "@/lib/shopify";
 import ProductFilters from "@/partials/ProductFilters";
 import Link from "next/link";
 import React from "react";
 const { pagination_list } = config.settings;
 
-const ProductListView = async ({ currentPage }: { currentPage: number | null }) => {
-  const data = await getProducts();
-  const products = data.products.edges;
+const ProductListView:  React.FC<ProductViewProps> = async ({ currentPage, searchParams }) => {
+
+  const { sort, q: searchValue } = searchParams as { [key: string]: string };
+  const { sortKey, reverse } = sorting.find((item) => item.slug === sort) || defaultSort;
+
+  const products = await getProducts({ sortKey, reverse, query: searchValue });
 
   const totalPages = Math.ceil(products.length / pagination_list);
   const currentProducts = products.slice(0, pagination_list);
@@ -33,7 +38,7 @@ const ProductListView = async ({ currentPage }: { currentPage: number | null }) 
           <div className="col-12 lg:col-9">
             <div className="space-y-10 mb-14">
               {productsToDisplay?.map((product: any) => {
-                 const { id, title,variants, handle, featuredImage, priceRange } = product?.node;
+                 const { id, title,variants, handle, featuredImage, priceRange,description } = product;
                 return(
                   <div className="row" key={id}>
                   <div className="col-12 md:col-4">
@@ -59,20 +64,15 @@ const ProductListView = async ({ currentPage }: { currentPage: number | null }) 
                           ${priceRange.minVariantPrice.amount} USD
                         </span>
                         {
-                          variants.edges.map((p: any, i: number) => (
-                            p.node.compareAtPrice?.amount && <s key={i} className="text-light dark:text-darkmode-light text-xs md:text-base font-medium">
-                              ${p.node.compareAtPrice?.amount} USD
+                          variants.map((p: any) => (
+                            p.compareAtPrice?.amount && <s key={p.id} className="text-light dark:text-darkmode-light text-xs md:text-base font-medium">
+                              ${p.compareAtPrice?.amount} USD
                             </s>
                           ))
                         }
                       </div>
 
-                    <p className="max-md:text-xs text-light dark:text-darkmode-light my-4 md:mb-8">
-                      Consider the overall style of your room. Do you prefer a
-                      modern, minimalist look, a classic or vintage style, or
-                      something else? Choose a lamp that complements the
-                      existing decor.
-                    </p>
+                    <p className="max-md:text-xs text-light dark:text-darkmode-light my-4 md:mb-8">{description}</p>
 
                     <button className="btn btn-outline-primary max-md:btn-sm drop-shadow-md">
                       Add to Cart
@@ -84,7 +84,7 @@ const ProductListView = async ({ currentPage }: { currentPage: number | null }) 
             </div>
 
             <Pagination
-              section={"product"}
+              section={"products"}
               currentPage={currentPage || 1}
               totalPages={totalPages}
             />

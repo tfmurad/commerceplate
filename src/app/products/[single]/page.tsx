@@ -1,5 +1,5 @@
 import Counter from "@/components/Counter";
-import DropdownMenu from "@/components/DropdownMenu";
+import DropdownMenu from "@/components/filter/DropdownMenu";
 import FrameColor from "@/components/FrameColor";
 import ProductGallery from "@/components/ProductGallery";
 import Social from "@/components/Social";
@@ -124,7 +124,7 @@ const ProductSingle = ({ params }: { params: any }) => {
 								}
 							</div>
 
-							<hr className="my-6"/>
+							<hr className="my-6" />
 
 							<div className="flex gap-3 items-center mb-6">
 								<h5 className="max-md:text-base">Share:</h5>

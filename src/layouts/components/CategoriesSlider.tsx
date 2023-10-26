@@ -29,8 +29,6 @@ interface Category {
 }
 
 const CategoriesSlider = ({ categories }: { categories: Category[] }) => {
-  console.log("----------------------")
-  console.log(categories);
 	
 	const [_, setInit] = useState(false);
 	const [isHovered, setIsHovered] = useState(false);
@@ -84,7 +82,7 @@ const CategoriesSlider = ({ categories }: { categories: Category[] }) => {
 								width={424}
 								height={306}
 								alt={title}
-								className="h-[97px] sm:h-[150px] md:h-[306px] object-cover object-top rounded-md"
+								className="h-[150px] md:h-[250px] lg:h-[306px] object-cover object-top rounded-md"
 							/>
 							<div className="py-6">
 								<h3 className='mb-2 font-medium h4'>

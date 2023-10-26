@@ -1,30 +1,21 @@
 "use client";
 
+import { SortFilterItem, sorting } from "@/lib/constants";
 import { GlobalContext } from "context/GlobalState";
 import { useContext, useState } from "react";
 import { BsGridFill } from "react-icons/bs";
 import { FaList } from "react-icons/fa6";
 import { IoSearch } from "react-icons/io5";
-import DropdownMenu from "./DropdownMenu";
 import ModalFilter from "./ModalFilter";
+import DropdownMenu from "./filter/DropdownMenu";
+
+export type ListItem = SortFilterItem | PathFilterItem;
+export type PathFilterItem = { title: string; path: string };
 
 const ProductLayouts = (props: any) => {
   const { children } = props;
   const { changeLayout, setChangeLayout } = useContext(GlobalContext);
   const [showModal, setShowModal] = useState(false);
-
-  const handleMenuItemClick = (itemId: string) => {
-    console.log(itemId)
-  };
-
-  const menuItems = [
-    { id: "item-1", label: " Alphabetically, Z-A" },
-    { id: "item-2", label: " Price, low to high" },
-    { id: "item-3", label: " Price, high to low" },
-    { id: "item-4", label: "Date, old to new" },
-    { id: "item-5", label: "Date, old to new" },
-    { id: "item-6", label: "Date, new to old" },
-  ];
 
   return (
     <>
@@ -74,7 +65,7 @@ const ProductLayouts = (props: any) => {
 
                 <div className="flex gap-2 items-center font-medium text-base">
                   <p>Sort By</p>
-                  <DropdownMenu items={menuItems} handleMenuItemClick={handleMenuItemClick} buttonLabel="Alphabetically, A-Z" />
+                  <DropdownMenu list={sorting} />
                 </div>
               </div>
             </div>
