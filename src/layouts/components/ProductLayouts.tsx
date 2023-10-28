@@ -8,6 +8,8 @@ import { FaList } from "react-icons/fa6";
 import { IoSearch } from "react-icons/io5";
 import ModalFilter from "./ModalFilter";
 import DropdownMenu from "./filter/DropdownMenu";
+import { useRouter, useSearchParams } from 'next/navigation';
+import { createUrl } from "@/lib/utils";
 
 export type ListItem = SortFilterItem | PathFilterItem;
 export type PathFilterItem = { title: string; path: string };
@@ -16,6 +18,25 @@ const ProductLayouts = (props: any) => {
   const { children } = props;
   const { changeLayout, setChangeLayout } = useContext(GlobalContext);
   const [showModal, setShowModal] = useState(false);
+
+  const router = useRouter();
+  const searchParams = useSearchParams();
+
+  function onSubmit(e: React.FormEvent<HTMLFormElement>) {
+    e.preventDefault();
+
+    const val = e.target as HTMLFormElement;
+    const search = val.search as HTMLInputElement;
+    const newParams = new URLSearchParams(searchParams.toString());
+
+    if (search.value) {
+      newParams.set('q', search.value);
+    } else {
+      newParams.delete('q');
+    }
+
+    router.push(createUrl('/products', newParams));
+  }
 
   return (
     <>
@@ -31,16 +52,20 @@ const ProductLayouts = (props: any) => {
                   + Filter
                 </button>
 
-                <div className="border border-border rounded-md flex justify-between">
+                <form onSubmit={onSubmit} className="border border-border rounded-md flex justify-between">
                   <input
                     className="bg-transparent border-none focus:ring-transparent"
+                    key={searchParams?.get('q')}
                     type="text"
-                    placeholder="Search For Products"
+                    name="search"
+                    placeholder="Search for products..."
+                    autoComplete="off"
+                    defaultValue={searchParams?.get('q') || ''}
                   />
                   <button className="px-2 search-icon">
                     <IoSearch size={20} />
                   </button>
-                </div>
+                </form>
               </div>
             </div>
 

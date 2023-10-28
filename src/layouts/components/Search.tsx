@@ -10,7 +10,7 @@ import {
   FaRegUserCircle,
   FaSearch,
 } from "react-icons/fa/index.js";
-import ImageFallback from "./helpers/ImageFallback";
+import ImageFallback from "../helpers/ImageFallback";
 
 const { summary_length, blog_folder } = config.settings;
 
@@ -116,7 +116,9 @@ const Search = ({ searchList }: Props) => {
                 height={184}
               />
               <h1 className="h2 mb-4">
-                {inputVal.length < 1 ? "Search Product Here" : "No Search Found!"}
+                {inputVal.length < 1
+                  ? "Search Product Here"
+                  : "No Search Found!"}
               </h1>
               <p>
                 {inputVal.length < 1

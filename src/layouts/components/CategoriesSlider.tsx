@@ -12,23 +12,8 @@ import "swiper/css/pagination";
 import { Navigation, Pagination } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
 
-interface Category {
-	node: {
-		title: string;
-		handle: string;
-		image: {
-			url: string;
-			altText: string;
-		};
-		products: {
-			nodes: {
-				title: string;
-			}[];
-		}
-	}
-}
 
-const CategoriesSlider = ({ categories }: { categories: Category[] }) => {
+const CategoriesSlider = ({ categories }: { categories: any }) => {
 	
 	const [_, setInit] = useState(false);
 	const [isHovered, setIsHovered] = useState(false);
@@ -70,15 +55,15 @@ const CategoriesSlider = ({ categories }: { categories: Category[] }) => {
 				onInit={() => setInit(true)}
 			>
 
-				{categories.map((item) => {
-					const {title, handle, image, products} = item.node;
+				{categories.slice(1).map((item:any) => {
+					const {title, handle, image, path, products} = item;
 					return(
 						<SwiperSlide key={handle}>
 						<div
 							className='text-center'
 						>
 							<ImageFallback
-								src={image.url}
+								src={image?.url}
 								width={424}
 								height={306}
 								alt={title}
@@ -86,11 +71,11 @@ const CategoriesSlider = ({ categories }: { categories: Category[] }) => {
 							/>
 							<div className="py-6">
 								<h3 className='mb-2 font-medium h4'>
-									<Link href={`categories/${handle}`}>
+									<Link href={path}>
 									{title}
 									</Link>
 								</h3>
-								<p className="text-light dark:text-darkmode-light text-xs md:text-xl">{products.nodes.length} items</p>
+								<p className="text-light dark:text-darkmode-light text-xs md:text-xl">{item.products?.edges.length} items</p>
 							</div>
 						</div>
 					</SwiperSlide>

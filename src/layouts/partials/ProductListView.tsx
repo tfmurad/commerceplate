@@ -15,6 +15,7 @@ const ProductListView:  React.FC<ProductViewProps> = async ({ currentPage, searc
   const { sortKey, reverse } = sorting.find((item) => item.slug === sort) || defaultSort;
 
   const products = await getProducts({ sortKey, reverse, query: searchValue });
+  const resultsText = products.length > 1 ? "results" : "result";
 
   const totalPages = Math.ceil(products.length / pagination_list);
   const currentProducts = products.slice(0, pagination_list);
@@ -37,6 +38,16 @@ const ProductListView:  React.FC<ProductViewProps> = async ({ currentPage, searc
           {/* Right side  */}
           <div className="col-12 lg:col-9">
             <div className="space-y-10 mb-14">
+
+            {searchValue ? (
+                <p className="mb-4">
+                  {products.length === 0
+                    ? "There are no products that match "
+                    : `Showing ${products.length} ${resultsText} for `}
+                  <span className="font-bold">&quot;{searchValue}&quot;</span>
+                </p>
+              ) : null}
+
               {productsToDisplay?.map((product: any) => {
                  const { id, title,variants, handle, featuredImage, priceRange,description } = product;
                 return(

@@ -1,11 +1,13 @@
 "use client";
 
+import CollectionItem from '@/components/CollectionItem';
 import FrameColor from '@/components/FrameColor';
 import RangeSlider from '@/components/RangeSlider/RangeSlider';
+import { ShopifyCollection } from '@/lib/shopify/types';
 import { useState } from 'react';
 import { BsCheckLg } from "react-icons/bs";
 
-const ProductFilters = () => {
+const ProductFilters = ({categories}:{categories:ShopifyCollection[]}) => {
 	const [selectedBrands, setSelectedBrands] = useState<string[]>([]);
 	const [selectedSize, setSelectedSize] = useState<string | null>(null);
 
@@ -101,14 +103,9 @@ const ProductFilters = () => {
 				<h5 className="mb-2 mt-8 lg:mt-10 lg:text-xl">Product Categories</h5>
 				<hr />
 				<ul className="mt-4 space-y-4">
-					{Array.from({ length: 6 }).map((_, i) => (
-						<li
-							key={i}
-							className="flex justify-between text-light dark:text-darkmode-light"
-						>
-							Gatelight <span>( 09 )</span>
-						</li>
-					))}
+					{
+						categories && categories.map(category=> <CollectionItem key={category.handle} title={category.title} path={category.path || ''} productCount={category.products?.edges.length}/>)
+					}
 				</ul>
 			</div>
 
