@@ -30,7 +30,7 @@ const LatestProducts = ({ products }: { products: any }) => {
               </div>
               <div className="py-2 md:py-4 text-center z-20">
                 <h2 className="font-medium text-base md:text-xl">
-                  <Link href={`/products/${handle}`}>{title}</Link>
+                  <Link href={`/product/${handle}`}>{title}</Link>
                 </h2>
                 <div className="flex justify-center items-center gap-x-2 mt-2">
                   <span className="text-light dark:text-darkmode-light text-xs md:text-lg font-bold">

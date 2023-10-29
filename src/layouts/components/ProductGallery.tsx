@@ -17,7 +17,7 @@ import { HiOutlineArrowNarrowLeft, HiOutlineArrowNarrowRight } from 'react-icons
 import type { Swiper as TSwiper } from 'swiper';
 import { FreeMode, Navigation, Thumbs } from 'swiper/modules';
 
-const ProductGallery = ({ products }: { products: any }) => {
+const ProductGallery = ({ images }: { images: any }) => {
 	const [thumbsSwiper, setThumbsSwiper] = useState<TSwiper | null>(null);
 
 	const [_, setInit] = useState(false);
@@ -46,9 +46,9 @@ const ProductGallery = ({ products }: { products: any }) => {
 				>
 
 					{
-						products.map((item: any) => (
-							<SwiperSlide key={item.id}>
-								<Image src={item.imgSrc} alt={item.productName} width={722} height={623} className='mb-6' />
+						images.map((item: any) => (
+							<SwiperSlide key={item.url}>
+								<Image src={item.url} alt={item.altText} width={722} height={623} className='mb-6' />
 							</SwiperSlide>
 						))
 					}
@@ -72,9 +72,9 @@ const ProductGallery = ({ products }: { products: any }) => {
 				className="mySwiper"
 			>
 				{
-					products.map((item: any) => (
-						<SwiperSlide key={item.id}>
-							<Image src={item.imgSrc} alt={item.productName} width={168} height={146} className='rounded-md cursor-pointer'/>
+					images.map((item: any) => (
+						<SwiperSlide key={item.altText}>
+							<Image src={item.url} alt={item.altText} width={168} height={146} className='rounded-md cursor-pointer'/>
 						</SwiperSlide>
 					))
 				}
