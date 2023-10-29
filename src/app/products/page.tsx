@@ -13,10 +13,12 @@ export interface ProductViewProps {
 }
 
 const Products = async({searchParams}: ProductViewProps) => {
-	// console.log(searchParams)
+
 	const callToAction = getListPage("sections/call-to-action.md");
 
 	const { sort, q: searchValue } = searchParams as { [key: string]: string };
+	const { layout } = searchParams as { [key: string]: string };
+
 	const { sortKey, reverse } =
 	  sorting.find((item) => item.slug === sort) || defaultSort;
   
@@ -25,11 +27,11 @@ const Products = async({searchParams}: ProductViewProps) => {
 	return (
 		<>
 			<PageHeader title={"Products"} />
-			<ProductLayouts>
-				<ProductCardView currentPage={null} products={products} searchValue={searchValue}/>
-				{/* <ProductListView currentPage={null} searchParams={searchParams}/> */}
-			</ProductLayouts>
-			<ProductCardView currentPage={null} products={products} searchValue={searchValue}/>
+			<ProductLayouts/>
+			{
+				layout==="list" ? <ProductListView currentPage={null} products={products} searchValue={searchValue}/> 
+				: 	<ProductCardView currentPage={null} products={products} searchValue={searchValue}/>
+			}
 			<CallToAction data={callToAction} />
 		</>
 	);

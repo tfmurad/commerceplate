@@ -15,17 +15,18 @@ const CategoryPage = async ({ params, searchParams }: { params: { page: number; 
 
     const { sort, q: searchValue } = searchParams as { [key: string]: string };
     const { sortKey, reverse } = sorting.find((item) => item.slug === sort) || defaultSort;
+
+    const { layout } = searchParams as { [key: string]: string };
     const products = await getCollectionProducts({ collection: params.collection, sortKey, reverse });
   return (
     <>
-    <PageHeader title={"Products"} />
-    <ProductLayouts>
-      {/* <ProductCardView currentPage={currentPage} searchParams={searchParams}/> */}
-      <ProductListView currentPage={currentPage} searchParams={searchParams}/>
-    </ProductLayouts>
-    <ProductCardView currentPage={currentPage} products={products} searchValue={searchValue}/>
-    <CallToAction data={callToAction} />
-  </>
+			<PageHeader title={"Products"} />
+			<ProductLayouts/>
+			{
+				layout==="list" ? <ProductListView currentPage={currentPage} products={products} searchValue={searchValue}/> : 	<ProductCardView currentPage={currentPage} products={products} searchValue={searchValue}/>
+			}
+			<CallToAction data={callToAction} />
+		</>
   )
 }
 

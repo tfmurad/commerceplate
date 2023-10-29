@@ -1,26 +1,25 @@
 "use client";
 
 import { SortFilterItem, sorting } from "@/lib/constants";
-import { GlobalContext } from "context/GlobalState";
-import { useContext, useState } from "react";
+import { createUrl } from "@/lib/utils";
+import { useRouter, useSearchParams } from 'next/navigation';
+import { useState } from "react";
 import { BsGridFill } from "react-icons/bs";
 import { FaList } from "react-icons/fa6";
 import { IoSearch } from "react-icons/io5";
 import ModalFilter from "./ModalFilter";
 import DropdownMenu from "./filter/DropdownMenu";
-import { useRouter, useSearchParams } from 'next/navigation';
-import { createUrl } from "@/lib/utils";
 
 export type ListItem = SortFilterItem | PathFilterItem;
 export type PathFilterItem = { title: string; path: string };
 
-const ProductLayouts = (props: any) => {
-  const { children } = props;
-  const { changeLayout, setChangeLayout } = useContext(GlobalContext);
+const ProductLayouts = () => {
+  // const { changeLayout, setChangeLayout } = useContext(GlobalContext);
   const [showModal, setShowModal] = useState(false);
 
   const router = useRouter();
   const searchParams = useSearchParams();
+  const isListView = searchParams.get("layout") === "list";
 
   function onSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
@@ -35,6 +34,17 @@ const ProductLayouts = (props: any) => {
       newParams.delete('q');
     }
 
+    router.push(createUrl('/products', newParams));
+  }
+
+  function layoutChange(isCard: string) {
+    const newParams = new URLSearchParams(searchParams.toString());
+
+    if (isCard == 'list') {
+      newParams.set('layout', isCard);
+    } else {
+      newParams.delete('layout');
+    }
     router.push(createUrl('/products', newParams));
   }
 
@@ -73,15 +83,15 @@ const ProductLayouts = (props: any) => {
               <div className="flex justify-between items-center mb-4">
                 <div className="flex gap-2">
                   <button
-                    onClick={() => setChangeLayout(true)}
-                    className={`btn ${changeLayout ? "btn-primary" : "btn-outline-primary"
+                    onClick={() => layoutChange("card")}
+                    className={`btn ${isListView ? "btn-outline-primary" : "btn-primary"
                       } p-2 hover:scale-105 duration-300`}
                   >
                     <BsGridFill />
                   </button>
                   <button
-                    onClick={() => setChangeLayout(false)}
-                    className={`btn ${changeLayout ? "btn-outline-primary" : "btn-primary"
+                    onClick={() => layoutChange("list")}
+                    className={`btn ${isListView ? "btn-primary" : "btn-outline-primary"
                       } p-2 hover:scale-105 duration-300`}
                   >
                     <FaList />
@@ -103,9 +113,9 @@ const ProductLayouts = (props: any) => {
         />
       </section>
 
-      {
+      {/* {
         changeLayout ? <div>{children[0]}</div> : <div>{children[1]}</div>
-      }
+      } */}
     </>
   );
 };

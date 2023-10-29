@@ -9,11 +9,7 @@ import Link from "next/link";
 const { pagination_card } = config.settings;
 // ProductViewProps
 const ProductCardView = async ({currentPage,products,searchValue }: any) => {
-  // const { sort, q: searchValue } = searchParams as { [key: string]: string };
-  // const { sortKey, reverse } =
-  //   sorting.find((item) => item.slug === sort) || defaultSort;
-
-  // const products = await getProducts({ sortKey, reverse, query: searchValue });
+  
   const resultsText = products.length > 1 ? "results" : "result";
 
   const totalPages = Math.ceil(products.length / pagination_card);

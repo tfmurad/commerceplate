@@ -1,20 +1,13 @@
-import { ProductViewProps } from "@/app/products/page";
 import Pagination from "@/components/Pagination";
 import config from "@/config/config.json";
 import ImageFallback from "@/helpers/ImageFallback";
-import { defaultSort, sorting } from "@/lib/constants";
-import { getProducts } from "@/lib/shopify";
+import { getCollections } from "@/lib/shopify";
 import ProductFilters from "@/partials/ProductFilters";
 import Link from "next/link";
-import React from "react";
 const { pagination_list } = config.settings;
 
-const ProductListView:  React.FC<ProductViewProps> = async ({ currentPage, searchParams }) => {
+const ProductListView = async ({ currentPage, products, searchValue }: any) => {
 
-  const { sort, q: searchValue } = searchParams as { [key: string]: string };
-  const { sortKey, reverse } = sorting.find((item) => item.slug === sort) || defaultSort;
-
-  const products = await getProducts({ sortKey, reverse, query: searchValue });
   const resultsText = products.length > 1 ? "results" : "result";
 
   const totalPages = Math.ceil(products.length / pagination_list);
@@ -26,20 +19,23 @@ const ProductListView:  React.FC<ProductViewProps> = async ({ currentPage, searc
 
   const productsToDisplay = currentPage ? paginatedProducts : currentProducts;
 
+  // getting collections 
+  const categories = await getCollections();
+
   return (
     <section>
       <div className="container">
         <div className="row">
           {/* Left Side  */}
           <div className="col-3 hidden lg:block">
-            <ProductFilters />
+            <ProductFilters categories={categories} />
           </div>
 
           {/* Right side  */}
           <div className="col-12 lg:col-9">
             <div className="space-y-10 mb-14">
 
-            {searchValue ? (
+              {searchValue ? (
                 <p className="mb-4">
                   {products.length === 0
                     ? "There are no products that match "
@@ -49,28 +45,28 @@ const ProductListView:  React.FC<ProductViewProps> = async ({ currentPage, searc
               ) : null}
 
               {productsToDisplay?.map((product: any) => {
-                 const { id, title,variants, handle, featuredImage, priceRange,description } = product;
-                return(
+                const { id, title, variants, handle, featuredImage, priceRange, description } = product;
+                return (
                   <div className="row" key={id}>
-                  <div className="col-12 md:col-4">
-                  <ImageFallback
-                      src={featuredImage?.url || '/images/product_image404.jpg'}
-                      // fallback={'/images/category-1.png'}
-                      width={312}
-                      height={269}
-                      alt={featuredImage?.altText || 'fallback image'}
-                      className='w-[312px] h-[150px] md:h-[269px] object-contain'
-                    />
-                  </div>
+                    <div className="col-12 md:col-4">
+                      <ImageFallback
+                        src={featuredImage?.url || '/images/product_image404.jpg'}
+                        // fallback={'/images/category-1.png'}
+                        width={312}
+                        height={269}
+                        alt={featuredImage?.altText || 'fallback image'}
+                        className='w-[312px] h-[150px] md:h-[269px] object-contain'
+                      />
+                    </div>
 
-                  <div className="col-12 md:col-8 py-3 max-md:pt-4">
-                    <h2 className="font-bold md:font-normal h4">
-                      <Link href={`/products/${handle}`}>
-                        {title}
-                      </Link>
-                    </h2>
+                    <div className="col-12 md:col-8 py-3 max-md:pt-4">
+                      <h2 className="font-bold md:font-normal h4">
+                        <Link href={`/products/${handle}`}>
+                          {title}
+                        </Link>
+                      </h2>
 
-                    <div className="flex items-center gap-x-2 mt-2">
+                      <div className="flex items-center gap-x-2 mt-2">
                         <span className="text-light dark:text-darkmode-light text-xs md:text-lg font-bold">
                           ${priceRange.minVariantPrice.amount} USD
                         </span>
@@ -83,13 +79,13 @@ const ProductListView:  React.FC<ProductViewProps> = async ({ currentPage, searc
                         }
                       </div>
 
-                    <p className="max-md:text-xs text-light dark:text-darkmode-light my-4 md:mb-8">{description}</p>
+                      <p className="max-md:text-xs text-light dark:text-darkmode-light my-4 md:mb-8">{description}</p>
 
-                    <button className="btn btn-outline-primary max-md:btn-sm drop-shadow-md">
-                      Add to Cart
-                    </button>
+                      <button className="btn btn-outline-primary max-md:btn-sm drop-shadow-md">
+                        Add to Cart
+                      </button>
+                    </div>
                   </div>
-                </div>
                 )
               })}
             </div>

@@ -11,7 +11,6 @@ const DropdownMenu = ({ list }: { list: ListItem[] }) => {
   const pathname = usePathname();
   const searchParams = useSearchParams();
   const [active, setActive] = useState('');
-  // console.log(searchParams)
 
   const [openSelect, setOpenSelect] = useState(false);
   const menuRef = useRef<HTMLDivElement>(null);
