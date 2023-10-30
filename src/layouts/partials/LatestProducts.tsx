@@ -1,15 +1,16 @@
 "use client";
 import ImageFallback from "@/helpers/ImageFallback";
+import { Product } from "@/lib/shopify/types";
 import Link from "next/link";
 
-const LatestProducts = ({ products }: { products: any }) => {
-  // console.log("--------->",products[0],"<---------")
+const LatestProducts = ({ products }: { products: Product[] }) => {
+
   return (
     <>
       <div className="row">
         {products.map((product: any) => {
-          const { id, title, handle, featuredImage, priceRange, variants } = product;
-
+          const { id, title, handle, featuredImage, priceRange, variants,compareAtPriceRange } = product;
+          // console.log("--------->",product,"<---------")
           return (
             <div
               key={id}
@@ -36,7 +37,16 @@ const LatestProducts = ({ products }: { products: any }) => {
                   <span className="text-light dark:text-darkmode-light text-xs md:text-lg font-bold">
                     ${priceRange.minVariantPrice.amount} USD
                   </span>
-                  {variants.map(
+
+                  {parseFloat(compareAtPriceRange?.maxVariantPrice.amount) > 0 ? (
+                  <s className="text-light dark:text-darkmode-light text-xs md:text-base font-medium">
+                    ৳ {compareAtPriceRange?.maxVariantPrice.amount}{" "}
+                    {compareAtPriceRange?.maxVariantPrice?.currencyCode}
+                  </s>
+                ) : (
+                  ""
+                )}
+                  {/* {variants.map(
                     (p: any, i: number) =>
                       p.compareAtPrice?.amount && (
                         <s
@@ -46,7 +56,7 @@ const LatestProducts = ({ products }: { products: any }) => {
                           ${p.compareAtPrice?.amount} USD
                         </s>
                       ),
-                  )}
+                  )} */}
                 </div>
               </div>
             </div>

@@ -1,12 +1,12 @@
-import Counter from "@/components/Counter";
 // import DropdownMenu from "@/components/filter/DropdownMenu";
-import FrameColor from "@/components/FrameColor";
-import ProductGallery from "@/components/ProductGallery";
 import Social from "@/components/Social";
+import { AddToCart } from "@/components/cart/add-to-cart";
+import FrameColor from "@/components/product/FrameColor";
+import ProductGallery from "@/components/product/ProductGallery";
+import { VariantSelector } from "@/components/product/variant-selector";
 import social from "@/config/social.json";
 import ImageFallback from "@/helpers/ImageFallback";
 // import MDXContent from "@/helpers/MDXContent";
-import { HIDDEN_PRODUCT_TAG } from "@/lib/constants";
 // import { getSinglePage } from "@/lib/contentParser";
 import { getProduct } from "@/lib/shopify";
 import { Metadata } from "next";
@@ -44,7 +44,7 @@ const ProductSingle = async ({ params }: { params: { single: string } }) => {
     tags,
   } = product;
 
-  console.log(variants[0].selectedOptions[0].name);
+  console.log(variants);
 
   const deskLampProducts = [
     {
@@ -107,7 +107,8 @@ const ProductSingle = async ({ params }: { params: { single: string } }) => {
                 <div>
                   <h5 className="mb-2 max-md:text-base">Frame Color</h5>
                   <div className="-mt-2">
-                    <FrameColor />
+                    {/* <FrameColor /> */}
+                    <VariantSelector options={options} variants={variants} />
                   </div>
                 </div>
 
@@ -118,14 +119,8 @@ const ProductSingle = async ({ params }: { params: { single: string } }) => {
               </div>
 
               <div className="flex gap-4 mt-8 md:mt-10 mb-6">
-                <Counter />
-
-                {/* <button className="btn btn-outline-primary">Add To Cart
-								</button> */}
-
-                <button className="btn max-md:btn-sm btn-primary">
-                  Buy now
-                </button>
+                {/* <Counter /> */}
+                <AddToCart variants={product.variants} availableForSale={product.availableForSale} stylesClass={"btn max-md:btn-sm btn-primary"} />
               </div>
 
               <div className="mb-8 md:mb-10">
@@ -133,11 +128,6 @@ const ProductSingle = async ({ params }: { params: { single: string } }) => {
                   Est. Delivery between 0 - 3 days
                 </p>
               </div>
-
-              {/* <div className="flex gap-3">
-								<h5>Payment: </h5>
-								<PaymentSlider paymentMethods={paymentMethods} />
-							</div> */}
 
               <div className="flex flex-wrap items-center gap-3">
                 <h5 className="max-md:text-base">Payment: </h5>

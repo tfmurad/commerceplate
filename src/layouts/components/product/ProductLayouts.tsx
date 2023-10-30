@@ -7,8 +7,8 @@ import { useState } from "react";
 import { BsGridFill } from "react-icons/bs";
 import { FaList } from "react-icons/fa6";
 import { IoSearch } from "react-icons/io5";
-import ModalFilter from "./ModalFilter";
-import DropdownMenu from "./filter/DropdownMenu";
+import ModalFilter from "../ModalFilter";
+import DropdownMenu from "../filter/DropdownMenu";
 
 export type ListItem = SortFilterItem | PathFilterItem;
 export type PathFilterItem = { title: string; path: string };

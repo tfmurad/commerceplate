@@ -1,8 +1,8 @@
 "use client";
 
 import CollectionItem from '@/components/CollectionItem';
-import FrameColor from '@/components/FrameColor';
-import RangeSlider from '@/components/RangeSlider/RangeSlider';
+import FrameColor from '@/components/product/FrameColor';
+import RangeSlider from '@/components/rangeSlider/RangeSlider';
 import { ShopifyCollection } from '@/lib/shopify/types';
 import { useState } from 'react';
 import { BsCheckLg } from "react-icons/bs";

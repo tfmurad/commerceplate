@@ -1,7 +1,9 @@
 import Pagination from "@/components/Pagination";
+import { AddToCart } from "@/components/cart/add-to-cart";
 import config from "@/config/config.json";
 import ImageFallback from "@/helpers/ImageFallback";
 import { getCollections } from "@/lib/shopify";
+import { Product } from "@/lib/shopify/types";
 import ProductFilters from "@/partials/ProductFilters";
 import Link from "next/link";
 const { pagination_list } = config.settings;
@@ -44,8 +46,8 @@ const ProductListView = async ({ currentPage, products, searchValue }: any) => {
                 </p>
               ) : null}
 
-              {productsToDisplay?.map((product: any) => {
-                const { id, title, variants, handle, featuredImage, priceRange, description } = product;
+              {productsToDisplay?.map((product: Product) => {
+                const { id, title, variants, handle, featuredImage, priceRange, description ,compareAtPriceRange} = product;
                 return (
                   <div className="row" key={id}>
                     <div className="col-12 md:col-4">
@@ -61,7 +63,7 @@ const ProductListView = async ({ currentPage, products, searchValue }: any) => {
 
                     <div className="col-12 md:col-8 py-3 max-md:pt-4">
                       <h2 className="font-bold md:font-normal h4">
-                        <Link href={`/products/${handle}`}>
+                        <Link href={`/product/${handle}`}>
                           {title}
                         </Link>
                       </h2>
@@ -70,20 +72,22 @@ const ProductListView = async ({ currentPage, products, searchValue }: any) => {
                         <span className="text-light dark:text-darkmode-light text-xs md:text-lg font-bold">
                           ${priceRange.minVariantPrice.amount} USD
                         </span>
-                        {
-                          variants.map((p: any) => (
-                            p.compareAtPrice?.amount && <s key={p.id} className="text-light dark:text-darkmode-light text-xs md:text-base font-medium">
-                              ${p.compareAtPrice?.amount} USD
-                            </s>
-                          ))
-                        }
+                        {parseFloat(compareAtPriceRange?.maxVariantPrice.amount) > 0 ? (
+                          <s className="text-light dark:text-darkmode-light text-xs md:text-base font-medium">
+                            ৳ {compareAtPriceRange?.maxVariantPrice.amount}{" "}
+                            {compareAtPriceRange?.maxVariantPrice?.currencyCode}
+                          </s>
+                        ) : (
+                          ""
+                        )}
                       </div>
 
                       <p className="max-md:text-xs text-light dark:text-darkmode-light my-4 md:mb-8">{description}</p>
 
-                      <button className="btn btn-outline-primary max-md:btn-sm drop-shadow-md">
+                      {/* <button className="btn btn-outline-primary max-md:btn-sm drop-shadow-md">
                         Add to Cart
-                      </button>
+                      </button> */}
+                      <AddToCart variants={product.variants} availableForSale={product.availableForSale} stylesClass={"max-md:text-xs text-light dark:text-darkmode-light my-4 md:mb-8"}/>
                     </div>
                   </div>
                 )

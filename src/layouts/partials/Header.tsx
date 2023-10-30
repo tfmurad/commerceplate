@@ -3,12 +3,14 @@
 import Logo from "@/components/Logo";
 import ModalCart from "@/components/ModalCart";
 import ThemeSwitcher from "@/components/ThemeSwitcher";
+import Cart from "@/components/cart";
+import OpenCart from "@/components/cart/open-cart";
 import config from "@/config/config.json";
 import menu from "@/config/menu.json";
 import { GlobalContext } from "context/GlobalState";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import React, { useContext, useEffect, useState } from "react";
+import React, { Suspense, useContext, useEffect, useState } from "react";
 import { BsCart3, BsPerson } from "react-icons/bs/index.js";
 import { IoSearch } from "react-icons/io5/index.js";
 
@@ -26,7 +28,8 @@ export interface INavigationLink {
   children?: IChildNavigationLink[];
 }
 
-const Header = () => {
+const Header = ({children}:{children:any}) => {
+
   const { cartItems } = useContext(GlobalContext);
   const [showModal, setShowModal] = useState(false);
 
@@ -186,7 +189,7 @@ const Header = () => {
             </Link>
           )}
 
-          {settings.cart && (
+          {/* {settings.cart && (
             <>
               <button
                 onClick={() => setShowModal(true)}
@@ -200,7 +203,10 @@ const Header = () => {
 
               <ModalCart isVisible={showModal} onClose={() => setShowModal(false)} />
             </>
-          )}
+          )} */}
+           <Suspense fallback={children[0]}>
+        {children[1]}
+          </Suspense>
         </div>
       </nav>
     </header>

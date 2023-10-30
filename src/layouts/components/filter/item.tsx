@@ -5,7 +5,7 @@ import { createUrl } from '@/lib/utils';
 // import clsx from 'clsx';
 import Link from 'next/link';
 import { usePathname, useSearchParams } from 'next/navigation';
-import { ListItem, PathFilterItem } from '../ProductLayouts';
+import { ListItem, PathFilterItem } from '../product/ProductLayouts';
 
 function PathFilterItem({ item }: { item: PathFilterItem }) {
   const pathname = usePathname();
@@ -17,14 +17,14 @@ function PathFilterItem({ item }: { item: PathFilterItem }) {
   newParams.delete('q');
 
   return (
-	// 	<p
-	// 	key={item.title}
-	// 	className="block px-4 py-2 text-sm cursor-pointer hover:bg-dark hover:text-white"
-	// 	role="menuitem"
-	// 	tabIndex={-1}
-	// >
-	// 	{item.title}
-	// </p>
+    // 	<p
+    // 	key={item.title}
+    // 	className="block px-4 py-2 text-sm cursor-pointer hover:bg-dark hover:text-white"
+    // 	role="menuitem"
+    // 	tabIndex={-1}
+    // >
+    // 	{item.title}
+    // </p>
     <li className="mt-2 flex text-black dark:text-white" key={item.title}>
       <DynamicTag
         href={createUrl(item.path, newParams)}
@@ -55,7 +55,7 @@ function SortFilterItem({ item }: { item: SortFilterItem }) {
       <DynamicTag
         prefetch={!active ? false : undefined}
         href={href}
-				className={`w-full pl-4 py-2 ${active ? 'bg-dark text-white' : ''}`}
+        className={`w-full pl-4 py-2 ${active ? 'bg-dark text-white' : ''}`}
 
       >
         {item.title}

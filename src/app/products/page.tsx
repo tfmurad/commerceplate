@@ -1,4 +1,4 @@
-import ProductLayouts from "@/components/ProductLayouts";
+import ProductLayouts from "@/components/product/ProductLayouts";
 import { defaultSort, sorting } from "@/lib/constants";
 import { getListPage } from "@/lib/contentParser";
 import { getProducts } from "@/lib/shopify";
@@ -7,12 +7,13 @@ import PageHeader from "@/partials/PageHeader";
 import ProductCardView from "@/partials/ProductCardView";
 import ProductListView from "@/partials/ProductListView";
 
+
 export interface ProductViewProps {
-  currentPage: number | null;
-  searchParams: {[key: string]: string | string[] | undefined};
+	currentPage: number | null;
+	searchParams: { [key: string]: string | string[] | undefined };
 }
 
-const Products = async({searchParams}: ProductViewProps) => {
+const Products = async ({ searchParams }: ProductViewProps) => {
 
 	const callToAction = getListPage("sections/call-to-action.md");
 
@@ -20,17 +21,17 @@ const Products = async({searchParams}: ProductViewProps) => {
 	const { layout } = searchParams as { [key: string]: string };
 
 	const { sortKey, reverse } =
-	  sorting.find((item) => item.slug === sort) || defaultSort;
-  
+		sorting.find((item) => item.slug === sort) || defaultSort;
+
 	const products = await getProducts({ sortKey, reverse, query: searchValue });
 
 	return (
 		<>
 			<PageHeader title={"Products"} />
-			<ProductLayouts/>
+			<ProductLayouts />
 			{
-				layout==="list" ? <ProductListView currentPage={null} products={products} searchValue={searchValue}/> 
-				: 	<ProductCardView currentPage={null} products={products} searchValue={searchValue}/>
+				layout === "list" ? <ProductListView currentPage={null} products={products} searchValue={searchValue} />
+					: <ProductCardView currentPage={null} products={products} searchValue={searchValue} />
 			}
 			<CallToAction data={callToAction} />
 		</>
