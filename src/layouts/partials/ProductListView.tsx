@@ -23,6 +23,8 @@ const ProductListView = async ({ currentPage, products, searchValue }: any) => {
 
   // getting collections 
   const categories = await getCollections();
+  const vendors: any = [...new Set(products.map((product: Product) => product?.vendor))];
+  const tags = [...new Set(products.flatMap((product:Product) => product.tags))];
 
   return (
     <section>
@@ -30,7 +32,7 @@ const ProductListView = async ({ currentPage, products, searchValue }: any) => {
         <div className="row">
           {/* Left Side  */}
           <div className="col-3 hidden lg:block">
-            <ProductFilters categories={categories} />
+            <ProductFilters categories={categories} vendors={vendors} tags={tags}/>
           </div>
 
           {/* Right side  */}
@@ -47,7 +49,7 @@ const ProductListView = async ({ currentPage, products, searchValue }: any) => {
               ) : null}
 
               {productsToDisplay?.map((product: Product) => {
-                const { id, title, variants, handle, featuredImage, priceRange, description ,compareAtPriceRange} = product;
+                const { id, title, variants, handle, featuredImage, priceRange, description, compareAtPriceRange } = product;
                 return (
                   <div className="row" key={id}>
                     <div className="col-12 md:col-4">
@@ -83,7 +85,7 @@ const ProductListView = async ({ currentPage, products, searchValue }: any) => {
                       </div>
 
                       <p className="max-md:text-xs text-light dark:text-darkmode-light my-4 md:mb-8">{description}</p>
-                      <AddToCart variants={product.variants} availableForSale={product.availableForSale} stylesClass={"btn btn-outline-primary max-md:btn-sm drop-shadow-md"}/>
+                      <AddToCart variants={product.variants} availableForSale={product.availableForSale} stylesClass={"btn btn-outline-primary max-md:btn-sm drop-shadow-md"} />
                     </div>
                   </div>
                 )

@@ -3,7 +3,7 @@ import { AddToCart } from "@/components/cart/add-to-cart";
 import config from "@/config/config.json";
 import ImageFallback from "@/helpers/ImageFallback";
 import { getCollections } from "@/lib/shopify";
-import { Product } from "@/lib/shopify/types";
+import { Product, ProductOption } from "@/lib/shopify/types";
 import ProductFilters from "@/partials/ProductFilters";
 import Link from "next/link";
 const { pagination_card } = config.settings;
@@ -24,6 +24,10 @@ const ProductCardView = async ({ currentPage, products, searchValue }: any) => {
 
   // getting collections 
   const categories = await getCollections();
+  const vendors: any = [...new Set(products.map((product:Product) => product?.vendor))];
+  const tags = [...new Set(products.flatMap((product:Product) => product.tags))];
+
+// console.log(tags);
 
   return (
     <section>
@@ -31,7 +35,7 @@ const ProductCardView = async ({ currentPage, products, searchValue }: any) => {
         <div className="row">
           {/* Left Side  */}
           <div className="col-3 hidden lg:block">
-            <ProductFilters categories={categories} />
+            <ProductFilters categories={categories} vendors={vendors} tags={tags}/>
           </div>
 
           {/* Right side  */}

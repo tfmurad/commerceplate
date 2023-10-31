@@ -7,7 +7,7 @@ import { ShopifyCollection } from '@/lib/shopify/types';
 import { useState } from 'react';
 import { BsCheckLg } from "react-icons/bs";
 
-const ProductFilters = ({categories}:{categories:ShopifyCollection[]}) => {
+const ProductFilters = ({categories,vendors,tags}:{categories:ShopifyCollection[], vendors:any, tags:any}) => {
 	const [selectedBrands, setSelectedBrands] = useState<string[]>([]);
 	const [selectedSize, setSelectedSize] = useState<string | null>(null);
 
@@ -113,17 +113,17 @@ const ProductFilters = ({categories}:{categories:ShopifyCollection[]}) => {
 				<h5 className="mb-2 mt-8 lg:mt-10 lg:text-xl">Brand</h5>
 				<hr />
 				<ul className="mt-4 space-y-4">
-					{brands.map((item) => (
+					{vendors.map((item:string) => (
 						<li
-							key={item.brand}
+							key={item}
 							className={`flex items-center justify-between cursor-pointer text-light dark:text-darkmode-light`}
-							onClick={() => handleBrandClick(item.brand)}
+							onClick={() => handleBrandClick(item)}
 						>
 							<span>
-								{item.brand} ({item.products.length})
+								{item} {/*({item.products?.length})*/}
 							</span>
 							<div className="h-4 w-4 rounded-sm flex items-center justify-center border border-light dark:border-darkmode-light">
-								{selectedBrands.includes(item.brand) && (
+								{selectedBrands.includes(item) && (
 									<span>
 										<BsCheckLg size={16} />
 									</span>
@@ -169,12 +169,12 @@ const ProductFilters = ({categories}:{categories:ShopifyCollection[]}) => {
 				<h5 className="mb-2 mt-8 lg:mt-10 lg:text-xl">Tags</h5>
 				<hr />
 				<button className="flex flex-wrap gap-3 mt-4">
-					{Array.from({ length: 4 }).map((_, idx) => (
+					{tags.map((tag:string) => (
 						<p
-							key={idx}
+							key={tag}
 							className="px-2 py-1 rounded-md border text-light dark:text-darkmode-light"
 						>
-							Table Lamps
+							{tag}
 						</p>
 					))}
 				</button>
