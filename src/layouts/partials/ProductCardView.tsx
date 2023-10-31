@@ -66,9 +66,6 @@ const ProductCardView = async ({ currentPage, products, searchValue }: any) => {
                         className="w-[312px] h-[150px] md:h-[269px] object-contain"
                       />
 
-                      {/* <button className="btn btn-primary max-md:btn-sm z-10 absolute bottom-0 left-1/2 transform -translate-x-1/2 translate-y-full group-hover:-translate-y-6 duration-300 ease-in-out whitespace-nowrap drop-shadow-md">
-                        Add to Cart
-                      </button> */}
                        <AddToCart variants={product.variants} availableForSale={product.availableForSale} stylesClass={"btn btn-primary max-md:btn-sm z-10 absolute bottom-0 left-1/2 transform -translate-x-1/2 translate-y-full group-hover:-translate-y-6 duration-300 ease-in-out whitespace-nowrap drop-shadow-md"}/>
                     </div>
                     <div className="py-2 md:py-4 text-center z-20">

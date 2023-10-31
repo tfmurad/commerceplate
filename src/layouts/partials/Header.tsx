@@ -1,17 +1,14 @@
 "use client";
 
 import Logo from "@/components/Logo";
-import ModalCart from "@/components/ModalCart";
 import ThemeSwitcher from "@/components/ThemeSwitcher";
-import Cart from "@/components/cart";
-import OpenCart from "@/components/cart/open-cart";
 import config from "@/config/config.json";
 import menu from "@/config/menu.json";
 import { GlobalContext } from "context/GlobalState";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import React, { Suspense, useContext, useEffect, useState } from "react";
-import { BsCart3, BsPerson } from "react-icons/bs/index.js";
+import { BsPerson } from "react-icons/bs/index.js";
 import { IoSearch } from "react-icons/io5/index.js";
 
 //  child navigation link interface
@@ -28,10 +25,7 @@ export interface INavigationLink {
   children?: IChildNavigationLink[];
 }
 
-const Header = ({children}:{children:any}) => {
-
-  const { cartItems } = useContext(GlobalContext);
-  const [showModal, setShowModal] = useState(false);
+const Header = ({ children }: { children: any }) => {
 
   const [navbarShadow, setNavbarShadow] = useState(false);
   // distructuring the main menu from menu object
@@ -189,23 +183,8 @@ const Header = ({children}:{children:any}) => {
             </Link>
           )}
 
-          {/* {settings.cart && (
-            <>
-              <button
-                onClick={() => setShowModal(true)}
-                className="relative text-xl text-dark hover:text-primary dark:border-darkmode-border dark:text-white"
-              >
-                <span className="bg-black text-white dark:bg-white dark:text-black text-xs rounded-full p-1 absolute -top-1 md:-top-2 -right-3 md:-right-4 w-5 h-5 flex items-center justify-center">
-                  {cartItems && cartItems.length}
-                </span>
-                <BsCart3 />
-              </button>
-
-              <ModalCart isVisible={showModal} onClose={() => setShowModal(false)} />
-            </>
-          )} */}
-           <Suspense fallback={children[0]}>
-        {children[1]}
+          <Suspense fallback={children[0]}>
+            {children[1]}
           </Suspense>
         </div>
       </nav>

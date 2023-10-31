@@ -1,32 +1,31 @@
-'use client';
-
-import clsx from 'clsx';
+"use client"
+import React from 'react';
 import { useSearchParams } from 'next/navigation';
 import {
   // @ts-ignore
   experimental_useFormState as useFormState,
   experimental_useFormStatus as useFormStatus
 } from 'react-dom';
-import LoadingDots from "../loading-dots";
-import { ProductVariant } from "@/lib/shopify/types";
-import { addItem } from "./actions";
+import LoadingDots from '../loading-dots';
+import { ProductVariant } from '@/lib/shopify/types';
+import { addItem } from './actions';
 
 function SubmitButton({
   availableForSale,
   selectedVariantId,
-  stylesClass
+  stylesClass,
 }: {
   availableForSale: boolean;
   selectedVariantId: string | undefined;
-  stylesClass:string;
+  stylesClass: string;
 }) {
   const { pending } = useFormStatus();
   const buttonClasses = stylesClass;
-  const disabledClasses = 'cursor-not-allowed opacity-60 hover:opacity-60';
+  const disabledClasses = 'cursor-not-allowed opacity-60 hover:opacity-60 flex';
 
   if (!availableForSale) {
     return (
-      <button aria-disabled className={clsx(buttonClasses, disabledClasses)}>
+      <button aria-disabled className={`${buttonClasses} ${disabledClasses}`}>
         Out Of Stock
       </button>
     );
@@ -37,11 +36,8 @@ function SubmitButton({
       <button
         aria-label="Please select an option"
         aria-disabled
-        className={clsx(buttonClasses, disabledClasses)}
+        className={`${buttonClasses} ${disabledClasses}`}
       >
-        {/* <div className="inline-block">
-          <FaPlus className="h-5" />
-        </div> */}
         Select Variant
       </button>
     );
@@ -53,16 +49,11 @@ function SubmitButton({
         if (pending) e.preventDefault();
       }}
       aria-label="Add to cart"
-      aria-disabled={pending}
-      className={clsx(buttonClasses, {
-        'hover:opacity-90 flex': true,
-        disabledClasses: pending
-      })}
+      aria-disabled={pending ? 'true' : 'false'}
+      className={`${buttonClasses} ${pending ? disabledClasses : 'hover:opacity-90'}`}
     >
       Add To Cart
-      <div>
-        {pending ? <LoadingDots className=" bg-white" /> : ''}
-      </div>
+      <div>{pending ? <LoadingDots className="bg-white" /> : ''}</div>
     </button>
   );
 }
@@ -70,13 +61,12 @@ function SubmitButton({
 export function AddToCart({
   variants,
   availableForSale,
-  stylesClass
+  stylesClass,
 }: {
   variants: ProductVariant[];
   availableForSale: boolean;
   stylesClass: string;
 }) {
-
   const [message, formAction] = useFormState(addItem, null);
   const searchParams = useSearchParams();
   const defaultVariantId = variants.length === 1 ? variants[0]?.id : undefined;
@@ -90,7 +80,7 @@ export function AddToCart({
 
   return (
     <form action={actionWithVariant}>
-      <SubmitButton availableForSale={availableForSale} selectedVariantId={selectedVariantId} stylesClass={stylesClass}/>
+      <SubmitButton availableForSale={availableForSale} selectedVariantId={selectedVariantId} stylesClass={stylesClass} />
       <p aria-live="polite" className="sr-only" role="status">
         {message}
       </p>

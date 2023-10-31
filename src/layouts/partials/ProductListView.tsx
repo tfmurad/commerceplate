@@ -83,11 +83,7 @@ const ProductListView = async ({ currentPage, products, searchValue }: any) => {
                       </div>
 
                       <p className="max-md:text-xs text-light dark:text-darkmode-light my-4 md:mb-8">{description}</p>
-
-                      {/* <button className="btn btn-outline-primary max-md:btn-sm drop-shadow-md">
-                        Add to Cart
-                      </button> */}
-                      <AddToCart variants={product.variants} availableForSale={product.availableForSale} stylesClass={"max-md:text-xs text-light dark:text-darkmode-light my-4 md:mb-8"}/>
+                      <AddToCart variants={product.variants} availableForSale={product.availableForSale} stylesClass={"btn btn-outline-primary max-md:btn-sm drop-shadow-md"}/>
                     </div>
                   </div>
                 )

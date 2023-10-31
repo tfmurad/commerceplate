@@ -1,13 +1,9 @@
-// import DropdownMenu from "@/components/filter/DropdownMenu";
 import Social from "@/components/Social";
 import { AddToCart } from "@/components/cart/add-to-cart";
-import FrameColor from "@/components/product/FrameColor";
 import ProductGallery from "@/components/product/ProductGallery";
 import { VariantSelector } from "@/components/product/variant-selector";
 import social from "@/config/social.json";
 import ImageFallback from "@/helpers/ImageFallback";
-// import MDXContent from "@/helpers/MDXContent";
-// import { getSinglePage } from "@/lib/contentParser";
 import { getProduct } from "@/lib/shopify";
 import { Metadata } from "next";
 import Image from "next/image";
@@ -44,36 +40,6 @@ const ProductSingle = async ({ params }: { params: { single: string } }) => {
     tags,
   } = product;
 
-  console.log(variants);
-
-  const deskLampProducts = [
-    {
-      id: 1,
-      productName: "Modern LED Desk Lamp",
-      imgSrc: "/images/product-1.png",
-    },
-    {
-      id: 2,
-      productName: "Adjustable Swing-Arm Desk Lamp",
-      imgSrc: "/images/product-1.png",
-    },
-    {
-      id: 3,
-      productName: "Vintage Industrial Desk Lamp",
-      imgSrc: "/images/product-1.png",
-    },
-    {
-      id: 4,
-      productName: "Wooden Base Desk Lamp",
-      imgSrc: "/images/product-1.png",
-    },
-    {
-      id: 5,
-      productName: "Minimalist LED Task Lamp",
-      imgSrc: "/images/product-1.png",
-    },
-  ];
-
   return (
     <>
       <section className="md:section-sm">
@@ -104,17 +70,8 @@ const ProductSingle = async ({ params }: { params: { single: string } }) => {
               </div>
 
               <div className="my-8 md:my-10 space-y-6 md:space-y-10">
-                <div>
-                  <h5 className="mb-2 max-md:text-base">Frame Color</h5>
-                  <div className="-mt-2">
-                    {/* <FrameColor /> */}
-                    <VariantSelector options={options} variants={variants} />
-                  </div>
-                </div>
-
-                <div>
-                  <h5 className="mb-2 max-md:text-base">Size & Weight</h5>
-                  {/* <DropdownMenu /> */}
+                <div className="-mt-2">
+                  {options && <VariantSelector options={options} variants={variants} />}
                 </div>
               </div>
 
@@ -170,11 +127,12 @@ const ProductSingle = async ({ params }: { params: { single: string } }) => {
       </section>
 
       {/* TODO: tabs description of a product  */}
-      {/* <section className="section">
-				<div className="container">
-					<MDXContent content={content} />
-				</div>
-			</section> */}
+      <section className="section">
+        <div className="container">
+          {/* <MDXContent content={description} /> */}
+          <p>{description}</p>
+        </div>
+      </section>
 
       <section>
         <div className="container text-center">
