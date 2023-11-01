@@ -7,7 +7,7 @@ import { ShopifyCollection } from '@/lib/shopify/types';
 import { useState } from 'react';
 import { BsCheckLg } from "react-icons/bs";
 
-const ProductFilters = ({categories,vendors,tags}:{categories:ShopifyCollection[], vendors:any, tags:any}) => {
+const ProductFilters = ({categories,vendors,tags,maxPriceData}:{categories:ShopifyCollection[], vendors:any, tags:any,maxPriceData:object}) => {
 	const [selectedBrands, setSelectedBrands] = useState<string[]>([]);
 	const [selectedSize, setSelectedSize] = useState<string | null>(null);
 
@@ -96,7 +96,7 @@ const ProductFilters = ({categories,vendors,tags}:{categories:ShopifyCollection[
 			<div>
 				<h5 className="mb-2 mt-8 lg:mt-10 lg:text-xl">Select Price Range</h5>
 				<hr />
-				<RangeSlider />
+				<RangeSlider maxPriceData={maxPriceData}/>
 			</div>
 
 			<div>

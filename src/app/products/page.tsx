@@ -15,27 +15,51 @@ export interface ProductViewProps {
 
 const Products = async ({ searchParams }: ProductViewProps) => {
 
-	const callToAction = getListPage("sections/call-to-action.md");
+  const callToAction = getListPage("sections/call-to-action.md");
 
-	const { sort, q: searchValue } = searchParams as { [key: string]: string };
-	const { layout } = searchParams as { [key: string]: string };
+  const { sort, q: searchValue, minPrice, maxPrice } = searchParams as {
+    [key: string]: string;
+  };
 
-	const { sortKey, reverse } =
-		sorting.find((item) => item.slug === sort) || defaultSort;
+  const { layout } = searchParams as { [key: string]: string };
 
-	const products = await getProducts({ sortKey, reverse, query: searchValue });
+  const { sortKey, reverse } =
+    sorting.find((item) => item.slug === sort) || defaultSort;
 
-	return (
-		<>
-			<PageHeader title={"Products"} />
-			<ProductLayouts />
-			{
-				layout === "list" ? <ProductListView currentPage={null} products={products} searchValue={searchValue} />
-					: <ProductCardView currentPage={null} products={products} searchValue={searchValue} />
-			}
-			<CallToAction data={callToAction} />
-		</>
-	);
+  let products;
+
+  if (searchValue || minPrice || maxPrice) {
+    // Construct the query string
+    let queryString = `variants.price:<=${maxPrice} variants.price:>=${minPrice}`;
+    if (searchValue) {
+      queryString += ` ${searchValue}`;
+    }
+
+    // Include the query string in the query object
+    const query = {
+      sortKey,
+      reverse,
+      query: queryString,
+    };
+
+    products = await getProducts(query);
+  } else {
+    // Fetch all products
+    products = await getProducts({ sortKey, reverse });
+  }
+
+  return (
+    <>
+      <PageHeader title={"Products"} />
+      <ProductLayouts />
+      {layout === "list" ? (
+        <ProductListView currentPage={null} products={products} searchValue={searchValue} />
+      ) : (
+        <ProductCardView currentPage={null} products={products} searchValue={searchValue} />
+      )}
+      <CallToAction data={callToAction} />
+    </>
+  );
 };
 
 export default Products;
