@@ -9,7 +9,6 @@ import Link from "next/link";
 const { pagination_card } = config.settings;
 // ProductViewProps
 const ProductCardView = async ({ currentPage, products, searchValue }: any) => {
-
   const resultsText = products.length > 1 ? "results" : "result";
 
   const totalPages = Math.ceil(products.length / pagination_card);
@@ -21,20 +20,22 @@ const ProductCardView = async ({ currentPage, products, searchValue }: any) => {
 
   const productsToDisplay = currentPage ? paginatedProducts : currentProducts;
 
-
-  // getting collections 
+  // getting collections
   const categories = await getCollections();
-  const vendors: any = [...new Set(products.map((product: Product) => product?.vendor))];
-  const tags = [...new Set(products.flatMap((product: Product) => product.tags))];
+  const vendors: any = [
+    ...new Set(products.map((product: Product) => product?.vendor)),
+  ];
+  const tags = [
+    ...new Set(products.flatMap((product: Product) => product.tags)),
+  ];
 
-  
+  // Getting Max price for the price-rage selector
   const maxProductPriceData = products.map((product: Product) => product.priceRange.maxVariantPrice);
-  const maxProductPrice =Math.ceil(Math.max(...maxProductPriceData.map((amount:any)=>parseFloat(amount.amount))));
-  const maxProductCurrency =products.map((product: Product) => product.priceRange.maxVariantPrice.currencyCode)[0];
-  const maxPriceData ={maxProductPrice,maxProductCurrency}
-  // console.log('Max Amount:', maxProductCurrency);
+  const maxProductPrice = Math.ceil(Math.max(...maxProductPriceData.map((a: { amount: string; currencyCode: string }) => parseFloat(a.amount))));
+  const maxProductCurrency:string = products.map((product: Product) => product.priceRange.maxVariantPrice.currencyCode)[0];
+  const maxPriceData = { maxProductPrice, maxProductCurrency };
+  // console.log('Max Amount:', maxProductPriceData);
   // console.log('Currency Code:', maxCurrencyCode);
-  
 
   // console.log(tags);
 
@@ -44,13 +45,17 @@ const ProductCardView = async ({ currentPage, products, searchValue }: any) => {
         <div className="row">
           {/* Left Side  */}
           <div className="col-3 hidden lg:block">
-            <ProductFilters categories={categories} vendors={vendors} tags={tags} maxPriceData={maxPriceData}/>
+            <ProductFilters
+              categories={categories}
+              vendors={vendors}
+              tags={tags}
+              maxPriceData={maxPriceData}
+            />
           </div>
 
           {/* Right side  */}
           <div className="col-12 lg:col-9">
             <div className="row">
-
               {searchValue ? (
                 <p className="mb-4">
                   {products.length === 0
@@ -61,7 +66,15 @@ const ProductCardView = async ({ currentPage, products, searchValue }: any) => {
               ) : null}
 
               {productsToDisplay?.map((product: Product) => {
-                const { id, title, handle, featuredImage, priceRange, variants, compareAtPriceRange } = product;
+                const {
+                  id,
+                  title,
+                  handle,
+                  featuredImage,
+                  priceRange,
+                  variants,
+                  compareAtPriceRange,
+                } = product;
 
                 return (
                   <div
@@ -79,7 +92,13 @@ const ProductCardView = async ({ currentPage, products, searchValue }: any) => {
                         className="w-[312px] h-[150px] md:h-[269px] object-contain"
                       />
 
-                      <AddToCart variants={product.variants} availableForSale={product.availableForSale} stylesClass={"btn btn-primary max-md:btn-sm z-10 absolute bottom-0 left-1/2 transform -translate-x-1/2 translate-y-full group-hover:-translate-y-6 duration-300 ease-in-out whitespace-nowrap drop-shadow-md"} />
+                      <AddToCart
+                        variants={product.variants}
+                        availableForSale={product.availableForSale}
+                        stylesClass={
+                          "btn btn-primary max-md:btn-sm z-10 absolute bottom-0 left-1/2 transform -translate-x-1/2 translate-y-full group-hover:-translate-y-6 duration-300 ease-in-out whitespace-nowrap drop-shadow-md"
+                        }
+                      />
                     </div>
                     <div className="py-2 md:py-4 text-center z-20">
                       <h2 className="font-bold md:font-medium text-base md:text-xl">
@@ -89,7 +108,9 @@ const ProductCardView = async ({ currentPage, products, searchValue }: any) => {
                         <span className="text-light dark:text-darkmode-light text-xs md:text-lg font-bold">
                           ${priceRange.minVariantPrice.amount} USD
                         </span>
-                        {parseFloat(compareAtPriceRange?.maxVariantPrice.amount) > 0 ? (
+                        {parseFloat(
+                          compareAtPriceRange?.maxVariantPrice.amount,
+                        ) > 0 ? (
                           <s className="text-light dark:text-darkmode-light text-xs md:text-base font-medium">
                             ৳ {compareAtPriceRange?.maxVariantPrice.amount}{" "}
                             {compareAtPriceRange?.maxVariantPrice?.currencyCode}

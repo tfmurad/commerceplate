@@ -7,7 +7,7 @@ banner:
     button:
       enable: true
       label: "Shop Now"
-      link: "https://github.com/zeon-studio/nextplate"
+      link: "/products"
 
   - title: "2 Styles Accessories & New Table Lamp"
     content: "Work light, LED, white"
@@ -15,7 +15,7 @@ banner:
     button:
       enable: true
       label: "Shop Now"
-      link: "https://github.com/zeon-studio/nextplate"
+      link: "/products"
 
   - title: "3 Styles Accessories & New Table Lamp"
     content: "Work light, LED, white"
@@ -23,7 +23,7 @@ banner:
     button:
       enable: true
       label: "Shop Now"
-      link: "https://github.com/zeon-studio/nextplate"
+      link: "/products"
 
   - title: "4 Styles Accessories & New Table Lamp"
     content: "Work light, LED, white"
@@ -31,5 +31,5 @@ banner:
     button:
       enable: true
       label: "Shop Now"
-      link: "https://github.com/zeon-studio/nextplate"
+      link: "/products"
 ---

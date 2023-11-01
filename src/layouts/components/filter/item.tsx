@@ -2,7 +2,6 @@
 
 import { SortFilterItem } from '@/lib/constants';
 import { createUrl } from '@/lib/utils';
-// import clsx from 'clsx';
 import Link from 'next/link';
 import { usePathname, useSearchParams } from 'next/navigation';
 import { ListItem, PathFilterItem } from '../product/ProductLayouts';

@@ -26,13 +26,24 @@ const ProductListView = async ({ currentPage, products, searchValue }: any) => {
   const vendors: any = [...new Set(products.map((product: Product) => product?.vendor))];
   const tags = [...new Set(products.flatMap((product:Product) => product.tags))];
 
+    // Getting Max price for the price-rage selector
+    const maxProductPriceData = products.map((product: Product) => product.priceRange.maxVariantPrice);
+    const maxProductPrice = Math.ceil(Math.max(...maxProductPriceData.map((a: { amount: string; currencyCode: string }) => parseFloat(a.amount))));
+    const maxProductCurrency:string = products.map((product: Product) => product.priceRange.maxVariantPrice.currencyCode)[0];
+    const maxPriceData = { maxProductPrice, maxProductCurrency };
+
   return (
     <section>
       <div className="container">
         <div className="row">
           {/* Left Side  */}
           <div className="col-3 hidden lg:block">
-            <ProductFilters categories={categories} vendors={vendors} tags={tags}/>
+          <ProductFilters
+              categories={categories}
+              vendors={vendors}
+              tags={tags}
+              maxPriceData={maxPriceData}
+            />
           </div>
 
           {/* Right side  */}

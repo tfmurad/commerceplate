@@ -7,17 +7,21 @@ import PageHeader from "@/partials/PageHeader";
 import ProductCardView from "@/partials/ProductCardView";
 import ProductListView from "@/partials/ProductListView";
 
-
 export interface ProductViewProps {
-	currentPage: number | null;
-	searchParams: { [key: string]: string | string[] | undefined };
+  currentPage: number | null;
+  searchParams: { [key: string]: string | string[] | undefined };
 }
 
 const Products = async ({ searchParams }: ProductViewProps) => {
-
   const callToAction = getListPage("sections/call-to-action.md");
 
-  const { sort, q: searchValue, minPrice, maxPrice } = searchParams as {
+  const {
+    sort,
+    q: searchValue,
+    minPrice,
+    maxPrice,
+    brand,
+  } = searchParams as {
     [key: string]: string;
   };
 
@@ -28,11 +32,15 @@ const Products = async ({ searchParams }: ProductViewProps) => {
 
   let products;
 
-  if (searchValue || minPrice || maxPrice) {
+  if (searchValue || minPrice || maxPrice || brand) {
     // Construct the query string
     let queryString = `variants.price:<=${maxPrice} variants.price:>=${minPrice}`;
+
     if (searchValue) {
       queryString += ` ${searchValue}`;
+    }
+    if (brand) {
+      queryString += ` ${brand}`;
     }
 
     // Include the query string in the query object
@@ -53,9 +61,17 @@ const Products = async ({ searchParams }: ProductViewProps) => {
       <PageHeader title={"Products"} />
       <ProductLayouts />
       {layout === "list" ? (
-        <ProductListView currentPage={null} products={products} searchValue={searchValue} />
+        <ProductListView
+          currentPage={null}
+          products={products}
+          searchValue={searchValue}
+        />
       ) : (
-        <ProductCardView currentPage={null} products={products} searchValue={searchValue} />
+        <ProductCardView
+          currentPage={null}
+          products={products}
+          searchValue={searchValue}
+        />
       )}
       <CallToAction data={callToAction} />
     </>
