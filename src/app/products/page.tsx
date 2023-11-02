@@ -1,18 +1,19 @@
 import ProductLayouts from "@/components/product/ProductLayouts";
 import { defaultSort, sorting } from "@/lib/constants";
 import { getListPage } from "@/lib/contentParser";
-import { getProducts } from "@/lib/shopify";
+import { getCollections, getProducts, getVendors } from "@/lib/shopify";
+import { Product } from "@/lib/shopify/types";
 import CallToAction from "@/partials/CallToAction";
 import PageHeader from "@/partials/PageHeader";
 import ProductCardView from "@/partials/ProductCardView";
 import ProductListView from "@/partials/ProductListView";
 
-export interface ProductViewProps {
-  currentPage: number | null;
-  searchParams: { [key: string]: string | string[] | undefined };
-}
+// export interface ProductViewProps {
+//   currentPage: number | null;
+//   searchParams: { [key: string]: string | string[] | undefined };
+// }
 
-const Products = async ({ searchParams }: ProductViewProps) => {
+const Products = async ({ searchParams }: { searchParams: any }) => {
   const callToAction = getListPage("sections/call-to-action.md");
 
   const {
@@ -32,10 +33,12 @@ const Products = async ({ searchParams }: ProductViewProps) => {
 
   let products;
 
-  if (searchValue || minPrice || maxPrice || brand) {
-    // Construct the query string
-    let queryString = `variants.price:<=${maxPrice} variants.price:>=${minPrice}`;
+  if (searchValue || brand || minPrice || maxPrice) {
+    let queryString = "";
 
+    if (minPrice || maxPrice) {
+      queryString += `variants.price:<=${maxPrice} variants.price:>=${minPrice}`;
+    }
     if (searchValue) {
       queryString += ` ${searchValue}`;
     }
@@ -43,23 +46,34 @@ const Products = async ({ searchParams }: ProductViewProps) => {
       queryString += ` ${brand}`;
     }
 
-    // Include the query string in the query object
     const query = {
       sortKey,
       reverse,
-      query: queryString,
+      query: queryString
     };
 
     products = await getProducts(query);
+
   } else {
     // Fetch all products
     products = await getProducts({ sortKey, reverse });
   }
 
+  // const products = await getProducts({ sortKey, reverse, query: searchValue });
+  const categories = await getCollections();
+  const vendors = await getVendors({});
+  const tags = [
+    ...new Set(products.flatMap((product: Product) => product.tags)),
+  ];
+
   return (
     <>
       <PageHeader title={"Products"} />
-      <ProductLayouts />
+      <ProductLayouts
+        categories={categories}
+        vendors={vendors}
+        tags={tags}
+        maxPriceData={0} />
       {layout === "list" ? (
         <ProductListView
           currentPage={null}

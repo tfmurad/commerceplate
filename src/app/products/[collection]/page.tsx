@@ -17,6 +17,7 @@ const CategoryPage = async ({ params, searchParams }: { params: { page: number; 
 
   const { layout } = searchParams as { [key: string]: string };
   const products = await getCollectionProducts({ collection: params.collection, sortKey, reverse });
+  console.log(params.collection)
   return (
     <>
       <PageHeader title={"Products"} />

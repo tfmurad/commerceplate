@@ -7,15 +7,13 @@ import { useState } from "react";
 import { BsGridFill } from "react-icons/bs";
 import { FaList } from "react-icons/fa6";
 import { IoSearch } from "react-icons/io5";
-import ModalFilter from "../ModalFilter";
+import PopoverFilter from "../PopoverFilter";
 import DropdownMenu from "../filter/DropdownMenu";
 
 export type ListItem = SortFilterItem | PathFilterItem;
 export type PathFilterItem = { title: string; path: string };
 
-const ProductLayouts = () => {
-  // const { changeLayout, setChangeLayout } = useContext(GlobalContext);
-  const [showModal, setShowModal] = useState(false);
+const ProductLayouts = ({categories,vendors,tags,maxPriceData}:any) => {
 
   const router = useRouter();
   const searchParams = useSearchParams();
@@ -55,12 +53,19 @@ const ProductLayouts = () => {
           <div className="row gy-4">
             <div className="col-12 lg:col-3">
               <div className="flex lg:block justify-between">
-                <button
+                {/* <button
                   className="block lg:hidden"
                   onClick={() => setShowModal(true)}
                 >
                   + Filter
-                </button>
+                </button> */}
+
+                <div className="block lg:hidden">
+                  <PopoverFilter  categories={categories}
+              vendors={vendors}
+              tags={tags}
+              maxPriceData={maxPriceData}/>
+                </div>
 
                 <form onSubmit={onSubmit} className="border border-border rounded-md flex justify-between">
                   <input
@@ -107,15 +112,11 @@ const ProductLayouts = () => {
           </div>
         </div>
 
-        <ModalFilter
+        {/* <ModalFilter
           isVisible={showModal}
           onClose={() => setShowModal(false)}
-        />
+        /> */}
       </section>
-
-      {/* {
-        changeLayout ? <div>{children[0]}</div> : <div>{children[1]}</div>
-      } */}
     </>
   );
 };

@@ -14,7 +14,7 @@ const Youtube = ({
 }) => {
   return (
     <LiteYouTubeEmbed
-      wrapperclassName="yt-lite rounded-lg"
+      // wrapperclassName="yt-lite rounded-lg"
       id={id}
       title={title}
       {...rest}

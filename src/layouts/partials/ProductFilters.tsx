@@ -17,7 +17,7 @@ const ProductFilters = ({
   maxPriceData,
 }: {
   categories: ShopifyCollection[];
-  vendors: any;
+  vendors: {vendor:string, productCount: number}[];
   tags: any;
   maxPriceData: { maxProductPrice: number; maxProductCurrency: string };
 }) => {
@@ -82,21 +82,23 @@ const ProductFilters = ({
         </ul>
       </div>
 
-      <div>
+      {
+        vendors &&
+        <div>
         <h5 className="mb-2 mt-8 lg:mt-10 lg:text-xl">Brand</h5>
         <hr />
         <ul className="mt-4 space-y-4">
-          {vendors.map((item: string) => (
+          {vendors.map(vendor => (
             <li
-              key={item}
+              key={vendor.vendor}
               className={`flex items-center justify-between cursor-pointer text-light dark:text-darkmode-light`}
-              onClick={() => handleBrandClick(item)}
+              onClick={() => handleBrandClick(vendor.vendor)}
             >
               <span>
-                {item} {/*({item.products?.length})*/}
+                {vendor.vendor} ({vendor.productCount})
               </span>
               <div className="h-4 w-4 rounded-sm flex items-center justify-center border border-light dark:border-darkmode-light">
-                {selectedBrand === item && (
+                {selectedBrand === vendor.vendor && (
                   <span>
                     <BsCheckLg size={16} />
                   </span>
@@ -106,6 +108,7 @@ const ProductFilters = ({
           ))}
         </ul>
       </div>
+      }
 
       {/* <div>
         <h5 className="mb-2 mt-8 lg:mt-10 lg:text-xl">Frame Color</h5>
@@ -138,20 +141,23 @@ const ProductFilters = ({
         </ul>
       </div> */}
 
+     {
+      tags && 
       <div>
-        <h5 className="mb-2 mt-8 lg:mt-10 lg:text-xl">Tags</h5>
-        <hr />
-        <button className="flex flex-wrap gap-3 mt-4">
-          {tags.map((tag: string) => (
-            <p
-              key={tag}
-              className="px-2 py-1 rounded-md border text-light dark:text-darkmode-light"
-            >
-              {tag}
-            </p>
-          ))}
-        </button>
-      </div>
+      <h5 className="mb-2 mt-8 lg:mt-10 lg:text-xl">Tags</h5>
+      <hr />
+      <button className="flex flex-wrap gap-3 mt-4">
+        {tags.map((tag: string) => (
+          <p
+            key={tag}
+            className="px-2 py-1 rounded-md border text-light dark:text-darkmode-light"
+          >
+            {tag}
+          </p>
+        ))}
+      </button>
+    </div>
+     }
     </>
   );
 };

@@ -2,7 +2,8 @@ import ProductLayouts from "@/components/product/ProductLayouts";
 import config from "@/config/config.json";
 import { defaultSort, sorting } from "@/lib/constants";
 import { getListPage } from "@/lib/contentParser";
-import { getProducts } from "@/lib/shopify";
+import { getCollections, getProducts, getVendors } from "@/lib/shopify";
+import { Product } from "@/lib/shopify/types";
 import CallToAction from "@/partials/CallToAction";
 import PageHeader from "@/partials/PageHeader";
 import ProductCardView from "@/partials/ProductCardView";
@@ -42,18 +43,64 @@ const Products = async ({ params, searchParams }: { params: { page: number }; se
   const currentPage =
     params.page && !isNaN(Number(params.page)) ? Number(params.page) : 1;
 
-  const { sort, q: searchValue } = searchParams as { [key: string]: string };
+  const {
+    sort,
+    q: searchValue,
+    minPrice,
+    maxPrice,
+    brand,
+  } = searchParams as {
+    [key: string]: string;
+  };
   const { layout } = searchParams as { [key: string]: string };
 
   const { sortKey, reverse } =
     sorting.find((item) => item.slug === sort) || defaultSort;
 
-  const products = await getProducts({ sortKey, reverse, query: searchValue });
+  // const products = await getProducts({ sortKey, reverse, query: searchValue });
+  let products;
+
+  if (searchValue || brand || minPrice || maxPrice) {
+    let queryString = "";
+
+    if (minPrice || maxPrice) {
+      queryString += `variants.price:<=${maxPrice} variants.price:>=${minPrice}`;
+    }
+    if (searchValue) {
+      queryString += ` ${searchValue}`;
+    }
+    if (brand) {
+      queryString += ` ${brand}`;
+    }
+
+    const query = {
+      sortKey,
+      reverse,
+      query: queryString
+    };
+
+    products = await getProducts(query);
+
+  } else {
+    // Fetch all products
+    products = await getProducts({ sortKey, reverse });
+  }
+
+  // const products = await getProducts({ sortKey, reverse, query: searchValue });
+  const categories = await getCollections();
+  const vendors = await getVendors({});
+  const tags = [
+    ...new Set(products.flatMap((product: Product) => product.tags)),
+  ];
 
   return (
     <>
       <PageHeader title={"Products"} />
-      <ProductLayouts />
+      <ProductLayouts
+        categories={categories}
+        vendors={vendors}
+        tags={tags}
+        maxPriceData={0} />
       {
         layout === "list" ? <ProductListView currentPage={currentPage} products={products} searchValue={searchValue} />
           : <ProductCardView currentPage={currentPage} products={products} searchValue={searchValue} />

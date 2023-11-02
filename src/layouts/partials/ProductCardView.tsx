@@ -2,11 +2,12 @@ import Pagination from "@/components/Pagination";
 import { AddToCart } from "@/components/cart/add-to-cart";
 import config from "@/config/config.json";
 import ImageFallback from "@/helpers/ImageFallback";
-import { getCollections } from "@/lib/shopify";
+import { getCollections, getVendors } from "@/lib/shopify";
 import { Product } from "@/lib/shopify/types";
 import ProductFilters from "@/partials/ProductFilters";
 import Link from "next/link";
 const { pagination_card } = config.settings;
+
 // ProductViewProps
 const ProductCardView = async ({ currentPage, products, searchValue }: any) => {
   const resultsText = products.length > 1 ? "results" : "result";
@@ -20,24 +21,19 @@ const ProductCardView = async ({ currentPage, products, searchValue }: any) => {
 
   const productsToDisplay = currentPage ? paginatedProducts : currentProducts;
 
-  // getting collections
   const categories = await getCollections();
-  const vendors: any = [
-    ...new Set(products.map((product: Product) => product?.vendor)),
-  ];
+  const vendors = await getVendors({});
+
   const tags = [
     ...new Set(products.flatMap((product: Product) => product.tags)),
   ];
 
+
   // Getting Max price for the price-rage selector
   const maxProductPriceData = products.map((product: Product) => product.priceRange.maxVariantPrice);
   const maxProductPrice = Math.ceil(Math.max(...maxProductPriceData.map((a: { amount: string; currencyCode: string }) => parseFloat(a.amount))));
-  const maxProductCurrency:string = products.map((product: Product) => product.priceRange.maxVariantPrice.currencyCode)[0];
+  const maxProductCurrency: string = products.map((product: Product) => product.priceRange.maxVariantPrice.currencyCode)[0];
   const maxPriceData = { maxProductPrice, maxProductCurrency };
-  // console.log('Max Amount:', maxProductPriceData);
-  // console.log('Currency Code:', maxCurrencyCode);
-
-  // console.log(tags);
 
   return (
     <section>

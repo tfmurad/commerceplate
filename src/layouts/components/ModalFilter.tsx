@@ -30,12 +30,12 @@ const ModalFilter: React.FC<ModalFilterProps> = ({ isVisible, onClose }) => {
             X
           </button>
           <div className="modal-content">
-          <ProductFilters
+          {/* <ProductFilters
               categories={categories}
               vendors={vendors}
               tags={tags}
               maxPriceData={maxPriceData}
-            />
+            /> */}
           </div>
         </div>
       </div>

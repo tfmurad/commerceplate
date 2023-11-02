@@ -21,7 +21,7 @@ const Breadcrumbs = ({ className }: { className?: string }) => {
     const href = `/${paths.slice(0, i + 1).join("/")}`;
     label !== "page" &&
       parts.push({
-        label: humanize(label.replace(/[-_]/g, " ")) || "",
+        label: <span>{humanize(label.replace(/[-_]/g, " ")) || ""}</span>,
         href,
         "aria-label": pathname === href ? "page" : undefined,
       });

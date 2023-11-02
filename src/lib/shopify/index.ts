@@ -49,6 +49,7 @@ import {
   ShopifyRemoveFromCartOperation,
   ShopifyUpdateCartOperation
 } from './types';
+import { getVendorsQuery } from "./queries/vendor";
 
 const domain = process.env.SHOPIFY_STORE_DOMAIN
   ? ensureStartsWith(process.env.SHOPIFY_STORE_DOMAIN, 'https://')
@@ -394,6 +395,54 @@ export async function getProductRecommendations(productId: string): Promise<Prod
 
   return reshapeProducts(res.body.data.productRecommendations);
 }
+
+export async function getVendors({
+  query,
+  reverse,
+  sortKey
+}: {
+  query?: string;
+  reverse?: boolean;
+  sortKey?: string;
+}): Promise<{ vendor: string; productCount: number }[]> {
+  const res = await shopifyFetch<ShopifyProductsOperation>({
+    query: getVendorsQuery,
+    tags: [TAGS.products],
+    variables: {
+      query,
+      reverse,
+      sortKey
+    }
+  });
+
+  const products = removeEdgesAndNodes(res.body.data.products);
+
+  // Create an array to store objects with vendor names and product counts
+  const vendorProductCounts: { vendor: string; productCount: number }[] = [];
+
+  // Process the products and count them by vendor
+  products.forEach((product) => {
+    const vendor = product.vendor;
+    if (vendor) {
+      // Check if the vendor is already in the array
+      const existingVendor = vendorProductCounts.find(
+        (v) => v.vendor === vendor
+      );
+
+      if (existingVendor) {
+        // Increment the product count for the existing vendor
+        existingVendor.productCount++;
+      } else {
+        // Add a new vendor entry
+        vendorProductCounts.push({ vendor, productCount: 1 });
+      }
+    }
+  });
+
+  return vendorProductCounts;
+}
+
+
 
 export async function getProducts({
   query,

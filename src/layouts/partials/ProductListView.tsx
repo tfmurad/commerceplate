@@ -2,7 +2,7 @@ import Pagination from "@/components/Pagination";
 import { AddToCart } from "@/components/cart/add-to-cart";
 import config from "@/config/config.json";
 import ImageFallback from "@/helpers/ImageFallback";
-import { getCollections } from "@/lib/shopify";
+import { getCollections, getVendors } from "@/lib/shopify";
 import { Product } from "@/lib/shopify/types";
 import ProductFilters from "@/partials/ProductFilters";
 import Link from "next/link";
@@ -23,7 +23,7 @@ const ProductListView = async ({ currentPage, products, searchValue }: any) => {
 
   // getting collections 
   const categories = await getCollections();
-  const vendors: any = [...new Set(products.map((product: Product) => product?.vendor))];
+  const vendors = await getVendors({});
   const tags = [...new Set(products.flatMap((product:Product) => product.tags))];
 
     // Getting Max price for the price-rage selector
