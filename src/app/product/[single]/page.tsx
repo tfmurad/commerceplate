@@ -3,8 +3,9 @@ import { AddToCart } from "@/components/cart/add-to-cart";
 import ProductGallery from "@/components/product/ProductGallery";
 import { VariantSelector } from "@/components/product/variant-selector";
 import social from "@/config/social.json";
-import ImageFallback from "@/helpers/ImageFallback";
-import { getProduct } from "@/lib/shopify";
+import { currencySymbol } from "@/lib/constants";
+import { getProduct, getProductRecommendations } from "@/lib/shopify";
+import LatestProducts from "@/partials/LatestProducts";
 import { Metadata } from "next";
 import Image from "next/image";
 import { notFound } from "next/navigation";
@@ -28,6 +29,7 @@ const ProductSingle = async ({ params }: { params: { single: string } }) => {
   const product = await getProduct(params.single);
   if (!product) return notFound();
   const {
+    id,
     title,
     description,
     availableForSale,
@@ -39,6 +41,10 @@ const ProductSingle = async ({ params }: { params: { single: string } }) => {
     variants,
     tags,
   } = product;
+
+  const relatedProducts = await getProductRecommendations(id);
+  if (!relatedProducts.length) return null;
+  // console.log(relatedProducts[0])
 
   return (
     <>
@@ -56,12 +62,12 @@ const ProductSingle = async ({ params }: { params: { single: string } }) => {
 
               <div className="flex gap-2 items-center">
                 <h4 className="text-light max-md:h2">
-                  ৳ {priceRange?.minVariantPrice.amount}{" "}
+                  {currencySymbol} {priceRange?.minVariantPrice.amount}{" "}
                   {priceRange?.minVariantPrice?.currencyCode}
                 </h4>
                 {parseFloat(compareAtPriceRange?.maxVariantPrice.amount) > 0 ? (
                   <s className="text-light max-md:h3 dark:text-darkmode-light">
-                    ৳ {compareAtPriceRange?.maxVariantPrice.amount}{" "}
+                    {currencySymbol} {compareAtPriceRange?.maxVariantPrice.amount}{" "}
                     {compareAtPriceRange?.maxVariantPrice?.currencyCode}
                   </s>
                 ) : (
@@ -127,42 +133,32 @@ const ProductSingle = async ({ params }: { params: { single: string } }) => {
       </section>
 
       {/* TODO: tabs description of a product  */}
-      <section className="section">
+      <section>
         <div className="container">
           {/* <MDXContent content={description} /> */}
           <p>{description}</p>
         </div>
       </section>
 
-      <section>
-        <div className="container text-center">
-          <h3 className="mb-14">Latest Products</h3>
-
-          <div className="row mb-6">
-            {Array.from({ length: 4 }).map((_, index) => (
-              <div
-                key={index}
-                className="text-center sm:col-6 md:col-4 lg:col-3"
-              >
-                <ImageFallback
-                  className=""
-                  src="/images/category-2.png"
-                  width={1000}
-                  height={269}
-                  alt="category image"
-                />
-                <div className="p-6 text-center">
-                  <h5>Elliot Table Lamp</h5>
-                  <div className="flex justify-center gap-2">
-                    <h6 className="text-light">$49.99 USD</h6>
-                    <h6 className="text-light line-through">$89.99 USD</h6>
-                  </div>
-                </div>
-              </div>
-            ))}
+      {/* Recommented Products section  */}
+      <section className="section">
+        <div className="container">
+          <div className="text-center mb-6 md:mb-14">
+            <h2 className="mb-2">Related Products</h2>
           </div>
+          <LatestProducts products={relatedProducts} />
         </div>
       </section>
+
+      {/* <section>
+        <div className="container text-center">
+          <h3 className="mb-14">Related Products</h3>
+
+          <div className="row mb-6">
+          <LatestProducts products={relatedProducts}/>
+          </div>
+        </div>
+      </section> */}
     </>
   );
 };

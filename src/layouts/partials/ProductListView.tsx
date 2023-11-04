@@ -2,6 +2,7 @@ import Pagination from "@/components/Pagination";
 import { AddToCart } from "@/components/cart/add-to-cart";
 import config from "@/config/config.json";
 import ImageFallback from "@/helpers/ImageFallback";
+import { currencySymbol } from "@/lib/constants";
 import { getCollections, getVendors } from "@/lib/shopify";
 import { Product } from "@/lib/shopify/types";
 import ProductFilters from "@/partials/ProductFilters";
@@ -87,7 +88,7 @@ const ProductListView = async ({ currentPage, products, searchValue }: any) => {
                         </span>
                         {parseFloat(compareAtPriceRange?.maxVariantPrice.amount) > 0 ? (
                           <s className="text-light dark:text-darkmode-light text-xs md:text-base font-medium">
-                            ৳ {compareAtPriceRange?.maxVariantPrice.amount}{" "}
+                            {currencySymbol} {compareAtPriceRange?.maxVariantPrice.amount}{" "}
                             {compareAtPriceRange?.maxVariantPrice?.currencyCode}
                           </s>
                         ) : (

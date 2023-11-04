@@ -69,7 +69,7 @@ const ProductLayouts = ({categories,vendors,tags,maxPriceData}:any) => {
 
                 <form onSubmit={onSubmit} className="border border-border rounded-md flex justify-between">
                   <input
-                    className="bg-transparent border-none focus:ring-transparent"
+                    className="bg-transparent border-none focus:ring-transparent pr-0 pl-2"
                     key={searchParams?.get('q')}
                     type="text"
                     name="search"
