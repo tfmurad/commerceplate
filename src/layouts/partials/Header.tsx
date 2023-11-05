@@ -160,7 +160,7 @@ const Header = ({ children }: { children: any }) => {
           )}
         </ul>
 
-        <div className="order-1 ml-auto mr-6 md:mr-7 flex gap-4 md:gap-7 items-center md:order-2 lg:ml-0">
+        <div className="order-1 ml-auto max-lg:mr-6 flex gap-4 md:gap-7 items-center md:order-2 lg:ml-0">
           <ThemeSwitcher className="" />
 
           {settings.search && (

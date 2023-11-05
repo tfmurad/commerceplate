@@ -85,7 +85,7 @@ const ProductCardView = async ({ currentPage, products, searchValue }: any) => {
                         width={312}
                         height={269}
                         alt={featuredImage?.altText || "fallback image"}
-                        className="w-[312px] h-[150px] md:h-[269px] object-contain"
+                        className="w-[312px] h-[150px] md:h-[269px] object-cover rounded-md border"
                       />
 
                       <AddToCart

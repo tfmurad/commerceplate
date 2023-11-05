@@ -23,7 +23,7 @@ export default function PopoverFilter({categories,vendors,tags,maxPriceData}:any
               leaveFrom="opacity-100 translate-y-0"
               leaveTo="opacity-0 translate-y-1"
             >
-              <Popover.Panel className="absolute left-48 z-10 mt-3 w-screen max-w-sm -translate-x-1/2 transform px-6 pb-6 rounded-md lg:max-w-3xl bg-body dark:bg-darkmode-body drop-shadow-2xl">
+              <Popover.Panel className="absolute left-40 sm:left-48 z-10 mt-3 w-screen max-w-xs sm:max-w-sm -translate-x-1/2 transform px-6 pb-6 rounded-md lg:max-w-3xl bg-body dark:bg-darkmode-body drop-shadow-2xl">
 							<ProductFilters
               categories={categories}
               vendors={vendors}

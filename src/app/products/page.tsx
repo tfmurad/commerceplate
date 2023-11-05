@@ -1,7 +1,7 @@
 import ProductLayouts from "@/components/product/ProductLayouts";
 import { defaultSort, sorting } from "@/lib/constants";
 import { getListPage } from "@/lib/contentParser";
-import { getCollections, getProducts, getVendors } from "@/lib/shopify";
+import { getCollectionProducts, getCollections, getProducts, getVendors } from "@/lib/shopify";
 import { Product } from "@/lib/shopify/types";
 import CallToAction from "@/partials/CallToAction";
 import PageHeader from "@/partials/PageHeader";
@@ -22,6 +22,7 @@ const Products = async ({ searchParams }: { searchParams: any }) => {
     minPrice,
     maxPrice,
     brand,
+    c
   } = searchParams as {
     [key: string]: string;
   };
@@ -33,7 +34,7 @@ const Products = async ({ searchParams }: { searchParams: any }) => {
 
   let products;
 
-  if (searchValue || brand || minPrice || maxPrice) {
+  if (searchValue || brand || minPrice || maxPrice || c) {
     let queryString = "";
 
     if (minPrice || maxPrice) {
@@ -52,7 +53,14 @@ const Products = async ({ searchParams }: { searchParams: any }) => {
       query: queryString
     };
 
-    products = await getProducts(query);
+    if(c && c != 'all'){
+      products = await getCollectionProducts({ collection: c, sortKey, reverse});
+      // console.log(products[2])
+    } else{
+      products = await getProducts(query);
+    }
+
+
 
   } else {
     // Fetch all products

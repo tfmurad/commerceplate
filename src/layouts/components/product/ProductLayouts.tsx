@@ -52,13 +52,7 @@ const ProductLayouts = ({categories,vendors,tags,maxPriceData}:any) => {
         <div className="container">
           <div className="row gy-4">
             <div className="col-12 lg:col-3">
-              <div className="flex lg:block justify-between">
-                {/* <button
-                  className="block lg:hidden"
-                  onClick={() => setShowModal(true)}
-                >
-                  + Filter
-                </button> */}
+              <div className="sm:flex lg:block justify-between">
 
                 <div className="block lg:hidden">
                   <PopoverFilter  categories={categories}

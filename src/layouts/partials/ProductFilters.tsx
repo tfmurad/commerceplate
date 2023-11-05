@@ -1,7 +1,5 @@
 "use client";
 
-import CollectionItem from "@/components/CollectionItem";
-import FrameColor from "@/components/product/FrameColor";
 import RangeSlider from "@/components/rangeSlider/RangeSlider";
 import { ShopifyCollection } from "@/lib/shopify/types";
 import { createUrl } from "@/lib/utils";
@@ -17,14 +15,15 @@ const ProductFilters = ({
   maxPriceData,
 }: {
   categories: ShopifyCollection[];
-  vendors: {vendor:string, productCount: number}[];
+  vendors: { vendor: string, productCount: number }[];
   tags: any;
   maxPriceData: { maxProductPrice: number; maxProductCurrency: string };
 }) => {
   const router = useRouter();
   const searchParams = useSearchParams();
   const [selectedBrand, setSelectedBrand] = useState<string | null>(null);
-
+  const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
+  // console.log(selectedCategory)
   // const sizes = [
   //   {
   //     id: "H40E27",
@@ -58,6 +57,22 @@ const ProductFilters = ({
     router.push(createUrl("/products", newParams), { scroll: false });
   };
 
+
+  const handleCategoryClick = (name: string) => {
+    const slugName = slugify(name.toLowerCase());
+    const newParams = new URLSearchParams(searchParams.toString());
+
+    if (name === selectedCategory || name === '') {
+      newParams.delete("c");
+      setSelectedCategory(null);
+    } else {
+      newParams.set("c", slugName);
+      setSelectedCategory(name);
+    }
+
+    router.push(createUrl("/products", newParams), { scroll: false });
+  };
+
   return (
     <>
       <div>
@@ -66,7 +81,7 @@ const ProductFilters = ({
         <RangeSlider maxPriceData={maxPriceData} />
       </div>
 
-      <div>
+      {/* <div>
         <h5 className="mb-2 mt-8 lg:mt-10 lg:text-xl">Product Categories</h5>
         <hr />
         <ul className="mt-4 space-y-4">
@@ -80,34 +95,49 @@ const ProductFilters = ({
               />
             ))}
         </ul>
+      </div> */}
+
+      <div>
+        <h5 className="mb-2 mt-8 lg:mt-10 lg:text-xl">Product Categories</h5>
+        <hr />
+        <ul className="mt-4 space-y-4">
+          {categories.map((category) => (
+            <li key={category.handle}
+              className={`flex items-center justify-between text-light dark:text-darkmode-light cursor-pointer ${selectedCategory === category.title ? "text-dark dark:text-darkmode-light font-semibold" : ''}`}
+              onClick={() => handleCategoryClick(category.title)}
+            >
+              {category.title} <span>{category?.products?.edges.length! > 0 ? `(${category?.products?.edges.length!})` : ''}</span>
+            </li>
+          ))}
+        </ul>
       </div>
 
       {
         vendors &&
         <div>
-        <h5 className="mb-2 mt-8 lg:mt-10 lg:text-xl">Brand</h5>
-        <hr />
-        <ul className="mt-4 space-y-4">
-          {vendors.map(vendor => (
-            <li
-              key={vendor.vendor}
-              className={`flex items-center justify-between cursor-pointer text-light dark:text-darkmode-light`}
-              onClick={() => handleBrandClick(vendor.vendor)}
-            >
-              <span>
-                {vendor.vendor} ({vendor.productCount})
-              </span>
-              <div className="h-4 w-4 rounded-sm flex items-center justify-center border border-light dark:border-darkmode-light">
-                {selectedBrand === vendor.vendor && (
-                  <span>
-                    <BsCheckLg size={16} />
-                  </span>
-                )}
-              </div>
-            </li>
-          ))}
-        </ul>
-      </div>
+          <h5 className="mb-2 mt-8 lg:mt-10 lg:text-xl">Brand</h5>
+          <hr />
+          <ul className="mt-4 space-y-4">
+            {vendors.map(vendor => (
+              <li
+                key={vendor.vendor}
+                className={`flex items-center justify-between cursor-pointer text-light dark:text-darkmode-light`}
+                onClick={() => handleBrandClick(vendor.vendor)}
+              >
+                <span>
+                  {vendor.vendor} ({vendor.productCount})
+                </span>
+                <div className="h-4 w-4 rounded-sm flex items-center justify-center border border-light dark:border-darkmode-light">
+                  {selectedBrand === vendor.vendor && (
+                    <span>
+                      <BsCheckLg size={16} />
+                    </span>
+                  )}
+                </div>
+              </li>
+            ))}
+          </ul>
+        </div>
       }
 
       {/* <div>
@@ -141,23 +171,23 @@ const ProductFilters = ({
         </ul>
       </div> */}
 
-     {
-      tags && 
-      <div>
-      <h5 className="mb-2 mt-8 lg:mt-10 lg:text-xl">Tags</h5>
-      <hr />
-      <button className="flex flex-wrap gap-3 mt-4">
-        {tags.map((tag: string) => (
-          <p
-            key={tag}
-            className="px-2 py-1 rounded-md border text-light dark:text-darkmode-light"
-          >
-            {tag}
-          </p>
-        ))}
-      </button>
-    </div>
-     }
+      {
+        tags &&
+        <div>
+          <h5 className="mb-2 mt-8 lg:mt-10 lg:text-xl">Tags</h5>
+          <hr />
+          <button className="flex flex-wrap gap-3 mt-4">
+            {tags.map((tag: string) => (
+              <p
+                key={tag}
+                className="px-2 py-1 rounded-md border text-light dark:text-darkmode-light"
+              >
+                {tag}
+              </p>
+            ))}
+          </button>
+        </div>
+      }
     </>
   );
 };
