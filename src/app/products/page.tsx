@@ -53,10 +53,10 @@ const Products = async ({ searchParams }: { searchParams: any }) => {
       query: queryString
     };
 
-    if(c && c != 'all'){
-      products = await getCollectionProducts({ collection: c, sortKey, reverse});
+    if (c && c != 'all') {
+      products = await getCollectionProducts({ collection: c, sortKey, reverse });
       // console.log(products[2])
-    } else{
+    } else {
       products = await getProducts(query);
     }
 
