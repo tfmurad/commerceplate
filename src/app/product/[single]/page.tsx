@@ -10,7 +10,7 @@ import { Metadata } from "next";
 import Image from "next/image";
 import { notFound } from "next/navigation";
 
-export const runtime = "edge";
+// export const runtime = "edge";
 
 export const generateMetadata = async ({
   params,

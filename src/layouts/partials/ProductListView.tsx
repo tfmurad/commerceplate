@@ -84,7 +84,8 @@ const ProductListView = async ({ currentPage, products, searchValue }: any) => {
 
                       <div className="flex items-center gap-x-2 mt-2">
                         <span className="text-light dark:text-darkmode-light text-xs md:text-lg font-bold">
-                          ${priceRange.minVariantPrice.amount} USD
+                        ৳ {priceRange.minVariantPrice.amount}{" "}
+                        {priceRange.minVariantPrice.currencyCode}
                         </span>
                         {parseFloat(compareAtPriceRange?.maxVariantPrice.amount) > 0 ? (
                           <s className="text-light dark:text-darkmode-light text-xs md:text-base font-medium">
