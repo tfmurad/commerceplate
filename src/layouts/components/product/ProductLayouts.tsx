@@ -3,7 +3,6 @@
 import { SortFilterItem, sorting } from "@/lib/constants";
 import { createUrl } from "@/lib/utils";
 import { useRouter, useSearchParams } from 'next/navigation';
-import { useState } from "react";
 import { BsGridFill } from "react-icons/bs";
 import { FaList } from "react-icons/fa6";
 import { IoSearch } from "react-icons/io5";
@@ -13,7 +12,7 @@ import DropdownMenu from "../filter/DropdownMenu";
 export type ListItem = SortFilterItem | PathFilterItem;
 export type PathFilterItem = { title: string; path: string };
 
-const ProductLayouts = ({categories,vendors,tags,maxPriceData}:any) => {
+const ProductLayouts = ({ categories, vendors, tags, maxPriceData }: any) => {
 
   const router = useRouter();
   const searchParams = useSearchParams();
@@ -55,10 +54,10 @@ const ProductLayouts = ({categories,vendors,tags,maxPriceData}:any) => {
               <div className="sm:flex lg:block justify-between">
 
                 <div className="block lg:hidden">
-                  <PopoverFilter  categories={categories}
-              vendors={vendors}
-              tags={tags}
-              maxPriceData={maxPriceData}/>
+                  <PopoverFilter categories={categories}
+                    vendors={vendors}
+                    tags={tags}
+                    maxPriceData={maxPriceData} />
                 </div>
 
                 <form onSubmit={onSubmit} className="border border-border rounded-md flex justify-between">
