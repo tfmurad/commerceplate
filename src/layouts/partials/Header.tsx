@@ -24,7 +24,7 @@ export interface INavigationLink {
   children?: IChildNavigationLink[];
 }
 
-const Header = () => {
+const Header = ({ children }: { children: any }) => {
   const [navbarShadow, setNavbarShadow] = useState(false);
   // distructuring the main menu from menu object
   const { main }: { main: INavigationLink[] } = menu;
@@ -61,9 +61,8 @@ const Header = () => {
 
   return (
     <header
-      className={`header z-30 ${settings.sticky_header && "sticky top-0"} ${
-        navbarShadow ? "shadow-sm" : "shadow-none"
-      }`}
+      className={`header z-30 ${settings.sticky_header && "sticky top-0"} ${navbarShadow ? "shadow-sm" : "shadow-none"
+        }`}
     >
       <nav className="navbar container">
         {/* logo */}
@@ -108,17 +107,16 @@ const Header = () => {
             <React.Fragment key={`menu-${i}`}>
               {menu.hasChildren ? (
                 <li
-                onClick={handleChildMenuClick}
-                 className="nav-item nav-dropdown group relative">
+                  onClick={handleChildMenuClick}
+                  className="nav-item nav-dropdown group relative">
                   <span
-                    className={`nav-link inline-flex items-center ${
-                      menu.children?.map(({ url }) => url).includes(pathname) ||
-                      menu.children
-                        ?.map(({ url }) => `${url}/`)
-                        .includes(pathname)
+                    className={`nav-link inline-flex items-center ${menu.children?.map(({ url }) => url).includes(pathname) ||
+                        menu.children
+                          ?.map(({ url }) => `${url}/`)
+                          .includes(pathname)
                         ? "active"
                         : ""
-                    }`}
+                      }`}
                   >
                     {menu.name}
                     <svg className="h-4 w-4 fill-current" viewBox="0 0 20 20">
@@ -126,19 +124,17 @@ const Header = () => {
                     </svg>
                   </span>
                   <ul
-                    className={`nav-dropdown-list hidden lg:invisible lg:absolute lg:block lg:opacity-0 lg:group-hover:visible lg:group-hover:block lg:group-hover:opacity-100 ${
-                      showContent && "max-lg:block"
-                    }`}
+                    className={`nav-dropdown-list hidden lg:invisible lg:absolute lg:block lg:opacity-0 lg:group-hover:visible lg:group-hover:block lg:group-hover:opacity-100 ${showContent && "max-lg:block"
+                      }`}
                   >
                     {menu.children?.map((child, i) => (
                       <li className="nav-dropdown-item" key={`children-${i}`}>
                         <Link
                           href={child.url}
-                          className={`nav-dropdown-link block ${
-                            (pathname === `${child.url}/` ||
+                          className={`nav-dropdown-link block ${(pathname === `${child.url}/` ||
                               pathname === child.url) &&
                             "nav-active"
-                          }`}
+                            }`}
                         >
                           {child.name}
                         </Link>
@@ -150,10 +146,9 @@ const Header = () => {
                 <li className="nav-item">
                   <Link
                     href={menu.url}
-                    className={`nav-link block ${
-                      (pathname === `${menu.url}/` || pathname === menu.url) &&
+                    className={`nav-link block ${(pathname === `${menu.url}/` || pathname === menu.url) &&
                       "nav-active"
-                    }`}
+                      }`}
                   >
                     {menu.name}
                   </Link>
@@ -191,6 +186,10 @@ const Header = () => {
               <BsPerson />
             </Link>
           )}
+
+          <Suspense fallback={children[0]}>
+            {children[1]}
+          </Suspense>
         </div>
       </nav>
     </header>

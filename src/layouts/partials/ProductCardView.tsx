@@ -2,7 +2,7 @@ import Pagination from "@/components/Pagination";
 import { AddToCart } from "@/components/cart/add-to-cart";
 import config from "@/config/config.json";
 import ImageFallback from "@/helpers/ImageFallback";
-import { getCollections, getVendors } from "@/lib/shopify";
+import { getCollections, getTags, getVendors } from "@/lib/shopify";
 import { Product } from "@/lib/shopify/types";
 import ProductFilters from "@/partials/ProductFilters";
 import Link from "next/link";
@@ -28,6 +28,8 @@ const ProductCardView = async ({ currentPage, products, searchValue }: any) => {
     ...new Set(products.flatMap((product: Product) => product.tags)),
   ];
 
+  // const tags2 = await getTags({});
+  // console.log(tags2)
 
   // Getting Max price for the price-rage selector
   const maxProductPriceData = products.map((product: Product) => product.priceRange.maxVariantPrice);

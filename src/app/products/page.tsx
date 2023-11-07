@@ -27,6 +27,7 @@ const ShowProducts = async ({ searchParams }: { searchParams: any }) => {
     maxPrice,
     brand,
     c,
+    t:tag
   } = searchParams as {
     [key: string]: string;
   };
@@ -38,7 +39,7 @@ const ShowProducts = async ({ searchParams }: { searchParams: any }) => {
 
   let products;
 
-  if (searchValue || brand || minPrice || maxPrice || c) {
+  if (searchValue || brand || minPrice || maxPrice || c || tag) {
     let queryString = "";
 
     if (minPrice || maxPrice) {
@@ -49,6 +50,9 @@ const ShowProducts = async ({ searchParams }: { searchParams: any }) => {
     }
     if (brand) {
       queryString += ` ${brand}`;
+    }
+    if (tag) {
+      queryString += ` ${tag}`;
     }
 
     const query = {
@@ -106,7 +110,7 @@ const ProductsListPage = ({ searchParams }: { searchParams: any }) => {
       <PageHeader title={"Products"} />
       <Suspense
         fallback={
-          <section className="pt-12 xl:pt-24">
+          <section className="pt-14 xl:pt-28">
             <div className="container">
               <div className="row gy-4">
                 <div className="col-12 lg:col-3">

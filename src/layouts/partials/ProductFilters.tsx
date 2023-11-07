@@ -54,7 +54,7 @@ const ProductFilters = ({
       setSelectedBrand(name);
     }
 
-    router.push(createUrl("/products", newParams), { scroll: false });
+    router.push(createUrl("/products", newParams));
   };
 
 
@@ -71,6 +71,21 @@ const ProductFilters = ({
     }
 
     router.push(createUrl("/products", newParams), { scroll: false });
+  };
+
+  const handleTagClick = (name: string) => {
+    const slugName = slugify(name.toLowerCase());
+    const newParams = new URLSearchParams(searchParams.toString());
+
+    if (name === selectedCategory || name === '') {
+      newParams.delete("t");
+      setSelectedCategory(null);
+    } else {
+      newParams.set("t", slugName);
+      setSelectedCategory(name);
+    }
+
+    router.push(createUrl("/products", newParams));
   };
 
   return (
@@ -115,7 +130,7 @@ const ProductFilters = ({
       {
         vendors &&
         <div>
-          <h5 className="mb-2 mt-8 lg:mt-10 lg:text-xl">Brand</h5>
+          <h5 className="mb-2 mt-8 lg:mt-10 lg:text-xl">Brands</h5>
           <hr />
           <ul className="mt-4 space-y-4">
             {vendors.map(vendor => (
@@ -181,6 +196,7 @@ const ProductFilters = ({
               <p
                 key={tag}
                 className="px-2 py-1 rounded-md border text-light dark:text-darkmode-light"
+                onClick={() => handleTagClick(tag)}
               >
                 {tag}
               </p>

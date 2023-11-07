@@ -9,3 +9,16 @@ export const getVendorsQuery = /* GraphQL */ `
 		}
   }
 `;
+
+export const getTagsQuery = /* GraphQL */ `
+  query getVendors {
+		products(first: 250) {
+			edges {
+				node {
+					tags
+				}
+			}
+		}
+  }
+`;
+

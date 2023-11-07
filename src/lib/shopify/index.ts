@@ -443,6 +443,28 @@ export async function getVendors({
   return vendorProductCounts;
 }
 
+export async function getTags({
+  query,
+  reverse,
+  sortKey
+}: {
+  query?: string;
+  reverse?: boolean;
+  sortKey?: string;
+}): Promise<Product[]> {
+  const res = await shopifyFetch<ShopifyProductsOperation>({
+    query: getProductsQuery,
+    tags: [TAGS.products],
+    variables: {
+      query,
+      reverse,
+      sortKey
+    }
+  });
+
+  return reshapeProducts(removeEdgesAndNodes(res.body.data.products));
+}
+
 
 
 export async function getProducts({
