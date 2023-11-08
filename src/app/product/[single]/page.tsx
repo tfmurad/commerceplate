@@ -4,6 +4,7 @@ import ProductGallery from "@/components/product/ProductGallery";
 import ShowTags from "@/components/product/ShowTags";
 import { VariantSelector } from "@/components/product/variant-selector";
 import social from "@/config/social.json";
+import MDXContent from "@/helpers/MDXContent";
 import { currencySymbol } from "@/lib/constants";
 import { getProduct, getProductRecommendations } from "@/lib/shopify";
 import LatestProducts from "@/partials/LatestProducts";
@@ -46,7 +47,7 @@ const ShowProductSingle = async ({ params }: { params: { single: string } }) => 
 
   const relatedProducts = await getProductRecommendations(id);
   if (!relatedProducts.length) return null;
-  // console.log(relatedProducts[0])
+  console.log(id)
 
   return (
     <>
@@ -84,7 +85,6 @@ const ShowProductSingle = async ({ params }: { params: { single: string } }) => 
               </div>
 
               <div className="flex gap-4 mt-8 md:mt-10 mb-6">
-                {/* <Counter /> */}
                 <AddToCart variants={product.variants} availableForSale={product.availableForSale} stylesClass={"btn max-md:btn-sm btn-primary"} />
               </div>
 
@@ -114,10 +114,10 @@ const ShowProductSingle = async ({ params }: { params: { single: string } }) => 
                 <Social source={social.main} className="social-icons" />
               </div>
 
-              {tags.length > 1 && (
+              {tags.length > 0 && (
                 <div className="flex gap-3 items-center">
                   <h5 className="max-md:text-base">Tags:</h5>
-                  <ShowTags tags={tags}/>
+                  <ShowTags tags={tags} />
                 </div>
               )}
             </div>
@@ -128,8 +128,8 @@ const ShowProductSingle = async ({ params }: { params: { single: string } }) => 
       {/* TODO: tabs description of a product  */}
       <section>
         <div className="container">
-          {/* <MDXContent content={description} /> */}
-          <p>{description}</p>
+          <MDXContent content={description} />
+          {/* <p>{description}</p> */}
         </div>
       </section>
 
@@ -195,21 +195,21 @@ const ProductSingle = ({ params }: { params: { single: string } }) => {
 
         <section className="pt-14 xl:pt-28">
           <div className="container">
-          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
-                    {Array(9)
-                      .fill(0)
-                      .map((_, index) => {
-                        return (
-                          <div key={index}>
-                            <div className="h-[150px] md:h-[269px] rounded-md animate-pulse bg-neutral-200 dark:bg-neutral-700" />
-                            <div className="flex flex-col justify-center items-center">
-                              <div className="mt-4 w-24 h-3 rounded-full animate-pulse bg-neutral-200 dark:bg-neutral-700"></div>
-                              <div className="mt-2 w-16 h-2 rounded-full animate-pulse bg-neutral-200 dark:bg-neutral-700"></div>
-                            </div>
-                          </div>
-                        );
-                      })}
-                  </div>
+            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+              {Array(9)
+                .fill(0)
+                .map((_, index) => {
+                  return (
+                    <div key={index}>
+                      <div className="h-[150px] md:h-[269px] rounded-md animate-pulse bg-neutral-200 dark:bg-neutral-700" />
+                      <div className="flex flex-col justify-center items-center">
+                        <div className="mt-4 w-24 h-3 rounded-full animate-pulse bg-neutral-200 dark:bg-neutral-700"></div>
+                        <div className="mt-2 w-16 h-2 rounded-full animate-pulse bg-neutral-200 dark:bg-neutral-700"></div>
+                      </div>
+                    </div>
+                  );
+                })}
+            </div>
           </div>
         </section>
       </>

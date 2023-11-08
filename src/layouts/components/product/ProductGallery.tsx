@@ -42,7 +42,7 @@ const ProductGallery = ({ images }: { images: any }) => {
         >
           {images.map((item: any, index: number) => (
             <SwiperSlide key={item.url}>
-              <Image src={item.url} alt={item.altText} width={722} height={623} className="mb-6 rounded-md " />
+              <Image src={item.url} alt={item.altText} width={722} height={623} className="mb-6 border rounded-md " />
             </SwiperSlide>
           ))}
           <div
@@ -66,7 +66,6 @@ const ProductGallery = ({ images }: { images: any }) => {
         freeMode={true}
         watchSlidesProgress={true}
         modules={[FreeMode, Navigation, Thumbs]}
-        className="mySwiper"
       >
         {images.map((item: any, index: number) => (
           <SwiperSlide key={item.altText}>

@@ -60,6 +60,21 @@ const ProductListView = async ({ currentPage, products, searchValue }: any) => {
                 </p>
               ) : null}
 
+              {
+                productsToDisplay.length === 0 &&
+                <div className="mx-auto pt-5 text-center">
+                  <ImageFallback
+                    className="mx-auto mb-6"
+                    src="/images/no-search-found.png"
+                    alt="no-search-found"
+                    width={211}
+                    height={184}
+                  />
+                  <h1 className="h2 mb-4">No Product Found!</h1>
+                  <p>We couldn&apos;t find what you filtered for. Try filtering again.</p>
+                </div>
+              }
+
               {productsToDisplay?.map((product: Product) => {
                 const { id, title, variants, handle, featuredImage, priceRange, description, compareAtPriceRange } = product;
                 return (

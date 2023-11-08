@@ -186,7 +186,7 @@ const ProductFilters = ({
       </div> */}
 
       {
-        tags.length > 1 &&
+        tags.length > 0 &&
         <div>
           <h5 className="mb-2 mt-8 lg:mt-10 lg:text-xl">Tags</h5>
           <hr />
