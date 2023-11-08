@@ -56,7 +56,7 @@ export default function RootLayout({
         />
       </head>
 
-      <body suppressHydrationWarning={true}>
+      <body suppressHydrationWarning={true} className=" selection:bg-gray-300 dark:selection:bg-gray-300 dark:selection:text-dark">
         <TwSizeIndicator />
         <Providers>
           <GlobalState>

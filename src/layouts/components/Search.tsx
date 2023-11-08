@@ -4,7 +4,7 @@ import { createUrl } from "@/lib/utils";
 import { useRouter, useSearchParams } from "next/navigation";
 import { IoSearch } from "react-icons/io5";
 
-const Search = ({ products }: { products: any }) => {
+const Search = ({ products, searchValue }: { products: any, searchValue: string }) => {
   const router = useRouter();
   const searchParams = useSearchParams();
 
@@ -47,9 +47,23 @@ const Search = ({ products }: { products: any }) => {
             </button>
           </form>
 
-
-          {
-            products.length < 1 &&
+          {searchValue ? (
+            <div className="mb-4 h4">
+              {products.length === 0
+                ? <div className="mx-auto pt-5 text-center">
+                <ImageFallback
+                  className="mx-auto mb-6"
+                  src="/images/no-search-found.png"
+                  alt="no-search-found"
+                  width={211}
+                  height={184}
+                />
+                <h1 className="h2 mb-4">No Search Found!</h1>
+                <p>There are no products that match <span className="font-bold">&quot;{searchValue}&quot;</span>. Try searching again.</p>
+              </div>
+                :null}
+            </div>
+          ) :
             <div className="mx-auto pt-5 text-center">
               <ImageFallback
                 className="mx-auto mb-6"
@@ -58,14 +72,8 @@ const Search = ({ products }: { products: any }) => {
                 width={211}
                 height={184}
               />
-              <h1 className="h2 mb-4">
-                {products.length < 1 ? "Search Products Here" : "No Search Found!"}
-              </h1>
-              <p>
-                {products.length < 1
-                  ? "Search for products by title, category, or tag."
-                  : "We couldn't find what you searched for. Try searching again."}
-              </p>
+              <h1 className="h2 mb-4">Search Products Here</h1>
+              <p>Search for products by title, category, or tag.</p>
             </div>
           }
         </div>

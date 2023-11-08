@@ -25,13 +25,13 @@ const ProductListView = async ({ currentPage, products, searchValue }: any) => {
   // getting collections 
   const categories = await getCollections();
   const vendors = await getVendors({});
-  const tags = [...new Set(products.flatMap((product:Product) => product.tags))];
+  const tags = [...new Set(products.flatMap((product: Product) => product.tags))];
 
-    // Getting Max price for the price-rage selector
-    const maxProductPriceData = products.map((product: Product) => product.priceRange.maxVariantPrice);
-    const maxProductPrice = Math.ceil(Math.max(...maxProductPriceData.map((a: { amount: string; currencyCode: string }) => parseFloat(a.amount))));
-    const maxProductCurrency:string = products.map((product: Product) => product.priceRange.maxVariantPrice.currencyCode)[0];
-    const maxPriceData = { maxProductPrice, maxProductCurrency };
+  // Getting Max price for the price-rage selector
+  const maxProductPriceData = products.map((product: Product) => product.priceRange.maxVariantPrice);
+  const maxProductPrice = Math.ceil(Math.max(...maxProductPriceData.map((a: { amount: string; currencyCode: string }) => parseFloat(a.amount))));
+  const maxProductCurrency: string = products.map((product: Product) => product.priceRange.maxVariantPrice.currencyCode)[0];
+  const maxPriceData = { maxProductPrice, maxProductCurrency };
 
   return (
     <section>
@@ -39,7 +39,7 @@ const ProductListView = async ({ currentPage, products, searchValue }: any) => {
         <div className="row">
           {/* Left Side  */}
           <div className="col-3 hidden lg:block">
-          <ProductFilters
+            <ProductFilters
               categories={categories}
               vendors={vendors}
               tags={tags}
@@ -49,7 +49,7 @@ const ProductListView = async ({ currentPage, products, searchValue }: any) => {
 
           {/* Right side  */}
           <div className="col-12 lg:col-9">
-            <div className="space-y-10 mb-14">
+            <div className="space-y-10 pb-24 lg:pb-36 xl:pb-24 sticky top-28">
 
               {searchValue ? (
                 <p className="mb-4">
@@ -84,8 +84,8 @@ const ProductListView = async ({ currentPage, products, searchValue }: any) => {
 
                       <div className="flex items-center gap-x-2 mt-2">
                         <span className="text-light dark:text-darkmode-light text-xs md:text-lg font-bold">
-                        ৳ {priceRange.minVariantPrice.amount}{" "}
-                        {priceRange.minVariantPrice.currencyCode}
+                          ৳ {priceRange.minVariantPrice.amount}{" "}
+                          {priceRange.minVariantPrice.currencyCode}
                         </span>
                         {parseFloat(compareAtPriceRange?.maxVariantPrice.amount) > 0 ? (
                           <s className="text-light dark:text-darkmode-light text-xs md:text-base font-medium">

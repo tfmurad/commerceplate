@@ -1,11 +1,12 @@
 "use client";
 
+import ShowTags from "@/components/product/ShowTags";
 import RangeSlider from "@/components/rangeSlider/RangeSlider";
 import { ShopifyCollection } from "@/lib/shopify/types";
 import { createUrl } from "@/lib/utils";
 import { slugify } from "@/lib/utils/textConverter";
 import { useRouter, useSearchParams } from "next/navigation";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { BsCheckLg } from "react-icons/bs";
 
 const ProductFilters = ({
@@ -23,7 +24,7 @@ const ProductFilters = ({
   const searchParams = useSearchParams();
   const [selectedBrand, setSelectedBrand] = useState<string | null>(null);
   const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
-  // console.log(selectedCategory)
+
   // const sizes = [
   //   {
   //     id: "H40E27",
@@ -46,15 +47,15 @@ const ProductFilters = ({
     const slugName = slugify(name.toLowerCase());
     const newParams = new URLSearchParams(searchParams.toString());
 
-    if (name === selectedBrand) {
-      newParams.delete("brand");
+    if (name === selectedBrand || name === '') {
+      newParams.delete("b");
       setSelectedBrand(null);
     } else {
-      newParams.set("brand", slugName);
+      newParams.set("b", slugName);
       setSelectedBrand(name);
     }
 
-    router.push(createUrl("/products", newParams));
+    router.push(createUrl("/products", newParams), { scroll: false });
   };
 
 
@@ -70,23 +71,21 @@ const ProductFilters = ({
       setSelectedCategory(name);
     }
 
+
     router.push(createUrl("/products", newParams), { scroll: false });
   };
 
-  const handleTagClick = (name: string) => {
-    const slugName = slugify(name.toLowerCase());
-    const newParams = new URLSearchParams(searchParams.toString());
-
-    if (name === selectedCategory || name === '') {
-      newParams.delete("t");
+  // removing the states for using in the style class 
+  const cRemove = searchParams.get('c');
+  const bRemove = searchParams.get('b');
+  useEffect(() => {
+    if (!cRemove) {
       setSelectedCategory(null);
-    } else {
-      newParams.set("t", slugName);
-      setSelectedCategory(name);
     }
-
-    router.push(createUrl("/products", newParams));
-  };
+    if (!bRemove) {
+      setSelectedBrand(null);
+    }
+  }, [cRemove, bRemove])
 
   return (
     <>
@@ -187,11 +186,11 @@ const ProductFilters = ({
       </div> */}
 
       {
-        tags &&
+        tags.length > 1 &&
         <div>
           <h5 className="mb-2 mt-8 lg:mt-10 lg:text-xl">Tags</h5>
           <hr />
-          <button className="flex flex-wrap gap-3 mt-4">
+          {/* <button className="flex flex-wrap gap-3 mt-4">
             {tags.map((tag: string) => (
               <p
                 key={tag}
@@ -201,7 +200,8 @@ const ProductFilters = ({
                 {tag}
               </p>
             ))}
-          </button>
+          </button> */}
+          <ShowTags tags={tags} />
         </div>
       }
     </>

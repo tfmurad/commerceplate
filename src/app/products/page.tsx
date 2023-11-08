@@ -25,9 +25,9 @@ const ShowProducts = async ({ searchParams }: { searchParams: any }) => {
     q: searchValue,
     minPrice,
     maxPrice,
-    brand,
+    b: brand,
     c,
-    t:tag
+    t: tag
   } = searchParams as {
     [key: string]: string;
   };

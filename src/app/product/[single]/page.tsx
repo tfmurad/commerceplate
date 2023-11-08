@@ -1,6 +1,7 @@
 import Social from "@/components/Social";
 import { AddToCart } from "@/components/cart/add-to-cart";
 import ProductGallery from "@/components/product/ProductGallery";
+import ShowTags from "@/components/product/ShowTags";
 import { VariantSelector } from "@/components/product/variant-selector";
 import social from "@/config/social.json";
 import { currencySymbol } from "@/lib/constants";
@@ -113,19 +114,10 @@ const ShowProductSingle = async ({ params }: { params: { single: string } }) => 
                 <Social source={social.main} className="social-icons" />
               </div>
 
-              {tags && (
+              {tags.length > 1 && (
                 <div className="flex gap-3 items-center">
                   <h5 className="max-md:text-base">Tags:</h5>
-                  <button className="flex flex-wrap gap-3">
-                    {tags.map((tag, i) => (
-                      <p
-                        key={`tags-${i}`}
-                        className="px-2 py-1 rounded-md border max-md:text-sm"
-                      >
-                        {tag}
-                      </p>
-                    ))}
-                  </button>
+                  <ShowTags tags={tags}/>
                 </div>
               )}
             </div>
