@@ -47,7 +47,7 @@ const ShowProductSingle = async ({ params }: { params: { single: string } }) => 
 
   const relatedProducts = await getProductRecommendations(id);
   if (!relatedProducts.length) return null;
-  console.log(id)
+  // console.log(id)
 
   return (
     <>
@@ -85,7 +85,7 @@ const ShowProductSingle = async ({ params }: { params: { single: string } }) => 
               </div>
 
               <div className="flex gap-4 mt-8 md:mt-10 mb-6">
-                <AddToCart variants={product.variants} availableForSale={product.availableForSale} stylesClass={"btn max-md:btn-sm btn-primary"} />
+                <AddToCart variants={product.variants} availableForSale={product.availableForSale} stylesClass={"btn max-md:btn-sm btn-primary"} handle={null}/>
               </div>
 
               <div className="mb-8 md:mb-10">

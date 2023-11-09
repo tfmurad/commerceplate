@@ -31,7 +31,7 @@ const Home = async () => {
       <SeoMeta />
       <section>
         <div className="container">
-          <div className="bg-gradient py-10">
+          <div className="bg-gradient py-10 rounded-md">
             <HeroSlider content={banner} />
           </div>
         </div>

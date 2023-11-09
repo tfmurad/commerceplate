@@ -5,20 +5,16 @@ description: "this is meta description"
 draft: false
 
 #Contact Options
-contactOptions:
-  - heading: "Address"
-    subHeading: "123 Main Street, Anytown,"
-    subtitle: "CA 12345 - USA"
+contact_meta:
+  - name: "Address"
+    contact: "123 Main Street, Anytown, </br> CA 12345 - USA"
 
-  - heading: "Email"
-    subHeading: "yourmail@domain.com"
-    subtitle: "support@roadthemes.com"
+  - name: "Email"
+    contact: "yourmail@domain.com </br> support@roadthemes.com"
 
-  - heading: "Phone"
-    subHeading: "Mobile: (08) 123 456 789"
-    subtitle: "Hotline: 1009 678 456"
+  - name: "Phone"
+    contact: "Mobile: (08) 123 456 789 </br> Hotline: 1009 678 456"
 
-  - heading: "shop time"
-    subHeading: "available at 10am-8pm"
-		subtitle: ""
+  - name: "Shop Time"
+    contact: "Available at 10am-8pm </br>"
 ---

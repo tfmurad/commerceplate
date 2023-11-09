@@ -38,8 +38,8 @@ const GlobalState = ({ children }: { children: ReactNode }) => {
     const indexOfCurrentItem = copycartItems.findIndex(
       (item) => item.id === getCurrentItem.id,
     );
-    console.log(indexOfCurrentItem);
-    console.log(indexOfCurrentItem);
+    // console.log(indexOfCurrentItem);
+    // console.log(indexOfCurrentItem);
 
     if (indexOfCurrentItem === -1) {
       copycartItems.push(getCurrentItem);

@@ -1,12 +1,14 @@
 import config from "@/config/config.json";
 import { getListPage } from "@/lib/contentParser";
+import { markdownify } from "@/lib/utils/textConverter";
 import PageHeader from "@/partials/PageHeader";
 import SeoMeta from "@/partials/SeoMeta";
+import { ContactUsItem, RegularPage } from "@/types";
 
 const Contact = async () => {
-  const data: any = getListPage("contact/_index.md");
+  const data: RegularPage = getListPage("contact/_index.md");
   const { frontmatter } = data;
-  const { title, description, meta_title, image, contactOptions } = frontmatter;
+  const { title, description, meta_title, image, contact_meta } = frontmatter;
   const { contact_form_action } = config.params;
 
   return (
@@ -22,11 +24,10 @@ const Contact = async () => {
         <div className="container">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
             {
-              contactOptions && contactOptions.map((contact: any) => (
-                <div key={contact.heading} className="p-10 bg-theme-light dark:bg-darkmode-theme-light rounded-md text-center">
-                  <h2 className="mb-6">{contact.heading}</h2>
-                  <p>{contact.subHeading}</p>
-                  <p>{contact.subtitle}</p>
+              contact_meta && contact_meta?.map((contact: ContactUsItem) => (
+                <div key={contact.name} className="p-10 bg-theme-light dark:bg-darkmode-theme-light rounded-md text-center">
+                  <p dangerouslySetInnerHTML={markdownify(contact.name)} className="mb-6 h3 font-medium text-dark dark:text-darkmode-dark"/>
+                  <p dangerouslySetInnerHTML={markdownify(contact.contact)} />
                 </div>
               ))
             }

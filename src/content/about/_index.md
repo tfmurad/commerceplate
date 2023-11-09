@@ -6,7 +6,7 @@ image: "/images/avatar.png"
 draft: false
 
 #About Us
-aboutUs:
+about_us:
  - image: "/images/aboutUs.png"
    content: "Welcome to **Commerceplate** where brilliance meets innovation. We take pride in being your ultimate destination for exquisite lighting solutions that illuminate spaces and lives alike. With a passion for creating luminous experiences, we curate a diverse range of cutting-edge light fixtures designed to elevate any environment. Our commitment to quality craftsmanship and a keen eye for aesthetic appeal ensures that each product we offer is not just a source of light, 
 	 <br/><br/>

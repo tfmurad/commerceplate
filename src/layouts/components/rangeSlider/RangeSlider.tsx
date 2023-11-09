@@ -4,8 +4,8 @@ import { useRouter, useSearchParams } from "next/navigation";
 import { useState } from 'react';
 import "./rangeSlider.css";
 
-const RangeSlider = ({maxPriceData}:{maxPriceData:{maxProductPrice:number, maxProductCurrency:string}}) => {
-	
+const RangeSlider = ({ maxPriceData }: { maxPriceData: { maxProductPrice: number, maxProductCurrency: string } }) => {
+
 	const [minValue, setMinValue] = useState(0);
 	const [maxValue, setMaxValue] = useState(0);
 	const [minValue2, setMinValue2] = useState(0);
@@ -17,22 +17,22 @@ const RangeSlider = ({maxPriceData}:{maxPriceData:{maxProductPrice:number, maxPr
 	// Define the priceChange function
 	function priceChange(minValue: number, maxValue: number) {
 		const newParams = new URLSearchParams(searchParams.toString());
-	  
+
 		// Retain existing query parameters
 		newParams.forEach((value, key) => {
-		  if (key !== 'minPrice' && key !== 'maxPrice') {
-			newParams.delete(key);
-		  }
+			if (key !== 'minPrice' && key !== 'maxPrice') {
+				newParams.delete(key);
+			}
 		});
-	  
+
 		if (minValue || maxValue !== undefined) {
-		  newParams.set('minPrice', minValue.toString());
-		  newParams.set('maxPrice', maxValue.toString());
+			newParams.set('minPrice', minValue.toString());
+			newParams.set('maxPrice', maxValue.toString());
 		}
-	  
+
 		router.push(createUrl('/products', newParams), { scroll: false });
-	  };
-	  
+	};
+
 
 	return (
 		<div>
@@ -63,7 +63,7 @@ const RangeSlider = ({maxPriceData}:{maxPriceData:{maxProductPrice:number, maxPr
 			/>
 
 			<button className="btn btn-sm btn-primary w-full" onClick={() => { priceChange(minValue2, maxValue2) }}>sumbit</button>
-			
+
 		</div>
 	);
 }

@@ -1,27 +1,32 @@
 "use client"
-import React from 'react';
+import { ProductVariant } from '@/lib/shopify/types';
 import { useSearchParams } from 'next/navigation';
+import React from 'react';
 import {
   // @ts-ignore
   experimental_useFormState as useFormState,
   experimental_useFormStatus as useFormStatus
 } from 'react-dom';
-import LoadingDots from '../loading-dots';
-import { ProductVariant } from '@/lib/shopify/types';
+import { BiLoaderAlt } from "react-icons/bi";
 import { addItem } from './actions';
+import Link from 'next/link';
 
 function SubmitButton({
   availableForSale,
   selectedVariantId,
   stylesClass,
+  handle
 }: {
   availableForSale: boolean;
   selectedVariantId: string | undefined;
   stylesClass: string;
+  handle:string | null;
 }) {
   const { pending } = useFormStatus();
   const buttonClasses = stylesClass;
   const disabledClasses = 'cursor-not-allowed opacity-60 hover:opacity-60 flex';
+
+  const DynamicTag = handle === null ? 'button' : Link;
 
   if (!availableForSale) {
     return (
@@ -33,13 +38,14 @@ function SubmitButton({
 
   if (!selectedVariantId) {
     return (
-      <button
+      <DynamicTag
+      href={`/product/${handle}`}
         aria-label="Please select an option"
         aria-disabled
-        className={`${buttonClasses} ${disabledClasses}`}
+        className={`${buttonClasses} ${DynamicTag === "button" && disabledClasses}`}
       >
         Select Variant
-      </button>
+      </DynamicTag>
     );
   }
 
@@ -50,10 +56,9 @@ function SubmitButton({
       }}
       aria-label="Add to cart"
       aria-disabled={pending ? 'true' : 'false'}
-      className={`${buttonClasses} ${pending ? disabledClasses : 'hover:opacity-90'}`}
+      className={`${buttonClasses}`}
     >
-      Add To Cart
-      <div>{pending ? <LoadingDots className="bg-white" /> : ''}</div>
+      {pending ? <BiLoaderAlt className={`animate-spin w-[70px] md:w-[85px]`} size={26}/> : 'Add To Cart'}
     </button>
   );
 }
@@ -62,10 +67,12 @@ export function AddToCart({
   variants,
   availableForSale,
   stylesClass,
+  handle
 }: {
   variants: ProductVariant[];
   availableForSale: boolean;
   stylesClass: string;
+  handle:string | null;
 }) {
   const [message, formAction] = useFormState(addItem, null);
   const searchParams = useSearchParams();
@@ -80,7 +87,7 @@ export function AddToCart({
 
   return (
     <form action={actionWithVariant}>
-      <SubmitButton availableForSale={availableForSale} selectedVariantId={selectedVariantId} stylesClass={stylesClass} />
+      <SubmitButton availableForSale={availableForSale} selectedVariantId={selectedVariantId} stylesClass={stylesClass} handle={handle}/>
       <p aria-live="polite" className="sr-only" role="status">
         {message}
       </p>

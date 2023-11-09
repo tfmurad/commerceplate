@@ -8,10 +8,10 @@ type ShowTagsProps = {
   tags: string[];
 };
 
-const ShowTags: React.FC<ShowTagsProps> = ({tags}) => {
-	const router = useRouter();
+const ShowTags: React.FC<ShowTagsProps> = ({ tags }) => {
+  const router = useRouter();
   const searchParams = useSearchParams();
-	const [selectedTag, setSelectedTag] = useState<string | null>(null);
+  const [selectedTag, setSelectedTag] = useState<string | null>(null);
 
   const handleTagClick = (name: string) => {
     const slugName = slugify(name.toLowerCase());
@@ -28,19 +28,19 @@ const ShowTags: React.FC<ShowTagsProps> = ({tags}) => {
     router.push(createUrl("/products", newParams), { scroll: false });
   };
 
-	return (
-		<button className="flex flex-wrap gap-3 mt-4">
-            {tags.map((tag: string) => (
-              <p
-                key={tag}
-                className="px-2 py-1 rounded-md border text-light dark:text-darkmode-light"
-                onClick={() => handleTagClick(tag)}
-              >
-                {tag}
-              </p>
-            ))}
-          </button>
-	)
+  return (
+    <button className="flex flex-wrap gap-3">
+      {tags.map((tag: string) => (
+        <p
+          key={tag}
+          className="px-2 py-1 rounded-md border text-light dark:text-darkmode-light"
+          onClick={() => handleTagClick(tag)}
+        >
+          {tag}
+        </p>
+      ))}
+    </button>
+  )
 }
 
 export default ShowTags

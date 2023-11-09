@@ -5,13 +5,14 @@ import { markdownify } from "@/lib/utils/textConverter";
 import PageHeader from "@/partials/PageHeader";
 import SeoMeta from "@/partials/SeoMeta";
 import Testimonials from "@/partials/Testimonials";
+import { AboutUsItem, RegularPage } from "@/types";
 
 const About = () => {
-  const data: any = getListPage("about/_index.md");
-  const testimonial = getListPage("sections/testimonial.md");
-  const accordion = getListPage("sections/faq.md");
-  const { frontmatter, content } = data;
-  const { title, meta_title, description, image, aboutUs } = frontmatter;
+  const data: RegularPage = getListPage("about/_index.md");
+  const testimonial = getListPage("about/testimonial.md");
+  const accordion = getListPage("about/faq.md");
+  const { frontmatter } = data;
+  const { title, meta_title, description, image, about_us } = frontmatter;
 
   return (
     <>
@@ -26,22 +27,22 @@ const About = () => {
 
       <section>
         <div className="container">
-          {aboutUs.map((section: any, index: number) => (
-            <div className={`lg:flex gap-8 mt-14 lg:mt-28`} key={section.heading}>
+          {about_us?.map((section: AboutUsItem, index: number) => (
+            <div className={`lg:flex gap-8 mt-14 lg:mt-28`} key={section?.heading}>
               {index % 2 === 0 ? (
                 <>
                   <ImageFallback
                     className="rounded-md mx-auto"
-                    src={section.image}
+                    src={section?.image}
                     width={536}
                     height={449}
-                    alt={section.heading}
+                    alt={section?.heading}
                   />
                   <div className="mt-10 lg:mt-0">
-                    <h2>{section.heading}</h2>
+                    <h2>{section?.heading}</h2>
                     <p
                       className="mt-4 text-light leading-7"
-                      dangerouslySetInnerHTML={markdownify(section.content)}
+                      dangerouslySetInnerHTML={markdownify(section?.content)}
                     />
                   </div>
                 </>
@@ -73,7 +74,7 @@ const About = () => {
       <section>
         <div className="container">
           <div className="text-center">
-            <h2>Out Staff</h2>
+            <h2>Our Staff</h2>
 
             <div className="grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 mt-14">
               {Array.from({ length: 4 }).map((_, idx) => (
@@ -140,7 +141,7 @@ const About = () => {
             </div>
 
             <div className="col-12 md:col-7">
-              <MDXContent content={accordion.content} />
+              <MDXContent content={accordion?.content} />
             </div>
           </div>
         </div>

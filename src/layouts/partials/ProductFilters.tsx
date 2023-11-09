@@ -201,7 +201,9 @@ const ProductFilters = ({
               </p>
             ))}
           </button> */}
-          <ShowTags tags={tags} />
+          <div className="mt-4">
+            <ShowTags tags={tags} />
+          </div>
         </div>
       }
     </>

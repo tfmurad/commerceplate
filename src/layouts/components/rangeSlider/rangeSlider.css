@@ -1,5 +1,5 @@
 :root {
-  --bar-inner-background: black;
+  --bar-inner-background: gray;
 }
 
 .multi-range-slider .bar-left {

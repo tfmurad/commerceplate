@@ -109,6 +109,7 @@ const ProductCardView = async ({ currentPage, products, searchValue }: any) => {
                         <AddToCart
                           variants={product.variants}
                           availableForSale={product.availableForSale}
+                          handle={handle}
                           stylesClass={
                             "btn btn-primary max-md:btn-sm z-10 absolute bottom-0 left-1/2 transform -translate-x-1/2 translate-y-full group-hover:-translate-y-6 duration-300 ease-in-out whitespace-nowrap drop-shadow-md"
                           }

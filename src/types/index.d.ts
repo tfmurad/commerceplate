@@ -6,10 +6,23 @@ export type RegularPage = {
     meta_title?: string;
     layout?: string;
     draft?: boolean;
+    about_us?: AboutUsItem[]; 
+    contact_meta?: ContactUsItem[];
   };
   content: string;
   slug?: string;
 };
+
+export type AboutUsItem = {
+  image: string;
+  content: string;
+  heading: string;
+}
+
+export type ContactUsItem = {
+  name: string;
+  contact: string;
+}
 
 export type Post = {
   frontmatter: {
@@ -81,7 +94,7 @@ export type Button = {
   link: string;
 };
 
-export type ContactOptions = {
+export type contact_meta = {
   frontmatter: {
     heading: string;
     subHeading: string;
@@ -91,7 +104,7 @@ export type ContactOptions = {
   slug?: string;
 };
 
-export type Categories ={
+export type Categories = {
   id: number;
   name: string;
   imageSrc: string;
