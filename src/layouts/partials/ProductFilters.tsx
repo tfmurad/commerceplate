@@ -6,7 +6,6 @@ import { ShopifyCollection } from "@/lib/shopify/types";
 import { createUrl } from "@/lib/utils";
 import { slugify } from "@/lib/utils/textConverter";
 import { useRouter, useSearchParams } from "next/navigation";
-import { useEffect, useState } from "react";
 import { BsCheckLg } from "react-icons/bs";
 
 const ProductFilters = ({
@@ -16,15 +15,17 @@ const ProductFilters = ({
   maxPriceData,
 }: {
   categories: ShopifyCollection[];
-  vendors: { vendor: string, productCount: number }[];
-  tags: any;
+  vendors: { vendor: string; productCount: number }[];
+  tags: string[];
   maxPriceData: { maxProductPrice: number; maxProductCurrency: string };
 }) => {
   const router = useRouter();
   const searchParams = useSearchParams();
-  const [selectedBrand, setSelectedBrand] = useState<string | null>(null);
-  const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
 
+  const selectedBrands = searchParams.getAll("b");
+  const selectedCategory = searchParams.get("c");
+
+  // console.log(vendors)
   // const sizes = [
   //   {
   //     id: "H40E27",
@@ -47,45 +48,38 @@ const ProductFilters = ({
     const slugName = slugify(name.toLowerCase());
     const newParams = new URLSearchParams(searchParams.toString());
 
-    if (name === selectedBrand || name === '') {
-      newParams.delete("b");
-      setSelectedBrand(null);
-    } else {
-      newParams.set("b", slugName);
-      setSelectedBrand(name);
-    }
+    const currentBrands = newParams.getAll("b");
 
+    if (currentBrands.includes(slugName)) {
+      newParams.delete("b", slugName);
+    } else {
+      newParams.append("b", slugName);
+    }
     router.push(createUrl("/products", newParams), { scroll: false });
   };
 
-
-  const handleCategoryClick = (name: string) => {
-    const slugName = slugify(name.toLowerCase());
+  const handleCategoryClick = (handle: string) => {
     const newParams = new URLSearchParams(searchParams.toString());
 
-    if (name === selectedCategory || name === '') {
+    if (handle === selectedCategory) {
       newParams.delete("c");
-      setSelectedCategory(null);
     } else {
-      newParams.set("c", slugName);
-      setSelectedCategory(name);
+      newParams.set("c", handle);
     }
-
-
     router.push(createUrl("/products", newParams), { scroll: false });
   };
 
-  // removing the states for using in the style class 
-  const cRemove = searchParams.get('c');
-  const bRemove = searchParams.get('b');
-  useEffect(() => {
-    if (!cRemove) {
-      setSelectedCategory(null);
-    }
-    if (!bRemove) {
-      setSelectedBrand(null);
-    }
-  }, [cRemove, bRemove])
+  // removing the states for using in the style class
+  // const cRemove = searchParams.get('c');
+  // const bRemove = searchParams.get('b');
+  // useEffect(() => {
+  //   if (!cRemove) {
+  //     setSelectedCategory(null);
+  //   }
+  //   if (!bRemove) {
+  //     setSelectedBrand(null);
+  //   }
+  // }, [cRemove, bRemove])
 
   return (
     <>
@@ -116,23 +110,32 @@ const ProductFilters = ({
         <hr />
         <ul className="mt-4 space-y-4">
           {categories.map((category) => (
-            <li key={category.handle}
-              className={`flex items-center justify-between text-light dark:text-darkmode-light cursor-pointer ${selectedCategory === category.title ? "text-dark dark:text-darkmode-light font-semibold" : ''}`}
-              onClick={() => handleCategoryClick(category.title)}
+            <li
+              key={category.handle}
+              className={`flex items-center justify-between text-light dark:text-darkmode-light cursor-pointer ${
+                selectedCategory === category.handle
+                  ? "text-dark dark:text-darkmode-light font-semibold"
+                  : ""
+              }`}
+              onClick={() => handleCategoryClick(category.handle)}
             >
-              {category.title} <span>{category?.products?.edges.length! > 0 ? `(${category?.products?.edges.length!})` : ''}</span>
+              {category.title}{" "}
+              <span>
+                {category?.products?.edges.length! > 0
+                  ? `(${category?.products?.edges.length!})`
+                  : ""}
+              </span>
             </li>
           ))}
         </ul>
       </div>
 
-      {
-        vendors &&
+      {vendors && (
         <div>
           <h5 className="mb-2 mt-8 lg:mt-10 lg:text-xl">Brands</h5>
           <hr />
           <ul className="mt-4 space-y-4">
-            {vendors.map(vendor => (
+            {vendors.map((vendor) => (
               <li
                 key={vendor.vendor}
                 className={`flex items-center justify-between cursor-pointer text-light dark:text-darkmode-light`}
@@ -142,17 +145,19 @@ const ProductFilters = ({
                   {vendor.vendor} ({vendor.productCount})
                 </span>
                 <div className="h-4 w-4 rounded-sm flex items-center justify-center border border-light dark:border-darkmode-light">
-                  {selectedBrand === vendor.vendor && (
-                    <span>
-                      <BsCheckLg size={16} />
-                    </span>
+                  {selectedBrands.map((b, i) =>
+                    slugify(vendor.vendor.toLowerCase()) === b ? (
+                      <span key={i}>
+                        <BsCheckLg size={16} />
+                      </span>
+                    ) : null,
                   )}
                 </div>
               </li>
             ))}
           </ul>
         </div>
-      }
+      )}
 
       {/* <div>
         <h5 className="mb-2 mt-8 lg:mt-10 lg:text-xl">Frame Color</h5>
@@ -185,8 +190,7 @@ const ProductFilters = ({
         </ul>
       </div> */}
 
-      {
-        tags.length > 0 &&
+      {tags.length > 0 && (
         <div>
           <h5 className="mb-2 mt-8 lg:mt-10 lg:text-xl">Tags</h5>
           <hr />
@@ -205,7 +209,7 @@ const ProductFilters = ({
             <ShowTags tags={tags} />
           </div>
         </div>
-      }
+      )}
     </>
   );
 };

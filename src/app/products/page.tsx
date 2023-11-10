@@ -27,10 +27,12 @@ const ShowProducts = async ({ searchParams }: { searchParams: any }) => {
     maxPrice,
     b: brand,
     c,
-    t: tag
+    t: tag,
   } = searchParams as {
     [key: string]: string;
   };
+
+  // console.log(brand)
 
   const { layout } = searchParams as { [key: string]: string };
 
@@ -45,12 +47,17 @@ const ShowProducts = async ({ searchParams }: { searchParams: any }) => {
     if (minPrice || maxPrice) {
       queryString += `variants.price:<=${maxPrice} variants.price:>=${minPrice}`;
     }
+
     if (searchValue) {
       queryString += ` ${searchValue}`;
     }
+
     if (brand) {
-      queryString += ` ${brand}`;
+      Array.isArray(brand)
+        ? (queryString += ` vendor:(${brand.join(" OR ")})`)
+        : (queryString += ` ${brand}`);
     }
+
     if (tag) {
       queryString += ` ${tag}`;
     }

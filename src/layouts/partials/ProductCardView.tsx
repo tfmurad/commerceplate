@@ -24,12 +24,10 @@ const ProductCardView = async ({ currentPage, products, searchValue }: any) => {
   const categories = await getCollections();
   const vendors = await getVendors({});
 
-  const tags = [
-    ...new Set(products.flatMap((product: Product) => product.tags)),
-  ];
-
-  // const tags2 = await getTags({});
-  // console.log(tags2)
+  const tags: string[] = [
+    ...new Set(products.flatMap((product: Product) => product.tags) as unknown[]),
+  ] as string[];
+  
 
   // Getting Max price for the price-rage selector
   const maxProductPriceData = products.map((product: Product) => product.priceRange.maxVariantPrice);
