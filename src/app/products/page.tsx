@@ -7,12 +7,13 @@ import {
   getProducts,
   getVendors,
 } from "@/lib/shopify";
-import { Product } from "@/lib/shopify/types";
+import { PageInfo, Product } from "@/lib/shopify/types";
 import CallToAction from "@/partials/CallToAction";
 import PageHeader from "@/partials/PageHeader";
 import ProductCardView from "@/partials/ProductCardView";
 import ProductListView from "@/partials/ProductListView";
 import { Suspense } from "react";
+import { FaFaceFlushed } from "react-icons/fa6";
 
 // export interface ProductViewProps {
 //   currentPage: number | null;
@@ -20,6 +21,7 @@ import { Suspense } from "react";
 // }
 
 const ShowProducts = async ({ searchParams }: { searchParams: any }) => {
+
   const {
     sort,
     q: searchValue,
@@ -37,7 +39,7 @@ const ShowProducts = async ({ searchParams }: { searchParams: any }) => {
   const { sortKey, reverse } =
     sorting.find((item) => item.slug === sort) || defaultSort;
 
-  let products;
+  let productsData;
 
   if (searchValue || brand || minPrice || maxPrice || c || tag) {
     let queryString = "";
@@ -66,21 +68,27 @@ const ShowProducts = async ({ searchParams }: { searchParams: any }) => {
       query: queryString,
     };
 
-    products =
+    productsData =
       c && c !== "all"
         ? await getCollectionProducts({ collection: c, sortKey, reverse })
         : await getProducts(query);
   } else {
     // Fetch all products
-    products = await getProducts({ sortKey, reverse });
+    productsData = await getProducts({ sortKey, reverse });
+    // console.log(productsData.products[2].options)
   }
 
   // const products = await getProducts({ sortKey, reverse, query: searchValue });
   const categories = await getCollections();
   const vendors = await getVendors({});
+  // const tags = [
+  //   ...new Set(productsData?.products.flatMap((product: Product) => product.tags)),
+  // ];
+
   const tags = [
-    ...new Set(products.flatMap((product: Product) => product.tags)),
+    ...new Set((productsData as { pageInfo: PageInfo; products: Product[]; })?.products.flatMap((product: Product) => product.tags)),
   ];
+  
 
   return (
     <>
@@ -91,15 +99,16 @@ const ShowProducts = async ({ searchParams }: { searchParams: any }) => {
         maxPriceData={0}
       />
       {layout === "list" ? (
-        <ProductListView
-          currentPage={null}
-          products={products}
-          searchValue={searchValue}
-        />
+      <ProductListView
+      currentPage={null}
+      products={(Array.isArray(productsData) ? productsData : productsData?.products) || []}
+      searchValue={searchValue}
+    />
+    
       ) : (
         <ProductCardView
           currentPage={null}
-          products={products}
+          products={(Array.isArray(productsData) ? productsData : productsData?.products) || []}
           searchValue={searchValue}
         />
       )}

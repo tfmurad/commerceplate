@@ -1,4 +1,4 @@
-import productFragment from '../fragments/product';
+import productFragment from "../fragments/product";
 
 export const getProductQuery = /* GraphQL */ `
   query getProduct($handle: String!) {
@@ -10,13 +10,24 @@ export const getProductQuery = /* GraphQL */ `
 `;
 
 export const getProductsQuery = /* GraphQL */ `
-  query getProducts($sortKey: ProductSortKeys, $reverse: Boolean, $query: String, $cursor: String) {
-    products(sortKey: $sortKey, reverse: $reverse, query: $query, first: 100,after: $cursor) {
+  query getProducts(
+    $sortKey: ProductSortKeys
+    $reverse: Boolean
+    $query: String
+    $cursor: String
+  ) {
+    products(
+      sortKey: $sortKey
+      reverse: $reverse
+      query: $query
+      first: 3
+      after: $cursor
+    ) {
       pageInfo {
-          hasNextPage
-          hasPreviousPage
-          endCursor
-        }
+        hasNextPage
+        hasPreviousPage
+        endCursor
+      }
       edges {
         node {
           ...product

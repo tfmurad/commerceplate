@@ -30,6 +30,7 @@ import {
   Image,
   Menu,
   Page,
+  PageInfo,
   Product,
   ShopifyAddToCartOperation,
   ShopifyCart,
@@ -477,7 +478,7 @@ export async function getProducts({
   reverse?: boolean;
   sortKey?: string;
   cursor?:string;
-}): Promise<Product[]> {
+}): Promise<{ pageInfo: PageInfo; products: Product[] }> {
   const res = await shopifyFetch<ShopifyProductsOperation>({
     query: getProductsQuery,
     tags: [TAGS.products],
@@ -490,7 +491,12 @@ export async function getProducts({
     cache: "force-cache",
   });
 
-  return reshapeProducts(removeEdgesAndNodes(res.body.data.products));
+  const pageInfo = res.body.data?.products?.pageInfo;
+
+  return {
+    pageInfo,
+    products: reshapeProducts(removeEdgesAndNodes(res.body.data.products)),
+  };
 }
 
 // This is called from `app/api/revalidate.ts` so providers can control revalidation logic.
