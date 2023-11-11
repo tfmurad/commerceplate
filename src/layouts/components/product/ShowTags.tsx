@@ -2,7 +2,6 @@
 import { createUrl } from '@/lib/utils';
 import { slugify } from '@/lib/utils/textConverter';
 import { useRouter, useSearchParams } from 'next/navigation';
-import React, { useState } from 'react';
 
 type ShowTagsProps = {
   tags: string[];
@@ -11,18 +10,16 @@ type ShowTagsProps = {
 const ShowTags: React.FC<ShowTagsProps> = ({ tags }) => {
   const router = useRouter();
   const searchParams = useSearchParams();
-  const [selectedTag, setSelectedTag] = useState<string | null>(null);
+  const selectedTag = searchParams.get('t');
 
   const handleTagClick = (name: string) => {
     const slugName = slugify(name.toLowerCase());
     const newParams = new URLSearchParams(searchParams.toString());
 
-    if (name === selectedTag) {
+    if (slugName === selectedTag) {
       newParams.delete("t");
-      setSelectedTag(null);
     } else {
       newParams.set("t", slugName);
-      setSelectedTag(name);
     }
 
     router.push(createUrl("/products", newParams), { scroll: false });
@@ -33,7 +30,7 @@ const ShowTags: React.FC<ShowTagsProps> = ({ tags }) => {
       {tags.map((tag: string) => (
         <p
           key={tag}
-          className="px-2 py-1 rounded-md border text-light dark:text-darkmode-light"
+          className={`px-2 py-1 rounded-md border text-light dark:text-darkmode-light ${selectedTag=== slugify(tag.toLowerCase()) && "bg-theme-light dark:bg-theme-dark"} `}
           onClick={() => handleTagClick(tag)}
         >
           {tag}

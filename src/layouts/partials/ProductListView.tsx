@@ -25,7 +25,10 @@ const ProductListView = async ({ currentPage, products, searchValue }: any) => {
   // getting collections 
   const categories = await getCollections();
   const vendors = await getVendors({});
-  const tags = [...new Set(products.flatMap((product: Product) => product.tags))];
+
+  const tags: string[] = [
+    ...new Set(products.flatMap((product: Product) => product.tags) as unknown[]),
+  ] as string[];
 
   // Getting Max price for the price-rage selector
   const maxProductPriceData = products.map((product: Product) => product.priceRange.maxVariantPrice);
@@ -113,7 +116,11 @@ const ProductListView = async ({ currentPage, products, searchValue }: any) => {
                       </div>
 
                       <p className="max-md:text-xs text-light dark:text-darkmode-light my-4 md:mb-8">{description}</p>
-                      <AddToCart variants={product.variants} availableForSale={product.availableForSale} stylesClass={"btn btn-outline-primary max-md:btn-sm drop-shadow-md"} />
+                      <AddToCart 
+                      variants={product.variants} 
+                      availableForSale={product.availableForSale}
+                      handle={handle}
+                      stylesClass={"btn btn-outline-primary max-md:btn-sm drop-shadow-md"} />
                     </div>
                   </div>
                 )

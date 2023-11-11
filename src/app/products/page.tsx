@@ -32,8 +32,6 @@ const ShowProducts = async ({ searchParams }: { searchParams: any }) => {
     [key: string]: string;
   };
 
-  // console.log(brand)
-
   const { layout } = searchParams as { [key: string]: string };
 
   const { sortKey, reverse } =
@@ -54,8 +52,8 @@ const ShowProducts = async ({ searchParams }: { searchParams: any }) => {
 
     if (brand) {
       Array.isArray(brand)
-        ? (queryString += ` vendor:(${brand.join(" OR ")})`)
-        : (queryString += ` ${brand}`);
+        ? (queryString += `${brand.map(b => `(vendor:${b})`).join(" OR ")}`)
+        : (queryString += `vendor:"${brand}"`);
     }
 
     if (tag) {
