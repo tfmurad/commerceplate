@@ -2,8 +2,13 @@ import ProductLayouts from "@/components/product/ProductLayouts";
 import config from "@/config/config.json";
 import { defaultSort, sorting } from "@/lib/constants";
 import { getListPage } from "@/lib/contentParser";
-import { getCollections, getProducts, getVendors } from "@/lib/shopify";
-import { Product } from "@/lib/shopify/types";
+import {
+  getCollectionProducts,
+  getCollections,
+  getProducts,
+  getVendors,
+} from "@/lib/shopify";
+import { PageInfo, Product } from "@/lib/shopify/types";
 import CallToAction from "@/partials/CallToAction";
 import PageHeader from "@/partials/PageHeader";
 import ProductCardView from "@/partials/ProductCardView";
@@ -15,7 +20,7 @@ export const dynamicParams = false;
 
 // generate static params
 export const generateStaticParams = async () => {
-  const products = await getProducts({});
+  const { products } = await getProducts({});
   const totalPages = Math.ceil(products.length / pagination_list);
   let paths: { page: string }[] = [];
 
@@ -38,7 +43,13 @@ function spreadPages(num: number): number[] {
   return pages;
 }
 
-const Products = async ({ params, searchParams }: { params: { page: number }; searchParams: { [key: string]: string | string[] | undefined } }) => {
+const Products = async ({
+  params,
+  searchParams,
+}: {
+  params: { page: number };
+  searchParams: { [key: string]: string | string[] | undefined };
+}) => {
   const callToAction = getListPage("sections/call-to-action.md");
   const currentPage =
     params.page && !isNaN(Number(params.page)) ? Number(params.page) : 1;
@@ -49,6 +60,8 @@ const Products = async ({ params, searchParams }: { params: { page: number }; se
     minPrice,
     maxPrice,
     brand,
+    c,
+    t: tag,
   } = searchParams as {
     [key: string]: string;
   };
@@ -57,10 +70,9 @@ const Products = async ({ params, searchParams }: { params: { page: number }; se
   const { sortKey, reverse } =
     sorting.find((item) => item.slug === sort) || defaultSort;
 
-  // const products = await getProducts({ sortKey, reverse, query: searchValue });
-  let products;
+  let productsData;
 
-  if (searchValue || brand || minPrice || maxPrice) {
+  if (searchValue || brand || minPrice || maxPrice || c || tag) {
     let queryString = "";
 
     if (minPrice || maxPrice) {
@@ -70,27 +82,38 @@ const Products = async ({ params, searchParams }: { params: { page: number }; se
       queryString += ` ${searchValue}`;
     }
     if (brand) {
-      queryString += ` ${brand}`;
+      Array.isArray(brand)
+        ? (queryString += `${brand.map((b) => `(vendor:${b})`).join(" OR ")}`)
+        : (queryString += `vendor:"${brand}"`);
+    }
+    if (tag) {
+      queryString += ` ${tag}`;
     }
 
     const query = {
       sortKey,
       reverse,
-      query: queryString
+      query: queryString,
     };
 
-    products = await getProducts(query);
-
+    productsData =
+      c && c !== "all"
+        ? await getCollectionProducts({ collection: c, sortKey, reverse })
+        : await getProducts(query);
   } else {
     // Fetch all products
-    products = await getProducts({ sortKey, reverse });
+    productsData = await getProducts({ sortKey, reverse });
+    // console.log(productsData.products[2].options)
   }
-
   // const products = await getProducts({ sortKey, reverse, query: searchValue });
   const categories = await getCollections();
   const vendors = await getVendors({});
   const tags = [
-    ...new Set(products.flatMap((product: Product) => product.tags)),
+    ...new Set(
+      (
+        productsData as { pageInfo: PageInfo; products: Product[] }
+      )?.products.flatMap((product: Product) => product.tags),
+    ),
   ];
 
   return (
@@ -100,11 +123,29 @@ const Products = async ({ params, searchParams }: { params: { page: number }; se
         categories={categories}
         vendors={vendors}
         tags={tags}
-        maxPriceData={0} />
-      {
-        layout === "list" ? <ProductListView currentPage={currentPage} products={products} searchValue={searchValue} />
-          : <ProductCardView currentPage={currentPage} products={products} searchValue={searchValue} />
-      }
+        maxPriceData={0}
+      />
+      {layout === "list" ? (
+        <ProductListView
+          currentPage={currentPage}
+          products={
+            (Array.isArray(productsData)
+              ? productsData
+              : productsData?.products) || []
+          }
+          searchValue={searchValue}
+        />
+      ) : (
+        <ProductCardView
+          currentPage={currentPage}
+          products={
+            (Array.isArray(productsData)
+              ? productsData
+              : productsData?.products) || []
+          }
+          searchValue={searchValue}
+        />
+      )}
       <CallToAction data={callToAction} />
     </>
   );

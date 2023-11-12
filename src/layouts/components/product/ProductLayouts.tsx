@@ -8,7 +8,7 @@ import { FaList } from "react-icons/fa6";
 import { IoSearch } from "react-icons/io5";
 import PopoverFilter from "../PopoverFilter";
 import DropdownMenu from "../filter/DropdownMenu";
-import { useState } from "react";
+import { useEffect } from "react";
 
 export type ListItem = SortFilterItem | PathFilterItem;
 export type PathFilterItem = { title: string; path: string };
@@ -20,19 +20,25 @@ const ProductLayouts = ({ categories, vendors, tags, maxPriceData }: any) => {
   const isListView = searchParams.get("layout") === "list";
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    e.preventDefault();
-  
     const val = e.target as HTMLInputElement;
     const newParams = new URLSearchParams(searchParams.toString());
-  
+
     if (val.value) {
       newParams.set('q', val.value);
     } else {
       newParams.delete('q');
     }
-  
-    router.push(createUrl('/products', newParams));
+
+    router.push(createUrl('/products', newParams), {scroll:false});
   };
+
+  useEffect(() => {
+    // focus on the input field only when 'q' is set
+    const inputField = document.getElementById('searchInput') as HTMLInputElement;
+    if (inputField && searchParams.get('q')) {
+      inputField.focus();
+    }
+  }, [searchParams]); // run the effect whenever searchParams change
   
 
   function onSubmit(e: React.FormEvent<HTMLFormElement>) {
@@ -79,6 +85,7 @@ const ProductLayouts = ({ categories, vendors, tags, maxPriceData }: any) => {
 
                 <form onSubmit={onSubmit} className="border border-border rounded-md flex justify-between">
                   <input
+                  id="searchInput"
                     className="bg-transparent border-none focus:ring-transparent pr-0 pl-2"
                     key={searchParams?.get('q')}
                     type="text"

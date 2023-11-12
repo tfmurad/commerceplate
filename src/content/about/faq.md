@@ -1,46 +1,20 @@
 ---
-title: "FAQ "
-meta_title: ""
-description: "this is meta description"
-draft: false
----
+title: "Frequently Asked Questions"
+meta_title: "FAQ"
+subtitle: "Discover more about our lamp e-commerce platform with these frequently asked questions."
+faqs:
+  - title: "Can I customize lamps for client projects?"
+    content: 'Yes, our platform allows customization for client projects, ensuring unique and tailored solutions. Yes, our platform allows customization for client projects, ensuring unique and tailored solutions.'
 
-<Accordion title="1. How do I choose the right table lamp for my space?">
+  - title: "Where are your lamps crafted?"
+    content: 'Our lamps are meticulously crafted, combining quality materials and skilled workmanship to deliver exceptional products. Our lamps are meticulously crafted, combining quality materials and skilled workmanship to deliver exceptional products.'
 
-Selecting the perfect table lamp is a blend of style, functionality, and proportion. Consider the size of your table and the overall aesthetic of your room. Opt for a lamp that complements your decor while providing adequate illumination for the area.
+  - title: "What's included in the 'free updates' policy?"
+    content: 'Free updates encompass enhancements to lamp designs and features, ensuring your collection stays current and appealing. Free updates encompass enhancements to lamp designs and features, ensuring your collection stays current and appealing'
 
-</Accordion>
+  - title: "Can I use your lamps for open source projects?"
+    content: 'Certainly! Our lamps are open for integration into various projects, fostering creativity and innovation. Certainly! Our lamps are open for integration into various projects, fostering creativity and innovation.'
 
-<Accordion title="2. How can I adjust Horizontal centering">
-
-- This is a thing.
-- This is a thing.
-- This is a thing.
-- This is a thing.
-- This is a thing.
-
-</Accordion>
-
-<Accordion title="3. Should you use Negative margin?">
-
-- This is a thing.
-- This is a thing.
-- This is a thing.
-- This is a thing.
-- This is a thing.
-
-</Accordion>
-
-<Accordion title="4. Should you use Negative margin?">
-
-Selecting the perfect table lamp is a blend of style, functionality, and proportion. Consider the size of your table and the overall aesthetic of your room. Opt for a lamp that complements your decor while providing adequate illumination for the area.
-
-</Accordion>
-
-<Accordion title="5. Should you use Negative margin?">
-
-Selecting the perfect table lamp is a blend of style, functionality, and proportion. Consider the size of your table and the overall aesthetic of your room. Opt for a lamp that complements your decor while providing adequate illumination for the area.
-
-</Accordion>
-
+  - title: "Can I retail themes featuring your lamps?"
+    content: 'Absolutely! You can sell themes created with our lamps, providing stylish solutions for diverse design needs. Absolutely! You can sell themes created with our lamps, providing stylish solutions for diverse design needs.'
 ---

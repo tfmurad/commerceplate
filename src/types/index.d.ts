@@ -24,6 +24,11 @@ export type ContactUsItem = {
   contact: string;
 }
 
+export type Faq = {
+  title: string;
+  content: string;
+};
+
 export type Post = {
   frontmatter: {
     title: string;

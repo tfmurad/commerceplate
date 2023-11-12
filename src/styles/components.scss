@@ -134,38 +134,6 @@
   }
 }
 
-// tab
-// .tab {
-//   @apply overflow-hidden rounded-lg border border-border dark:border-darkmode-border;
-//   &-nav {
-//     @apply flex border-b border-border bg-theme-light dark:border-darkmode-border dark:bg-darkmode-theme-light;
-//     @apply m-0 #{!important};
-//     @apply list-none #{!important};
-
-//     &-item {
-//       @apply cursor-pointer border-b-[3px] border-border py-2 text-lg text-dark opacity-80 dark:text-darkmode-light dark:border-light;
-//       @apply my-0 #{!important};
-//       @apply px-8 #{!important};
-
-//       &.active {
-//         @apply border-b-[3px] border-dark opacity-100 dark:border-darkmode-primary;
-//       }
-//     }
-//   }
-//   &-content {
-//     @apply p-5;
-//     &-panel {
-//       @apply p-8;
-//       p {
-//         @apply mb-0;
-//       }
-//       &.active {
-//         @apply block;
-//       }
-//     }
-//   }
-// }
-
 // accordion
 .accordion {
   @apply overflow-hidden border-b-2 border-border bg-theme-light dark:border-darkmode-border dark:bg-darkmode-theme-light;
@@ -188,6 +156,9 @@
     .accordion-content {
       @apply max-h-screen;
     }
+  }
+  &:last-child {
+    @apply border-b-0;
   }
 }
 
@@ -221,8 +192,6 @@
     @apply rounded-full p-2 text-dark  dark:text-darkmode-dark;
   }
 }
-
-
 
 // content style
 .content {

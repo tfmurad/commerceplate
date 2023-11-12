@@ -1,18 +1,30 @@
 import ImageFallback from "@/helpers/ImageFallback";
-import MDXContent from "@/helpers/MDXContent";
 import { getListPage } from "@/lib/contentParser";
 import { markdownify } from "@/lib/utils/textConverter";
 import PageHeader from "@/partials/PageHeader";
 import SeoMeta from "@/partials/SeoMeta";
 import Testimonials from "@/partials/Testimonials";
-import { AboutUsItem, RegularPage } from "@/types";
+import Accordion from "@/shortcodes/Accordion";
+import { AboutUsItem, Faq, RegularPage } from "@/types";
 
 const About = () => {
   const data: RegularPage = getListPage("about/_index.md");
   const testimonial = getListPage("about/testimonial.md");
-  const accordion = getListPage("about/faq.md");
+  const faq = getListPage("about/faq.md");
+
   const { frontmatter } = data;
   const { title, meta_title, description, image, about_us } = frontmatter;
+
+  const { frontmatter: accordionData } = faq;
+  const {
+    title: accordionTitle,
+    subtitle,
+    faqs,
+  }: {
+    title: string;
+    subtitle: string;
+    faqs: Faq[];
+  } = accordionData;
 
   return (
     <>
@@ -28,7 +40,10 @@ const About = () => {
       <section>
         <div className="container">
           {about_us?.map((section: AboutUsItem, index: number) => (
-            <div className={`lg:flex gap-8 mt-14 lg:mt-28`} key={section?.heading}>
+            <div
+              className={`lg:flex gap-8 mt-14 lg:mt-28`}
+              key={section?.heading}
+            >
               {index % 2 === 0 ? (
                 <>
                   <ImageFallback
@@ -132,16 +147,12 @@ const About = () => {
         <div className="container">
           <div className="bg-theme-light px-7 lg:px-32 py-20 dark:bg-darkmode-theme-light row mb-14 xl:mb-28 rounded-b-md">
             <div className="col-12 md:col-5 mx-auto space-y-5 mb-10 md:mb-0">
-              <h1>Frequently Asked Questions</h1>
-              <p className="md:text-lg">
-                Our expertly crafted FAQ guide provides valuable insights on
-                selecting the perfect table lamp to complement your decor and
-                meet your specific lighting needs.
-              </p>
+              <h1 dangerouslySetInnerHTML={markdownify(accordionTitle)}/>
+              <p dangerouslySetInnerHTML={markdownify(subtitle)} className="md:text-lg"/>
             </div>
 
             <div className="col-12 md:col-7">
-              <MDXContent content={accordion?.content} />
+              <Accordion faqs={faqs}/>
             </div>
           </div>
         </div>
