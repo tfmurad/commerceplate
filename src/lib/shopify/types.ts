@@ -139,7 +139,7 @@ export type ShopifyProduct = {
   seo: SEO;
   tags: string[];
   updatedAt: string;
-  vendor:string;
+  vendor: string;
 };
 
 export type ShopifyCartOperation = {
@@ -210,7 +210,10 @@ export type ShopifyCollectionOperation = {
 export type ShopifyCollectionProductsOperation = {
   data: {
     collection: {
-      products: Connection<ShopifyProduct>;
+      products: {
+        pageInfo: PageInfo;
+        edges: Edge<ShopifyProduct>[];
+      };
     };
   };
   variables: {

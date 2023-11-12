@@ -50,12 +50,11 @@ function SortFilterItem({ item }: { item: SortFilterItem }) {
   const DynamicTag = active ? 'p' : Link;
 
   return (
-    <li className="flex text-sm text-dark hover:bg-dark hover:text-white py-1" key={item.title}>
+    <li className="flex text-sm text-dark hover:bg-light hover:text-white" key={item.title}>
       <DynamicTag
         prefetch={!active ? false : undefined}
         href={href}
         className={`w-full pl-4 py-2 ${active ? 'bg-dark text-white' : ''}`}
-
       >
         {item.title}
       </DynamicTag>

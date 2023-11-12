@@ -16,8 +16,8 @@ const ShowCategories = async () => {
 }
 
 const ShowLatestProducts = async () => {
-  const latestProducts = await getCollectionProducts({ collection: "latest-products", reverse: false });
-  return <LatestProducts products={latestProducts} />
+  const {pageInfo, products} = await getCollectionProducts({ collection: "latest-products", reverse: false });
+  return <LatestProducts products={products} />
 }
 
 const Home = async () => {

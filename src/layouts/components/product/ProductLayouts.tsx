@@ -8,6 +8,7 @@ import { FaList } from "react-icons/fa6";
 import { IoSearch } from "react-icons/io5";
 import PopoverFilter from "../PopoverFilter";
 import DropdownMenu from "../filter/DropdownMenu";
+import { useState } from "react";
 
 export type ListItem = SortFilterItem | PathFilterItem;
 export type PathFilterItem = { title: string; path: string };
@@ -17,6 +18,22 @@ const ProductLayouts = ({ categories, vendors, tags, maxPriceData }: any) => {
   const router = useRouter();
   const searchParams = useSearchParams();
   const isListView = searchParams.get("layout") === "list";
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    e.preventDefault();
+  
+    const val = e.target as HTMLInputElement;
+    const newParams = new URLSearchParams(searchParams.toString());
+  
+    if (val.value) {
+      newParams.set('q', val.value);
+    } else {
+      newParams.delete('q');
+    }
+  
+    router.push(createUrl('/products', newParams));
+  };
+  
 
   function onSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
@@ -69,6 +86,7 @@ const ProductLayouts = ({ categories, vendors, tags, maxPriceData }: any) => {
                     placeholder="Search for products..."
                     autoComplete="off"
                     defaultValue={searchParams?.get('q') || ''}
+                    onChange={handleChange}
                   />
                   <button className="px-2 search-icon">
                     <IoSearch size={20} />
