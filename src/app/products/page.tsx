@@ -13,7 +13,6 @@ import PageHeader from "@/partials/PageHeader";
 import ProductCardView from "@/partials/ProductCardView";
 import ProductListView from "@/partials/ProductListView";
 import { Suspense } from "react";
-import { FaFaceFlushed } from "react-icons/fa6";
 
 // export interface ProductViewProps {
 //   currentPage: number | null;
@@ -28,7 +27,7 @@ const ShowProducts = async ({ searchParams }: { searchParams: any }) => {
     minPrice,
     maxPrice,
     b: brand,
-    c,
+    c:category,
     t: tag,
   } = searchParams as {
     [key: string]: string;
@@ -41,7 +40,7 @@ const ShowProducts = async ({ searchParams }: { searchParams: any }) => {
 
   let productsData;
 
-  if (searchValue || brand || minPrice || maxPrice || c || tag) {
+  if (searchValue || brand || minPrice || maxPrice || category || tag) {
     let queryString = "";
 
     if (minPrice || maxPrice) {
@@ -69,8 +68,8 @@ const ShowProducts = async ({ searchParams }: { searchParams: any }) => {
     };
 
     productsData =
-      c && c !== "all"
-        ? await getCollectionProducts({ collection: c, sortKey, reverse })
+    category && category !== "all"
+        ? await getCollectionProducts({ collection: category, sortKey, reverse })
         : await getProducts(query);
   } else {
     // Fetch all products
