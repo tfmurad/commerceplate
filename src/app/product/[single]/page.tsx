@@ -47,7 +47,6 @@ const ShowProductSingle = async ({ params }: { params: { single: string } }) => 
 
   const relatedProducts = await getProductRecommendations(id);
   if (!relatedProducts.length) return null;
-  console.log(images)
 
   return (
     <>

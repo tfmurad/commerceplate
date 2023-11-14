@@ -37,21 +37,7 @@ const ProductCardView = async ({ currentPage, products, searchValue }: any) => {
 
   return (
     <section>
-      <div className="container">
-        <div className="row">
-          {/* Left Side  */}
-          <div className="col-3 hidden lg:block">
-            <ProductFilters
-              categories={categories}
-              vendors={vendors}
-              tags={tags}
-              maxPriceData={maxPriceData}
-            />
-          </div>
-
-          {/* Right side  */}
-          <div className="col-12 lg:col-9">
-            <div className="sticky top-28 pb-16">
+        <div className="sticky top-28 pb-16">
               <div className="row ">
                 {searchValue ? (
                   <p className="mb-4">
@@ -139,15 +125,6 @@ const ProductCardView = async ({ currentPage, products, searchValue }: any) => {
                 })}
               </div>
             </div>
-
-            {/* <Pagination
-              section={"products"}
-              currentPage={currentPage || 1}
-              totalPages={totalPages}
-            /> */}
-          </div>
-        </div>
-      </div>
     </section>
   );
 };

@@ -11,23 +11,32 @@ import { PageInfo, Product } from "@/lib/shopify/types";
 import CallToAction from "@/partials/CallToAction";
 import PageHeader from "@/partials/PageHeader";
 import ProductCardView from "@/partials/ProductCardView";
+import ProductFilters from "@/partials/ProductFilters";
 import ProductListView from "@/partials/ProductListView";
 import { Suspense } from "react";
 
-// export interface ProductViewProps {
-//   currentPage: number | null;
-//   searchParams: { [key: string]: string | string[] | undefined };
-// }
+interface SearchParams {
+  sort?: string;
+  q?: string;
+  minPrice?: string;
+  maxPrice?: string;
+  b?: string;
+  c?: string;
+  t?: string;
+}
 
-const ShowProducts = async ({ searchParams }: { searchParams: any }) => {
-
+const ShowProducts = async ({
+  searchParams,
+}: {
+  searchParams: SearchParams;
+}) => {
   const {
     sort,
     q: searchValue,
     minPrice,
     maxPrice,
     b: brand,
-    c:category,
+    c: category,
     t: tag,
   } = searchParams as {
     [key: string]: string;
@@ -53,7 +62,7 @@ const ShowProducts = async ({ searchParams }: { searchParams: any }) => {
 
     if (brand) {
       Array.isArray(brand)
-        ? (queryString += `${brand.map(b => `(vendor:${b})`).join(" OR ")}`)
+        ? (queryString += `${brand.map((b) => `(vendor:${b})`).join(" OR ")}`)
         : (queryString += `vendor:"${brand}"`);
     }
 
@@ -68,13 +77,16 @@ const ShowProducts = async ({ searchParams }: { searchParams: any }) => {
     };
 
     productsData =
-    category && category !== "all"
-        ? await getCollectionProducts({ collection: category, sortKey, reverse })
+      category && category !== "all"
+        ? await getCollectionProducts({
+            collection: category,
+            sortKey,
+            reverse,
+          })
         : await getProducts(query);
   } else {
     // Fetch all products
     productsData = await getProducts({ sortKey, reverse });
-    // console.log(productsData.products[2].options)
   }
 
   // const products = await getProducts({ sortKey, reverse, query: searchValue });
@@ -85,9 +97,28 @@ const ShowProducts = async ({ searchParams }: { searchParams: any }) => {
   // ];
 
   const tags = [
-    ...new Set((productsData as { pageInfo: PageInfo; products: Product[]; })?.products.flatMap((product: Product) => product.tags)),
+    ...new Set(
+      (
+        productsData as { pageInfo: PageInfo; products: Product[] }
+      )?.products.flatMap((product: Product) => product.tags),
+    ),
   ];
-  
+
+  // Getting Max price for the price-rage selector
+  const maxProductPriceData = productsData?.products.map(
+    (product: Product) => product.priceRange.maxVariantPrice,
+  );
+  const maxProductPrice = Math.ceil(
+    Math.max(
+      ...maxProductPriceData.map(
+        (a: { amount: string; currencyCode: string }) => parseFloat(a.amount),
+      ),
+    ),
+  );
+  const maxProductCurrency: string = productsData?.products.map(
+    (product: Product) => product.priceRange.maxVariantPrice.currencyCode,
+  )[0];
+  const maxPriceData = { maxProductPrice, maxProductCurrency };
 
   return (
     <>
@@ -97,20 +128,43 @@ const ShowProducts = async ({ searchParams }: { searchParams: any }) => {
         tags={tags}
         maxPriceData={0}
       />
-      {layout === "list" ? (
-      <ProductListView
-      currentPage={null}
-      products={(Array.isArray(productsData) ? productsData : productsData?.products) || []}
-      searchValue={searchValue}
-    />
-    
-      ) : (
-        <ProductCardView
-          currentPage={null}
-          products={(Array.isArray(productsData) ? productsData : productsData?.products) || []}
-          searchValue={searchValue}
-        />
-      )}
+
+      <div className="container">
+        <div className="row">
+          <div className="col-3 hidden lg:block">
+            <ProductFilters
+              categories={categories}
+              vendors={vendors}
+              tags={tags}
+              maxPriceData={maxPriceData}
+            />
+          </div>
+
+          <div className="col-12 lg:col-9">
+            {layout === "list" ? (
+              <ProductListView
+                currentPage={null}
+                products={
+                  (Array.isArray(productsData)
+                    ? productsData
+                    : productsData?.products) || []
+                }
+                searchValue={searchValue}
+              />
+            ) : (
+              <ProductCardView
+                currentPage={null}
+                products={
+                  (Array.isArray(productsData)
+                    ? productsData
+                    : productsData?.products) || []
+                }
+                searchValue={searchValue}
+              />
+            )}
+          </div>
+        </div>
+      </div>
     </>
   );
 };

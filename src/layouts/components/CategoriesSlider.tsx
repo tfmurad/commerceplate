@@ -60,7 +60,7 @@ const CategoriesSlider = ({ categories }: { categories: any }) => {
 					return(
 						<SwiperSlide key={handle}>
 						<div
-							className='text-center'
+							className='text-center relative'
 						>
 							<ImageFallback
 								src={image?.url}
@@ -71,7 +71,7 @@ const CategoriesSlider = ({ categories }: { categories: any }) => {
 							/>
 							<div className="py-6">
 								<h3 className='mb-2 font-medium h4'>
-									<Link href={path}>
+									<Link className="after:absolute after:inset-0" href={path}>
 									{title}
 									</Link>
 								</h3>
