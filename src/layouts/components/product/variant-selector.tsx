@@ -83,7 +83,7 @@ export function VariantSelector({
                   {/* {value} */}
                   {option.name == "Color" ? <span
                     className={`h-10 w-10 rounded-md`}
-                    style={{ backgroundColor: value }}
+                    style={{ backgroundColor: `#${value}` }}
                   >
                     { isActive &&
                       <span className="text-white flex items-center justify-center h-full"><BsCheckLg size={25} /></span>

@@ -12,28 +12,6 @@ const { pagination_card } = config.settings;
 const ProductCardView = async ({ currentPage, products, searchValue }: any) => {
   const resultsText = products.length > 1 ? "results" : "result";
 
-  // const totalPages = Math.ceil(products.length / pagination_card);
-  // const currentProducts = products.slice(0, pagination_card);
-
-  // const indexOfLastPost = currentPage! * pagination_card;
-  // const indexOfFirstPost = indexOfLastPost - pagination_card;
-  // const paginatedProducts = products.slice(indexOfFirstPost, indexOfLastPost);
-
-  // const productsToDisplay = currentPage ? paginatedProducts : currentProducts;
-
-  const categories = await getCollections();
-  const vendors = await getVendors({});
-
-  const tags: string[] = [
-    ...new Set(products.flatMap((product: Product) => product.tags) as unknown[]),
-  ] as string[];
-  
-
-  // Getting Max price for the price-rage selector
-  const maxProductPriceData = products.map((product: Product) => product.priceRange.maxVariantPrice);
-  const maxProductPrice = Math.ceil(Math.max(...maxProductPriceData.map((a: { amount: string; currencyCode: string }) => parseFloat(a.amount))));
-  const maxProductCurrency: string = products.map((product: Product) => product.priceRange.maxVariantPrice.currencyCode)[0];
-  const maxPriceData = { maxProductPrice, maxProductCurrency };
 
   return (
     <section>

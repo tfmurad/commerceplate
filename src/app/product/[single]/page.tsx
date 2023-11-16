@@ -46,7 +46,7 @@ const ShowProductSingle = async ({ params }: { params: { single: string } }) => 
   } = product;
 
   const relatedProducts = await getProductRecommendations(id);
-  if (!relatedProducts.length) return null;
+  // if (!relatedProducts.length) return null;
 
   return (
     <>
@@ -84,7 +84,7 @@ const ShowProductSingle = async ({ params }: { params: { single: string } }) => 
               </div>
 
               <div className="flex gap-4 mt-8 md:mt-10 mb-6">
-                <AddToCart variants={product.variants} availableForSale={product.availableForSale} stylesClass={"btn max-md:btn-sm btn-primary"} handle={null}/>
+                <AddToCart variants={product.variants} availableForSale={product.availableForSale} stylesClass={"btn max-md:btn-sm btn-primary"} handle={null} />
               </div>
 
               <div className="mb-8 md:mb-10">
@@ -135,10 +135,14 @@ const ShowProductSingle = async ({ params }: { params: { single: string } }) => 
       {/* Recommented Products section  */}
       <section className="section">
         <div className="container">
-          <div className="text-center mb-6 md:mb-14">
-            <h2 className="mb-2">Related Products</h2>
-          </div>
-          <LatestProducts products={relatedProducts} />
+          {relatedProducts.length > 0 &&
+            <>
+              <div className="text-center mb-6 md:mb-14">
+                <h2 className="mb-2">Related Products</h2>
+              </div>
+              <LatestProducts products={relatedProducts} />
+            </>
+          }
         </div>
       </section>
 

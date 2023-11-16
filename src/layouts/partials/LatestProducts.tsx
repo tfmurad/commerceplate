@@ -16,7 +16,7 @@ const LatestProducts = ({ products }: { products: Product[] }) => {
           return (
             <div
               key={id}
-              className="text-center col-6 md:col-4 lg:col-3 mb-8 md:mb-14 group"
+              className="text-center col-6 md:col-4 lg:col-3 mb-8 md:mb-14 group relative"
             >
               <div className="relative overflow-hidden">
                 <ImageFallback
@@ -32,13 +32,13 @@ const LatestProducts = ({ products }: { products: Product[] }) => {
                   availableForSale={product.availableForSale}
                   handle={handle}
                   stylesClass={
-                    "btn btn-primary max-md:btn-sm z-10 absolute bottom-0 left-1/2 transform -translate-x-1/2 translate-y-full group-hover:-translate-y-6 duration-300 ease-in-out whitespace-nowrap drop-shadow-md"
+                    "btn btn-primary max-md:btn-sm z-10 absolute bottom-12 md:bottom-0 left-1/2 transform -translate-x-1/2 translate-y-full md:group-hover:-translate-y-6 duration-300 ease-in-out whitespace-nowrap drop-shadow-md"
                   }
                 />
               </div>
               <div className="py-2 md:py-4 text-center z-20">
                 <h2 className="font-medium text-base md:text-xl">
-                  <Link href={`/product/${handle}`}>{title}</Link>
+                  <Link className="after:absolute after:inset-0" href={`/product/${handle}`}>{title}</Link>
                 </h2>
                 <div className="flex justify-center items-center gap-x-2 mt-2">
                   <span className="text-light dark:text-darkmode-light text-xs md:text-lg font-bold">

@@ -1,19 +1,19 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
-import { Swiper, SwiperSlide } from "swiper/react";
-import "swiper/css";
-import "swiper/css/free-mode";
-import "swiper/css/navigation";
-import "swiper/css/thumbs";
 import Image from "next/image";
+import { useSearchParams } from "next/navigation";
+import { useEffect, useRef, useState } from "react";
 import {
   HiOutlineArrowNarrowLeft,
   HiOutlineArrowNarrowRight,
 } from "react-icons/hi";
 import type { Swiper as TSwiper } from "swiper";
+import "swiper/css";
+import "swiper/css/free-mode";
+import "swiper/css/navigation";
+import "swiper/css/thumbs";
 import { FreeMode, Navigation, Thumbs } from "swiper/modules";
-import { useSearchParams } from "next/navigation";
+import { Swiper, SwiperSlide } from "swiper/react";
 
 interface ImageItem {
   url: string;
@@ -27,20 +27,20 @@ const ProductGallery = ({ images }: { images: ImageItem[] }) => {
   const [activeIndex, setActiveIndex] = useState(0);
   const [isHovered, setIsHovered] = useState(false);
 
-  const searchParams = useSearchParams().get("color")?.toLowerCase();
+  const searchParams = useSearchParams().get("color");
   // console.log(activeIndex)
 
   const prevRef = useRef(null);
   const nextRef = useRef(null);
 
-  const altTextArray = images.map((item:any)=>item.altText);
+  const altTextArray = images.map((item: any) => item.altText);
 
   useEffect(() => {
     if (searchParams) {
       const foundIndex = altTextArray.indexOf(searchParams);
       setActiveIndex(foundIndex);
     }
-  }, [searchParams,altTextArray]);
+  }, [searchParams, altTextArray]);
 
   const handleSlideChange = (swiper: TSwiper) => {
     setActiveIndex(swiper.activeIndex);
@@ -50,15 +50,16 @@ const ProductGallery = ({ images }: { images: ImageItem[] }) => {
     setActiveIndex(index);
   };
 
-  type ImageObject = Record<string, string>;
+  interface ImageObject {
+    [key: string]: ImageItem;
+  }
 
-const imageObject: ImageObject = {};
+  const imageObject: ImageObject = {};
 
-images.forEach((item: ImageItem) => {
-  imageObject[item.altText] = item.url;
-});
-
-console.log(imageObject);
+  const imageArray: ImageItem[] = images.map((item: ImageItem) => {
+    imageObject[item.altText] = item;
+    return item;
+  });
 
   return (
     <>
@@ -80,7 +81,7 @@ console.log(imageObject);
           {images.map((item: any, index: number) => (
             <SwiperSlide key={item.url}>
               <Image
-                src={imageObject[altTextArray[activeIndex]] || item.src}
+                src={imageArray[activeIndex]?.url || item.url}
                 alt={item.altText}
                 width={722}
                 height={623}
@@ -89,11 +90,10 @@ console.log(imageObject);
             </SwiperSlide>
           ))}
           <div
-            className={`hidden lg:flex justify-between w-full absolute top-1/2 -translate-y-1/2 z-10 px-6 text-dark ${
-              isHovered
+            className={`hidden lg:flex justify-between w-full absolute top-1/2 -translate-y-1/2 z-10 px-6 text-dark ${isHovered
                 ? "opacity-100 transition-opacity duration-300 ease-in-out"
                 : "opacity-0 transition-opacity duration-300 ease-in-out"
-            }`}
+              }`}
           >
             <div
               ref={prevRef}
@@ -121,12 +121,11 @@ console.log(imageObject);
         {images.map((item: any, index: number) => (
           <SwiperSlide key={item.altText}>
             <div
-            onClick={() => handleThumbSlideClick(index)}
-              className={`rounded-md border cursor-pointer overflow-hidden ${
-                index === activeIndex
+              onClick={() => handleThumbSlideClick(index)}
+              className={`rounded-md border cursor-pointer overflow-hidden ${index === activeIndex
                   ? "border border-primary dark:border-blue-500"
                   : ""
-              }`}
+                }`}
             >
               <Image
                 src={item.url}

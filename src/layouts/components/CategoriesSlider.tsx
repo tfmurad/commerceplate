@@ -67,7 +67,7 @@ const CategoriesSlider = ({ categories }: { categories: any }) => {
 								width={424}
 								height={306}
 								alt={title}
-								className="h-[150px] md:h-[250px] lg:h-[306px] object-cover object-top rounded-md"
+								className="h-[150px] md:h-[250px] lg:h-[306px] object-cover rounded-md"
 							/>
 							<div className="py-6">
 								<h3 className='mb-2 font-medium h4'>
