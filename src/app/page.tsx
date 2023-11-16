@@ -6,7 +6,6 @@ import { getCollectionProducts, getCollections } from "@/lib/shopify";
 import CallToAction from "@/partials/CallToAction";
 import LatestProducts from "@/partials/LatestProducts";
 import SeoMeta from "@/partials/SeoMeta";
-import { Banner } from "@/types";
 import { Suspense } from "react";
 
 
@@ -16,15 +15,18 @@ const ShowCategories = async () => {
 }
 
 const ShowLatestProducts = async () => {
-  const {pageInfo, products} = await getCollectionProducts({ collection: "latest-products", reverse: false });
+  const { pageInfo, products } = await getCollectionProducts({ collection: "latest-products", reverse: false });
   return <LatestProducts products={products} />
 }
 
 const Home = async () => {
-  const homepage = getListPage("homepage/_index.md");
   const callToAction = getListPage("sections/call-to-action.md");
-  const { frontmatter } = homepage;
-  const { banner }: { banner: Banner[]; } = frontmatter;
+  // const homepage = getListPage("homepage/_index.md");
+  // const { frontmatter } = homepage;
+  // const { banner }: { banner: Banner[]; } = frontmatter;
+
+  const sliderImages = await getCollectionProducts({ collection: "hidden-homepage-carousel" });
+  const { products } = sliderImages;
 
   return (
     <>
@@ -32,7 +34,7 @@ const Home = async () => {
       <section>
         <div className="container">
           <div className="bg-gradient py-10 rounded-md">
-            <HeroSlider content={banner} />
+            <HeroSlider products={products} />
           </div>
         </div>
       </section>
@@ -47,7 +49,7 @@ const Home = async () => {
           <Suspense
             fallback={
               <div className="grid grid-cols-2 md:grid-cols-3 gap-x-6">
-                  {Array(3)
+                {Array(3)
                   .fill(0)
                   .map((_, index) => {
                     return (

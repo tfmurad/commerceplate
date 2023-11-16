@@ -91,8 +91,8 @@ const ProductGallery = ({ images }: { images: ImageItem[] }) => {
           ))}
           <div
             className={`hidden lg:flex justify-between w-full absolute top-1/2 -translate-y-1/2 z-10 px-6 text-dark ${isHovered
-                ? "opacity-100 transition-opacity duration-300 ease-in-out"
-                : "opacity-0 transition-opacity duration-300 ease-in-out"
+              ? "opacity-100 transition-opacity duration-300 ease-in-out"
+              : "opacity-0 transition-opacity duration-300 ease-in-out"
               }`}
           >
             <div
@@ -123,8 +123,8 @@ const ProductGallery = ({ images }: { images: ImageItem[] }) => {
             <div
               onClick={() => handleThumbSlideClick(index)}
               className={`rounded-md border cursor-pointer overflow-hidden ${index === activeIndex
-                  ? "border border-primary dark:border-blue-500"
-                  : ""
+                ? "border border-primary dark:border-blue-500"
+                : ""
                 }`}
             >
               <Image
