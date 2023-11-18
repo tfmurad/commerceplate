@@ -124,13 +124,20 @@ const ShowProductSingle = async ({ params }: { params: { single: string } }) => 
         </div>
       </section>
 
-      {/* TODO: tabs description of a product  */}
-      <section>
-        <div className="container">
-          <MDXContent content={description} />
-          {/* <p>{description}</p> */}
-        </div>
-      </section>
+      {/* Description of a product  */}
+      {description && (
+        <section>
+          <div className="container">
+            <div className="row">
+              <div className="col-10 lg:col-11 mx-auto border rounded-md p-4">
+                <p className="font-semibold">Description:</p>
+                <MDXContent content={description} />
+              </div>
+            </div>
+            {/* <p>{description}</p> */}
+          </div>
+        </section>
+      )}
 
       {/* Recommented Products section  */}
       <section className="section">

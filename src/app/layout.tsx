@@ -7,7 +7,6 @@ import Footer from "@/partials/Footer";
 import Header from "@/partials/Header";
 import Providers from "@/partials/Providers";
 import "@/styles/main.scss";
-import GlobalState from 'context/GlobalState';
 
 export default function RootLayout({
   children,
@@ -59,13 +58,11 @@ export default function RootLayout({
       <body suppressHydrationWarning={true} className=" selection:bg-gray-300 dark:selection:bg-gray-300 dark:selection:text-dark">
         <TwSizeIndicator />
         <Providers>
-          <GlobalState>
-            <Header>
-              <OpenCart />
-              <Cart />
-            </Header>
-            <main>{children}</main>
-          </GlobalState>
+          <Header>
+            <OpenCart />
+            <Cart />
+          </Header>
+          <main>{children}</main>
           <Footer />
         </Providers>
       </body>
