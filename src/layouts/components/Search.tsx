@@ -21,13 +21,13 @@ const Search = ({ products, searchValue }: { products: any, searchValue: string 
       newParams.delete('q');
     }
 
-    router.push(createUrl('/search', newParams));
+    router.push(createUrl('/products', newParams));
   }
 
   return (
     <section className="section-sm">
       <div className="container">
-        <div className="row">
+            <div className="row">
           <form onSubmit={onSubmit} className="flex justify-center col-9 md:col-7 mx-auto">
             <input
               key={searchParams?.get('q')}
