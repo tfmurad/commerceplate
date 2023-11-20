@@ -1,6 +1,7 @@
 "use client";
 
 import Logo from "@/components/Logo";
+import SearchBar from "@/components/SearchBar";
 import ThemeSwitcher from "@/components/ThemeSwitcher";
 import config from "@/config/config.json";
 import menu from "@/config/menu.json";
@@ -8,7 +9,6 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import React, { Suspense, useEffect, useState } from "react";
 import { BsPerson } from "react-icons/bs/index.js";
-import { IoSearch } from "react-icons/io5/index.js";
 
 //  child navigation link interface
 export interface IChildNavigationLink {
@@ -25,6 +25,7 @@ export interface INavigationLink {
 }
 
 const Header = ({ children }: { children: any }) => {
+
   const [navbarShadow, setNavbarShadow] = useState(false);
   // distructuring the main menu from menu object
   const { main }: { main: INavigationLink[] } = menu;
@@ -108,14 +109,15 @@ const Header = ({ children }: { children: any }) => {
               {menu.hasChildren ? (
                 <li
                   onClick={handleChildMenuClick}
-                  className="nav-item nav-dropdown group relative">
+                  className="nav-item nav-dropdown group relative"
+                >
                   <span
                     className={`nav-link inline-flex items-center ${menu.children?.map(({ url }) => url).includes(pathname) ||
-                        menu.children
-                          ?.map(({ url }) => `${url}/`)
-                          .includes(pathname)
-                        ? "active"
-                        : ""
+                      menu.children
+                        ?.map(({ url }) => `${url}/`)
+                        .includes(pathname)
+                      ? "active"
+                      : ""
                       }`}
                   >
                     {menu.name}
@@ -132,7 +134,7 @@ const Header = ({ children }: { children: any }) => {
                         <Link
                           href={child.url}
                           className={`nav-dropdown-link block ${(pathname === `${child.url}/` ||
-                              pathname === child.url) &&
+                            pathname === child.url) &&
                             "nav-active"
                             }`}
                         >
@@ -171,11 +173,15 @@ const Header = ({ children }: { children: any }) => {
         <div className="order-1 ml-auto max-lg:mr-6 flex items-center md:order-2 lg:ml-0">
           <ThemeSwitcher className="mr-4 md:mr-6" />
 
-          {settings.search && (
+          {/* {settings.search && (
             <Link className="search-icon mr-4 md:mr-6" href="/search" aria-label="search">
               <IoSearch size={20} />
             </Link>
-          )}
+          )} */}
+
+          {settings.search &&
+            <SearchBar />
+          }
 
           {settings.account && (
             <Link
@@ -187,9 +193,7 @@ const Header = ({ children }: { children: any }) => {
             </Link>
           )}
 
-          <Suspense fallback={children[0]}>
-            {children[1]}
-          </Suspense>
+          <Suspense fallback={children[0]}>{children[1]}</Suspense>
         </div>
       </nav>
     </header>

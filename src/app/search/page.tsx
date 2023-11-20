@@ -1,4 +1,4 @@
-import Search from "@/components/Search";
+import Search from "@/components/SearchBar";
 import { AddToCart } from "@/components/cart/add-to-cart";
 import ImageFallback from "@/helpers/ImageFallback";
 import { getProducts } from "@/lib/shopify";
