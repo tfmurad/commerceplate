@@ -22,6 +22,7 @@ export function VariantSelector({
   const router = useRouter();
   const pathname = usePathname();
   const searchParams = useSearchParams();
+
   const hasNoOptionsOrJustOneOption =
     !options.length ||
     (options.length === 1 && options[0]?.values.length === 1);
@@ -44,7 +45,7 @@ export function VariantSelector({
 
   // Find the 'Size' option
   const sizeOption = options.find((option) => option.name === "Size");
-  // console.log("----->", sizeOption, "<--------");
+
   return (
     <div>
       {options.map((option) => (
@@ -69,6 +70,7 @@ export function VariantSelector({
                       option.values.includes(value),
                   ),
               );
+
               const isAvailableForSale = combinations.find((combination) =>
                 filtered.every(
                   ([key, value]) =>
@@ -91,21 +93,26 @@ export function VariantSelector({
                     onClick={() => {
                       router.replace(optionUrl, { scroll: false });
                     }}
-                    title={`${option.name} ${value}${!isAvailableForSale ? " (Out of Stock)" : ""
-                      }`}
-                    className={`flex min-w-[48px] items-center justify-center rounded-md border ${option.name === "Color"
+                    title={`${option.name} ${value}${
+                      !isAvailableForSale ? " (Out of Stock)" : ""
+                    }`}
+                    className={`flex min-w-[48px] items-center justify-center rounded-md border ${
+                      option.name === "Color"
                         ? "bg-transparent border-none"
                         : "bg-neutral-100 dark:border-neutral-800 dark:bg-neutral-900 px-2 py-1"
-                      } text-sm ${isActive && option.name !== "Color"
+                    } text-sm ${
+                      isActive && option.name !== "Color"
                         ? "cursor-default ring-2 ring-dark dark:ring-darkmode-dark"
                         : ""
-                      } ${!isActive && isAvailableForSale && option.name !== "Color"
+                    } ${
+                      !isActive && isAvailableForSale && option.name !== "Color"
                         ? "ring-1 ring-transparent transition duration-300 ease-in-out hover:scale-110 hover:ring-dark hover:dark:ring-darkmode-dark"
                         : ""
-                      } ${!isAvailableForSale
+                    } ${
+                      !isAvailableForSale
                         ? "relative z-10 cursor-not-allowed overflow-hidden bg-neutral-100 text-neutral-500  before:absolute before:inset-x-0 before:-z-10 before:h-px before:-rotate-45 before:bg-neutral-300 before:transition-transform dark:bg-neutral-900 dark:text-neutral-400 dark:ring-neutral-700 before:dark:bg-neutral-700"
                         : ""
-                      }`}
+                    }`}
                   >
                     {option.name == "Color" ? (
                       <span
@@ -133,37 +140,9 @@ export function VariantSelector({
       {sizeOption && (
         <div className="mb-8">
           <h5 className="mb-2 max-md:text-base">{sizeOption.name}</h5>
-          <VariantDropDown/>
-          {/* <div className="flex flex-wrap gap-3">
-            <select
-              value={searchParams.get(sizeOption.name.toLowerCase()) || ""}
-              onChange={(e) => {
-                const selectedValue = e.target.value;
-                const optionSearchParams = new URLSearchParams(
-                  searchParams.toString(),
-                );
-                optionSearchParams.set(
-                  sizeOption.name.toLowerCase(),
-                  selectedValue,
-                );
-                const newUrl = createUrl(pathname, optionSearchParams);
-                router.replace(newUrl, { scroll: false });
-              }}
-              className="w-2/3 text-sm px-3 py-2 rounded-md shadow-sm "
-            >
-              <option value="" disabled>
-                Select Size
-              </option>
-              {sizeOption.values.map((size) => (
-                <option key={size} value={size}>
-                  {size}
-                </option>
-              ))}
-            </select>
-          </div> */}
+          <VariantDropDown sizeOption={sizeOption} options={options} />
         </div>
       )}
-
     </div>
   );
 }
