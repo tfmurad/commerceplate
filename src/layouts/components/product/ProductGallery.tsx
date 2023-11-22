@@ -104,7 +104,7 @@ const ProductGallery = ({ images }: { images: ImageItem[] }) => {
                 zoomSrc={item.url}
                 width={722}
                 height={623}
-                className="mb-6 border rounded-md"
+                className="mb-6 border rounded-md max-h-[623px]"
               />
             </SwiperSlide>
           ))}
@@ -146,7 +146,7 @@ const ProductGallery = ({ images }: { images: ImageItem[] }) => {
                 : ""
                 }`}
             >
-              <Image src={item.url} alt={item.altText} width={168} height={146} />
+              <Image src={item.url} alt={item.altText} width={168} height={146} className="max-h-[146px]"/>
             </div>
           </SwiperSlide>
         ))}
