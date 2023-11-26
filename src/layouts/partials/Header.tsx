@@ -5,6 +5,8 @@ import SearchBar from "@/components/SearchBar";
 import ThemeSwitcher from "@/components/ThemeSwitcher";
 import config from "@/config/config.json";
 import menu from "@/config/menu.json";
+import { getUserDetails } from "@/lib/shopify";
+import { user } from "@/lib/shopify/types";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import React, { Suspense, useEffect, useState } from "react";
@@ -32,6 +34,24 @@ const Header = ({ children }: { children: any }) => {
   const { navigation_button, settings } = config;
   // get current path
   const pathname = usePathname();
+  const [user, setUser] = useState<any>();
+
+  useEffect(() => {
+    const fetchUser = async () => {
+      try {
+        // const userDetails: user = await getUserDetails('3b5f289207d5a2589ba9d0b4f1684c9d');
+        const userDetails: user = await getUserDetails('');
+        const userInfo = userDetails.customer;
+        setUser(userInfo)
+        console.log(userInfo)
+  
+      } catch (error) {
+        console.error("Error fetching user details:", error);
+      }
+    };
+  
+    fetchUser();
+  }, []);
 
   // scroll to top on route change
   useEffect(() => {
@@ -189,7 +209,10 @@ const Header = ({ children }: { children: any }) => {
               href="/login"
               aria-label="login"
             >
-              <BsPerson />
+              {
+                user ? <p className="text-red-400">{user.firstName}</p> : <BsPerson />
+              }
+              
             </Link>
           )}
 

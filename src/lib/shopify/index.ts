@@ -1,3 +1,4 @@
+"use server"
 import { HIDDEN_PRODUCT_TAG, SHOPIFY_GRAPHQL_API_ENDPOINT, TAGS } from "../../lib/constants";
 import { isShopifyError } from '../../lib/type-guards';
 import { ensureStartsWith } from '../../lib/utils';
@@ -27,6 +28,7 @@ import {
   Cart,
   Collection,
   Connection,
+  CustomerInput,
   Image,
   Menu,
   Page,
@@ -48,9 +50,13 @@ import {
   ShopifyProductRecommendationsOperation,
   ShopifyProductsOperation,
   ShopifyRemoveFromCartOperation,
-  ShopifyUpdateCartOperation
+  ShopifyUpdateCartOperation,
+  registerOperation,
+  user,
+  userOperation
 } from './types';
 import { getVendorsQuery } from "./queries/vendor";
+import { createCustomerMutation, getCustomerAccessTokenMutation, getUserDetailsQuery } from "./mutations/customer";
 
 const domain = process.env.SHOPIFY_STORE_DOMAIN
   ? ensureStartsWith(process.env.SHOPIFY_STORE_DOMAIN, 'https://')
@@ -316,6 +322,46 @@ export async function getCollectionProducts({
     pageInfo,
     products: reshapeProducts(removeEdgesAndNodes(res.body.data.collection.products)),
   };
+}
+
+
+export async function createCustomer(input: CustomerInput): Promise<user> {
+  const res = await shopifyFetch<registerOperation>({
+    query: createCustomerMutation,
+    variables: {
+      input,
+    },
+    cache: "no-store",
+  });
+
+  return res.body.data.customerCreate.customer;
+}
+
+export async function getCustomerAccessToken({
+  email,
+  password,
+}: Partial<CustomerInput>): Promise<any> {
+  const res = await shopifyFetch<any>({
+    query: getCustomerAccessTokenMutation,
+    variables: { input: { email, password } },
+  });
+
+  const token =
+    res.body.data?.customerAccessTokenCreate?.customerAccessToken?.accessToken;
+
+  return token;
+}
+
+export async function getUserDetails(accessToken: string): Promise<user> {
+  const response = await shopifyFetch<userOperation>({
+    query: getUserDetailsQuery,
+    variables: {
+      input: accessToken,
+    },
+    cache: "no-store",
+  });
+
+  return response.body.data;
 }
 
 export async function getCollections(): Promise<Collection[]> {

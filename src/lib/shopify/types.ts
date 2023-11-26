@@ -8,6 +8,56 @@ export type Edge<T> = {
   node: T;
 };
 
+export interface CustomerInput {
+  email: string;
+  password: string;
+  firstName: string;
+  lastName: string;
+}
+
+export interface CustomerAccessTokenInput {
+  email: string;
+  password: string;
+}
+
+export type user = {
+  customer: {
+    id: string;
+    firstName: string;
+    lastName: string;
+    email: string;
+    phone: string | null;
+    acceptsMarketing: boolean;
+  };
+};
+
+export type userOperation = {
+  data: user;
+  variables: {
+    input: string;
+  };
+};
+
+export type registerOperation = {
+  data: {
+    customerCreate: {
+      customer: user;
+    };
+  };
+  variables: {
+    input: CustomerInput;
+  };
+};
+
+export interface ShopifyCustomer {
+  email: string;
+  password: string;
+  firstName: string;
+  lastName: string;
+  acceptsMarketing: boolean;
+  phone: string;
+}
+
 export type Cart = Omit<ShopifyCart, "lines"> & {
   lines: CartItem[];
 };

@@ -1,8 +1,43 @@
-import PageHeader from "@/partials/PageHeader";
-import Link from "next/link";
-import React from "react";
+"use client";import Link from "next/link";
+import React, { ChangeEvent, FormEvent, useState } from "react";
+import { FormData } from "../sign-up/page";
 
 const Login = () => {
+  const [formData, setFormData] = useState<FormData>({
+    email: "",
+    password: "",
+  });
+
+  const handleChange = (e: ChangeEvent<HTMLInputElement>): void => {
+    setFormData({
+      ...formData,
+      [e.target.name]: e.target.value,
+    });
+  };
+
+  const handleLogin = async (e: FormEvent<HTMLFormElement>): Promise<void> => {
+    e.preventDefault();
+
+    try {
+      const response = await fetch("/api/customer/login", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(formData),
+      });
+
+      if (response.ok) {
+        const data = await response.json();
+        localStorage.setItem("user", JSON.stringify(data));
+      } else {
+        const errorData = await response.json();
+        console.log(errorData);
+      }
+    } catch (error) {
+      console.error("Error during registration:", error);
+    }
+  };
   return (
     <>
       <section className="section">
@@ -14,13 +49,15 @@ const Login = () => {
                 <p className="md:text-lg">Please fill your email and password to login</p>
               </div>
 
-              <form method="post">
+              <form onSubmit={handleLogin}>
                 <div>
                   <label className="form-label">Email Address</label>
                   <input
                     className="form-input"
                     placeholder="Type your email"
                     type="email"
+                    onChange={handleChange}
+                    name="email"
                   />
                 </div>
 
@@ -30,6 +67,8 @@ const Login = () => {
                     className="form-input"
                     placeholder="********"
                     type="password"
+                    onChange={handleChange}
+                    name="password"
                   />
                 </div>
 
