@@ -6,7 +6,7 @@ import { BsCheckLg } from 'react-icons/bs';
 import { createUrl } from '@/lib/utils';
 import { usePathname, useRouter, useSearchParams } from 'next/navigation';
 
-const VariantDropDown = ({ sizeOption,options }: any) => {
+const VariantDropDown = ({ sizeOption }: any) => {
   const [selected, setSelected] = useState('Select One');
 
   const router = useRouter();
@@ -24,7 +24,7 @@ const VariantDropDown = ({ sizeOption,options }: any) => {
   };
 
   return (
-    <div className=" w-72">
+    <div className="w-72">
       <Listbox value={selected} onChange={handleSizeChanged}>
         <div className="relative mt-1">
           <Listbox.Button className="relative w-full cursor-default rounded-md bg-theme-light py-2 pl-3 pr-10 text-left focus:outline-none focus-visible:border-indigo-500 focus-visible:ring-2 focus-visible:ring-white/75 focus-visible:ring-offset-2 focus-visible:ring-offset-orange-300 sm:text-sm">
@@ -55,7 +55,7 @@ const VariantDropDown = ({ sizeOption,options }: any) => {
                 <Listbox.Option
                   key={size}
                   className={({ active }) =>
-                    `relative cursor-default select-none py-2 pl-10 pr-4 ${
+                    `relative select-none py-2 pl-10 pr-4 cursor-pointer ${
                       active ? 'bg-dark text-white' : 'text-gray-900'
                     }`
                   }

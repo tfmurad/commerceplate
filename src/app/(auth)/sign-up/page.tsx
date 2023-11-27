@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { ChangeEvent, FormEvent, useState } from "react";
 
 export interface FormData {
@@ -10,6 +11,7 @@ export interface FormData {
 }
 
 const SignUp = () => {
+  const router = useRouter();
   const [formData, setFormData] = useState<FormData>({
     firstName: "",
     email: "",
@@ -38,6 +40,7 @@ const SignUp = () => {
       if (response.ok) {
         const data = await response.json();
         localStorage.setItem("user", JSON.stringify(data));
+        router.push("/");
       } else {
         const errorData = await response.json();
         console.log(errorData);

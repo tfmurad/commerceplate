@@ -1,8 +1,12 @@
-"use client";import Link from "next/link";
+"use client";
+
+import Link from "next/link";
 import React, { ChangeEvent, FormEvent, useState } from "react";
 import { FormData } from "../sign-up/page";
+import { useRouter } from "next/navigation";
 
 const Login = () => {
+  const router = useRouter();
   const [formData, setFormData] = useState<FormData>({
     email: "",
     password: "",
@@ -30,6 +34,7 @@ const Login = () => {
       if (response.ok) {
         const data = await response.json();
         localStorage.setItem("user", JSON.stringify(data));
+        router.push("/");
       } else {
         const errorData = await response.json();
         console.log(errorData);
@@ -38,6 +43,7 @@ const Login = () => {
       console.error("Error during registration:", error);
     }
   };
+
   return (
     <>
       <section className="section">
@@ -46,7 +52,9 @@ const Login = () => {
             <div className="col-11 sm:col-9 md:col-7 mx-auto">
               <div className="mb-14 text-center">
                 <h2 className="max-md:h1 md:mb-2">Login</h2>
-                <p className="md:text-lg">Please fill your email and password to login</p>
+                <p className="md:text-lg">
+                  Please fill your email and password to login
+                </p>
               </div>
 
               <form onSubmit={handleLogin}>
@@ -72,7 +80,10 @@ const Login = () => {
                   />
                 </div>
 
-                <button type="submit" className="btn btn-primary md:text-lg md:font-medium w-full mt-10">
+                <button
+                  type="submit"
+                  className="btn btn-primary md:text-lg md:font-medium w-full mt-10"
+                >
                   Log In
                 </button>
               </form>
