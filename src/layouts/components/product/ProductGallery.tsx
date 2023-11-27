@@ -66,7 +66,7 @@ const ProductGallery = ({ images }: { images: ImageItem[] }) => {
       (item: any) => item.url === clickedUrl
     );
     setActiveIndex(foundIndex);
-    console.log(clickedUrl, foundIndex);
+    // console.log(clickedUrl, foundIndex);
   };
 
   // interface ImageObject {

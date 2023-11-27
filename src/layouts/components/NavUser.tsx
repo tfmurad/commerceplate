@@ -92,7 +92,7 @@ const NavUser = () => {
 						leaveFrom="opacity-100"
 						leaveTo="opacity-0"
 					>
-						<Listbox.Options className="z-20 text-center absolute w-full overflow-hidden">
+						<Listbox.Options className="z-20 text-center absolute w-full md:overflow-hidden">
 							<Listbox.Option
 								value={'Logout'}
 							>

@@ -7,15 +7,16 @@ import { getProducts, getCollectionProducts } from "@/lib/shopify";
 import { PageInfo, Product } from "@/lib/shopify/types";
 import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
-import { AddToCart } from "./cart/add-to-cart";
+import { AddToCart } from "../cart/add-to-cart";
 import { BiLoaderAlt } from "react-icons/bi";
+import LoadingCards from "../loading/LoadingCards";
 
 const ProductCard = ({
   searchParams,
 }: {
   searchParams: { [key: string]: string | string[] | undefined };
 }) => {
-  const [isLoading, setIsLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
   const targetElementRef = useRef<HTMLDivElement>(null);
   const [data, setData] = useState<{
     products: Product[];
@@ -48,7 +49,15 @@ const ProductCard = ({
       try {
         let productsData;
 
-        if (searchValue || brand || minPrice || maxPrice || category || tag || cursor) {
+        if (
+          searchValue ||
+          brand ||
+          minPrice ||
+          maxPrice ||
+          category ||
+          tag ||
+          cursor
+        ) {
           let queryString = "";
 
           if (minPrice || maxPrice) {
@@ -82,15 +91,12 @@ const ProductCard = ({
               ? await getCollectionProducts({
                   collection: category,
                   sortKey,
-                  reverse
+                  reverse,
                 })
               : await getProducts({ ...query, cursor });
-
-          console.log("i'm brand from if block", productsData.products);
         } else {
           // Fetch all products
           productsData = await getProducts({ sortKey, reverse, cursor });
-          console.log("i'm all pd from else block", productsData.products);
         }
 
         setData({
@@ -128,7 +134,7 @@ const ProductCard = ({
   });
 
   const fetchDataWithNewCursor = async (newCursor: string) => {
-    setIsLoading(true);
+    // setIsLoading(true);
 
     try {
       const res = await getProducts({
@@ -142,7 +148,6 @@ const ProductCard = ({
         products: [...products, ...res.products],
         pageInfo: res.pageInfo,
       });
-			
     } catch (error) {
       console.error("Error fetching more products:", error);
     } finally {
@@ -150,10 +155,9 @@ const ProductCard = ({
     }
   };
 
-  // console.log(products)
-	if(isLoading){
-		<p>Loading...</p>
-	}
+  if (isLoading) {
+    return <LoadingCards />;
+  }
 
   return (
     <div ref={targetElementRef} className="row">
