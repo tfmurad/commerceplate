@@ -145,22 +145,10 @@ const ShowProducts = async ({
           <div className="col-12 lg:col-9">
             {layout === "list" ? (
               <ProductListView
-                products={
-                  (Array.isArray(productsData)
-                    ? productsData
-                    : productsData?.products) || []
-                }
-                searchValue={searchValue}
                 searchParams={searchParams}
               />
             ) : (
               <ProductCardView
-                products={
-                  (Array.isArray(productsData)
-                    ? productsData
-                    : productsData?.products) || []
-                }
-                searchValue={searchValue}
                 searchParams={searchParams}
               />
             )}

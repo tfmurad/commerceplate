@@ -10,6 +10,7 @@ import { useEffect, useRef, useState } from "react";
 import { AddToCart } from "../cart/add-to-cart";
 import { BiLoaderAlt } from "react-icons/bi";
 import LoadingCards from "../loading/LoadingCards";
+import { removeSlug } from "@/lib/utils/textConverter";
 
 const ProductCard = ({
   searchParams,
@@ -59,6 +60,22 @@ const ProductCard = ({
           cursor
         ) {
           let queryString = "";
+          let filterCategoryProduct = [];
+
+          if (minPrice || maxPrice || brand || tag) {
+            filterCategoryProduct.push({
+              price: {
+                min:
+                  minPrice !== undefined && minPrice !== ""
+                    ? parseFloat(minPrice)
+                    : 0,
+                max:
+                  maxPrice !== undefined && maxPrice !== ""
+                    ? parseFloat(maxPrice)
+                    : Number.POSITIVE_INFINITY,
+              },
+            });
+          }
 
           if (minPrice || maxPrice) {
             queryString += `variants.price:<=${maxPrice} variants.price:>=${minPrice}`;
@@ -68,16 +85,46 @@ const ProductCard = ({
             queryString += ` ${searchValue}`;
           }
 
+          // if (brand) {
+          //   Array.isArray(brand)
+          //     ? (queryString += `${brand
+          //         .map((b) => `(vendor:${b})`)
+          //         .join(" OR ")}`)
+          //     : (queryString += `vendor:"${brand}"`);
+
+          //   // Include brand condition in filterCategoryProduct
+          //   filterCategoryProduct.push({
+          //     productVendor: removeSlug(brand),
+          //   });
+          // }
+
           if (brand) {
             Array.isArray(brand)
               ? (queryString += `${brand
                   .map((b) => `(vendor:${b})`)
                   .join(" OR ")}`)
               : (queryString += `vendor:"${brand}"`);
+
+            if (Array.isArray(brand) && brand.length > 0) {
+              brand.forEach((b) => {
+                filterCategoryProduct.push({
+                  productVendor: removeSlug(b),
+                });
+              });
+            } else {
+              filterCategoryProduct.push({
+                productVendor: removeSlug(brand),
+              });
+            }
           }
 
           if (tag) {
             queryString += ` ${tag}`;
+
+            // Include tag condition in filterCategoryProduct
+            filterCategoryProduct.push({
+              tag: tag.charAt(0).toUpperCase() + tag.slice(1),
+            });
           }
 
           const query = {
@@ -92,8 +139,13 @@ const ProductCard = ({
                   collection: category,
                   sortKey,
                   reverse,
+                  filterCategoryProduct:
+                    filterCategoryProduct.length > 0
+                      ? filterCategoryProduct
+                      : undefined,
                 })
               : await getProducts({ ...query, cursor });
+          console.log(filterCategoryProduct);
         } else {
           // Fetch all products
           productsData = await getProducts({ sortKey, reverse, cursor });
@@ -159,8 +211,35 @@ const ProductCard = ({
     return <LoadingCards />;
   }
 
+  const resultsText = products.length > 1 ? "results" : "result";
+
   return (
     <div ref={targetElementRef} className="row">
+      {searchValue ? (
+        <p className="mb-4">
+          {products.length === 0
+            ? "There are no products that match "
+            : `Showing ${products.length} ${resultsText} for `}
+          <span className="font-bold">&quot;{searchValue}&quot;</span>
+        </p>
+      ) : null}
+
+      {products?.length === 0 && (
+        <div className="mx-auto pt-5 text-center">
+          <ImageFallback
+            className="mx-auto mb-6"
+            src="/images/no-search-found.png"
+            alt="no-search-found"
+            width={211}
+            height={184}
+          />
+          <h1 className="h2 mb-4">No Product Found!</h1>
+          <p>
+            We couldn&apos;t find what you filtered for. Try filtering again.
+          </p>
+        </div>
+      )}
+
       {products.map((product, index) => (
         <div
           key={index}

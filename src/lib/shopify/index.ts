@@ -290,15 +290,50 @@ export async function getCollection(handle: string): Promise<Collection | undefi
   return reshapeCollection(res.body.data.collection);
 }
 
+// export async function getCollectionProducts({
+//   collection,
+//   reverse,
+//   sortKey,
+// }: {
+//   collection: string;
+//   reverse?: boolean;
+//   sortKey?: string;
+//   query?: string;
+// }): Promise<{ pageInfo: PageInfo | null; products: Product[] }> {
+//   const res = await shopifyFetch<ShopifyCollectionProductsOperation>({
+//     query: getCollectionProductsQuery,
+//     tags: [TAGS.collections, TAGS.products],
+//     variables: {
+//       handle: collection,
+//       reverse,
+//       sortKey: sortKey === 'CREATED_AT' ? 'CREATED' : sortKey,
+//     }
+//   });
+
+//   if (!res.body.data.collection) {
+//     console.log(`No collection found for \`${collection}\``);
+//     return { pageInfo: null, products: [] };
+//   }
+
+//   // return reshapeProducts(removeEdgesAndNodes(res.body.data.collection.products));
+//   const pageInfo = res.body.data?.collection?.products?.pageInfo;
+
+//   return {
+//     pageInfo,
+//     products: reshapeProducts(removeEdgesAndNodes(res.body.data.collection.products)),
+//   };
+// }
+
 export async function getCollectionProducts({
   collection,
   reverse,
   sortKey,
+  filterCategoryProduct,
 }: {
   collection: string;
   reverse?: boolean;
   sortKey?: string;
-  query?: string;
+  filterCategoryProduct?: any[]; // Update the type based on your GraphQL schema
 }): Promise<{ pageInfo: PageInfo | null; products: Product[] }> {
   const res = await shopifyFetch<ShopifyCollectionProductsOperation>({
     query: getCollectionProductsQuery,
@@ -307,7 +342,13 @@ export async function getCollectionProducts({
       handle: collection,
       reverse,
       sortKey: sortKey === 'CREATED_AT' ? 'CREATED' : sortKey,
-    }
+      filterCategoryProduct, // Pass the filters variable to the query
+    } as {
+      handle: string;
+      reverse?: boolean;
+      sortKey?: string;
+      filterCategoryProduct?: any[]; 
+    },
   });
 
   if (!res.body.data.collection) {
@@ -323,6 +364,7 @@ export async function getCollectionProducts({
     products: reshapeProducts(removeEdgesAndNodes(res.body.data.collection.products)),
   };
 }
+
 
 
 export async function createCustomer(input: CustomerInput): Promise<user> {
