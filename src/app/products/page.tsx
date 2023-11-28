@@ -81,10 +81,10 @@ const ShowProducts = async ({
     productsData =
       category && category !== "all"
         ? await getCollectionProducts({
-            collection: category,
-            sortKey,
-            reverse,
-          })
+          collection: category,
+          sortKey,
+          reverse,
+        })
         : await getProducts(query);
   } else {
     // Fetch all products
@@ -178,7 +178,7 @@ const ProductsListPage = ({ searchParams }: { searchParams: any }) => {
     <>
       <PageHeader title={"Products"} />
       <Suspense
-        fallback={<LoadingProducts/>}
+        fallback={<LoadingProducts />}
       >
         <ShowProducts searchParams={searchParams} />
       </Suspense>

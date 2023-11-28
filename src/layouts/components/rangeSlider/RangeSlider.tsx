@@ -5,6 +5,7 @@ import MultiRangeSlider from "multi-range-slider-react";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useState } from "react";
 import "./rangeSlider.css";
+import { currencyCode } from "@/lib/constants";
 
 const RangeSlider = ({
   maxPriceData,
@@ -54,10 +55,10 @@ const RangeSlider = ({
     <div>
       <div className="flex justify-between">
         <p>
-          ৳{minValue2} {maxPriceData.maxProductCurrency}
+          ৳{minValue2} {maxPriceData.maxProductCurrency || currencyCode}
         </p>
         <p>
-          ৳{maxValue2} {maxPriceData.maxProductCurrency}
+          ৳{maxValue2} {maxPriceData.maxProductCurrency || currencyCode}
         </p>
       </div>
 
