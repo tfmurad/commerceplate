@@ -274,14 +274,14 @@ const ProductListView = ({
 
                 <div className="flex items-center gap-x-2 mt-2">
                   <span className="text-light dark:text-darkmode-light text-xs md:text-lg font-bold">
-                    ৳ {priceRange.minVariantPrice.amount}{" "}
-                    {priceRange.minVariantPrice.currencyCode}
+                    ৳ {priceRange?.minVariantPrice?.amount}{" "}
+                    {priceRange?.minVariantPrice?.currencyCode}
                   </span>
-                  {parseFloat(compareAtPriceRange?.maxVariantPrice.amount) >
+                  {parseFloat(compareAtPriceRange?.maxVariantPrice?.amount) >
                   0 ? (
                     <s className="text-light dark:text-darkmode-light text-xs md:text-base font-medium">
                       {currencySymbol}{" "}
-                      {compareAtPriceRange?.maxVariantPrice.amount}{" "}
+                      {compareAtPriceRange?.maxVariantPrice?.amount}{" "}
                       {compareAtPriceRange?.maxVariantPrice?.currencyCode}
                     </s>
                   ) : (
@@ -293,8 +293,8 @@ const ProductListView = ({
                   {description}
                 </p>
                 <AddToCart
-                  variants={product.variants}
-                  availableForSale={product.availableForSale}
+                  variants={product?.variants}
+                  availableForSale={product?.availableForSale}
                   handle={handle}
                   stylesClass={
                     "btn btn-outline-primary max-md:btn-sm drop-shadow-md"

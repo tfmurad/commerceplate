@@ -254,9 +254,9 @@ const ProductCardView = ({
             />
 
             <AddToCart
-              variants={product.variants}
-              availableForSale={product.availableForSale}
-              handle={product.handle}
+              variants={product?.variants}
+              availableForSale={product?.availableForSale}
+              handle={product?.handle}
               stylesClass={
                 "btn btn-primary max-md:btn-sm z-10 absolute bottom-28 md:bottom-0 left-1/2 transform -translate-x-1/2 translate-y-full md:group-hover:-translate-y-6 duration-300 ease-in-out whitespace-nowrap drop-shadow-md"
               }
@@ -266,21 +266,21 @@ const ProductCardView = ({
             <h2 className="font-bold md:font-medium text-base md:text-xl">
               <Link
                 className="after:absolute after:inset-0"
-                href={`/product/${product.handle}`}
+                href={`/product/${product?.handle}`}
               >
-                {product.title}
+                {product?.title}
               </Link>
             </h2>
             <div className="flex justify-center items-center gap-x-2 mt-2">
               <span className="text-light dark:text-darkmode-light text-xs md:text-lg font-bold">
-                ৳ {product.priceRange.minVariantPrice.amount}{" "}
-                {product.priceRange.minVariantPrice.currencyCode}
+                ৳ {product?.priceRange?.minVariantPrice?.amount}{" "}
+                {product?.priceRange?.minVariantPrice?.currencyCode}
               </span>
-              {parseFloat(product.compareAtPriceRange?.maxVariantPrice.amount) >
+              {parseFloat(product?.compareAtPriceRange?.maxVariantPrice?.amount) >
               0 ? (
                 <s className="text-light dark:text-darkmode-light text-xs md:text-base font-medium">
-                  ৳ {product.compareAtPriceRange?.maxVariantPrice.amount}{" "}
-                  {product.compareAtPriceRange?.maxVariantPrice?.currencyCode}
+                  ৳ {product?.compareAtPriceRange?.maxVariantPrice?.amount}{" "}
+                  {product?.compareAtPriceRange?.maxVariantPrice?.currencyCode}
                 </s>
               ) : (
                 ""

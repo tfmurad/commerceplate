@@ -91,12 +91,8 @@ const ShowProducts = async ({
     productsData = await getProducts({ sortKey, reverse, cursor });
   }
 
-  // const products = await getProducts({ sortKey, reverse, query: searchValue });
   const categories = await getCollections();
   const vendors = await getVendors({});
-  // const tags = [
-  //   ...new Set(productsData?.products.flatMap((product: Product) => product.tags)),
-  // ];
 
   const tags = [
     ...new Set(
@@ -108,17 +104,17 @@ const ShowProducts = async ({
 
   // Getting Max price for the price-rage selector
   const maxProductPriceData = productsData?.products.map(
-    (product: Product) => product.priceRange.maxVariantPrice,
+    (product: Product) => product?.priceRange?.maxVariantPrice,
   );
   const maxProductPrice = Math.ceil(
     Math.max(
-      ...maxProductPriceData.map(
+      ...maxProductPriceData?.map(
         (a: { amount: string; currencyCode: string }) => parseFloat(a.amount),
       ),
     ),
   );
-  const maxProductCurrency: string = productsData?.products.map(
-    (product: Product) => product.priceRange.maxVariantPrice.currencyCode,
+  const maxProductCurrency: string = productsData?.products?.map(
+    (product: Product) => product?.priceRange?.maxVariantPrice?.currencyCode,
   )[0];
   const maxPriceData = { maxProductPrice, maxProductCurrency };
 
