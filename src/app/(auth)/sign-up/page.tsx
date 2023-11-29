@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { ChangeEvent, FormEvent, useState } from "react";
+import { BiLoaderAlt } from "react-icons/bi";
 
 export interface FormData {
   firstName?: string;
@@ -18,6 +19,8 @@ const SignUp = () => {
     password: "",
   });
 
+  const [loading, setLoading] = useState(false);
+
   const handleChange = (e: ChangeEvent<HTMLInputElement>): void => {
     setFormData({
       ...formData,
@@ -29,6 +32,8 @@ const SignUp = () => {
     e.preventDefault();
 
     try {
+      setLoading(true);
+
       const response = await fetch("/api/customer/sign-up", {
         method: "POST",
         headers: {
@@ -43,10 +48,12 @@ const SignUp = () => {
         router.push("/");
       } else {
         const errorData = await response.json();
-        console.log(errorData);
+        // console.log(errorData);
       }
     } catch (error) {
-      console.error("Error during registration:", error);
+      // console.error("Error during registration:", error);
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -101,7 +108,7 @@ const SignUp = () => {
                   type="submit"
                   className="btn btn-primary md:text-lg md:font-medium w-full mt-10"
                 >
-                  Sign Up
+                  {loading ? <BiLoaderAlt className={`animate-spin mx-auto`} size={26}/> : "Sign Up"}
                 </button>
               </form>
 

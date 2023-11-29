@@ -71,7 +71,7 @@ const CategoriesSlider = ({ categories }: { categories: any }) => {
 							/>
 							<div className="py-6">
 								<h3 className='mb-2 font-medium h4'>
-									<Link className="after:absolute after:inset-0" href={path}>
+									<Link className="after:absolute after:inset-0" href={`/products?c=${handle}`}>
 									{title}
 									</Link>
 								</h3>

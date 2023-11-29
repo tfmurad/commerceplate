@@ -4,6 +4,7 @@ import Link from "next/link";
 import React, { ChangeEvent, FormEvent, useState } from "react";
 import { FormData } from "../sign-up/page";
 import { useRouter } from "next/navigation";
+import { BiLoaderAlt } from "react-icons/bi";
 
 const Login = () => {
   const router = useRouter();
@@ -11,6 +12,8 @@ const Login = () => {
     email: "",
     password: "",
   });
+
+  const [loading, setLoading] = useState(false);
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>): void => {
     setFormData({
@@ -23,6 +26,8 @@ const Login = () => {
     e.preventDefault();
 
     try {
+      setLoading(true);
+
       const response = await fetch("/api/customer/login", {
         method: "POST",
         headers: {
@@ -37,10 +42,12 @@ const Login = () => {
         router.push("/");
       } else {
         const errorData = await response.json();
-        console.log(errorData);
+        // console.log(errorData);
       }
     } catch (error) {
-      console.error("Error during registration:", error);
+      // console.error("Error during registration:", error);
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -84,7 +91,7 @@ const Login = () => {
                   type="submit"
                   className="btn btn-primary md:text-lg md:font-medium w-full mt-10"
                 >
-                  Log In
+                  {loading ? <BiLoaderAlt className={`animate-spin mx-auto`} size={26}/> : "Log In"}
                 </button>
               </form>
 

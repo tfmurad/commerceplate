@@ -22,7 +22,7 @@ export const fetchUser = async () => {
 		}
 
 	} catch (error) {
-		console.log("Error fetching user details:", error);
+		// console.log("Error fetching user details:", error);
 		return null;
 	}
 };

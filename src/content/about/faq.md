@@ -1,7 +1,7 @@
 ---
 title: "Frequently Asked Questions"
 meta_title: "FAQ"
-subtitle: "Discover more about our lamp e-commerce platform with these frequently asked questions."
+subtitle: "Our expertly crafted FAQ guide provides valuable insights on selecting the perfect table lamp to complement your decor and meet your specific lighting needs."
 faqs:
   - title: "Can I customize lamps for client projects?"
     content: 'Yes, our platform allows customization for client projects, ensuring unique and tailored solutions. Yes, our platform allows customization for client projects, ensuring unique and tailored solutions.'
