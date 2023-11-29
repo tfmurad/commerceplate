@@ -135,7 +135,7 @@ export function VariantSelector({
                         key={value}
                         className={`relative rounded-md overflow-hidden ${
                           isActive &&
-                          "border border-dark dark:border-darkmode-dark outline-none"
+                          "outline outline-1 outline-dark dark:outline-darkmode-dark"
                         }`}
                       >
                         <Image
