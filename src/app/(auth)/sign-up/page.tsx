@@ -1,5 +1,7 @@
 "use client";
 
+import { CustomerError } from "@/lib/shopify/types";
+import Cookies from "js-cookie";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { ChangeEvent, FormEvent, useState } from "react";
@@ -20,6 +22,7 @@ const SignUp = () => {
   });
 
   const [loading, setLoading] = useState(false);
+  const [errorMessages, seterrorMessages] = useState([]);
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>): void => {
     setFormData({
@@ -42,10 +45,20 @@ const SignUp = () => {
         body: JSON.stringify(formData),
       });
 
+      const customerCreateErrors: any = Cookies.get('customerCreateErrors');
+      const errorParsed = JSON.parse(customerCreateErrors);
+
       if (response.ok) {
+        seterrorMessages([]);
         const data = await response.json();
         localStorage.setItem("user", JSON.stringify(data));
-        router.push("/");
+
+        if (errorParsed.length > 0) {
+          seterrorMessages(errorParsed)
+        } else {
+          router.push("/");
+        }
+
       } else {
         const errorData = await response.json();
         // console.log(errorData);
@@ -104,12 +117,18 @@ const SignUp = () => {
                   />
                 </div>
 
-                <button
-                  type="submit"
-                  className="btn btn-primary md:text-lg md:font-medium w-full mt-10"
-                >
-                  {loading ? <BiLoaderAlt className={`animate-spin mx-auto`} size={26}/> : "Sign Up"}
-                </button>
+                <div className="mt-8">
+                  {
+                    errorMessages.map((error: CustomerError) => <p key={error.code} className="text-sm text-light dark:text-darkmode-light truncate">*{error.message}</p>)
+                  }
+
+                  <button
+                    type="submit"
+                    className="btn btn-primary md:text-lg md:font-medium w-full mt-2"
+                  >
+                    {loading ? <BiLoaderAlt className={`animate-spin mx-auto`} size={26} /> : "Sign Up"}
+                  </button>
+                </div>
               </form>
 
               <div className="flex gap-x-2 text-sm md:text-base mt-6">

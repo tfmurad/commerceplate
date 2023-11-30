@@ -10,6 +10,7 @@ import { BsGridFill } from "react-icons/bs";
 import { FaList } from "react-icons/fa6";
 import { IoSearch } from "react-icons/io5";
 import DropdownMenu from "../filter/DropdownMenu";
+import { TbFilter,TbFilterX } from "react-icons/tb";
 
 export type ListItem = SortFilterItem | PathFilterItem;
 export type PathFilterItem = { title: string; path: string };
@@ -106,17 +107,17 @@ const ProductLayouts = ({ categories, vendors, tags, maxPriceData }: any) => {
                 </div> */}
 
                 <div className="block lg:hidden w-full">
-                  <div className="filter-button-container">
+                  <div className="filter-button-container mb-4">
                     <button {...getToggleProps()}>
                       {isExpanded ? (
-                        <span>&times; Filter</span>
+                         <span className="font-medium text-base flex gap-x-1 items-center justify-center"><TbFilterX /> Filter</span>
                       ) : (
-                        <span>+ Filter</span>
+                        <span className="font-medium text-base flex gap-x-1 items-center justify-center"><TbFilter /> Filter</span>
                       )}
                     </button>
                   </div>
                   <section
-                    className="collapse-container-class mt-4 z-20 bg-body dark:bg-darkmode-body w-full px-4 rounded-md"
+                    className="collapse-container-class z-20 bg-body dark:bg-darkmode-body w-full px-4 rounded-md"
                     {...getCollapseProps()}
                   >
                     <ProductFilters

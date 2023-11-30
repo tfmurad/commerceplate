@@ -9,9 +9,9 @@ export const createCustomerMutation = /* GraphQL */ `
         acceptsMarketing
       }
       customerUserErrors {
+        code
         field
         message
-        code
       }
     }
   }
@@ -24,9 +24,9 @@ export const getCustomerAccessTokenMutation = /* GraphQL */ `
         accessToken
       }
       customerUserErrors {
-        message
         code
         field
+        message
       }
     }
   }

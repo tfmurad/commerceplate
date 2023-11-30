@@ -67,8 +67,8 @@ const RangeSlider = ({
         ruler="false"
         label="false"
         min="0"
-        // max={maxPriceData.maxProductPrice}
-        max="3000"
+        // max={`${maxPriceData.maxProductPrice}`}
+        max="6000"
         minValue={getMinPrice! || 0}
         maxValue={getMaxPrice! || 1000}
         onInput={(e) => {

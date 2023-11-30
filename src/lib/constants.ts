@@ -7,7 +7,7 @@ export type SortFilterItem = {
 
 export const defaultSort: SortFilterItem = {
   title: 'Relevance',
-  slug: 'relevance',
+  slug: null,
   sortKey: 'CREATED_AT',
   reverse: false
 };

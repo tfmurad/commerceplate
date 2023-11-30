@@ -22,11 +22,11 @@ export interface CustomerAccessTokenInput {
 
 export type user = {
   customer: {
-    id: string;
+    id?: string;
     firstName: string;
-    lastName: string;
+    lastName?: string;
     email: string;
-    phone: string | null;
+    phone?: string | null;
     acceptsMarketing: boolean;
   };
 };
@@ -38,10 +38,17 @@ export type userOperation = {
   };
 };
 
+export type CustomerError = {
+  code: string;
+  field: string[];
+  message: string;
+};
+
 export type registerOperation = {
   data: {
     customerCreate: {
       customer: user;
+      customerUserErrors: CustomerError;
     };
   };
   variables: {

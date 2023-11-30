@@ -1,10 +1,15 @@
 "use client";
 
+import Cookies from "js-cookie";
 import Link from "next/link";
-import React, { ChangeEvent, FormEvent, useState } from "react";
-import { FormData } from "../sign-up/page";
 import { useRouter } from "next/navigation";
+import { ChangeEvent, FormEvent, useState } from "react";
 import { BiLoaderAlt } from "react-icons/bi";
+import { FormData } from "../sign-up/page";
+import { CustomerError } from "@/lib/shopify/types";
+
+
+
 
 const Login = () => {
   const router = useRouter();
@@ -14,6 +19,7 @@ const Login = () => {
   });
 
   const [loading, setLoading] = useState(false);
+  const [errorMessages, seterrorMessages] = useState([]);
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>): void => {
     setFormData({
@@ -36,10 +42,20 @@ const Login = () => {
         body: JSON.stringify(formData),
       });
 
+      const customerLoginErrors: any = Cookies.get('customerLoginErrors');
+      const errorParsed = JSON.parse(customerLoginErrors);
+
       if (response.ok) {
+        seterrorMessages([]);
         const data = await response.json();
         localStorage.setItem("user", JSON.stringify(data));
-        router.push("/");
+
+        if (errorParsed.length > 0) {
+          seterrorMessages(errorParsed)
+        } else {
+          router.push("/");
+        }
+
       } else {
         const errorData = await response.json();
         // console.log(errorData);
@@ -87,12 +103,18 @@ const Login = () => {
                   />
                 </div>
 
-                <button
-                  type="submit"
-                  className="btn btn-primary md:text-lg md:font-medium w-full mt-10"
-                >
-                  {loading ? <BiLoaderAlt className={`animate-spin mx-auto`} size={26}/> : "Log In"}
-                </button>
+                <div className="mt-8">
+                  {
+                    errorMessages.map((error: CustomerError) => <p key={error.code} className="text-sm text-light dark:text-darkmode-light truncate">*{error.code === "UNIDENTIFIED_CUSTOMER" ? "Wrong Password!" : "Something Went Wrong!"}</p>)
+                  }
+
+                  <button
+                    type="submit"
+                    className="btn btn-primary md:text-lg md:font-medium w-full mt-2"
+                  >
+                    {loading ? <BiLoaderAlt className={`animate-spin mx-auto`} size={26} /> : "Log In"}
+                  </button>
+                </div>
               </form>
 
               <div className="flex gap-x-2 text-sm md:text-base mt-4">

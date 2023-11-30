@@ -173,13 +173,13 @@ const Header = ({ children }: { children: any }) => {
 
           {settings.search && <SearchBar />}
 
+          <Suspense fallback={children[0]}>{children[1]}</Suspense>
+
           {settings.account && (
-            <div className="mr-4 md:mr-6">
+            <div className="ml-4 md:ml-6">
               <NavUser />
             </div>
           )}
-
-          <Suspense fallback={children[0]}>{children[1]}</Suspense>
         </div>
       </nav>
     </header>
