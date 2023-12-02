@@ -2,6 +2,7 @@ import Social from "@/components/Social";
 import { AddToCart } from "@/components/cart/add-to-cart";
 import ProductGallery from "@/components/product/ProductGallery";
 import ShowTags from "@/components/product/ShowTags";
+import Tabs from "@/components/product/Tabs";
 import { VariantSelector } from "@/components/product/variant-selector";
 import social from "@/config/social.json";
 import MDXContent from "@/helpers/MDXContent";
@@ -35,6 +36,7 @@ const ShowProductSingle = async ({ params }: { params: { single: string } }) => 
     id,
     title,
     description,
+    descriptionHtml,
     availableForSale,
     priceRange,
     featuredImage,
@@ -125,19 +127,34 @@ const ShowProductSingle = async ({ params }: { params: { single: string } }) => 
       </section>
 
       {/* Description of a product  */}
-      {description && (
+      {/* {description && (
         <section>
           <div className="container">
             <div className="row">
               <div className="col-10 lg:col-11 mx-auto border rounded-md p-4">
                 <p className="font-semibold">Description:</p>
-                <MDXContent content={description} />
+                <div className="content">
+                  <MDXContent content={descriptionHtml} />
+                </div>
               </div>
             </div>
-            {/* <p>{description}</p> */}
           </div>
         </section>
-      )}
+      )} */}
+
+      {
+        description && (
+          <section>
+          <div className="container">
+            <div className="row">
+              <div className="col-10 lg:col-11 mx-auto">
+              <Tabs/>
+              </div>
+            </div>
+          </div>
+        </section>
+        )
+      }
 
       {/* Recommented Products section  */}
       <section className="section">
