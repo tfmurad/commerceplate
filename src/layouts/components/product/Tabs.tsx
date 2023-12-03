@@ -1,69 +1,48 @@
 "use client"
-// import { Tab } from '@headlessui/react'
-// import { useState } from 'react'
-
-// const Tabs = () => {
-//   const product = {
-//     description: '<p>This is the <strong>product</strong> description.</p>',
-//     moreInfo: '<p>More information about the product.</p>',
-//   };
-
-//   return (
-//     <Tab.Group>
-//       <Tab.List className="flex gap-x-4 border-b-2 focus:outline-none">
-//         <Tab className={({ selected }) => `${selected ? 'border-t-2 border-l-2 border-r-2 border-b-0' : ''} px-6 rounded-tl-md rounded-tr-md`} >Description</Tab>
-//         <Tab className={({ selected }) => `${selected ? 'border-t-2 border-l-2 border-r-2 border-b-0' : ''} px-6 rounded-tl-md rounded-tr-md`} >More Info</Tab>
-//       </Tab.List>
-//       <Tab.Panels className="border-l-2 border-r-2 border-b-2 rounded-bl-md rounded-br-md roun p-6">
-//       <Tab.Panel>
-//           <div dangerouslySetInnerHTML={{ __html: product.description }} />
-//         </Tab.Panel>
-//         <Tab.Panel>
-//           <div dangerouslySetInnerHTML={{ __html: product.moreInfo }} />
-//         </Tab.Panel>
-//       </Tab.Panels>
-//     </Tab.Group>
-//   )
-// }
-
-// export default Tabs
 
 
-// Import the necessary modules
 import { Tab } from '@headlessui/react';
+import { useEffect, useState } from 'react';
+import LoadingDescription from '../loading/LoadingDescription';
 
-// Your Tabs component
-const Tabs = () => {
-  const content: string =
-  `<div>
-  <p>This is the product description.</p>
-  </div>
-  <hr />
-  <div>
-  <p>More information about the product.</p>
-</div>`;
+const Tabs = ({ descriptionHtml }: { descriptionHtml: string }) => {
+  const [description, setDescription] = useState('');
+  const [loading, setLoading] = useState(true);
+  const contentArray = description.split(`--- split content ---`);
 
-  // Split the HTML content based on the separator class
-  const contentArray = content.split(`<hr />`);
-  console.log(contentArray)
+  useEffect(() => {
+    setDescription(descriptionHtml);
+    setLoading(false);
+  }, [descriptionHtml]);
+
+  if (loading) {
+    return <LoadingDescription />;
+  }
 
   return (
     <Tab.Group>
-      <Tab.List className="flex gap-x-4 border-b-2 focus:outline-none">
-        <Tab className={({ selected }) => `${selected ? 'border-t-2 border-l-2 border-r-2 border-b-0' : ''} px-6 rounded-tl-md rounded-tr-md`} >Description</Tab>
-        <Tab className={({ selected }) => `${selected ? 'border-t-2 border-l-2 border-r-2 border-b-0' : ''} px-6 rounded-tl-md rounded-tr-md`} >More Info</Tab>
+      <Tab.List className="border-b-2 relative">
+        <Tab
+          className={({ selected }) => `${selected ? 'border-t-2 border-l-2 border-r-2 border-b-0 bg-body dark:bg-darkmode-body' : ''} cursor-pointer focus:outline-none px-6 rounded-tl-md rounded-tr-md absolute -top-[30px] left-0 h-8`}
+        >
+          Description
+        </Tab>
+        <Tab
+          className={({ selected }) => `${selected ? 'border-t-2 border-l-2 border-r-2 border-b-0 bg-body dark:bg-darkmode-body' : ''} cursor-pointer focus:outline-none px-6 rounded-tl-md rounded-tr-md absolute -top-[30px] left-1/2 md:left-[25%] lg:left-[15%] h-8`}
+        >
+          More Info
+        </Tab>
       </Tab.List>
       <Tab.Panels className="border-l-2 border-r-2 border-b-2 rounded-bl-md rounded-br-md p-6">
         <Tab.Panel>
-          <div dangerouslySetInnerHTML={{ __html: contentArray[0] }} />
+          <div className='space-y-4' dangerouslySetInnerHTML={{ __html: contentArray[0] }} />
         </Tab.Panel>
         <Tab.Panel>
-          <div dangerouslySetInnerHTML={{ __html: contentArray[1] }} />
+          <div className='space-y-4' dangerouslySetInnerHTML={{ __html: contentArray[1] }} />
         </Tab.Panel>
       </Tab.Panels>
     </Tab.Group>
   );
-}
+};
 
 export default Tabs;
-

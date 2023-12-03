@@ -24,12 +24,7 @@ const ShowHeroSlider = async () => {
 
 const ShowCategories = async () => {
   const categories = await getCollections();
-  return new Promise(resolve => {
-    setTimeout(() => {
-      resolve(<CategoriesSlider categories={categories} />);
-    }, 2500);
-  });
-
+  return <CategoriesSlider categories={categories} />
 }
 
 

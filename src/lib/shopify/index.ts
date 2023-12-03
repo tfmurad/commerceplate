@@ -29,6 +29,7 @@ import {
 import { getMenuQuery } from "./queries/menu";
 import { getPageQuery, getPagesQuery } from "./queries/page";
 import {
+  getHighestProductPriceQuery,
   getProductQuery,
   getProductRecommendationsQuery,
   getProductsQuery,
@@ -313,40 +314,6 @@ export async function getCollection(
   return reshapeCollection(res.body.data.collection);
 }
 
-// export async function getCollectionProducts({
-//   collection,
-//   reverse,
-//   sortKey,
-// }: {
-//   collection: string;
-//   reverse?: boolean;
-//   sortKey?: string;
-//   query?: string;
-// }): Promise<{ pageInfo: PageInfo | null; products: Product[] }> {
-//   const res = await shopifyFetch<ShopifyCollectionProductsOperation>({
-//     query: getCollectionProductsQuery,
-//     tags: [TAGS.collections, TAGS.products],
-//     variables: {
-//       handle: collection,
-//       reverse,
-//       sortKey: sortKey === 'CREATED_AT' ? 'CREATED' : sortKey,
-//     }
-//   });
-
-//   if (!res.body.data.collection) {
-//     console.log(`No collection found for \`${collection}\``);
-//     return { pageInfo: null, products: [] };
-//   }
-
-//   // return reshapeProducts(removeEdgesAndNodes(res.body.data.collection.products));
-//   const pageInfo = res.body.data?.collection?.products?.pageInfo;
-
-//   return {
-//     pageInfo,
-//     products: reshapeProducts(removeEdgesAndNodes(res.body.data.collection.products)),
-//   };
-// }
-
 export async function getCollectionProducts({
   collection,
   reverse,
@@ -404,7 +371,7 @@ export async function createCustomer(input: CustomerInput): Promise<any> {
   const customerCreateErrors =
     res.body.data?.customerCreate?.customerUserErrors;
 
-  return {customer, customerCreateErrors};
+  return { customer, customerCreateErrors };
 }
 
 export async function getCustomerAccessToken({
@@ -624,6 +591,27 @@ export async function getProducts({
     pageInfo,
     products: reshapeProducts(removeEdgesAndNodes(res.body.data.products)),
   };
+}
+
+export async function getHighestProductPrice(): Promise<{
+  amount: string;
+  currencyCode: string;
+} | null> {
+  try {
+    const res = await shopifyFetch<any>({
+      query: getHighestProductPriceQuery,
+      cache: "force-cache",
+    });
+
+    // Extract and return the relevant data
+    const highestProduct = res?.body?.data?.products?.edges[0]?.node;
+    const highestProductPrice = highestProduct?.variants?.edges[0]?.node?.price;
+
+    return highestProductPrice || null;
+  } catch (error) {
+    console.log("Error fetching highest product price:", error);
+    throw error;
+  }
 }
 
 // This is called from `app/api/revalidate.ts` so providers can control revalidation logic.

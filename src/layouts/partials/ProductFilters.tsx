@@ -17,7 +17,7 @@ const ProductFilters = ({
   categories: ShopifyCollection[];
   vendors: { vendor: string; productCount: number }[];
   tags: string[];
-  maxPriceData: { maxProductPrice: number; maxProductCurrency: string };
+  maxPriceData: { amount: string; currencyCode: string };
 }) => {
   const router = useRouter();
   const searchParams = useSearchParams();
@@ -85,9 +85,9 @@ const ProductFilters = ({
     <div className="py-4 lg:py-10">
       <div>
         <h5 className="mb-2 lg:text-xl">Select Price Range</h5>
-        <hr className="dark:border-darkmode-border"/>
+        <hr className="dark:border-darkmode-border" />
         <div className="py-4">
-        <RangeSlider maxPriceData={maxPriceData} />
+          <RangeSlider maxPriceData={maxPriceData} />
         </div>
       </div>
 
@@ -109,16 +109,15 @@ const ProductFilters = ({
 
       <div>
         <h5 className="mb-2 lg:text-xl">Product Categories</h5>
-        <hr className="dark:border-darkmode-border"/>
+        <hr className="dark:border-darkmode-border" />
         <ul className="mt-4 space-y-4">
           {categories.map((category) => (
             <li
               key={category.handle}
-              className={`flex items-center justify-between text-light dark:text-darkmode-light cursor-pointer ${
-                selectedCategory === category.handle
+              className={`flex items-center justify-between text-light dark:text-darkmode-light cursor-pointer ${selectedCategory === category.handle
                   ? "text-dark dark:text-darkmode-light font-semibold"
                   : ""
-              }`}
+                }`}
               onClick={() => handleCategoryClick(category.handle)}
             >
               {category.title}{" "}
@@ -135,7 +134,7 @@ const ProductFilters = ({
       {vendors && (
         <div>
           <h5 className="mb-2 mt-8 lg:mt-10 lg:text-xl">Brands</h5>
-          <hr className="dark:border-darkmode-border"/>
+          <hr className="dark:border-darkmode-border" />
           <ul className="mt-4 space-y-4">
             {vendors.map((vendor) => (
               <li
@@ -195,7 +194,7 @@ const ProductFilters = ({
       {tags.length > 0 && (
         <div>
           <h5 className="mb-2 mt-8 lg:mt-10 lg:text-xl">Tags</h5>
-          <hr className="dark:border-darkmode-border"/>
+          <hr className="dark:border-darkmode-border" />
           {/* <button className="flex flex-wrap gap-3 mt-4">
             {tags.map((tag: string) => (
               <p

@@ -46,3 +46,24 @@ export const getProductRecommendationsQuery = /* GraphQL */ `
   }
   ${productFragment}
 `;
+
+export const getHighestProductPriceQuery = /* GraphQL */ `
+  query getHighestProductPrice {
+    products(first: 1, sortKey: PRICE, reverse: true) {
+      edges {
+        node {
+          variants(first: 1) {
+            edges {
+              node {
+                price {
+                  amount
+                  currencyCode
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+`;

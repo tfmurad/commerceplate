@@ -5,6 +5,7 @@ import { getListPage } from "@/lib/contentParser";
 import {
   getCollectionProducts,
   getCollections,
+  getHighestProductPrice,
   getProducts,
   getVendors,
 } from "@/lib/shopify";
@@ -103,20 +104,21 @@ const ShowProducts = async ({
   ];
 
   // Getting Max price for the price-rage selector
-  const maxProductPriceData = productsData?.products.map(
-    (product: Product) => product?.priceRange?.maxVariantPrice,
-  );
-  const maxProductPrice = Math.ceil(
-    Math.max(
-      ...maxProductPriceData?.map(
-        (a: { amount: string; currencyCode: string }) => parseFloat(a.amount),
-      ),
-    ),
-  );
-  const maxProductCurrency: string = productsData?.products?.map(
-    (product: Product) => product?.priceRange?.maxVariantPrice?.currencyCode,
-  )[0];
-  const maxPriceData = { maxProductPrice, maxProductCurrency };
+  // const maxProductPriceData = productsData?.products.map(
+  //   (product: Product) => product?.priceRange?.maxVariantPrice,
+  // );
+  // const maxProductPrice = Math.ceil(
+  //   Math.max(
+  //     ...maxProductPriceData?.map(
+  //       (a: { amount: string; currencyCode: string }) => parseFloat(a.amount),
+  //     ),
+  //   ),
+  // );
+  // const maxProductCurrency: string = productsData?.products?.map(
+  //   (product: Product) => product?.priceRange?.maxVariantPrice?.currencyCode,
+  // )[0];
+  // const maxPriceData = { maxProductPrice, maxProductCurrency }
+  const maxPriceData =await getHighestProductPrice();
 
   return (
     <>
@@ -124,7 +126,7 @@ const ShowProducts = async ({
         categories={categories}
         vendors={vendors}
         tags={tags}
-        maxPriceData={0}
+        maxPriceData={maxPriceData}
       />
 
       <div className="container">
@@ -134,7 +136,7 @@ const ShowProducts = async ({
               categories={categories}
               vendors={vendors}
               tags={tags}
-              maxPriceData={maxPriceData}
+              maxPriceData={maxPriceData!}
             />
           </div>
 

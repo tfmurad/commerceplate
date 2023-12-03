@@ -1,9 +1,8 @@
 "use client";
 
 import ImageFallback from '@/helpers/ImageFallback';
-import { Categories } from '@/types';
 import Link from 'next/link';
-import { useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { HiOutlineArrowNarrowLeft, HiOutlineArrowNarrowRight } from "react-icons/hi";
 // Import Swiper styles
 import "swiper/css";
@@ -11,15 +10,27 @@ import "swiper/css/navigation";
 import "swiper/css/pagination";
 import { Navigation, Pagination } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
+import LoadingCategory from './loading/LoadingCategory';
 
 
 const CategoriesSlider = ({ categories }: { categories: any }) => {
-	
+
 	const [_, setInit] = useState(false);
 	const [isHovered, setIsHovered] = useState(false);
+	const [categoriesData, setCategoriesData] = useState([]);
+	const [loadingCategoriesData, setLoadingCategoriesData] = useState(true);
 
 	const prevRef = useRef(null);
 	const nextRef = useRef(null);
+
+	useEffect(() => {
+		setCategoriesData(categories);
+		setLoadingCategoriesData(false);
+	}, [categories]);
+
+	if (loadingCategoriesData) {
+		return <LoadingCategory />
+	}
 
 	return (
 		<div
@@ -55,30 +66,30 @@ const CategoriesSlider = ({ categories }: { categories: any }) => {
 				onInit={() => setInit(true)}
 			>
 
-				{categories.slice(1).map((item:any) => {
-					const {title, handle, image, path, products} = item;
-					return(
+				{categoriesData.slice(1).map((item: any) => {
+					const { title, handle, image, path, products } = item;
+					return (
 						<SwiperSlide key={handle}>
-						<div
-							className='text-center relative'
-						>
-							<ImageFallback
-								src={image?.url}
-								width={424}
-								height={306}
-								alt={title}
-								className="h-[150px] md:h-[250px] lg:h-[306px] object-cover rounded-md"
-							/>
-							<div className="py-6">
-								<h3 className='mb-2 font-medium h4'>
-									<Link className="after:absolute after:inset-0" href={`/products?c=${handle}`}>
-									{title}
-									</Link>
-								</h3>
-								<p className="text-light dark:text-darkmode-light text-xs md:text-xl">{item.products?.edges.length} items</p>
+							<div
+								className='text-center relative'
+							>
+								<ImageFallback
+									src={image?.url}
+									width={424}
+									height={306}
+									alt={title}
+									className="h-[150px] md:h-[250px] lg:h-[306px] object-cover rounded-md"
+								/>
+								<div className="py-6">
+									<h3 className='mb-2 font-medium h4'>
+										<Link className="after:absolute after:inset-0" href={`/products?c=${handle}`}>
+											{title}
+										</Link>
+									</h3>
+									<p className="text-light dark:text-darkmode-light text-xs md:text-xl">{item.products?.edges.length} items</p>
+								</div>
 							</div>
-						</div>
-					</SwiperSlide>
+						</SwiperSlide>
 					)
 				})}
 
