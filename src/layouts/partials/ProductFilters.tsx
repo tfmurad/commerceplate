@@ -143,7 +143,8 @@ const ProductFilters = ({
                 onClick={() => handleBrandClick(vendor.vendor)}
               >
                 <span>
-                  {vendor.vendor} ({vendor.productCount})
+                  {vendor.vendor} 
+                  {/* ({vendor.productCount}) */}
                 </span>
                 <div className="h-4 w-4 rounded-sm flex items-center justify-center border border-light dark:border-darkmode-light">
                   {selectedBrands.map((b, i) =>

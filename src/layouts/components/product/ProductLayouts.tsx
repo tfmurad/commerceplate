@@ -4,7 +4,7 @@ import { SortFilterItem, sorting } from "@/lib/constants";
 import { createUrl } from "@/lib/utils";
 import ProductFilters from "@/partials/ProductFilters";
 import { useRouter, useSearchParams } from "next/navigation";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useCollapse } from "react-collapsed";
 import { BsGridFill } from "react-icons/bs";
 import { FaList } from "react-icons/fa6";
@@ -21,9 +21,11 @@ const ProductLayouts = ({ categories, vendors, tags, maxPriceData }: any) => {
 
   const router = useRouter();
   const searchParams = useSearchParams();
+  const [isInputEditing, setInputEditing] = useState(false);
   const isListView = searchParams.get("layout") === "list";
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setInputEditing(true);
     const val = e.target as HTMLInputElement;
     const newParams = new URLSearchParams(searchParams.toString());
 
@@ -40,10 +42,10 @@ const ProductLayouts = ({ categories, vendors, tags, maxPriceData }: any) => {
     const inputField = document.getElementById(
       "searchInput",
     ) as HTMLInputElement;
-    if (inputField && searchParams.get("q")) {
+    if (isInputEditing || searchParams.get("q")) {
       inputField.focus();
     }
-  }, [searchParams]);
+  }, [searchParams,isInputEditing]);
 
   useEffect(() => {
     const handleOutsideClick = (event: MouseEvent) => {
@@ -55,6 +57,15 @@ const ProductLayouts = ({ categories, vendors, tags, maxPriceData }: any) => {
       ) {
         setExpanded(false);
       }
+
+      // set input editing state to false when clicking outside the input
+      if (
+        !target.closest("#searchInput") &&
+        isInputEditing &&
+        document.getElementById("searchInput")
+      ) {
+        setInputEditing(false);
+      }
     };
 
     document.addEventListener("click", handleOutsideClick);
@@ -62,7 +73,7 @@ const ProductLayouts = ({ categories, vendors, tags, maxPriceData }: any) => {
     return () => {
       document.removeEventListener("click", handleOutsideClick);
     };
-  }, [isExpanded, setExpanded]);
+  }, [isExpanded, setExpanded,isInputEditing]);
 
   function onSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
