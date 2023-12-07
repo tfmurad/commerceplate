@@ -40,8 +40,8 @@ const LatestProducts = ({ products }: { products: Product[] }) => {
                 <h2 className="font-medium text-base md:text-xl">
                   <Link className="after:absolute after:inset-0" href={`/product/${handle}`}>{title}</Link>
                 </h2>
-                <div className="flex justify-center items-center gap-x-2 mt-2">
-                  <span className="text-light dark:text-darkmode-light text-xs md:text-lg font-bold">
+                <div className="flex justify-center items-center gap-x-2 mt-2 md:mt-4">
+                  <span className="text-base md:text-xl font-bold text-dark dark:text-darkmode-dark">
                     {currencySymbol}{priceRange.minVariantPrice.amount} USD
                   </span>
 

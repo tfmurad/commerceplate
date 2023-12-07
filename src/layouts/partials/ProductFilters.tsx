@@ -27,7 +27,7 @@ const ProductFilters = ({
   const selectedBrands = searchParams.getAll("b");
   const selectedCategory = searchParams.get("c");
 
-  console.log("------>", vendorsWithCounts, "<------");
+  // console.log("------>", vendorsWithCounts, "<------");
 
   // console.log(vendors)
   // const sizes = [
@@ -90,7 +90,7 @@ const ProductFilters = ({
       <div>
         <h5 className="mb-2 lg:text-xl">Select Price Range</h5>
         <hr className="dark:border-darkmode-border" />
-        <div className="py-4">
+        <div className="pt-4">
           <RangeSlider maxPriceData={maxPriceData} />
         </div>
       </div>
@@ -112,7 +112,7 @@ const ProductFilters = ({
       </div> */}
 
       <div>
-        <h5 className="mb-2 lg:text-xl">Product Categories</h5>
+        <h5 className="mb-2 mt-4 lg:mt-6 lg:text-xl">Product Categories</h5>
         <hr className="dark:border-darkmode-border" />
         <ul className="mt-4 space-y-4">
           {categories.map((category) => (

@@ -15,7 +15,7 @@ import DropdownMenu from "../filter/DropdownMenu";
 export type ListItem = SortFilterItem | PathFilterItem;
 export type PathFilterItem = { title: string; path: string };
 
-const ProductLayouts = ({ categories, vendors, tags, maxPriceData,vendorsWithCounts }: any) => {
+const ProductLayouts = ({ categories, vendors, tags, maxPriceData, vendorsWithCounts }: any) => {
   const { getCollapseProps, getToggleProps, isExpanded, setExpanded } =
     useCollapse();
 
@@ -45,7 +45,7 @@ const ProductLayouts = ({ categories, vendors, tags, maxPriceData,vendorsWithCou
     if (isInputEditing || searchParams.get("q")) {
       inputField.focus();
     }
-  }, [searchParams,isInputEditing]);
+  }, [searchParams, isInputEditing]);
 
   useEffect(() => {
     const handleOutsideClick = (event: MouseEvent) => {
@@ -73,7 +73,7 @@ const ProductLayouts = ({ categories, vendors, tags, maxPriceData,vendorsWithCou
     return () => {
       document.removeEventListener("click", handleOutsideClick);
     };
-  }, [isExpanded, setExpanded,isInputEditing]);
+  }, [isExpanded, setExpanded, isInputEditing]);
 
   function onSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
@@ -171,25 +171,28 @@ const ProductLayouts = ({ categories, vendors, tags, maxPriceData,vendorsWithCou
 
             <div className="col-12 lg:col-9">
               <div className="flex justify-between items-center mb-4">
-                <div className="flex gap-2">
-                  <button
-                    onClick={() => layoutChange("card")}
-                    className={`btn border dark:border-darkmode-border ${isListView ? "btn-outline-primary" : "btn-primary"
-                      } p-2 hover:scale-105 duration-300`}
-                  >
-                    <BsGridFill />
-                  </button>
-                  <button
-                    onClick={() => layoutChange("list")}
-                    className={`btn border dark:border-darkmode-border ${isListView ? "btn-primary" : "btn-outline-primary"
-                      } p-2 hover:scale-105 duration-300`}
-                  >
-                    <FaList />
-                  </button>
+                <div className="flex gap-x-4 items-center font-medium text-xs md:text-base">
+                  <p className="max-md:hidden text-dark dark:text-darkmode-dark">Views</p>
+                  <div className="flex gap-2">
+                    <button
+                      onClick={() => layoutChange("card")}
+                      className={`btn border dark:border-darkmode-border ${isListView ? "btn-outline-primary" : "btn-primary"
+                        } p-2 hover:scale-105 duration-300`}
+                    >
+                      <BsGridFill />
+                    </button>
+                    <button
+                      onClick={() => layoutChange("list")}
+                      className={`btn border dark:border-darkmode-border ${isListView ? "btn-primary" : "btn-outline-primary"
+                        } p-2 hover:scale-105 duration-300`}
+                    >
+                      <FaList />
+                    </button>
+                  </div>
                 </div>
 
-                <div className="flex gap-2 items-center font-medium text-base">
-                  <p>Sort By</p>
+                <div className="flex gap-x-4 items-center font-medium text-sm md:text-base">
+                  <p className="text-dark dark:text-darkmode-dark">Sort By</p>
                   <DropdownMenu list={sorting} />
                 </div>
               </div>

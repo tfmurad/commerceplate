@@ -1,11 +1,11 @@
 "use client";
 
+import { currencyCode, currencySymbol } from "@/lib/constants";
 import { createUrl } from "@/lib/utils";
 import MultiRangeSlider from "multi-range-slider-react";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useState } from "react";
 import "./rangeSlider.css";
-import { currencyCode, currencySymbol } from "@/lib/constants";
 
 const RangeSlider = ({
   maxPriceData,
@@ -39,7 +39,7 @@ const RangeSlider = ({
           {currencySymbol}{minValue2} {maxPriceData.currencyCode || currencyCode}
         </p>
         <p>
-        {currencySymbol}{maxValue2} {maxPriceData.currencyCode || currencyCode}
+          {currencySymbol}{maxValue2} {maxPriceData.currencyCode || currencyCode}
         </p>
       </div>
 
@@ -57,18 +57,30 @@ const RangeSlider = ({
         }}
       />
 
-      <button
-        className={`btn btn-sm btn-primary w-full transition-opacity duration-300 ${
+      {
+        minValue2 === 0 && maxValue2 === 1000 ||
+        <button
+          className={`btn btn-sm btn-primary w-full`}
+          onClick={() => {
+            priceChange(minValue2, maxValue2);
+          }}
+        >
+          submit
+        </button>
+      }
+      {/* <button
+        className={`btn btn-sm btn-primary w-full ${
           minValue2 === 0 && maxValue2 === 1000
-            ? "opacity-0 pointer-events-none"
-            : "opacity-100 pointer-events-auto"
+            ? "hidden"
+            : "block"
         }`}
         onClick={() => {
           priceChange(minValue2, maxValue2);
         }}
       >
         submit
-      </button>
+      </button> */}
+
     </div>
   );
 };

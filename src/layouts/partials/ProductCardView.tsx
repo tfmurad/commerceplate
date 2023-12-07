@@ -2,7 +2,7 @@
 
 import ImageFallback from "@/helpers/ImageFallback";
 import useLoadMore from "@/hooks/useLoadMore";
-import { defaultSort, sorting } from "@/lib/constants";
+import { currencySymbol, defaultSort, sorting } from "@/lib/constants";
 import { getProducts, getCollectionProducts } from "@/lib/shopify";
 import { PageInfo, Product } from "@/lib/shopify/types";
 import Link from "next/link";
@@ -263,7 +263,7 @@ const ProductCardView = ({
             />
           </div>
           <div className="py-2 md:py-4 text-center z-20">
-            <h2 className="font-bold md:font-medium text-base md:text-xl">
+            <h2 className="font-medium text-base md:text-xl">
               <Link
                 className="after:absolute after:inset-0"
                 href={`/product/${product?.handle}`}
@@ -271,15 +271,15 @@ const ProductCardView = ({
                 {product?.title}
               </Link>
             </h2>
-            <div className="flex justify-center items-center gap-x-2 mt-2">
-              <span className="text-light dark:text-darkmode-light text-xs md:text-lg font-bold">
-                ৳ {product?.priceRange?.minVariantPrice?.amount}{" "}
+            <div className="flex justify-center items-center gap-x-2 mt-2 md:mt-4">
+              <span className="text-base md:text-xl font-bold text-dark dark:text-darkmode-dark">
+              {currencySymbol} {product?.priceRange?.minVariantPrice?.amount}{" "}
                 {product?.priceRange?.minVariantPrice?.currencyCode}
               </span>
               {parseFloat(product?.compareAtPriceRange?.maxVariantPrice?.amount) >
               0 ? (
                 <s className="text-light dark:text-darkmode-light text-xs md:text-base font-medium">
-                  ৳ {product?.compareAtPriceRange?.maxVariantPrice?.amount}{" "}
+                  {currencySymbol} {product?.compareAtPriceRange?.maxVariantPrice?.amount}{" "}
                   {product?.compareAtPriceRange?.maxVariantPrice?.currencyCode}
                 </s>
               ) : (

@@ -107,8 +107,8 @@ const Login = () => {
                     >
                       *
                       {error.code === "UNIDENTIFIED_CUSTOMER"
-                        ? "Wrong Password!"
-                        : "Something Went Wrong!"}
+                        ? `${error.message}`
+                        : "Invalid Email or Password"}
                     </p>
                   ))}
 
