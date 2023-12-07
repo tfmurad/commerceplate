@@ -15,7 +15,7 @@ import DropdownMenu from "../filter/DropdownMenu";
 export type ListItem = SortFilterItem | PathFilterItem;
 export type PathFilterItem = { title: string; path: string };
 
-const ProductLayouts = ({ categories, vendors, tags, maxPriceData }: any) => {
+const ProductLayouts = ({ categories, vendors, tags, maxPriceData,vendorsWithCounts }: any) => {
   const { getCollapseProps, getToggleProps, isExpanded, setExpanded } =
     useCollapse();
 
@@ -139,6 +139,7 @@ const ProductLayouts = ({ categories, vendors, tags, maxPriceData }: any) => {
                       vendors={vendors}
                       tags={tags}
                       maxPriceData={maxPriceData}
+                      vendorsWithCounts={vendorsWithCounts}
                     />
                   </section>
                 </div>

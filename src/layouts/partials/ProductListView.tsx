@@ -290,7 +290,7 @@ const ProductListView = ({
                 </div>
 
                 <p className="max-md:text-xs text-light dark:text-darkmode-light my-4 md:mb-8">
-                  {description}
+                  {description.substring(0, 200)}...
                 </p>
                 <AddToCart
                   variants={product?.variants}

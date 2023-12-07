@@ -49,7 +49,9 @@ const ShowProducts = async ({
   const { sortKey, reverse } =
     sorting.find((item) => item.slug === sort) || defaultSort;
 
-  let productsData;
+  let productsData: any;
+  let vendorsWithCounts: { vendor: string; productCount: number }[] = [];
+  // let categoriesWithCounts: { category: string; productCount: number }[] = [];
 
   if (searchValue || brand || minPrice || maxPrice || category || tag) {
     let queryString = "";
@@ -76,17 +78,49 @@ const ShowProducts = async ({
       sortKey,
       reverse,
       query: queryString,
-      cursor
+      cursor,
     };
 
     productsData =
       category && category !== "all"
         ? await getCollectionProducts({
-          collection: category,
-          sortKey,
-          reverse,
-        })
+            collection: category,
+            sortKey,
+            reverse,
+          })
         : await getProducts(query);
+
+    const uniqueVendors: string[] = [
+      ...new Set(
+        ((productsData?.products as Product[]) || []).map((product: Product) =>
+          String(product?.vendor || ""),
+        ),
+      ),
+    ];
+
+    // const uniqueCategories: string[] = [
+    //   ...new Set(
+    //     ((productsData?.products as Product[]) || []).map(
+    //       (product: Product) => String(product?.category || ""),
+    //     ),
+    //   ),
+    // ];
+  
+
+    vendorsWithCounts = uniqueVendors.map((vendor: string) => {
+      const productCount = (productsData?.products || []).filter(
+        (product: Product) => product?.vendor === vendor,
+      ).length;
+      return { vendor, productCount };
+    });
+
+    // categoriesWithCounts = uniqueCategories.map((category: string) => {
+    //   const productCount = (productsData?.products || []).filter(
+    //     (product: Product) => product?.category === category,
+    //   ).length;
+    //   return { category, productCount };
+    // });
+
   } else {
     // Fetch all products
     productsData = await getProducts({ sortKey, reverse, cursor });
@@ -103,22 +137,7 @@ const ShowProducts = async ({
     ),
   ];
 
-  // Getting Max price for the price-rage selector
-  // const maxProductPriceData = productsData?.products.map(
-  //   (product: Product) => product?.priceRange?.maxVariantPrice,
-  // );
-  // const maxProductPrice = Math.ceil(
-  //   Math.max(
-  //     ...maxProductPriceData?.map(
-  //       (a: { amount: string; currencyCode: string }) => parseFloat(a.amount),
-  //     ),
-  //   ),
-  // );
-  // const maxProductCurrency: string = productsData?.products?.map(
-  //   (product: Product) => product?.priceRange?.maxVariantPrice?.currencyCode,
-  // )[0];
-  // const maxPriceData = { maxProductPrice, maxProductCurrency }
-  const maxPriceData =await getHighestProductPrice();
+  const maxPriceData = await getHighestProductPrice();
 
   return (
     <>
@@ -127,6 +146,7 @@ const ShowProducts = async ({
         vendors={vendors}
         tags={tags}
         maxPriceData={maxPriceData}
+        vendorsWithCounts={vendorsWithCounts}
       />
 
       <div className="container">
@@ -137,18 +157,15 @@ const ShowProducts = async ({
               vendors={vendors}
               tags={tags}
               maxPriceData={maxPriceData!}
+              vendorsWithCounts={vendorsWithCounts}
             />
           </div>
 
           <div className="col-12 lg:col-9">
             {layout === "list" ? (
-              <ProductListView
-                searchParams={searchParams}
-              />
+              <ProductListView searchParams={searchParams} />
             ) : (
-              <ProductCardView
-                searchParams={searchParams}
-              />
+              <ProductCardView searchParams={searchParams} />
             )}
           </div>
         </div>
@@ -163,9 +180,7 @@ const ProductsListPage = ({ searchParams }: { searchParams: any }) => {
   return (
     <>
       <PageHeader title={"Products"} />
-      <Suspense
-        fallback={<LoadingProducts />}
-      >
+      <Suspense fallback={<LoadingProducts />}>
         <ShowProducts searchParams={searchParams} />
       </Suspense>
 
