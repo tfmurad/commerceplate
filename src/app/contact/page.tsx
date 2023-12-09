@@ -4,12 +4,13 @@ import { markdownify } from "@/lib/utils/textConverter";
 import PageHeader from "@/partials/PageHeader";
 import SeoMeta from "@/partials/SeoMeta";
 import { ContactUsItem, RegularPage } from "@/types";
+import Airform from "react-airform";
 
 const Contact = async () => {
+  const { airformContactEmail } = config.shopify;
   const data: RegularPage = getListPage("contact/_index.md");
   const { frontmatter } = data;
   const { title, description, meta_title, image, contact_meta } = frontmatter;
-  const { contact_form_action } = config.params;
 
   return (
     <>
@@ -26,7 +27,7 @@ const Contact = async () => {
             {
               contact_meta && contact_meta?.map((contact: ContactUsItem) => (
                 <div key={contact.name} className="p-10 bg-theme-light dark:bg-darkmode-theme-light rounded-md text-center">
-                  <p dangerouslySetInnerHTML={markdownify(contact.name)} className="mb-6 h3 font-medium text-dark dark:text-darkmode-dark"/>
+                  <p dangerouslySetInnerHTML={markdownify(contact.name)} className="mb-6 h3 font-medium text-dark dark:text-darkmode-dark" />
                   <p dangerouslySetInnerHTML={markdownify(contact.contact)} />
                 </div>
               ))
@@ -39,7 +40,9 @@ const Contact = async () => {
         <div className="container">
           <div className="mx-auto sm:col-9 md:col-10">
             <h2 className="mb-14 text-center">We would love to hear from you!</h2>
-            <form className="border border-border rounded-md p-10" action={contact_form_action} method="POST">
+
+            {/* @ts-ignore */}
+            <Airform email={airformContactEmail} className="border border-border rounded-md p-10">
               <div className="mb-6 md:grid grid-cols-2 gap-x-8 max-md:space-y-6">
                 <div>
                   <label htmlFor="name" className="form-label">
@@ -98,6 +101,7 @@ const Contact = async () => {
                   />
                 </div>
               </div>
+
               <div className="mb-6">
                 <label htmlFor="message" className="form-label">
                   Message <span className="text-red-500">*</span>
@@ -117,7 +121,8 @@ const Contact = async () => {
                   Send Message
                 </button>
               </div>
-            </form>
+            </Airform>
+
           </div>
         </div>
       </section>

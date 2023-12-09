@@ -1,22 +1,24 @@
 "use client";
 
+import { AddToCart } from "@/components/cart/add-to-cart";
+import LoadingCards from "@/components/loading/LoadingCards";
+import config from "@/config/config.json";
 import ImageFallback from "@/helpers/ImageFallback";
 import useLoadMore from "@/hooks/useLoadMore";
-import { currencySymbol, defaultSort, sorting } from "@/lib/constants";
-import { getProducts, getCollectionProducts } from "@/lib/shopify";
+import { defaultSort, sorting } from "@/lib/constants";
+import { getCollectionProducts, getProducts } from "@/lib/shopify";
 import { PageInfo, Product } from "@/lib/shopify/types";
+import { removeSlug } from "@/lib/utils/textConverter";
 import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
 import { BiLoaderAlt } from "react-icons/bi";
-import { removeSlug } from "@/lib/utils/textConverter";
-import LoadingCards from "@/components/loading/LoadingCards";
-import { AddToCart } from "@/components/cart/add-to-cart";
 
 const ProductCardView = ({
   searchParams,
 }: {
   searchParams: any;
 }) => {
+  const { currencySymbol } = config.shopify;
   const [isLoading, setIsLoading] = useState(true);
   const targetElementRef = useRef<HTMLDivElement>(null);
   const [data, setData] = useState<{
@@ -101,8 +103,8 @@ const ProductCardView = ({
           if (brand) {
             Array.isArray(brand)
               ? (queryString += `${brand
-                  .map((b) => `(vendor:${b})`)
-                  .join(" OR ")}`)
+                .map((b) => `(vendor:${b})`)
+                .join(" OR ")}`)
               : (queryString += `vendor:"${brand}"`);
 
             if (Array.isArray(brand) && brand.length > 0) {
@@ -135,14 +137,14 @@ const ProductCardView = ({
           productsData =
             category && category !== "all"
               ? await getCollectionProducts({
-                  collection: category,
-                  sortKey,
-                  reverse,
-                  filterCategoryProduct:
-                    filterCategoryProduct.length > 0
-                      ? filterCategoryProduct
-                      : undefined,
-                })
+                collection: category,
+                sortKey,
+                reverse,
+                filterCategoryProduct:
+                  filterCategoryProduct.length > 0
+                    ? filterCategoryProduct
+                    : undefined,
+              })
               : await getProducts({ ...query, cursor });
 
         } else {
@@ -273,11 +275,11 @@ const ProductCardView = ({
             </h2>
             <div className="flex justify-center items-center gap-x-2 mt-2 md:mt-4">
               <span className="text-base md:text-xl font-bold text-dark dark:text-darkmode-dark">
-              {currencySymbol} {product?.priceRange?.minVariantPrice?.amount}{" "}
+                {currencySymbol} {product?.priceRange?.minVariantPrice?.amount}{" "}
                 {product?.priceRange?.minVariantPrice?.currencyCode}
               </span>
               {parseFloat(product?.compareAtPriceRange?.maxVariantPrice?.amount) >
-              0 ? (
+                0 ? (
                 <s className="text-light dark:text-darkmode-light text-xs md:text-base font-medium">
                   {currencySymbol} {product?.compareAtPriceRange?.maxVariantPrice?.amount}{" "}
                   {product?.compareAtPriceRange?.maxVariantPrice?.currencyCode}

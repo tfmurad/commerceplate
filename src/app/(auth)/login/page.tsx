@@ -99,33 +99,28 @@ const Login = () => {
                   />
                 </div>
 
-                <div className="mt-8">
-                  {errorMessages.map((error: CustomerError) => (
-                    <p
-                      key={error.code}
-                      className="text-sm text-light dark:text-darkmode-light truncate"
-                    >
-                      *
-                      {error.code === "UNIDENTIFIED_CUSTOMER"
-                        ? `${error.message}`
-                        : "Invalid Email or Password"}
-                    </p>
-                  ))}
-
-                  <button
-                    type="submit"
-                    className="btn btn-primary md:text-lg md:font-medium w-full mt-2"
+                {errorMessages.map((error: CustomerError) => (
+                  <p
+                    key={error.code}
+                    className="font-medium text-red-500 truncate mt-2"
                   >
-                    {loading ? (
-                      <BiLoaderAlt
-                        className={`animate-spin mx-auto`}
-                        size={26}
-                      />
-                    ) : (
-                      "Log In"
-                    )}
-                  </button>
-                </div>
+                    *
+                    {error.code === "UNIDENTIFIED_CUSTOMER"
+                      ? `${error.message}`
+                      : "Invalid Email or Password"}
+                  </p>
+                ))}
+
+                <button
+                  type="submit"
+                  className="btn btn-primary md:text-lg md:font-medium w-full mt-10"
+                >
+                  {loading ? (
+                    <BiLoaderAlt className={`animate-spin mx-auto`} size={26} />
+                  ) : (
+                    "Log In"
+                  )}
+                </button>
               </form>
 
               <div className="flex gap-x-2 text-sm md:text-base mt-4">

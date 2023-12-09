@@ -5,9 +5,8 @@ import ProductGallery from "@/components/product/ProductGallery";
 import ShowTags from "@/components/product/ShowTags";
 import Tabs from "@/components/product/Tabs";
 import { VariantSelector } from "@/components/product/variant-selector";
+import config from "@/config/config.json";
 import social from "@/config/social.json";
-import MDXContent from "@/helpers/MDXContent";
-import { currencySymbol } from "@/lib/constants";
 import { getProduct, getProductRecommendations } from "@/lib/shopify";
 import LatestProducts from "@/partials/LatestProducts";
 import { Metadata } from "next";
@@ -31,6 +30,7 @@ export const generateMetadata = async ({
 };
 
 const ShowProductSingle = async ({ params }: { params: { single: string } }) => {
+  const { currencySymbol } = config.shopify;
   const product = await getProduct(params.single);
   if (!product) return notFound();
   const {
@@ -146,14 +146,14 @@ const ShowProductSingle = async ({ params }: { params: { single: string } }) => 
       {
         description && (
           <section>
-          <div className="container">
-            <div className="row">
-              <div className="col-10 lg:col-11 mx-auto mt-8">
-              <Tabs descriptionHtml={descriptionHtml}/>
+            <div className="container">
+              <div className="row">
+                <div className="col-10 lg:col-11 mx-auto mt-12">
+                  <Tabs descriptionHtml={descriptionHtml} />
+                </div>
               </div>
             </div>
-          </div>
-        </section>
+          </section>
         )
       }
 
@@ -187,7 +187,7 @@ const ShowProductSingle = async ({ params }: { params: { single: string } }) => 
 const ProductSingle = ({ params }: { params: { single: string } }) => {
 
   return (
-    <Suspense fallback={<LoadingProductGallery/>}>
+    <Suspense fallback={<LoadingProductGallery />}>
       <ShowProductSingle params={params} />
     </Suspense>
   );

@@ -118,9 +118,9 @@ const ProductFilters = ({
           {categories.map((category) => (
             <li
               key={category.handle}
-              className={`flex items-center justify-between text-light dark:text-darkmode-light cursor-pointer ${selectedCategory === category.handle
-                ? "text-dark dark:text-darkmode-light font-semibold"
-                : ""
+              className={`flex items-center justify-between cursor-pointer ${selectedCategory === category.handle
+                ? "text-dark dark:text-darkmode-dark font-semibold"
+                : "text-light dark:text-darkmode-light"
                 }`}
               onClick={() => handleCategoryClick(category.handle)}
             >

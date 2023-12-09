@@ -1,11 +1,12 @@
 "use client";
 import { AddToCart } from "@/components/cart/add-to-cart";
+import config from "@/config/config.json";
 import ImageFallback from "@/helpers/ImageFallback";
-import { currencySymbol } from "@/lib/constants";
 import { Product } from "@/lib/shopify/types";
 import Link from "next/link";
 
 const LatestProducts = ({ products }: { products: Product[] }) => {
+  const { currencySymbol } = config.shopify;
 
   return (
     <>

@@ -1,17 +1,19 @@
 "use client";
 
-import { currencyCode, currencySymbol } from "@/lib/constants";
 import { createUrl } from "@/lib/utils";
 import MultiRangeSlider from "multi-range-slider-react";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useState } from "react";
 import "./rangeSlider.css";
+import config from "@/config/config.json";
 
 const RangeSlider = ({
   maxPriceData,
 }: {
   maxPriceData: { amount: string; currencyCode: string };
 }) => {
+  const { currencyCode, currencySymbol } = config.shopify;
+
   const [minValue, setMinValue] = useState(0);
   const [maxValue, setMaxValue] = useState(0);
   const [minValue2, setMinValue2] = useState(0);

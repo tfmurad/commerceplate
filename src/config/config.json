@@ -43,5 +43,14 @@
     "meta_author": "Themefisher",
     "meta_image": "/images/og-image.png",
     "meta_description": "Next Boilerplate"
+  },
+
+  "shopify": {
+    "currencySymbol": "৳",
+    "currencyCode": "BDT",
+    "airformContactEmail": "murad.themefisher@gmail.com",
+    "collections": {
+      "hero_slider": "hidden-homepage-carousel"
+    }
   }
 }

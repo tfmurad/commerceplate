@@ -9,9 +9,11 @@ import CallToAction from "@/partials/CallToAction";
 import LatestProducts from "@/partials/LatestProducts";
 import SeoMeta from "@/partials/SeoMeta";
 import { Suspense } from "react";
+import config from "@/config/config.json";
 
 const ShowHeroSlider = async () => {
-  const sliderImages = await getCollectionProducts({ collection: "hidden-homepage-carousel" });
+  const { collections } = config.shopify;
+  const sliderImages = await getCollectionProducts({ collection: collections.hero_slider });
   const { products } = sliderImages;
   return <HeroSlider products={products} />
 }
