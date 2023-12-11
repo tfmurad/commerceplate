@@ -21,6 +21,7 @@ const ProductLayouts = ({
   tags,
   maxPriceData,
   vendorsWithCounts,
+  categoriesWithCounts
 }: any) => {
   const { getCollapseProps, getToggleProps, isExpanded, setExpanded } =
     useCollapse();
@@ -146,6 +147,7 @@ const ProductLayouts = ({
                       tags={tags}
                       maxPriceData={maxPriceData}
                       vendorsWithCounts={vendorsWithCounts}
+                      categoriesWithCounts={categoriesWithCounts}
                     />
                   </section>
                 </div>

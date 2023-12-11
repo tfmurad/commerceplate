@@ -14,12 +14,14 @@ const ProductFilters = ({
   tags,
   maxPriceData,
   vendorsWithCounts,
+  categoriesWithCounts,
 }: {
   categories: ShopifyCollection[];
   vendors: { vendor: string; productCount: number }[];
   tags: string[];
   maxPriceData: { amount: string; currencyCode: string };
   vendorsWithCounts: { vendor: string; productCount: number }[];
+  categoriesWithCounts: { category: string; productCount: number }[];
 }) => {
   const router = useRouter();
   const searchParams = useSearchParams();
@@ -27,7 +29,7 @@ const ProductFilters = ({
   const selectedBrands = searchParams.getAll("b");
   const selectedCategory = searchParams.get("c");
 
-  // console.log("------>", vendorsWithCounts, "<------");
+  // console.log("------>", categoriesWithCounts, "<------");
 
   // console.log(vendors)
   // const sizes = [
@@ -118,18 +120,27 @@ const ProductFilters = ({
           {categories.map((category) => (
             <li
               key={category.handle}
-              className={`flex items-center justify-between cursor-pointer ${selectedCategory === category.handle
-                ? "text-dark dark:text-darkmode-dark font-semibold"
-                : "text-light dark:text-darkmode-light"
-                }`}
+              className={`flex items-center justify-between cursor-pointer ${
+                selectedCategory === category.handle
+                  ? "text-dark dark:text-darkmode-dark font-semibold"
+                  : "text-light dark:text-darkmode-light"
+              }`}
               onClick={() => handleCategoryClick(category.handle)}
             >
               {category.title}{" "}
-              <span>
-                {category?.products?.edges.length! > 0
-                  ? `(${category?.products?.edges.length!})`
-                  : ""}
-              </span>
+              {searchParams.has("c") ? (
+                <span>({category?.products?.edges.length!})</span>
+              ) : (
+                <span>
+                  {categoriesWithCounts.length > 0
+                    ? `(${
+                        categoriesWithCounts.find(
+                          (c) => c.category === category.title,
+                        )?.productCount || 0
+                      })`
+                    : `(${category?.products?.edges.length!})`}
+                </span>
+              )}
             </li>
           ))}
         </ul>
@@ -146,13 +157,21 @@ const ProductFilters = ({
                 className={`flex items-center justify-between cursor-pointer text-light dark:text-darkmode-light`}
                 onClick={() => handleBrandClick(vendor.vendor)}
               >
-                <span>
-                  {vendorsWithCounts.length > 0 ? (
-                    `${vendor.vendor} (${vendorsWithCounts.find((v) => v.vendor === vendor.vendor)?.productCount || 0})`
-                  ) : (
-                   `${vendor.vendor} (${vendor.productCount})`
-                  )}
-                </span>
+                {searchParams.has("b") ? (
+                  <span>
+                    {vendor.vendor}{" "}({vendor.productCount})
+                  </span>
+                ) : (
+                  <span>
+                    {vendorsWithCounts.length > 0
+                      ? `${vendor.vendor} (${
+                          vendorsWithCounts.find(
+                            (v) => v.vendor === vendor.vendor,
+                          )?.productCount || 0
+                        })`
+                      : `${vendor.vendor} (${vendor.productCount})`}
+                  </span>
+                )}
                 <div className="h-4 w-4 rounded-sm flex items-center justify-center border border-light dark:border-darkmode-light">
                   {selectedBrands.map((b, i) =>
                     slugify(vendor.vendor.toLowerCase()) === b ? (

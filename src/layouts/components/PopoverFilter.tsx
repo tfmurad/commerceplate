@@ -8,6 +8,7 @@ export default function PopoverFilter({
   tags,
   maxPriceData,
   vendorsWithCounts,
+  categoriesWithCounts
 }: any) {
   return (
     <div className="">
@@ -40,6 +41,7 @@ export default function PopoverFilter({
                   tags={tags}
                   maxPriceData={maxPriceData}
                   vendorsWithCounts={vendorsWithCounts}
+                  categoriesWithCounts={categoriesWithCounts}
                 />
               </Popover.Panel>
             </Transition>
