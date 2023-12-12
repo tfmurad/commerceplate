@@ -163,7 +163,7 @@ export function VariantSelector({
 
       {/* rendering the 'Size' select element outside the loop */}
       {sizeOption && (
-        <div className="mb-8">
+        <div className="mb-8 mt-8">
           <h5 className="mb-2 max-md:text-base">{sizeOption.name}</h5>
           <VariantDropDown sizeOption={sizeOption} options={options} />
         </div>

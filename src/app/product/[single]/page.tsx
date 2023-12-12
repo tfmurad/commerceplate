@@ -80,8 +80,8 @@ const ShowProductSingle = async ({ params }: { params: { single: string } }) => 
                 )}
               </div>
 
-              <div className="my-8 md:my-10 space-y-6 md:space-y-10">
-                <div className="-mt-2">
+              <div className="my-10 md:my-10 space-y-6 md:space-y-10">
+                <div>
                   {options && <VariantSelector options={options} variants={variants} images={images} />}
                 </div>
               </div>
@@ -128,21 +128,6 @@ const ShowProductSingle = async ({ params }: { params: { single: string } }) => 
       </section>
 
       {/* Description of a product  */}
-      {/* {description && (
-        <section>
-          <div className="container">
-            <div className="row">
-              <div className="col-10 lg:col-11 mx-auto border rounded-md p-4">
-                <p className="font-semibold">Description:</p>
-                <div className="content">
-                  <MDXContent content={descriptionHtml} />
-                </div>
-              </div>
-            </div>
-          </div>
-        </section>
-      )} */}
-
       {
         description && (
           <section>
@@ -157,7 +142,7 @@ const ShowProductSingle = async ({ params }: { params: { single: string } }) => 
         )
       }
 
-      {/* Recommented Products section  */}
+      {/* Recommended Products section  */}
       <section className="section">
         <div className="container">
           {relatedProducts?.length > 0 &&
@@ -170,16 +155,6 @@ const ShowProductSingle = async ({ params }: { params: { single: string } }) => 
           }
         </div>
       </section>
-
-      {/* <section>
-      <div className="container text-center">
-        <h3 className="mb-14">Related Products</h3>
-
-        <div className="row mb-6">
-        <LatestProducts products={relatedProducts}/>
-        </div>
-      </div>
-    </section> */}
     </>
   )
 }

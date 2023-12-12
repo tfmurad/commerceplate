@@ -26,8 +26,8 @@ const Tabs = ({ descriptionHtml }: { descriptionHtml: string }) => {
             `${
               selected
                 ? "border-t-2 border-l-2 border-r-2 border-b-0 bg-body dark:bg-darkmode-body"
-                : ""
-            } cursor-pointer focus:outline-none px-6 rounded-tl-md rounded-tr-md absolute -top-[46px] left-0 h-12 py-2`
+                : "border-transparent"
+            } cursor-pointer focus:outline-none px-6 rounded-tl-md rounded-tr-md absolute -top-[46px] left-0 h-12 py-2 border-t-2 border-l-2 border-r-2 border-b-0`
           }
         >
           Description
@@ -38,8 +38,8 @@ const Tabs = ({ descriptionHtml }: { descriptionHtml: string }) => {
               `${
                 selected
                   ? "border-t-2 border-l-2 border-r-2 border-b-0 bg-body dark:bg-darkmode-body"
-                  : ""
-              } cursor-pointer focus:outline-none px-6 rounded-tl-md rounded-tr-md absolute -top-[46px] left-32 h-12 py-2`
+                  : "border-transparent"
+              } cursor-pointer focus:outline-none px-6 rounded-tl-md rounded-tr-md absolute -top-[46px] left-32 h-12 py-2 border-t-2 border-l-2 border-r-2 border-b-0`
             }
           >
             More Info
