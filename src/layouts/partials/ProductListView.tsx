@@ -254,6 +254,10 @@ const ProductListView = ({
               description,
               compareAtPriceRange,
             } = product;
+
+            const defaultVariantId =
+            variants.length > 0 ? variants[0].id : undefined;
+            
             return (
               <div className="col-12 mb-10" key={id}>
                 <div className="row">
@@ -297,6 +301,7 @@ const ProductListView = ({
                       variants={product?.variants}
                       availableForSale={product?.availableForSale}
                       handle={handle}
+                      defaultVariantId={defaultVariantId}
                       stylesClass={
                         "btn btn-outline-primary max-md:btn-sm drop-shadow-md"
                       }

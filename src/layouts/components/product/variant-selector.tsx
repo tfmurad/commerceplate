@@ -104,7 +104,7 @@ export function VariantSelector({
               }
 
               return (
-                <div key={value} className="mb-2">
+                <div key={value}>
                   <button
                     key={value}
                     aria-disabled={!isAvailableForSale}
@@ -143,6 +143,7 @@ export function VariantSelector({
                           alt={value}
                           width={50}
                           height={50}
+                          className={`${isActive && 'opacity-80'}`}
                         />
                         {isActive && (
                           <span className="text-inherit h-full opacity-100 absolute top-2 right-2">

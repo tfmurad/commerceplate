@@ -29,7 +29,11 @@ export const generateMetadata = async ({
   };
 };
 
-const ShowProductSingle = async ({ params }: { params: { single: string } }) => {
+const ShowProductSingle = async ({
+  params,
+}: {
+  params: { single: string };
+}) => {
   const { currencySymbol } = config.shopify;
   const product = await getProduct(params.single);
   if (!product) return notFound();
@@ -50,6 +54,8 @@ const ShowProductSingle = async ({ params }: { params: { single: string } }) => 
 
   const relatedProducts = await getProductRecommendations(id);
   // if (!relatedProducts.length) return null;
+
+  const defaultVariantId = variants.length > 0 ? variants[0].id : undefined;
 
   return (
     <>
@@ -72,7 +78,8 @@ const ShowProductSingle = async ({ params }: { params: { single: string } }) => 
                 </h4>
                 {parseFloat(compareAtPriceRange?.maxVariantPrice.amount) > 0 ? (
                   <s className="text-light max-md:h3 dark:text-darkmode-light">
-                    {currencySymbol} {compareAtPriceRange?.maxVariantPrice?.amount}{" "}
+                    {currencySymbol}{" "}
+                    {compareAtPriceRange?.maxVariantPrice?.amount}{" "}
                     {compareAtPriceRange?.maxVariantPrice?.currencyCode}
                   </s>
                 ) : (
@@ -82,12 +89,24 @@ const ShowProductSingle = async ({ params }: { params: { single: string } }) => 
 
               <div className="my-10 md:my-10 space-y-6 md:space-y-10">
                 <div>
-                  {options && <VariantSelector options={options} variants={variants} images={images} />}
+                  {options && (
+                    <VariantSelector
+                      options={options}
+                      variants={variants}
+                      images={images}
+                    />
+                  )}
                 </div>
               </div>
 
               <div className="flex gap-4 mt-8 md:mt-10 mb-6">
-                <AddToCart variants={product?.variants} availableForSale={product?.availableForSale} stylesClass={"btn max-md:btn-sm btn-primary"} handle={null} />
+                <AddToCart
+                  variants={product?.variants}
+                  availableForSale={product?.availableForSale}
+                  stylesClass={"btn max-md:btn-sm btn-primary"}
+                  handle={null}
+                  defaultVariantId={defaultVariantId}
+                />
               </div>
 
               <div className="mb-8 md:mb-10">
@@ -128,39 +147,36 @@ const ShowProductSingle = async ({ params }: { params: { single: string } }) => 
       </section>
 
       {/* Description of a product  */}
-      {
-        description && (
-          <section>
-            <div className="container">
-              <div className="row">
-                <div className="col-10 lg:col-11 mx-auto mt-12">
-                  <Tabs descriptionHtml={descriptionHtml} />
-                </div>
+      {description && (
+        <section>
+          <div className="container">
+            <div className="row">
+              <div className="col-10 lg:col-11 mx-auto mt-12">
+                <Tabs descriptionHtml={descriptionHtml} />
               </div>
             </div>
-          </section>
-        )
-      }
+          </div>
+        </section>
+      )}
 
       {/* Recommended Products section  */}
       <section className="section">
         <div className="container">
-          {relatedProducts?.length > 0 &&
+          {relatedProducts?.length > 0 && (
             <>
               <div className="text-center mb-6 md:mb-14">
                 <h2 className="mb-2">Related Products</h2>
               </div>
               <LatestProducts products={relatedProducts} />
             </>
-          }
+          )}
         </div>
       </section>
     </>
-  )
-}
+  );
+};
 
 const ProductSingle = ({ params }: { params: { single: string } }) => {
-
   return (
     <Suspense fallback={<LoadingProductGallery />}>
       <ShowProductSingle params={params} />

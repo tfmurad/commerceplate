@@ -67,27 +67,39 @@ export function AddToCart({
   variants,
   availableForSale,
   stylesClass,
-  handle
+  handle,
+  defaultVariantId
 }: {
   variants: ProductVariant[];
   availableForSale: boolean;
   stylesClass: string;
   handle:string | null;
+  defaultVariantId: string | undefined;
 }) {
-  const [message, formAction] = useFormState(addItem, null);
+  const [message, formAction] = useFormState(addItem, defaultVariantId);
   const searchParams = useSearchParams();
-  const defaultVariantId = variants.length === 1 ? variants[0]?.id : undefined;
+
+  // Find the first variant that matches the selected option
   const variant = variants.find((variant: ProductVariant) =>
-    variant.selectedOptions.every(
+    variant.selectedOptions.some(
       (option) => option.value === searchParams.get(option.name.toLowerCase())
     )
   );
+
+  // If variant is found, use its ID; otherwise, use the defaultVariantId
   const selectedVariantId = variant?.id || defaultVariantId;
+
+  // Bind the selectedVariantId to the form action
   const actionWithVariant = formAction.bind(null, selectedVariantId);
 
   return (
     <form action={actionWithVariant}>
-      <SubmitButton availableForSale={availableForSale} selectedVariantId={selectedVariantId} stylesClass={stylesClass} handle={handle}/>
+      <SubmitButton
+        availableForSale={availableForSale}
+        selectedVariantId={selectedVariantId}
+        stylesClass={stylesClass}
+        handle={handle}
+      />
       <p aria-live="polite" className="sr-only" role="status">
         {message}
       </p>
