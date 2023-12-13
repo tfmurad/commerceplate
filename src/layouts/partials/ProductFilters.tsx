@@ -128,7 +128,7 @@ const ProductFilters = ({
               onClick={() => handleCategoryClick(category.handle)}
             >
               {category.title}{" "}
-              {searchParams.has("c") ? (
+              {(searchParams.size === 1 && searchParams.has("c")) ? (
                 <span>({category?.products?.edges.length!})</span>
               ) : (
                 <span>

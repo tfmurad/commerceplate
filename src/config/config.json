@@ -48,7 +48,6 @@
   "shopify": {
     "currencySymbol": "৳",
     "currencyCode": "BDT",
-    "airformContactEmail": "murad.themefisher@gmail.com",
     "collections": {
       "hero_slider": "hidden-homepage-carousel"
     }
