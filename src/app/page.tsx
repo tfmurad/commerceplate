@@ -10,9 +10,9 @@ import LatestProducts from "@/partials/LatestProducts";
 import SeoMeta from "@/partials/SeoMeta";
 import { Suspense } from "react";
 import config from "@/config/config.json";
+const { collections } = config.shopify;
 
 const ShowHeroSlider = async () => {
-  const { collections } = config.shopify;
   const sliderImages = await getCollectionProducts({ collection: collections.hero_slider });
   const { products } = sliderImages;
   return <HeroSlider products={products} />
@@ -31,7 +31,7 @@ const ShowCategories = async () => {
 
 
 const ShowLatestProducts = async () => {
-  const { pageInfo, products } = await getCollectionProducts({ collection: "latest-products", reverse: false });
+  const { pageInfo, products } = await getCollectionProducts({ collection: collections.featured_products, reverse: false });
   return <LatestProducts products={products} />
 }
 
@@ -69,10 +69,9 @@ const Home = () => {
       <section>
         <div className="container">
           <div className="text-center mb-6 md:mb-14">
-            <h2 className="mb-2">Latest Products</h2>
-            <p className="md:h5">Don't Miss Today's Latest Deals</p>
+            <h2 className="mb-2">Featured Products</h2>
+            <p className="md:h5">Explore Today's Featured Picks!</p>
           </div>
-          {/* <LatestProducts products={latestProducts} /> */}
           <Suspense
             fallback={<LoadingLatestProducts />}>
             <ShowLatestProducts />

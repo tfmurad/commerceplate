@@ -6,7 +6,7 @@ export interface ISocial {
   link: string;
 }
 
-const Social = ({
+const Social: React.FC<{ source: ISocial[]; className: string }> = ({
   source,
   className,
 }: {
