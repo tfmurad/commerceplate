@@ -197,6 +197,7 @@ export type ShopifyProduct = {
   tags: string[];
   updatedAt: string;
   vendor: string;
+  collections: any;
 };
 
 export type ShopifyCartOperation = {

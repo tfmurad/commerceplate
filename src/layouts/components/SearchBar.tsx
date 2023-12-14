@@ -18,16 +18,22 @@ const SearchBar = ({
   const { getCollapseProps, getToggleProps, isExpanded, setExpanded } =
     useCollapse();
 
+  // useEffect(() => {
+  //   const inputField = document.getElementById(
+  //     "searchInputBar",
+  //   ) as HTMLInputElement;
+  //   if (inputField || searchParams.get("q")) {
+  //     inputField.focus();
+  //   }
+  // }, [searchParams]);
+
   useEffect(() => {
     const inputField = document.getElementById(
       "searchInputBar",
     ) as HTMLInputElement;
-    if (inputField && searchParams.get("q")) {
+    if (inputField || searchParams.get("q")) {
       inputField.focus();
     }
-  }, [searchParams]);
-
-  useEffect(() => {
     const handleOutsideClick = (event: MouseEvent) => {
       const target = event.target as HTMLElement;
       if (
@@ -44,7 +50,7 @@ const SearchBar = ({
     return () => {
       document.removeEventListener("click", handleOutsideClick);
     };
-  }, [isExpanded, setExpanded]);
+  }, [isExpanded, setExpanded,searchParams]);
 
 
   function onSubmit(e: React.FormEvent<HTMLFormElement>) {
@@ -84,9 +90,9 @@ const SearchBar = ({
                 placeholder="Search for products"
                 autoComplete="off"
                 defaultValue={searchParams?.get("q") || ""}
-                className="w-full bg-theme-light px-3 py-2 md:px-6 md:py-4 text-dark placeholder:text-light focus:ring-transparent border-none dark:bg-darkmode-theme-light dark:text-darkmode-light"
+                className="w-full bg-darkmode-body/90 dark:bg-body/90 px-3 py-2 md:px-6 md:py-4 text-darkmode-dark dark:text-dark placeholder:text-darkmode-dark dark:placeholder:text-light focus:ring-transparent border-none"
               />
-              <button className="rounded-none btn btn-sm md:btn-md btn-primary cursor-pointer bg-theme-light dark:bg-darkmode-theme-light border-none text-dark dark:text-darkmode-light">
+              <button className="rounded-none btn btn-sm md:btn-md btn-primary cursor-pointer text-darkmode-dark dark:text-dark bg-darkmode-body/90 dark:bg-body/90 border-none">
                 <IoSearch size={25} />
               </button>
             </form>

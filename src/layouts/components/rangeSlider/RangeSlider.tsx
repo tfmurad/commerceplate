@@ -5,13 +5,15 @@ import MultiRangeSlider from "multi-range-slider-react";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useState } from "react";
 import "./rangeSlider.css";
-import { currencyCode, currencySymbol } from "@/lib/constants";
+import config from "@/config/config.json";
 
 const RangeSlider = ({
   maxPriceData,
 }: {
   maxPriceData: { amount: string; currencyCode: string };
 }) => {
+  const { currencyCode, currencySymbol } = config.shopify;
+
   const [minValue, setMinValue] = useState(0);
   const [maxValue, setMaxValue] = useState(0);
   const [minValue2, setMinValue2] = useState(0);
@@ -39,7 +41,7 @@ const RangeSlider = ({
           {currencySymbol}{minValue2} {maxPriceData.currencyCode || currencyCode}
         </p>
         <p>
-        {currencySymbol}{maxValue2} {maxPriceData.currencyCode || currencyCode}
+          {currencySymbol}{maxValue2} {maxPriceData.currencyCode || currencyCode}
         </p>
       </div>
 
@@ -57,18 +59,30 @@ const RangeSlider = ({
         }}
       />
 
-      <button
-        className={`btn btn-sm btn-primary w-full transition-opacity duration-300 ${
+      {
+        minValue2 === 0 && maxValue2 === 1000 ||
+        <button
+          className={`btn btn-sm btn-primary w-full`}
+          onClick={() => {
+            priceChange(minValue2, maxValue2);
+          }}
+        >
+          submit
+        </button>
+      }
+      {/* <button
+        className={`btn btn-sm btn-primary w-full ${
           minValue2 === 0 && maxValue2 === 1000
-            ? "opacity-0 pointer-events-none"
-            : "opacity-100 pointer-events-auto"
+            ? "hidden"
+            : "block"
         }`}
         onClick={() => {
           priceChange(minValue2, maxValue2);
         }}
       >
         submit
-      </button>
+      </button> */}
+
     </div>
   );
 };

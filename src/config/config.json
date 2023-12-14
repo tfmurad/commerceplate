@@ -11,7 +11,7 @@
     "logo_icon_darkmode": "/images/logo_icon_darkmode.png",
     "logo_width": "22",
     "logo_height": "25",
-    "logo_text": "CommercePlate"
+    "logo_text": "Commerceplate"
   },
 
   "settings": {
@@ -43,5 +43,13 @@
     "meta_author": "Themefisher",
     "meta_image": "/images/og-image.png",
     "meta_description": "Next Boilerplate"
+  },
+
+  "shopify": {
+    "currencySymbol": "৳",
+    "currencyCode": "BDT",
+    "collections": {
+      "hero_slider": "hidden-homepage-carousel"
+    }
   }
 }
