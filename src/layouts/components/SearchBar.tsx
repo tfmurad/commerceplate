@@ -90,9 +90,9 @@ const SearchBar = ({
                 placeholder="Search for products"
                 autoComplete="off"
                 defaultValue={searchParams?.get("q") || ""}
-                className="w-full bg-darkmode-body/80 dark:bg-body/80 px-3 py-2 md:px-6 md:py-4 text-darkmode-dark dark:text-dark placeholder:text-darkmode-dark dark:placeholder:text-light focus:ring-transparent border-none"
+                className="w-full bg-darkmode-body/90 dark:bg-body/90 px-3 py-2 md:px-6 md:py-4 text-darkmode-dark dark:text-dark placeholder:text-darkmode-dark dark:placeholder:text-light focus:ring-transparent border-none"
               />
-              <button className="rounded-none btn btn-sm md:btn-md btn-primary cursor-pointer text-darkmode-dark dark:text-dark bg-darkmode-body/80 dark:bg-body/80 border-none">
+              <button className="rounded-none btn btn-sm md:btn-md btn-primary cursor-pointer text-darkmode-dark dark:text-dark bg-darkmode-body/90 dark:bg-body/90 border-none">
                 <IoSearch size={25} />
               </button>
             </form>

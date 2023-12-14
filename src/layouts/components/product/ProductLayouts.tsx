@@ -106,7 +106,7 @@ const ProductLayouts = ({
     } else {
       newParams.delete("layout");
     }
-    router.push(createUrl("/products", newParams));
+    router.push(createUrl("/products", newParams), { scroll: false });
   }
 
   return (
