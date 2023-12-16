@@ -169,9 +169,10 @@ const Header = ({ children }: { children: any }) => {
         </ul>
 
         <div className="order-1 ml-auto max-lg:mr-6 flex items-center md:order-2 lg:ml-0">
+          {settings.search && <SearchBar />}
+          
           <ThemeSwitcher className="mr-4 md:mr-6" />
 
-          {settings.search && <SearchBar />}
 
           <Suspense fallback={children[0]}>{children[1]}</Suspense>
 
