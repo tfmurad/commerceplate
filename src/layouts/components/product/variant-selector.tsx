@@ -42,6 +42,31 @@ export function VariantSelector({
 
   const imageMap = generateImageMap(images);
 
+  const color = searchParams.get("color");
+  const size = searchParams.get("size");
+
+  // Check if color and size search parameters exist
+  const hasColorAndSizeParams = color && size;
+
+  // Set default option based on the existence of search parameters
+  const defaultOption: any = hasColorAndSizeParams
+  ? {
+      color:
+        options.find((option) => option.name === "Color")?.values.includes(color) ||
+        options.find((option) => option.name === "Size")?.values.includes(color)
+          ? color
+          : options.find((option) => option.name === "Color")?.values[0],
+      size:
+        options.find((option) => option.name === "Size")?.values.includes(size) ||
+        options.find((option) => option.name === "Color")?.values.includes(size)
+          ? size
+          : options.find((option) => option.name === "Size")?.values[0],
+    }
+  : {
+      color: options.find((option) => option.name === "Color")?.values[0],
+      size: options.find((option) => option.name === "Size")?.values[0],
+    };
+
   const hasNoOptionsOrJustOneOption =
     !options.length ||
     (options.length === 1 && options[0]?.values.length === 1);
@@ -97,7 +122,10 @@ export function VariantSelector({
                 ),
               );
 
-              const isActive = searchParams.get(optionNameLowerCase) === value;
+              const isActive =
+  searchParams.get(optionNameLowerCase) === value ||
+  (!searchParams.get(optionNameLowerCase) && value === defaultOption[optionNameLowerCase]);
+
 
               if (option.name === "Size") {
                 return null; // skip rendering in the loop

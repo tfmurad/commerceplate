@@ -25,7 +25,7 @@ const Footer = () => {
             ))}
           </ul>
 
-          <Social source={social.main} className="social-icons" />
+          <Social source={social.main} className="social-icons social-icons-footer" />
         </div>
 
         <div className="border-t border-border py-5 dark:border-darkmode-border">

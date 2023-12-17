@@ -16,7 +16,9 @@ const SearchBar = ({
   const router = useRouter();
   const searchParams = useSearchParams();
   const { getCollapseProps, getToggleProps, isExpanded, setExpanded } =
-    useCollapse();
+    useCollapse({
+      hasDisabledAnimation:true
+    });
 
   // useEffect(() => {
   //   const inputField = document.getElementById(
@@ -72,11 +74,11 @@ const SearchBar = ({
 
   return (
     <div className="flex items-center">
-      <button className="search-button-class search-icon mr-4 md:mr-6" {...getToggleProps()}>
+      <button className="search-button-class search-icon mr-4 md:mr-6 z-20" {...getToggleProps()}>
         {isExpanded ? <TbZoomCancel size={20} /> : <IoSearch size={20} />}
       </button>
       <section
-        className="collapse-bar-class w-full absolute top-[56px] lg:top-[74px] left-0"
+        className="collapse-bar-class w-full absolute top-[56px] max-lg:left-0 lg:top-1 lg:w-52 lg:right-[180px]"
         {...getCollapseProps()}
       >
         <div className="container">
@@ -87,12 +89,12 @@ const SearchBar = ({
                 key={searchParams?.get("q")}
                 type="text"
                 name="search"
-                placeholder="Search for products"
+                placeholder="Search"
                 autoComplete="off"
                 defaultValue={searchParams?.get("q") || ""}
-                className="w-full bg-darkmode-body/90 dark:bg-body/90 px-3 py-2 md:px-6 md:py-4 text-darkmode-dark dark:text-dark placeholder:text-darkmode-dark dark:placeholder:text-light focus:ring-transparent border-none"
+                className="w-full lg:rounded-md bg-light dark:bg-darkmode-light px-3 py-2 text-darkmode-dark dark:text-dark placeholder:text-darkmode-dark dark:placeholder:text-light focus:ring-transparent border-none"
               />
-              <button className="rounded-none btn btn-sm md:btn-md btn-primary cursor-pointer text-darkmode-dark dark:text-dark bg-darkmode-body/90 dark:bg-body/90 border-none">
+              <button className="lg:hidden rounded-none px-2 cursor-pointer text-darkmode-dark dark:text-dark bg-light dark:bg-darkmode-light border-none">
                 <IoSearch size={25} />
               </button>
             </form>
