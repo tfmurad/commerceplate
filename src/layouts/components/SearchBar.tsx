@@ -77,7 +77,7 @@ const SearchBar = ({
       <button className="search-button-class search-icon mr-4 md:mr-6 z-20" {...getToggleProps()}>
         {isExpanded ? <TbZoomCancel size={20} /> : <IoSearch size={20} />}
       </button>
-      <section
+      <div
         className="collapse-bar-class w-full absolute top-[56px] max-lg:left-0 lg:top-1 lg:w-52 lg:right-[180px]"
         {...getCollapseProps()}
       >
@@ -100,7 +100,7 @@ const SearchBar = ({
             </form>
           </div>
         </div>
-      </section>
+      </div>
     </div>
   );
 };
