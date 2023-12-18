@@ -70,7 +70,7 @@
 
 <!-- get Shopify storefront API access token-->
 
-### 🛒 Retrieve Shopify Token & Add Demo Products
+## 🛒 Retrieve Shopify Token & Add Demo Products
 - To get the tokens needed, create a Shopify partner account.
   ![Screenshot_1](https://github.com/tfmurad/commerceplate/assets/145179606/7309e70c-905a-4f20-8ad0-bc73ef176e97)
 
