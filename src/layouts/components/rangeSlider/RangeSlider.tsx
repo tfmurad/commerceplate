@@ -14,10 +14,10 @@ const RangeSlider = ({
 }) => {
   const { currencyCode, currencySymbol } = config.shopify;
 
-  const [minValue, setMinValue] = useState(0);
-  const [maxValue, setMaxValue] = useState(0);
+  // const [minValue, setMinValue] = useState(0);
+  // const [maxValue, setMaxValue] = useState(0);
   const [minValue2, setMinValue2] = useState(0);
-  const [maxValue2, setMaxValue2] = useState(1000);
+  const [maxValue2, setMaxValue2] = useState(parseInt(maxPriceData?.amount));
 
   const router = useRouter();
   const searchParams = useSearchParams();
@@ -52,7 +52,7 @@ const RangeSlider = ({
         min="0"
         max={`${maxPriceData?.amount}`}
         minValue={getMinPrice! || 0}
-        maxValue={getMaxPrice! || 1000}
+        maxValue={getMaxPrice! || parseInt(maxPriceData?.amount)}
         onInput={(e) => {
           setMinValue2(e.minValue);
           setMaxValue2(e.maxValue);
@@ -60,7 +60,7 @@ const RangeSlider = ({
       />
 
       {
-        minValue2 === 0 && maxValue2 === 1000 ||
+        minValue2 === 0 && maxValue2 === parseInt(maxPriceData?.amount) ||
         <button
           className={`btn btn-sm btn-primary w-full`}
           onClick={() => {

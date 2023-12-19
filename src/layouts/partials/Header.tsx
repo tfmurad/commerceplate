@@ -26,7 +26,7 @@ export interface INavigationLink {
 
 const Header = ({ children }: { children: any }) => {
   const [navbarShadow, setNavbarShadow] = useState(false);
-  // distructuring the main menu from menu object
+  // destructuring the main menu from menu object
   const { main }: { main: INavigationLink[] } = menu;
   const { navigation_button, settings } = config;
   // get current path

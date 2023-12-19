@@ -5,12 +5,10 @@
     "base_path": "/",
     "trailing_slash": false,
     "favicon": "/images/favicon.png",
-    "logo": "/images/logo_icon.png",
-    "logo_darkmode": "/images/logo_icon_darkmode.png",
-    "logo_icon": "/images/logo_icon.png",
-    "logo_icon_darkmode": "/images/logo_icon_darkmode.png",
-    "logo_width": "22",
-    "logo_height": "25",
+    "logo": "/images/logo.png",
+    "logo_darkmode": "/images/logo-darkmode.png",
+    "logo_width": "150",
+    "logo_height": "27",
     "logo_text": "Commerceplate"
   },
 
