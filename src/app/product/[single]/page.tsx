@@ -6,7 +6,6 @@ import ShowTags from "@/components/product/ShowTags";
 import Tabs from "@/components/product/Tabs";
 import { VariantSelector } from "@/components/product/variant-selector";
 import config from "@/config/config.json";
-import social from "@/config/social.json";
 import { getProduct, getProductRecommendations } from "@/lib/shopify";
 import LatestProducts from "@/partials/LatestProducts";
 import { Metadata } from "next";
@@ -132,7 +131,7 @@ const ShowProductSingle = async ({
 
               <div className="flex gap-3 items-center mb-6">
                 <h5 className="max-md:text-base">Share:</h5>
-                <Social source={social?.main} className="social-icons" />
+                <Social socialName={title} className="social-icons" />
               </div>
 
               {tags.length > 0 && (
