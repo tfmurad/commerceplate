@@ -20,15 +20,6 @@ const SearchBar = ({
       hasDisabledAnimation: true,
     });
 
-  // useEffect(() => {
-  //   const inputField = document.getElementById(
-  //     "searchInputBar",
-  //   ) as HTMLInputElement;
-  //   if (inputField || searchParams.get("q")) {
-  //     inputField.focus();
-  //   }
-  // }, [searchParams]);
-
   useEffect(() => {
     const inputField = document.getElementById(
       "searchInputBar",

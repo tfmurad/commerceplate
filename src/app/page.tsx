@@ -18,12 +18,6 @@ const ShowHeroSlider = async () => {
   return <HeroSlider products={products} />
 }
 
-
-// const ShowCategories = async () => {
-//   const categories = await getCollections();
-//   return <CategoriesSlider categories={categories} />
-// }
-
 const ShowCategories = async () => {
   const categories = await getCollections();
   return <CategoriesSlider categories={categories} />

@@ -116,13 +116,6 @@ const ProductLayouts = ({
           <div className="row gy-4">
             <div className="col-12 lg:col-3">
               <div className=" lg:block relative">
-                {/* <div className="block lg:hidden">
-                  <PopoverFilter categories={categories}
-                    vendors={vendors}
-                    tags={tags}
-                    maxPriceData={maxPriceData} />
-                </div> */}
-
                 <div className="block lg:hidden w-full">
                   <div className="filter-button-container mb-4">
                     <button {...getToggleProps()}>
@@ -211,11 +204,6 @@ const ProductLayouts = ({
             </div>
           </div>
         </div>
-
-        {/* <ModalFilter
-          isVisible={showModal}
-          onClose={() => setShowModal(false)}
-        /> */}
       </section>
     </>
   );

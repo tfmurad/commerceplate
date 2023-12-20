@@ -328,18 +328,6 @@ export type ShopifyProductRecommendationsOperation = {
   };
 };
 
-// export type ShopifyProductsOperation = {
-//   data: {
-//     products: Connection<ShopifyProduct>;
-//   };
-//   variables: {
-//     query?: string;
-//     reverse?: boolean;
-//     sortKey?: string;
-//     cursor?: string;
-//   };
-// };
-
 export type ShopifyProductsOperation = {
   data: {
     products: {

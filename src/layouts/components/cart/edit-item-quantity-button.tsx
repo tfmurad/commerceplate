@@ -4,7 +4,7 @@ import { CartItem } from "@/lib/shopify/types";
 import clsx from "clsx";
 import { useFormState, useFormStatus } from "react-dom";
 import { FaMinus, FaPlus } from "react-icons/fa6";
-import LoadingDots from "../loading-dots";
+import LoadingDots from "../LoadingDots";
 import { updateItemQuantity } from "./actions";
 
 function SubmitButton({ type }: { type: "plus" | "minus" }) {

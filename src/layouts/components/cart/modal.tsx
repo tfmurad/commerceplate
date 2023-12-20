@@ -8,11 +8,11 @@ import Image from "next/image";
 import Link from "next/link";
 import { Fragment, useEffect, useRef, useState } from "react";
 import { FaShoppingCart } from "react-icons/fa";
-import Price from "../price";
 import CloseCart from "./close-cart";
 import { DeleteItemButton } from "./delete-item-button";
 import { EditItemQuantityButton } from "./edit-item-quantity-button";
 import OpenCart from "./open-cart";
+import Price from "../Price";
 
 type MerchandiseSearchParams = {
   [key: string]: string;
