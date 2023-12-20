@@ -38,10 +38,12 @@ const RangeSlider = ({
     <div>
       <div className="flex justify-between">
         <p>
-          {currencySymbol}{minValue2} {maxPriceData?.currencyCode || currencyCode}
+          {currencySymbol}
+          {minValue2} {maxPriceData?.currencyCode || currencyCode}
         </p>
         <p>
-          {currencySymbol}{maxValue2} {maxPriceData?.currencyCode || currencyCode}
+          {currencySymbol}
+          {maxValue2} {maxPriceData?.currencyCode || currencyCode}
         </p>
       </div>
 
@@ -59,7 +61,7 @@ const RangeSlider = ({
         }}
       />
 
-      {
+      {/* {
         minValue2 === 0 && maxValue2 === parseInt(maxPriceData?.amount) ||
         <button
           className={`btn btn-sm btn-primary w-full`}
@@ -69,20 +71,19 @@ const RangeSlider = ({
         >
           submit
         </button>
-      }
-      {/* <button
-        className={`btn btn-sm btn-primary w-full ${
-          minValue2 === 0 && maxValue2 === 1000
-            ? "hidden"
-            : "block"
-        }`}
-        onClick={() => {
-          priceChange(minValue2, maxValue2);
-        }}
-      >
-        submit
-      </button> */}
+      } */}
 
+      {(minValue2 === parseInt(getMinPrice!) &&
+        maxValue2 === parseInt(getMaxPrice!) || ( minValue2 === 0 && maxValue2 === parseInt(maxPriceData?.amount))) || (
+        <button
+          className={`btn btn-sm btn-primary w-full`}
+          onClick={() => {
+            priceChange(minValue2, maxValue2);
+          }}
+        >
+          submit
+        </button>
+      )}
     </div>
   );
 };
