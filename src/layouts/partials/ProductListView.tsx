@@ -8,16 +8,12 @@ import useLoadMore from "@/hooks/useLoadMore";
 import { defaultSort, sorting } from "@/lib/constants";
 import { getCollectionProducts, getProducts } from "@/lib/shopify";
 import { PageInfo, Product } from "@/lib/shopify/types";
-import { removeSlug } from "@/lib/utils/textConverter";
+import { titleify } from "@/lib/utils/textConverter";
 import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
 import { BiLoaderAlt } from "react-icons/bi";
 
-const ProductListView = ({
-  searchParams,
-}: {
-  searchParams: any;
-}) => {
+const ProductListView = ({ searchParams }: { searchParams: any }) => {
   const { currencySymbol } = config.shopify;
   const [isLoading, setIsLoading] = useState(true);
   const targetElementRef = useRef<HTMLDivElement>(null);
@@ -87,35 +83,22 @@ const ProductListView = ({
             queryString += ` ${searchValue}`;
           }
 
-          // if (brand) {
-          //   Array.isArray(brand)
-          //     ? (queryString += `${brand
-          //         .map((b) => `(vendor:${b})`)
-          //         .join(" OR ")}`)
-          //     : (queryString += `vendor:"${brand}"`);
-
-          //   // Include brand condition in filterCategoryProduct
-          //   filterCategoryProduct.push({
-          //     productVendor: removeSlug(brand),
-          //   });
-          // }
-
           if (brand) {
             Array.isArray(brand)
               ? (queryString += `${brand
-                .map((b) => `(vendor:${b})`)
-                .join(" OR ")}`)
+                  .map((b) => `(vendor:${b})`)
+                  .join(" OR ")}`)
               : (queryString += `vendor:"${brand}"`);
 
             if (Array.isArray(brand) && brand.length > 0) {
               brand.forEach((b) => {
                 filterCategoryProduct.push({
-                  productVendor: removeSlug(b),
+                  productVendor: titleify(b),
                 });
               });
             } else {
               filterCategoryProduct.push({
-                productVendor: removeSlug(brand),
+                productVendor: titleify(brand),
               });
             }
           }
@@ -137,16 +120,15 @@ const ProductListView = ({
           productsData =
             category && category !== "all"
               ? await getCollectionProducts({
-                collection: category,
-                sortKey,
-                reverse,
-                filterCategoryProduct:
-                  filterCategoryProduct.length > 0
-                    ? filterCategoryProduct
-                    : undefined,
-              })
+                  collection: category,
+                  sortKey,
+                  reverse,
+                  filterCategoryProduct:
+                    filterCategoryProduct.length > 0
+                      ? filterCategoryProduct
+                      : undefined,
+                })
               : await getProducts({ ...query, cursor });
-
         } else {
           // Fetch all products
           productsData = await getProducts({ sortKey, reverse, cursor });
@@ -238,7 +220,8 @@ const ProductListView = ({
               />
               <h1 className="h2 mb-4">No Product Found!</h1>
               <p>
-                We couldn&apos;t find what you filtered for. Try filtering again.
+                We couldn&apos;t find what you filtered for. Try filtering
+                again.
               </p>
             </div>
           )}
@@ -256,8 +239,8 @@ const ProductListView = ({
             } = product;
 
             const defaultVariantId =
-            variants.length > 0 ? variants[0].id : undefined;
-            
+              variants.length > 0 ? variants[0].id : undefined;
+
             return (
               <div className="col-12 mb-10" key={id}>
                 <div className="row">
@@ -282,8 +265,9 @@ const ProductListView = ({
                         ৳ {priceRange?.minVariantPrice?.amount}{" "}
                         {priceRange?.minVariantPrice?.currencyCode}
                       </span>
-                      {parseFloat(compareAtPriceRange?.maxVariantPrice?.amount) >
-                        0 ? (
+                      {parseFloat(
+                        compareAtPriceRange?.maxVariantPrice?.amount,
+                      ) > 0 ? (
                         <s className="text-light dark:text-darkmode-light text-xs md:text-base font-medium">
                           {currencySymbol}{" "}
                           {compareAtPriceRange?.maxVariantPrice?.amount}{" "}

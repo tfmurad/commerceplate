@@ -8,16 +8,12 @@ import useLoadMore from "@/hooks/useLoadMore";
 import { defaultSort, sorting } from "@/lib/constants";
 import { getCollectionProducts, getProducts } from "@/lib/shopify";
 import { PageInfo, Product } from "@/lib/shopify/types";
-import { removeSlug } from "@/lib/utils/textConverter";
+import { titleify } from "@/lib/utils/textConverter";
 import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
 import { BiLoaderAlt } from "react-icons/bi";
 
-const ProductCardView = ({
-  searchParams,
-}: {
-  searchParams: any;
-}) => {
+const ProductCardView = ({ searchParams }: { searchParams: any }) => {
   const { currencySymbol } = config.shopify;
   const [isLoading, setIsLoading] = useState(true);
   const targetElementRef = useRef<HTMLDivElement>(null);
@@ -87,35 +83,22 @@ const ProductCardView = ({
             queryString += ` ${searchValue}`;
           }
 
-          // if (brand) {
-          //   Array.isArray(brand)
-          //     ? (queryString += `${brand
-          //         .map((b) => `(vendor:${b})`)
-          //         .join(" OR ")}`)
-          //     : (queryString += `vendor:"${brand}"`);
-
-          //   // Include brand condition in filterCategoryProduct
-          //   filterCategoryProduct.push({
-          //     productVendor: removeSlug(brand),
-          //   });
-          // }
-
           if (brand) {
             Array.isArray(brand)
               ? (queryString += `${brand
-                .map((b) => `(vendor:${b})`)
-                .join(" OR ")}`)
+                  .map((b) => `(vendor:${b})`)
+                  .join(" OR ")}`)
               : (queryString += `vendor:"${brand}"`);
 
             if (Array.isArray(brand) && brand.length > 0) {
               brand.forEach((b) => {
                 filterCategoryProduct.push({
-                  productVendor: removeSlug(b),
+                  productVendor: titleify(b),
                 });
               });
             } else {
               filterCategoryProduct.push({
-                productVendor: removeSlug(brand),
+                productVendor: titleify(brand),
               });
             }
           }
@@ -137,16 +120,15 @@ const ProductCardView = ({
           productsData =
             category && category !== "all"
               ? await getCollectionProducts({
-                collection: category,
-                sortKey,
-                reverse,
-                filterCategoryProduct:
-                  filterCategoryProduct.length > 0
-                    ? filterCategoryProduct
-                    : undefined,
-              })
+                  collection: category,
+                  sortKey,
+                  reverse,
+                  filterCategoryProduct:
+                    filterCategoryProduct.length > 0
+                      ? filterCategoryProduct
+                      : undefined,
+                })
               : await getProducts({ ...query, cursor });
-
         } else {
           // Fetch all products
           productsData = await getProducts({ sortKey, reverse, cursor });
@@ -243,7 +225,7 @@ const ProductCardView = ({
 
       {products.map((product, index) => {
         const defaultVariantId =
-        product?.variants.length > 0 ? product?.variants[0].id : undefined;
+          product?.variants.length > 0 ? product?.variants[0].id : undefined;
         return (
           <div
             key={index}
@@ -251,13 +233,15 @@ const ProductCardView = ({
           >
             <div className="md:relative overflow-hidden">
               <ImageFallback
-                src={product.featuredImage?.url || "/images/product_image404.jpg"}
+                src={
+                  product.featuredImage?.url || "/images/product_image404.jpg"
+                }
                 width={312}
                 height={269}
                 alt={product.featuredImage?.altText || "fallback image"}
                 className="w-[312px] h-[150px] md:h-[269px] object-cover rounded-md border mx-auto"
               />
-  
+
               <AddToCart
                 variants={product?.variants}
                 availableForSale={product?.availableForSale}
@@ -279,14 +263,20 @@ const ProductCardView = ({
               </h2>
               <div className="flex justify-center items-center gap-x-2 mt-2 md:mt-4">
                 <span className="text-base md:text-xl font-bold text-dark dark:text-darkmode-dark">
-                  {currencySymbol} {product?.priceRange?.minVariantPrice?.amount}{" "}
+                  {currencySymbol}{" "}
+                  {product?.priceRange?.minVariantPrice?.amount}{" "}
                   {product?.priceRange?.minVariantPrice?.currencyCode}
                 </span>
-                {parseFloat(product?.compareAtPriceRange?.maxVariantPrice?.amount) >
-                  0 ? (
+                {parseFloat(
+                  product?.compareAtPriceRange?.maxVariantPrice?.amount,
+                ) > 0 ? (
                   <s className="text-light dark:text-darkmode-light text-xs md:text-base font-medium">
-                    {currencySymbol} {product?.compareAtPriceRange?.maxVariantPrice?.amount}{" "}
-                    {product?.compareAtPriceRange?.maxVariantPrice?.currencyCode}
+                    {currencySymbol}{" "}
+                    {product?.compareAtPriceRange?.maxVariantPrice?.amount}{" "}
+                    {
+                      product?.compareAtPriceRange?.maxVariantPrice
+                        ?.currencyCode
+                    }
                   </s>
                 ) : (
                   ""
@@ -294,7 +284,7 @@ const ProductCardView = ({
               </div>
             </div>
           </div>
-        )
+        );
       })}
 
       <p

@@ -21,7 +21,7 @@ const ProductLayouts = ({
   tags,
   maxPriceData,
   vendorsWithCounts,
-  categoriesWithCounts
+  categoriesWithCounts,
 }: any) => {
   const { getCollapseProps, getToggleProps, isExpanded, setExpanded } =
     useCollapse();
@@ -160,9 +160,9 @@ const ProductLayouts = ({
                   >
                     <input
                       id="searchInput"
-                      className="bg-transparent border-none focus:ring-transparent pr-0 pl-2 w-full"
+                      className="bg-transparent border-none search-input focus:ring-transparent pr-0 pl-2 w-full"
                       key={searchParams?.get("q")}
-                      type="text"
+                      type="search"
                       name="search"
                       placeholder="Search for products"
                       autoComplete="off"

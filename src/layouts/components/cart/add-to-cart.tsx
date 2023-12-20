@@ -1,15 +1,11 @@
 "use client";
 import { ProductVariant } from "@/lib/shopify/types";
+import Link from "next/link";
 import { useSearchParams } from "next/navigation";
 import React from "react";
-import {
-  // @ts-ignore
-  experimental_useFormState as useFormState,
-  experimental_useFormStatus as useFormStatus,
-} from "react-dom";
+import { useFormState, useFormStatus } from "react-dom";
 import { BiLoaderAlt } from "react-icons/bi";
 import { addItem } from "./actions";
-import Link from "next/link";
 
 function SubmitButton({
   availableForSale,
@@ -95,13 +91,11 @@ export function AddToCart({
   // Find the variant based on selected options
   const selectedOptions = Array.from(searchParams.entries());
   const variant = variants.find((variant: ProductVariant) =>
-    selectedOptions.every(
-      ([key, value]) =>
-        variant.selectedOptions.some(
-          (option) =>
-            option.name.toLowerCase() === key && option.value === value
-        )
-    )
+    selectedOptions.every(([key, value]) =>
+      variant.selectedOptions.some(
+        (option) => option.name.toLowerCase() === key && option.value === value,
+      ),
+    ),
   );
 
   // Use the default variant ID if no variant is found
@@ -123,4 +117,3 @@ export function AddToCart({
     </form>
   );
 }
-

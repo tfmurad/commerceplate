@@ -1,8 +1,8 @@
-<h1 align=center>Nextjs + Shopify + Tailwind CSS + TypeScript Starter and Boilerplate</h1>
+<h1 align=center>Commerceplate | NextJs + Shopify + Tailwind CSS + TypeScript Starter and Boilerplate</h1>
 
-<p align=center>Commerceplate: A free, production-ready Next.js template powered by Tailwind CSS and TypeScript, specifically designed for Shopify. Utilizes the Shopify Storefront API through GraphQL and providing everything you need to jumpstart your Next project and save valuable time.</p>
+<p align=center>A free, production-ready Next.js template powered by Tailwind CSS and TypeScript, specifically designed for Shopify. Utilizes the Shopify Storefront API through GraphQL and providing everything you need to jumpstart your Next project and save valuable time.</p>
 
-<p align=center>Made with ♥ by<a href="https://zeon.studio/"> Zeon Studio</a></p>
+<p align=center>Made with ♥ by<a href="https://zeon.studio/">Zeon Studio</a></p>
 <p align=center> If you find this project useful, please give it a ⭐ to show your support. </p>
 
 <h2 align="center"> <a target="_blank" href="https://tf-commerceplate.netlify.app/" rel="nofollow">👀 Demo</a> | <a  target="_blank" href="https://pagespeed.web.dev/analysis/https-tf-commerceplate-netlify-app/xslneuoi4k?form_factor=desktop">Page Speed (80%)🚀</a>
@@ -44,7 +44,6 @@
 - 📝 Write and Update Content in Markdown / MDX
 - ⌛ Infinite Product Load on Scrolling
 
-
 ### 📄 10+ Pre-designed Pages
 
 - 🏠 Homepage
@@ -71,6 +70,7 @@
 <!-- get Shopify storefront API access token-->
 
 ## 🛒 Retrieve Shopify Token & Add Demo Products
+
 - To get the tokens needed, create a Shopify partner account.
   ![Screenshot_1](https://github.com/tfmurad/commerceplate/assets/145179606/7309e70c-905a-4f20-8ad0-bc73ef176e97)
 

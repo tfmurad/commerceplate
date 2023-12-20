@@ -17,7 +17,7 @@ const SearchBar = ({
   const searchParams = useSearchParams();
   const { getCollapseProps, getToggleProps, isExpanded, setExpanded } =
     useCollapse({
-      hasDisabledAnimation:true
+      hasDisabledAnimation: true,
     });
 
   // useEffect(() => {
@@ -52,13 +52,12 @@ const SearchBar = ({
     return () => {
       document.removeEventListener("click", handleOutsideClick);
     };
-  }, [isExpanded, setExpanded,searchParams]);
-
+  }, [isExpanded, setExpanded, searchParams]);
 
   function onSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
     setExpanded(false);
-    
+
     const val = e.target as HTMLFormElement;
     const search = val.search as HTMLInputElement;
     const newParams = new URLSearchParams(searchParams.toString());
@@ -74,7 +73,10 @@ const SearchBar = ({
 
   return (
     <div className="flex items-center">
-      <button className="search-button-class search-icon mr-4 md:mr-6 z-20" {...getToggleProps()}>
+      <button
+        className="search-button-class search-icon mr-4 md:mr-6 z-20"
+        {...getToggleProps()}
+      >
         {isExpanded ? <TbZoomCancel size={20} /> : <IoSearch size={20} />}
       </button>
       <div
@@ -87,12 +89,12 @@ const SearchBar = ({
               <input
                 id="searchInputBar"
                 key={searchParams?.get("q")}
-                type="text"
+                type="search"
                 name="search"
                 placeholder="Search"
                 autoComplete="off"
                 defaultValue={searchParams?.get("q") || ""}
-                className="w-full rounded-s-md lg:rounded-md bg-light dark:bg-darkmode-light px-3 py-2 text-darkmode-dark dark:text-dark placeholder:text-darkmode-dark dark:placeholder:text-light focus:ring-transparent border-none"
+                className="w-full rounded-s-md lg:rounded-md bg-light dark:bg-darkmode-light px-3 py-2 text-darkmode-dark dark:text-dark placeholder:text-darkmode-dark dark:placeholder:text-light focus:ring-transparent border-none search-input"
               />
               <button className="lg:hidden rounded-e-md lg:rounded-none px-2 cursor-pointer text-darkmode-dark dark:text-dark bg-light dark:bg-darkmode-light border-none">
                 <IoSearch size={25} />

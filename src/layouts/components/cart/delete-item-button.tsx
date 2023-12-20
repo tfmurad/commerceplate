@@ -1,12 +1,8 @@
-'use client';
-import { FaXmark } from "react-icons/fa6";
-import clsx from 'clsx';
-import {
-  // @ts-ignore
-  experimental_useFormState as useFormState,
-  experimental_useFormStatus as useFormStatus
-} from 'react-dom';
+"use client";
 import { CartItem } from "@/lib/shopify/types";
+import clsx from "clsx";
+import { useFormState, useFormStatus } from "react-dom";
+import { FaXmark } from "react-icons/fa6";
 import LoadingDots from "../loading-dots";
 import { removeItem } from "./actions";
 
@@ -22,10 +18,10 @@ function SubmitButton() {
       aria-label="Remove cart item"
       aria-disabled={pending}
       className={clsx(
-        'ease flex h-[17px] w-[17px] items-center justify-center rounded-full bg-neutral-500 transition-all duration-200',
+        "ease flex h-[17px] w-[17px] items-center justify-center rounded-full bg-neutral-500 transition-all duration-200",
         {
-          'cursor-not-allowed px-0': pending
-        }
+          "cursor-not-allowed px-0": pending,
+        },
       )}
     >
       {pending ? (
