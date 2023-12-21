@@ -2,7 +2,7 @@
 
 import { Tab } from "@headlessui/react";
 import { useEffect, useState } from "react";
-import LoadingDescription from "../loading/LoadingDescription";
+import LoadingDescription from "../skeleton/SkeletonDescription";
 
 const Tabs = ({ descriptionHtml }: { descriptionHtml: string }) => {
   const [description, setDescription] = useState("");

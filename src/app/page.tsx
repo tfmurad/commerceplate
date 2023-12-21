@@ -1,15 +1,15 @@
 /* eslint-disable react/no-unescaped-entities */
 import CategoriesSlider from "@/components/CategoriesSlider";
 import HeroSlider from "@/components/HeroSlider";
-import LoadingCategory from "@/components/loading/LoadingCategory";
-import LoadingLatestProducts from "@/components/loading/LoadingLatestProducts";
 import { getListPage } from "@/lib/contentParser";
 import { getCollectionProducts, getCollections } from "@/lib/shopify";
 import CallToAction from "@/partials/CallToAction";
-import LatestProducts from "@/partials/LatestProducts";
+import FeaturedProducts from "@/partials/FeaturedProducts";
 import SeoMeta from "@/partials/SeoMeta";
 import { Suspense } from "react";
 import config from "@/config/config.json";
+import SkeletonCategory from "@/components/skeleton/SkeletonCategory";
+import SkeletonFeaturedProducts from "@/components/skeleton/SkeletonFeaturedProducts";
 const { collections } = config.shopify;
 
 const ShowHeroSlider = async () => {
@@ -24,9 +24,9 @@ const ShowCategories = async () => {
 }
 
 
-const ShowLatestProducts = async () => {
+const ShowFeaturedProducts = async () => {
   const { pageInfo, products } = await getCollectionProducts({ collection: collections.featured_products, reverse: false });
-  return <LatestProducts products={products} />
+  return <FeaturedProducts products={products} />
 }
 
 const Home = () => {
@@ -52,14 +52,14 @@ const Home = () => {
             <h2>Categories</h2>
           </div>
           <Suspense
-            fallback={<LoadingCategory />}>
+            fallback={<SkeletonCategory />}>
             {/* @ts-ignore */}
             <ShowCategories />
           </Suspense>
         </div>
       </section>
 
-      {/* Latest Products section  */}
+      {/* Featured Products section  */}
       <section>
         <div className="container">
           <div className="text-center mb-6 md:mb-14">
@@ -67,8 +67,8 @@ const Home = () => {
             <p className="md:h5">Explore Today's Featured Picks!</p>
           </div>
           <Suspense
-            fallback={<LoadingLatestProducts />}>
-            <ShowLatestProducts />
+            fallback={<SkeletonFeaturedProducts />}>
+            <ShowFeaturedProducts />
           </Suspense>
         </div>
       </section>

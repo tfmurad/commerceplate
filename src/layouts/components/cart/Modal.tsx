@@ -9,10 +9,10 @@ import Link from "next/link";
 import { Fragment, useEffect, useRef, useState } from "react";
 import { FaShoppingCart } from "react-icons/fa";
 import Price from "../Price";
-import CloseCart from "./close-cart";
-import { DeleteItemButton } from "./delete-item-button";
-import { EditItemQuantityButton } from "./edit-item-quantity-button";
-import OpenCart from "./open-cart";
+import CloseCart from "./CloseCart";
+import { DeleteItemButton } from "./DeleteItemButton";
+import { EditItemQuantityButton } from "./EditItemQuantityButton";
+import OpenCart from "./OpenCart";
 
 type MerchandiseSearchParams = {
   [key: string]: string;

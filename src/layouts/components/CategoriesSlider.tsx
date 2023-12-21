@@ -10,7 +10,7 @@ import "swiper/css/navigation";
 import "swiper/css/pagination";
 import { Navigation, Pagination } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
-import LoadingCategory from './loading/LoadingCategory';
+import LoadingCategory from './skeleton/SkeletonCategory';
 
 
 const CategoriesSlider = ({ categories }: { categories: any }) => {

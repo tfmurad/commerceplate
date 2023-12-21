@@ -1,5 +1,5 @@
 
-const LoadingDescription = () => {
+const SkeletonDescription = () => {
 	return (
 		<div>
 			<div className="border-b-2 flex gap-x-6">
@@ -18,4 +18,4 @@ const LoadingDescription = () => {
 	)
 }
 
-export default LoadingDescription
+export default SkeletonDescription;

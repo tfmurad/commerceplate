@@ -1,13 +1,13 @@
 import Social from "@/components/Social";
-import { AddToCart } from "@/components/cart/add-to-cart";
-import LoadingProductGallery from "@/components/loading/LoadingProductGallery";
+import { AddToCart } from "@/components/cart/AddToCart";
+import LoadingProductGallery from "@/components/skeleton/SkeletonProductGallery";
 import ProductGallery from "@/components/product/ProductGallery";
 import ShowTags from "@/components/product/ShowTags";
 import Tabs from "@/components/product/Tabs";
 import { VariantSelector } from "@/components/product/variant-selector";
 import config from "@/config/config.json";
 import { getProduct, getProductRecommendations } from "@/lib/shopify";
-import LatestProducts from "@/partials/LatestProducts";
+import LatestProducts from "@/partials/FeaturedProducts";
 import { Metadata } from "next";
 import Image from "next/image";
 import { notFound } from "next/navigation";

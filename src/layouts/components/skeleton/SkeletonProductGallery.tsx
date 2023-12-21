@@ -1,5 +1,5 @@
 
-const LoadingProductGallery = () => {
+const SkeletonProductGallery = () => {
 	return (
 		<>
 			<section className="md:section-sm">
@@ -57,4 +57,4 @@ const LoadingProductGallery = () => {
 	)
 }
 
-export default LoadingProductGallery
+export default SkeletonProductGallery;

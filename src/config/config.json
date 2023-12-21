@@ -15,8 +15,6 @@
   "settings": {
     "search": true,
     "account": true,
-    "cart": true,
-    "currency": false,
     "sticky_header": true,
     "theme_switcher": true,
     "default_theme": "system",

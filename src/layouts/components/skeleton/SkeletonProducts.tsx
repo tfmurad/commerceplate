@@ -1,10 +1,19 @@
-const LoadingCards = () => {
+const SkeletonProducts = () => {
   return (
-    <section>
+    <section className="pt-14 xl:pt-28">
       <div className="container">
         <div className="row gy-4">
-          <div className="col-12 mx-auto">
+          <div className="col-12 lg:col-3">
+            <div className="hidden lg:block h-8 mb-4 rounded-md animate-pulse bg-neutral-200 dark:bg-neutral-700" />
+            <div className="hidden lg:block h-full rounded-md animate-pulse bg-neutral-200 dark:bg-neutral-700" />
+          </div>
+
+          <div className="col-12 lg:col-9">
             <div>
+              <div className="flex justify-between">
+                <div className="h-8 w-2/12 mb-4 rounded-md animate-pulse bg-neutral-200 dark:bg-neutral-700" />
+                <div className="h-8 w-3/12 mb-4 rounded-md animate-pulse bg-neutral-200 dark:bg-neutral-700" />
+              </div>
               <div className="grid grid-cols-2 lg:grid-cols-3 gap-4">
                 {Array(9)
                   .fill(0)
@@ -28,4 +37,4 @@ const LoadingCards = () => {
   );
 };
 
-export default LoadingCards;
+export default SkeletonProducts;

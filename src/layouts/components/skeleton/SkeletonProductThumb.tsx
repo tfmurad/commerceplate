@@ -1,6 +1,6 @@
 import React from 'react'
 
-const LoadingProductThumb = () => {
+const SkeletonProductThumb = () => {
 	return (
 		<div className="row justify-center">
 			<div>
@@ -20,4 +20,4 @@ const LoadingProductThumb = () => {
 	)
 }
 
-export default LoadingProductThumb
+export default SkeletonProductThumb;

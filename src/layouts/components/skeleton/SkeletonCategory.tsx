@@ -1,5 +1,5 @@
 
-const LoadingCategory = () => {
+const SkeletonCategory = () => {
 	return (
 		<div className="grid grid-cols-2 md:grid-cols-3 gap-x-6">
 			{Array(3)
@@ -13,4 +13,4 @@ const LoadingCategory = () => {
 	)
 }
 
-export default LoadingCategory
+export default SkeletonCategory;

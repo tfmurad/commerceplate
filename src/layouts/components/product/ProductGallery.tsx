@@ -16,7 +16,7 @@ import "swiper/css/navigation";
 import "swiper/css/thumbs";
 import { FreeMode, Navigation, Thumbs } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
-import LoadingProductThumb from "../loading/LoadingProductThumb";
+import LoadingProductThumb from "../skeleton/SkeletonProductThumb";
 
 export interface ImageItem {
   url: string;

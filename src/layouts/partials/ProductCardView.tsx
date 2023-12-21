@@ -1,7 +1,7 @@
 "use client";
 
-import { AddToCart } from "@/components/cart/add-to-cart";
-import LoadingCards from "@/components/loading/LoadingCards";
+import { AddToCart } from "@/components/cart/AddToCart";
+import LoadingCards from "@/components/skeleton/SkeletonCards";
 import config from "@/config/config.json";
 import ImageFallback from "@/helpers/ImageFallback";
 import useLoadMore from "@/hooks/useLoadMore";

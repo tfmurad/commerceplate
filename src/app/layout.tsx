@@ -1,5 +1,6 @@
-import Cart from "@/components/cart";
-import OpenCart from "@/components/cart/open-cart";
+
+import Cart from "@/components/cart/Cart";
+import OpenCart from "@/components/cart/OpenCart";
 import config from "@/config/config.json";
 import theme from "@/config/theme.json";
 import TwSizeIndicator from "@/helpers/TwSizeIndicator";
