@@ -257,7 +257,7 @@ const ProductListView = ({ searchParams }: { searchParams: any }) => {
 
                   <div className="col-12 md:col-8 py-3 max-md:pt-4">
                     <h2 className="font-bold md:font-normal h4">
-                      <Link href={`/product/${handle}`}>{title}</Link>
+                      <Link href={`/products/${handle}`}>{title}</Link>
                     </h2>
 
                     <div className="flex items-center gap-x-2 mt-2">

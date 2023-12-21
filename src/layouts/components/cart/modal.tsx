@@ -8,11 +8,11 @@ import Image from "next/image";
 import Link from "next/link";
 import { Fragment, useEffect, useRef, useState } from "react";
 import { FaShoppingCart } from "react-icons/fa";
+import Price from "../Price";
 import CloseCart from "./close-cart";
 import { DeleteItemButton } from "./delete-item-button";
 import { EditItemQuantityButton } from "./edit-item-quantity-button";
 import OpenCart from "./open-cart";
-import Price from "../Price";
 
 type MerchandiseSearchParams = {
   [key: string]: string;
@@ -44,10 +44,7 @@ export default function CartModal({ cart }: { cart: Cart | undefined }) {
       </div>
       <Transition show={isOpen}>
         <Dialog onClose={closeCart} className="relative z-50">
-          <Transition.Child
-            as={Fragment}
-
-          >
+          <Transition.Child as={Fragment}>
             <div className="fixed inset-0" aria-hidden="true" />
           </Transition.Child>
           <Transition.Child
@@ -96,7 +93,7 @@ export default function CartModal({ cart }: { cart: Cart | undefined }) {
                       );
 
                       const merchandiseUrl = createUrl(
-                        `/product/${item.merchandise.product.handle}`,
+                        `/products/${item.merchandise.product.handle}`,
                         new URLSearchParams(merchandiseSearchParams),
                       );
 

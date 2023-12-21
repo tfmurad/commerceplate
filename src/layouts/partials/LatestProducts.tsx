@@ -52,7 +52,7 @@ const LatestProducts = ({ products }: { products: Product[] }) => {
                 <h2 className="font-medium text-base md:text-xl">
                   <Link
                     className="after:absolute after:inset-0"
-                    href={`/product/${handle}`}
+                    href={`/products/${handle}`}
                   >
                     {title}
                   </Link>

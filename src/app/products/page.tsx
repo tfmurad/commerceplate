@@ -108,7 +108,6 @@ const ShowProducts = async ({
         ),
       ),
     ];
-  
 
     vendorsWithCounts = uniqueVendors.map((vendor: string) => {
       const productCount = (productsData?.products || []).filter(
@@ -118,20 +117,19 @@ const ShowProducts = async ({
     });
 
     categoriesWithCounts = uniqueCategories.map((category: string) => {
-      const productCount = (productsData?.products as Product[] || []).filter(
+      const productCount = ((productsData?.products as Product[]) || []).filter(
         (product: Product) =>
           product.collections.nodes.some(
-            (collectionNode:any) => collectionNode.title === category,
+            (collectionNode: any) => collectionNode.title === category,
           ),
       ).length;
       return { category, productCount };
     });
-
   } else {
     // Fetch all products
     productsData = await getProducts({ sortKey, reverse, cursor });
   }
-// console.log(categoriesWithCounts)
+  // console.log(categoriesWithCounts)
   const categories = await getCollections();
   const vendors = await getVendors({});
 

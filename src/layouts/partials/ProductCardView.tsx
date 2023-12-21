@@ -256,7 +256,7 @@ const ProductCardView = ({ searchParams }: { searchParams: any }) => {
               <h2 className="font-medium text-base md:text-xl">
                 <Link
                   className="after:absolute after:inset-0"
-                  href={`/product/${product?.handle}`}
+                  href={`/products/${product?.handle}`}
                 >
                   {product?.title}
                 </Link>

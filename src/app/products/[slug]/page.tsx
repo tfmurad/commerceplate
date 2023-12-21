@@ -13,14 +13,12 @@ import Image from "next/image";
 import { notFound } from "next/navigation";
 import { Suspense } from "react";
 
-// export const runtime = "edge";
-
 export const generateMetadata = async ({
   params,
 }: {
-  params: { single: string };
+  params: { slug: string };
 }): Promise<Metadata> => {
-  const product = await getProduct(params.single);
+  const product = await getProduct(params.slug);
   if (!product) return notFound();
   return {
     title: product.seo.title || product.title,
@@ -28,13 +26,9 @@ export const generateMetadata = async ({
   };
 };
 
-const ShowProductSingle = async ({
-  params,
-}: {
-  params: { single: string };
-}) => {
+const ShowProductSingle = async ({ params }: { params: { slug: string } }) => {
   const { currencySymbol } = config.shopify;
-  const product = await getProduct(params.single);
+  const product = await getProduct(params.slug);
   if (!product) return notFound();
   const {
     id,
@@ -50,7 +44,6 @@ const ShowProductSingle = async ({
   } = product;
 
   const relatedProducts = await getProductRecommendations(id);
-  // if (!relatedProducts.length) return null;
 
   const defaultVariantId = variants.length > 0 ? variants[0].id : undefined;
 
@@ -173,7 +166,7 @@ const ShowProductSingle = async ({
   );
 };
 
-const ProductSingle = ({ params }: { params: { single: string } }) => {
+const ProductSingle = ({ params }: { params: { slug: string } }) => {
   return (
     <Suspense fallback={<LoadingProductGallery />}>
       <ShowProductSingle params={params} />
