@@ -1,4 +1,3 @@
-
 import Cart from "@/components/cart/Cart";
 import OpenCart from "@/components/cart/OpenCart";
 import config from "@/config/config.json";

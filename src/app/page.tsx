@@ -13,21 +13,25 @@ import SkeletonFeaturedProducts from "@/components/skeleton/SkeletonFeaturedProd
 const { collections } = config.shopify;
 
 const ShowHeroSlider = async () => {
-  const sliderImages = await getCollectionProducts({ collection: collections.hero_slider });
+  const sliderImages = await getCollectionProducts({
+    collection: collections.hero_slider,
+  });
   const { products } = sliderImages;
-  return <HeroSlider products={products} />
-}
+  return <HeroSlider products={products} />;
+};
 
 const ShowCategories = async () => {
   const categories = await getCollections();
-  return <CategoriesSlider categories={categories} />
-}
-
+  return <CategoriesSlider categories={categories} />;
+};
 
 const ShowFeaturedProducts = async () => {
-  const { pageInfo, products } = await getCollectionProducts({ collection: collections.featured_products, reverse: false });
-  return <FeaturedProducts products={products} />
-}
+  const { pageInfo, products } = await getCollectionProducts({
+    collection: collections.featured_products,
+    reverse: false,
+  });
+  return <FeaturedProducts products={products} />;
+};
 
 const Home = () => {
   const callToAction = getListPage("sections/call-to-action.md");
@@ -51,8 +55,7 @@ const Home = () => {
           <div className="text-center mb-6 md:mb-14">
             <h2>Categories</h2>
           </div>
-          <Suspense
-            fallback={<SkeletonCategory />}>
+          <Suspense fallback={<SkeletonCategory />}>
             {/* @ts-ignore */}
             <ShowCategories />
           </Suspense>
@@ -66,8 +69,7 @@ const Home = () => {
             <h2 className="mb-2">Featured Products</h2>
             <p className="md:h5">Explore Today's Featured Picks!</p>
           </div>
-          <Suspense
-            fallback={<SkeletonFeaturedProducts />}>
+          <Suspense fallback={<SkeletonFeaturedProducts />}>
             <ShowFeaturedProducts />
           </Suspense>
         </div>

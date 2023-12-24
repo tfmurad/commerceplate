@@ -33,7 +33,6 @@ const ProductGallery = ({ images }: { images: ImageItem[] }) => {
   // const [picUrl, setPicUrl] = useState(images.length > 0 ? images[0].url : "");
   const [picUrl, setPicUrl] = useState("");
 
-
   const searchParams = useSearchParams().get("color");
 
   const prevRef = useRef(null);
@@ -93,7 +92,7 @@ const ProductGallery = ({ images }: { images: ImageItem[] }) => {
                 zoomSrc={item.url}
                 width={722}
                 height={623}
-                zoomType={'hover'}
+                zoomType={"hover"}
                 className="mb-6 border rounded-md max-h-[623px]"
               />
             </SwiperSlide>

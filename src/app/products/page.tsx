@@ -1,5 +1,5 @@
-import LoadingProducts from "@/components/skeleton/SkeletonProducts";
 import ProductLayouts from "@/components/product/ProductLayouts";
+import LoadingProducts from "@/components/skeleton/SkeletonProducts";
 import { defaultSort, sorting } from "@/lib/constants";
 import { getListPage } from "@/lib/contentParser";
 import {

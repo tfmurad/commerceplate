@@ -1,12 +1,12 @@
 "use client";
 
+import { CustomerError } from "@/lib/shopify/types";
 import Cookies from "js-cookie";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { ChangeEvent, FormEvent, useState } from "react";
 import { BiLoaderAlt } from "react-icons/bi";
 import { FormData } from "../sign-up/page";
-import { CustomerError } from "@/lib/shopify/types";
 
 const Login = () => {
   const router = useRouter();

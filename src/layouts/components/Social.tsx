@@ -74,9 +74,21 @@ const Social: React.FC<{ socialName: string; className: string }> = ({
       </li>
 
       <li>
-        <a className="cursor-pointer relative" onClick={handleCopyLink} aria-label="Copy Link">
+        <a
+          className="cursor-pointer relative"
+          onClick={handleCopyLink}
+          aria-label="Copy Link"
+        >
           <span className="sr-only">Copy Link</span>
-          {isTooltipVisible && <span className="text-xs absolute -right-16 text-text dark:text-darkmode-text whitespace-nowrap"><DynamicIcon className="inline-block text-green-500" icon={"FaLink"} /> copied!</span>}
+          {isTooltipVisible && (
+            <span className="text-xs absolute -right-16 text-text dark:text-darkmode-text whitespace-nowrap">
+              <DynamicIcon
+                className="inline-block text-green-500"
+                icon={"FaLink"}
+              />{" "}
+              copied!
+            </span>
+          )}
           <DynamicIcon className="inline-block" icon={"FaRegCopy"} />
         </a>
       </li>

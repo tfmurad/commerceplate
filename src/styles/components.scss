@@ -37,9 +37,9 @@
   }
   &-footer {
     a {
-      @apply  h-10 w-10 p-1 rounded-full #{!important};
+      @apply h-10 w-10 p-1 rounded-full #{!important};
       svg {
-        @apply text-lg #{!important}; 
+        @apply text-lg #{!important};
       }
     }
   }

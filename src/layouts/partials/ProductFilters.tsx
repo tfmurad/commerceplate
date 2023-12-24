@@ -79,7 +79,7 @@ const ProductFilters = ({
               onClick={() => handleCategoryClick(category.handle)}
             >
               {category.title}{" "}
-              {(searchParams.has("c") && !searchParams.has("b")) ? (
+              {searchParams.has("c") && !searchParams.has("b") ? (
                 <span>({category?.products?.edges.length!})</span>
               ) : (
                 <span>
@@ -108,9 +108,14 @@ const ProductFilters = ({
                 className={`flex items-center justify-between cursor-pointer text-light dark:text-darkmode-light`}
                 onClick={() => handleBrandClick(vendor.vendor)}
               >
-                {searchParams.has("b") && !searchParams.has('c') && !searchParams.has('minPrice') && !searchParams.has('maxPrice') && !searchParams.has('q') && !searchParams.has('t') ? (
+                {searchParams.has("b") &&
+                !searchParams.has("c") &&
+                !searchParams.has("minPrice") &&
+                !searchParams.has("maxPrice") &&
+                !searchParams.has("q") &&
+                !searchParams.has("t") ? (
                   <span>
-                    {vendor.vendor}{" "}({vendor.productCount})
+                    {vendor.vendor} ({vendor.productCount})
                   </span>
                 ) : (
                   <span>

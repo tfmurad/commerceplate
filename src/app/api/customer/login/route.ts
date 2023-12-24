@@ -5,7 +5,7 @@ import { NextRequest, NextResponse } from "next/server";
 export async function POST(req: NextRequest) {
   try {
     const input = await req.json();
-    const {token, customerLoginErrors} = await getCustomerAccessToken(input);
+    const { token, customerLoginErrors } = await getCustomerAccessToken(input);
     cookies().set("token", token);
     cookies().set("customerLoginErrors", JSON.stringify(customerLoginErrors));
     const { customer } = await getUserDetails(token);

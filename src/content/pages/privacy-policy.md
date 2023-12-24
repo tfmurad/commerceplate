@@ -39,7 +39,7 @@ In order to use our Service, you must meet a number of conditions, including but
 - Send emails about our Site or respond to inquiries.
 - Including news and requests for agreement to amended legal documents such as this
   Privacy Policy and our Terms of Service.
-<br/>
+  <br/>
 
 #### Why we collect and use personal data
 
@@ -50,7 +50,7 @@ Users of Conclude (i) must keep passwords secure and confidential; (ii) are sole
 - Send emails about our Site or respond to inquiries.
 - Including news and requests for agreement to amended legal documents such as this
   Privacy Policy and our Terms of Service.
-<br/>
+  <br/>
 
 #### Type of personal data collected
 

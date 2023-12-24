@@ -50,22 +50,30 @@ export function VariantSelector({
 
   // Set default option based on the existence of search parameters
   const defaultOption: any = hasColorAndSizeParams
-  ? {
-      color:
-        options.find((option) => option.name === "Color")?.values.includes(color) ||
-        options.find((option) => option.name === "Size")?.values.includes(color)
-          ? color
-          : options.find((option) => option.name === "Color")?.values[0],
-      size:
-        options.find((option) => option.name === "Size")?.values.includes(size) ||
-        options.find((option) => option.name === "Color")?.values.includes(size)
-          ? size
-          : options.find((option) => option.name === "Size")?.values[0],
-    }
-  : {
-      color: options.find((option) => option.name === "Color")?.values[0],
-      size: options.find((option) => option.name === "Size")?.values[0],
-    };
+    ? {
+        color:
+          options
+            .find((option) => option.name === "Color")
+            ?.values.includes(color) ||
+          options
+            .find((option) => option.name === "Size")
+            ?.values.includes(color)
+            ? color
+            : options.find((option) => option.name === "Color")?.values[0],
+        size:
+          options
+            .find((option) => option.name === "Size")
+            ?.values.includes(size) ||
+          options
+            .find((option) => option.name === "Color")
+            ?.values.includes(size)
+            ? size
+            : options.find((option) => option.name === "Size")?.values[0],
+      }
+    : {
+        color: options.find((option) => option.name === "Color")?.values[0],
+        size: options.find((option) => option.name === "Size")?.values[0],
+      };
 
   const hasNoOptionsOrJustOneOption =
     !options.length ||
@@ -123,9 +131,9 @@ export function VariantSelector({
               );
 
               const isActive =
-  searchParams.get(optionNameLowerCase) === value ||
-  (!searchParams.get(optionNameLowerCase) && value === defaultOption[optionNameLowerCase]);
-
+                searchParams.get(optionNameLowerCase) === value ||
+                (!searchParams.get(optionNameLowerCase) &&
+                  value === defaultOption[optionNameLowerCase]);
 
               if (option.name === "Size") {
                 return null; // skip rendering in the loop
@@ -171,7 +179,7 @@ export function VariantSelector({
                           alt={value}
                           width={50}
                           height={50}
-                          className={`${isActive && 'opacity-80'}`}
+                          className={`${isActive && "opacity-80"}`}
                         />
                         {isActive && (
                           <span className="text-inherit h-full opacity-100 absolute top-2 right-2">

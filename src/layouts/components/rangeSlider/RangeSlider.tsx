@@ -74,16 +74,17 @@ const RangeSlider = ({
       } */}
 
       {(minValue2 === parseInt(getMinPrice!) &&
-        maxValue2 === parseInt(getMaxPrice!) || ( minValue2 === 0 && maxValue2 === parseInt(maxPriceData?.amount))) || (
-        <button
-          className={`btn btn-sm btn-primary w-full`}
-          onClick={() => {
-            priceChange(minValue2, maxValue2);
-          }}
-        >
-          submit
-        </button>
-      )}
+        maxValue2 === parseInt(getMaxPrice!)) ||
+        (minValue2 === 0 && maxValue2 === parseInt(maxPriceData?.amount)) || (
+          <button
+            className={`btn btn-sm btn-primary w-full`}
+            onClick={() => {
+              priceChange(minValue2, maxValue2);
+            }}
+          >
+            submit
+          </button>
+        )}
     </div>
   );
 };
