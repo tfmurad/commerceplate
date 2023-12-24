@@ -4,7 +4,6 @@ import LoadingProductGallery from "@/components/skeleton/SkeletonProductGallery"
 import ProductGallery from "@/components/product/ProductGallery";
 import ShowTags from "@/components/product/ShowTags";
 import Tabs from "@/components/product/Tabs";
-import { VariantSelector } from "@/components/product/variant-selector";
 import config from "@/config/config.json";
 import { getProduct, getProductRecommendations } from "@/lib/shopify";
 import LatestProducts from "@/partials/FeaturedProducts";
@@ -12,6 +11,7 @@ import { Metadata } from "next";
 import Image from "next/image";
 import { notFound } from "next/navigation";
 import { Suspense } from "react";
+import { VariantSelector } from "@/components/product/VariantSelector";
 
 export const generateMetadata = async ({
   params,
