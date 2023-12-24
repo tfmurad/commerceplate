@@ -62,7 +62,7 @@ const ShowProductSingle = async ({ params }: { params: { slug: string } }) => {
               <h1 className="text-3xl md:h2 mb-2 md:mb-6">{title}</h1>
 
               <div className="flex gap-2 items-center">
-                <h4 className="text-light max-md:h2">
+                <h4 className="text-light dark:text-darkmode-light max-md:h2">
                   {currencySymbol} {priceRange?.minVariantPrice.amount}{" "}
                   {priceRange?.minVariantPrice?.currencyCode}
                 </h4>
