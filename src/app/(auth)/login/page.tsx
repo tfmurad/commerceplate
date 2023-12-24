@@ -1,7 +1,6 @@
 "use client";
 
 import { CustomerError } from "@/lib/shopify/types";
-import Cookies from "js-cookie";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { ChangeEvent, FormEvent, useState } from "react";
@@ -16,7 +15,7 @@ const Login = () => {
   });
 
   const [loading, setLoading] = useState(false);
-  const [errorMessages, seterrorMessages] = useState([]);
+  const [errorMessages, setErrorMessages] = useState([]);
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>): void => {
     setFormData({
@@ -27,10 +26,10 @@ const Login = () => {
 
   const handleLogin = async (e: FormEvent<HTMLFormElement>): Promise<void> => {
     e.preventDefault();
-
+  
     try {
       setLoading(true);
-
+  
       const response = await fetch("/api/customer/login", {
         method: "POST",
         headers: {
@@ -38,26 +37,20 @@ const Login = () => {
         },
         body: JSON.stringify(formData),
       });
-
-      const customerLoginErrors: any = Cookies.get("customerLoginErrors");
-      const errorParsed = JSON.parse(customerLoginErrors);
-
+  
+      const responseData = await response.json();
+  
       if (response.ok) {
-        seterrorMessages([]);
-        const data = await response.json();
+        setErrorMessages([]);
+        const data = responseData;
         localStorage.setItem("user", JSON.stringify(data));
-
-        if (errorParsed.length > 0) {
-          seterrorMessages(errorParsed);
-        } else {
-          router.push("/");
-        }
+        router.push("/");
       } else {
-        const errorData = await response.json();
-        // console.log(errorData);
+        const errors = responseData.errors || [];
+        setErrorMessages(errors);
       }
     } catch (error) {
-      // console.error("Error during registration:", error);
+      console.error("Error during login:", error);
     } finally {
       setLoading(false);
     }
