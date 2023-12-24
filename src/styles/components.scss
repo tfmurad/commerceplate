@@ -91,7 +91,7 @@
 }
 
 .banner-pagination-bullet {
-  @apply cursor-pointer h-2.5 w-2.5 rounded-full bg-swiper-bullet opacity-100 dark:bg-swiper-bullet;
+  @apply cursor-pointer h-2.5 w-2.5 rounded-full bg-light opacity-100;
 }
 
 .banner-pagination-bullet-active {
@@ -101,14 +101,6 @@
 .swiper-button-disabled {
   @apply opacity-50;
 }
-
-// .swiper{
-//   @apply invisible
-// }
-
-// .swiper-initialized{
-//   @apply visible
-// }
 
 // tab
 .tab {
