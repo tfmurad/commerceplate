@@ -1,14 +1,14 @@
 "use server";
-import { revalidateTag } from "next/cache";
-import { headers } from "next/headers";
-import { NextRequest, NextResponse } from "next/server";
 import {
   HIDDEN_PRODUCT_TAG,
   SHOPIFY_GRAPHQL_API_ENDPOINT,
   TAGS,
-} from "../../lib/constants";
-import { isShopifyError } from "../../lib/type-guards";
-import { ensureStartsWith } from "../../lib/utils";
+} from "@/lib/constants";
+import { isShopifyError } from "@/lib/typeGuards";
+import { ensureStartsWith } from "@/lib/utils";
+import { revalidateTag } from "next/cache";
+import { headers } from "next/headers";
+import { NextRequest, NextResponse } from "next/server";
 import {
   addToCartMutation,
   createCartMutation,
@@ -78,7 +78,7 @@ type ExtractVariables<T> = T extends { variables: object }
   : never;
 
 export async function shopifyFetch<T>({
-  cache = "force-cache",
+  cache = "no-store",
   headers,
   query,
   tags,
@@ -582,7 +582,6 @@ export async function getProducts({
       sortKey,
       cursor,
     },
-    cache: "force-cache",
   });
 
   const pageInfo = res.body.data?.products?.pageInfo;
@@ -600,7 +599,6 @@ export async function getHighestProductPrice(): Promise<{
   try {
     const res = await shopifyFetch<any>({
       query: getHighestProductPriceQuery,
-      cache: "force-cache",
     });
 
     // Extract and return the relevant data
@@ -633,7 +631,7 @@ export async function revalidate(req: NextRequest): Promise<NextResponse> {
   const isCollectionUpdate = collectionWebhooks.includes(topic);
   const isProductUpdate = productWebhooks.includes(topic);
 
-  if (!secret || secret !== process.env.SHOPIFY_REVALIDATION_SECRET) {
+  if (!secret || secret !== process.env.SHOPIFY_API_SECRET_KEY) {
     console.error("Invalid revalidation secret.");
     return NextResponse.json({ status: 200 });
   }

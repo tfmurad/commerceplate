@@ -30,13 +30,12 @@ const SignUp = () => {
     });
   };
 
-
   const handleSignUp = async (e: FormEvent<HTMLFormElement>): Promise<void> => {
     e.preventDefault();
-  
+
     try {
       setLoading(true);
-  
+
       const response = await fetch("/api/customer/sign-up", {
         method: "POST",
         headers: {
@@ -44,9 +43,9 @@ const SignUp = () => {
         },
         body: JSON.stringify(formData),
       });
-  
+
       const responseData = await response.json();
-  
+
       if (response.ok) {
         setErrorMessages([]);
         const data = responseData;
@@ -62,7 +61,6 @@ const SignUp = () => {
       setLoading(false);
     }
   };
-  
 
   return (
     <>

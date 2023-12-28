@@ -7,7 +7,10 @@ export async function POST(req: NextRequest) {
     const input = await req.json();
     const { token, customerLoginErrors } = await getCustomerAccessToken(input);
     if (customerLoginErrors.length > 0) {
-      return NextResponse.json({ errors: customerLoginErrors }, { status: 400 });
+      return NextResponse.json(
+        { errors: customerLoginErrors },
+        { status: 400 },
+      );
     }
 
     cookies().set("token", token);
@@ -17,6 +20,9 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ ...customer, token });
   } catch (error: any) {
     const { message, status } = error.error;
-    return NextResponse.json({ errors: [{ code: "INTERNAL_ERROR", message }] }, { status });
+    return NextResponse.json(
+      { errors: [{ code: "INTERNAL_ERROR", message }] },
+      { status },
+    );
   }
 }

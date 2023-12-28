@@ -16,14 +16,14 @@ collect non-identifying information from you, such as referring URL, browser, op
 
 #### About Commerceplate
 
-#### Service Provided As:
+#### Service Provided As
 
 The discovery was made by Richard McClintock , a professor of Latin at Hampden-Sydney College in Virginia, who faced the impetuous recurrence of the dark word consectetur in the text Lorem ipsum researched its origins to identify them in sections 1.10.32 and 1.10.33 of the aforementioned Cicero's
 
 When referring to Lorem ipsum, different expressions are used, namely fill text , fictitious text , blind text or placeholder text : in short, its meaning can also be zero, but its usefulness is so clear as to go
 <br/>
 
-#### Company Liability:
+#### Company Liability
 
 The choice of font and font size with which Lorem ipsum is reproduced answers to specific needs that go beyond the simple and simple filling of spaces dedicated to accepting real texts and allowing to have hands an advertising/publishing product, both web and paper, true to reality.
 

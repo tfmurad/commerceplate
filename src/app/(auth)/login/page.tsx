@@ -26,10 +26,10 @@ const Login = () => {
 
   const handleLogin = async (e: FormEvent<HTMLFormElement>): Promise<void> => {
     e.preventDefault();
-  
+
     try {
       setLoading(true);
-  
+
       const response = await fetch("/api/customer/login", {
         method: "POST",
         headers: {
@@ -37,9 +37,9 @@ const Login = () => {
         },
         body: JSON.stringify(formData),
       });
-  
+
       const responseData = await response.json();
-  
+
       if (response.ok) {
         setErrorMessages([]);
         const data = responseData;
