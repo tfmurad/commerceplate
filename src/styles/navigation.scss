@@ -71,7 +71,7 @@
 
 // search style
 .search-icon {
-  @apply cursor-pointer transition text-light hover:text-dark dark:text-darkmode-text dark:hover:text-darkmode-primary;
+  @apply cursor-pointer transition text-white dark:text-black bg-black dark:bg-white;
 }
 
 .search-modal {

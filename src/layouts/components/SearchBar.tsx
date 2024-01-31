@@ -80,13 +80,13 @@ const SearchBar = () => {
       {inputValue && (
         <button
           type="button"
-          className="p-2 m-1 rounded-full hover:scale-110 duration-200"
+          className="p-2 m-1 rounded-full"
           onClick={handleClear}
         >
           <IoClose size={20} />
         </button>
       )}
-      <button className="search-icon p-2 m-1 bg-light/30 rounded-full hover:scale-110 duration-200">
+      <button className="search-icon p-2 m-1 rounded-full">
         <IoSearch size={20} />
       </button>
     </form>
