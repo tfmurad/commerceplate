@@ -8,7 +8,7 @@ input#nav-toggle:checked + label #hide-button {
 }
 
 input#nav-toggle:checked ~ #nav-menu {
-  @apply block lg:flex;
+  @apply block;
 }
 
 .header {
@@ -28,7 +28,7 @@ input#nav-toggle:checked ~ #nav-menu {
 }
 
 .navbar-nav {
-  @apply text-center lg:text-left;
+  @apply text-center;
 }
 
 // .nav-item {
@@ -36,7 +36,7 @@ input#nav-toggle:checked ~ #nav-menu {
 // }
 
 .nav-link {
-  @apply block p-3 font-medium transition text-light hover:text-dark dark:text-darkmode-text dark:hover:text-darkmode-primary lg:px-2 lg:py-3;
+  @apply block p-3 font-bold text-2xl transition text-light hover:text-dark dark:text-darkmode-text dark:hover:text-darkmode-primary lg:px-2 lg:py-3 cursor-pointer;
 }
 
 .nav-active {
@@ -48,7 +48,7 @@ input#nav-toggle:checked ~ #nav-menu {
 }
 
 .nav-dropdown-list {
-  @apply z-10 min-w-[180px] rounded bg-body p-4 shadow dark:bg-darkmode-body;
+  @apply z-10 rounded bg-body p-4 shadow dark:bg-darkmode-theme-dark;
 }
 
 .nav-dropdown-item {
@@ -56,7 +56,7 @@ input#nav-toggle:checked ~ #nav-menu {
 }
 
 .nav-dropdown-link {
-  @apply block py-1 font-medium text-light transition hover:text-dark dark:text-darkmode-text dark:hover:text-darkmode-primary;
+  @apply block py-1 font-medium text-xl text-light transition hover:text-dark dark:text-darkmode-text dark:hover:text-darkmode-primary;
 }
 
 //theme-switcher
