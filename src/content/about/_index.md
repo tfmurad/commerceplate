@@ -22,6 +22,10 @@ Committed to delivering excellence, we prioritize customer satisfaction and prov
 # Frequently Asked Questions
 faq_section_title: "Frequently Asked Questions"
 faq_section_subtitle: "Our expertly crafted FAQ guide provides valuable insights on selecting the perfect table lamp to complement your decor and meet your specific lighting needs."
+button:
+  enable: true
+  label: "Contact Us"
+  link: "/contact"
 faqs:
   - title: "Can I customize lamps for client projects?"
     content: 'Yes, our platform allows customization for client projects, ensuring unique and tailored solutions. Yes, our platform allows customization for client projects, ensuring unique and tailored solutions.'
